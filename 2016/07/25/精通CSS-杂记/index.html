@@ -1,0 +1,914 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="精通CSS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="一、设计代码结构id和class语义化命名在分配ID和类名的时候，使用语义化的命名方式，有意义的类名的最大优点就是可以在整个网站中重用它们。比如:
+12345&amp;lt;!-- bad  --&amp;gt;&amp;lt;div class=&quot;top&quot;&amp;gt;...&amp;lt;/div&amp;gt;&amp;lt;!-- good --&amp;gt;&amp;lt;div class=&quot;nav&quot;&amp;gt;...&amp;lt;/div&amp;gt;
+多个单词可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《精通CSS》笔记">
+<meta property="og:url" content="http://yoursite.com/2016/07/25/精通CSS-杂记/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="一、设计代码结构id和class语义化命名在分配ID和类名的时候，使用语义化的命名方式，有意义的类名的最大优点就是可以在整个网站中重用它们。比如:
+12345&amp;lt;!-- bad  --&amp;gt;&amp;lt;div class=&quot;top&quot;&amp;gt;...&amp;lt;/div&amp;gt;&amp;lt;!-- good --&amp;gt;&amp;lt;div class=&quot;nav&quot;&amp;gt;...&amp;lt;/div&amp;gt;
+多个单词可">
+<meta property="og:image" content="http://static.zybuluo.com/chulinyin/klutp0o7azvmpq1knr62m0kb/image_1anrheorh2m1qh51f6q9adi8b9.png">
+<meta property="og:image" content="http://static.zybuluo.com/chulinyin/g6uonhqfwvbjw4g0l30ts9c6/image_1anrhfctl1dcl1nkd19no1iu91ulqm.png">
+<meta property="og:image" content="http://static.zybuluo.com/chulinyin/7rmf7r090siy9mzuz7q9plsv/image_1ansnv99i1i92fj012o31p7017c9.png">
+<meta property="og:image" content="http://static.zybuluo.com/chulinyin/5u644qzl4dgdggapp42umcdx/image_1aoduq6594vs11v615601ligpdq9.png">
+<meta property="og:image" content="http://static.zybuluo.com/chulinyin/eo8lbkhei2phyn3vssi6b7sd/image_1aodurdid1u176e1dl51ppv3tv13.png">
+<meta property="og:image" content="http://static.zybuluo.com/chulinyin/5v86u6azdcp907c3jvu3xxx7/image_1aoe17muivg3tp1m6p19031ah81g.png">
+<meta property="og:updated_time" content="2016-09-13T15:26:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《精通CSS》笔记">
+<meta name="twitter:description" content="一、设计代码结构id和class语义化命名在分配ID和类名的时候，使用语义化的命名方式，有意义的类名的最大优点就是可以在整个网站中重用它们。比如:
+12345&amp;lt;!-- bad  --&amp;gt;&amp;lt;div class=&quot;top&quot;&amp;gt;...&amp;lt;/div&amp;gt;&amp;lt;!-- good --&amp;gt;&amp;lt;div class=&quot;nav&quot;&amp;gt;...&amp;lt;/div&amp;gt;
+多个单词可">
+<meta name="twitter:image" content="http://static.zybuluo.com/chulinyin/klutp0o7azvmpq1knr62m0kb/image_1anrheorh2m1qh51f6q9adi8b9.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/25/精通CSS-杂记/"/>
+
+
+  <title> 《精通CSS》笔记 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《精通CSS》笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T23:53:29+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/25/精通CSS-杂记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/25/精通CSS-杂记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h3 id="一、设计代码结构"><a href="#一、设计代码结构" class="headerlink" title="一、设计代码结构"></a><strong>一、设计代码结构</strong></h3><h4 id="id和class语义化命名"><a href="#id和class语义化命名" class="headerlink" title="id和class语义化命名"></a><strong><code>id</code>和<code>class</code>语义化命名</strong></h4><p>在分配ID和类名的时候，使用语义化的命名方式，有意义的类名的最大优点就是<strong>可以在整个网站中重用它们</strong>。比如:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- bad  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- good --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>多个单词可以考虑用连字符<code>-</code>，因为比驼峰命名更加清晰。</p>
+<h4 id="id和class哪家强"><a href="#id和class哪家强" class="headerlink" title="id和class哪家强"></a><strong><code>id</code>和<code>class</code>哪家强</strong></h4><p>一般原则是，类应该应用于概念上相似的元素，这些元素可以出现在同一页面上的多个位置，而ID则应该应用于不同的唯一元素。只有在绝对确定这个元素只会出现一次的情况下，才应该使用ID。如果你认为以后可能需要相似的元素，就使用类。</p>
+<p>不要过度使用类，会在文档中添加无意义的代码。<br>不要过度使用<code>div</code>,这是代码结构不合理且过分复杂的一个信号。</p>
+<h3 id="二、为样式找到应用目标"><a href="#二、为样式找到应用目标" class="headerlink" title="二、为样式找到应用目标"></a><strong>二、为样式找到应用目标</strong></h3><p>按逻辑对样式进行分组以及通过添加注释使代码更容易阅读。</p>
+<h4 id="！使用注释进行分组"><a href="#！使用注释进行分组" class="headerlink" title="！使用注释进行分组"></a><strong>！使用注释进行分组</strong></h4><p>使用注释，通过搜索<code>@关键字</code>的办法快速找到对应部分。通过关键字可以区分重要的注释，如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* @todo remember to .. */</span> 表示需要修改、修复或复查</div><div class="line"><span class="comment">/* @bugfix ... */</span> 表示代码或特定浏览器遇到的问题</div><div class="line"><span class="comment">/* @workaround ... */</span> 表示不完善的权宜之计</div></pre></td></tr></table></figure>
+<h4 id="设计代码的结构"><a href="#设计代码的结构" class="headerlink" title="设计代码的结构"></a><strong>设计代码的结构</strong></h4><ol>
+<li>一般性样式 /<em> @goup general styles </em>/<ul>
+<li>主体样式</li>
+<li>reset样式</li>
+<li>链接</li>
+<li>标题</li>
+<li>其他元素</li>
+</ul>
+</li>
+<li>辅助样式 /<em> @goup helper styles </em>/<ul>
+<li>表单</li>
+<li>通知和错误</li>
+<li>一致的条目</li>
+</ul>
+</li>
+<li>页面结构 /<em> @goup page structure </em>/<ul>
+<li>标题、页脚和导航</li>
+<li>布局</li>
+<li>其他页面结构元素</li>
+</ul>
+</li>
+<li>页面组件 /<em> @goup page components </em>/<ul>
+<li>各个页面</li>
+</ul>
+</li>
+<li>覆盖 /<em> @goup page overrides </em>/</li>
+</ol>
+<h4 id="样式规范"><a href="#样式规范" class="headerlink" title="样式规范"></a><strong>样式规范</strong></h4><p>程序员、内容管理员和其他前端开发人员可能需要了解代码的元素和设计是如何工作的，而建立样式规范是维护或实现站点的好方法。可以确保网站开发以可控的方式进行，同时防止样式随着时间的推移变得散乱。还非常有助于向新职员或承包商介绍他们不熟悉、可能是很复杂的系统。</p>
+<ol>
+<li>静态样式规范：一个文档、网页或小型站点<br>解释代码和站点的视觉设计是如何组合在一起的。<ul>
+<li>最基本的样式规范应该描述一般性设计原则，如如何处理标题和其他排版元素、网格结构的设计方式是什么，以及如何使用哪个调色板。</li>
+<li>好的样式规范还应描述文章、新闻条目和通知等重复元素的处理方法，决定他们应该如何实现和不应该如何实现。</li>
+<li>更详细的样式规范可以包含编码标准，使用的HTML/CSS版本、选择的可访问性级别、浏览器支持细节和一般的编码最佳实践。</li>
+</ul>
+</li>
+<li>动态样式规范<br>因为及时更新静态样式规范需要花费大量精力，所以它们常常很快就与当前网站不同步了。所以使用动态的样式规范（“<code>模式组合</code>”）</li>
+</ol>
+<blockquote>
+<p>模式组合是一个页面或一系列页面，它们使用当前的样式表显示站点上可能出现的每种样式排列组合，从标题级别和文本样式直到特定的内容和布局类型。</p>
+</blockquote>
+<h3 id="三、可视化格式模型"><a href="#三、可视化格式模型" class="headerlink" title="三、可视化格式模型"></a><strong>三、可视化格式模型</strong></h3><a id="more"></a>
+<h4 id="IE盒模型与标准盒模型"><a href="#IE盒模型与标准盒模型" class="headerlink" title="IE盒模型与标准盒模型"></a><strong>IE盒模型与标准盒模型</strong></h4><ul>
+<li>IE: ele = width + margin(width=content+padding+border)</li>
+<li>W3C： ele = width+padding+border+margin(width=content)</li>
+</ul>
+<p>解决方案：box-sizing:border-box;</p>
+<h4 id="外边距叠加"><a href="#外边距叠加" class="headerlink" title="外边距叠加"></a><strong>外边距叠加</strong></h4><ul>
+<li>一个元素在另一个元素上面，上一个元素的底外边距与下一个元素的顶外边距发生叠加。</li>
+<li>一个元素包含在另一个元素中（假设没有内边距或边框将外边距隔开），它们的顶/底外边距也会发生叠加。</li>
+<li>外边距甚至可以与本身发生叠加，当元素没有边框或内边距，但有外边距时，上下会叠加。如果叠加后的外边距碰到另一个元素的外边距，它们还会发生叠加</li>
+</ul>
+<p><strong>注意：</strong>只有<strong>*普通文档流中</strong>的<strong>块级元素框</strong>的<strong>垂直外边距</strong>会发生外边距叠加。行内框、浮动框或绝对定位框之间的外边距不会叠加。</p>
+<h4 id="修改行内框宽高"><a href="#修改行内框宽高" class="headerlink" title="修改行内框宽高"></a><strong>修改行内框宽高</strong></h4><p>修改行内框（<code>inline</code>）宽高的唯一方法就是修改行高或者水平边框、内边距或外边距</p>
+<h4 id="文本作为块级元素对待"><a href="#文本作为块级元素对待" class="headerlink" title="文本作为块级元素对待"></a><strong>文本作为块级元素对待</strong></h4><p>将一些文本添加到一个块级元素（如<code>div</code>）开头时会被当成块级元素对待：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    some text</div><div class="line">    &lt;p&gt;some more text&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h4 id="浮动定位"><a href="#浮动定位" class="headerlink" title="浮动定位"></a><strong>浮动定位</strong></h4><p>浮动的框可以左右移动，直到它的外边缘碰到包含框或另一个浮动框的边缘。但是浮动元素底下文档流中的元素框中的文本内容会受到浮动元素的影响，会移动以留出空间。（半脱离文档流）</p>
+<h4 id="清除浮动（IE6-）"><a href="#清除浮动（IE6-）" class="headerlink" title="清除浮动（IE6-）"></a><strong>清除浮动（IE6-）</strong></h4><p>因为浮动元素不占据空间，因此包含浮动元素的父元素在视觉上不会包围浮动元素，此时可以在父级元素上添加<code>clearfix</code>类，然后用以下样式清除浮动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.clearfix:after&#123;</div><div class="line">    content:&apos;.&apos;;</div><div class="line">    height: 0;</div><div class="line">    visibility:hidden;</div><div class="line">    display:block;</div><div class="line">    clear:both;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是在IE6和更低版本中不起作用，最常用的解决方案是<code>Holly hack</code>:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.clearfix</span>&#123;</div><div class="line">    <span class="attribute">display</span>:inline-block;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* Holly hack targets IE win only */</span></div><div class="line">* <span class="selector-tag">html</span> <span class="selector-class">.clearfix</span>&#123;</div><div class="line">    <span class="attribute">height</span>:<span class="number">1%</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.clearfix</span>&#123;</div><div class="line">    <span class="attribute">display</span>:block;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* End Holly hack */</span></div></pre></td></tr></table></figure>
+<h3 id="四、背景图像效果"><a href="#四、背景图像效果" class="headerlink" title="四、背景图像效果"></a><strong>四、背景图像效果</strong></h3><h4 id="创建渐变图案"><a href="#创建渐变图案" class="headerlink" title="创建渐变图案"></a><strong>创建渐变图案</strong></h4><p><strong>垂直渐变但横向重复的图案</strong>可以只获取横向重复最小单位，高度最高的部分图像，然后用以下方法获得完整图像。（不过是下面这样性能更好，还是直接截取整张图性能好？）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>();</div><div class="line">    <span class="attribute">background-repeat</span>:repeat-x;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同理，横向渐变但是纵向重复图案，也可以通过以上办法只截取部分图像获取完整图案。</p>
+<h4 id="为标题添加项目符号"><a href="#为标题添加项目符号" class="headerlink" title="为标题添加项目符号"></a><strong>为标题添加项目符号</strong></h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span>&#123;</div><div class="line">    <span class="attribute">padding-left</span>:<span class="number">30px</span>;</div><div class="line">    <span class="attribute">backgroud-img</span>: <span class="built_in">url</span>();</div><div class="line">    <span class="attribute">background-repeat</span>: none;</div><div class="line">    <span class="attribute">background-position</span>: left center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong><code>background-postion</code>的值也可以是像素或百分数。当为像素时，指的是图像左上角到元素左上角的距离。而当使用百分数（20%，20%）时，指的是将图像上20%的点定位到距离元素左上角20%的位置。也就是说图像上的百分比所在的点与元素上百分比所在的点重合。还有最好不要将百分数或像素等单位与关键字混合使用。</p>
+<h3 id="五、对a元素应用样式"><a href="#五、对a元素应用样式" class="headerlink" title="五、对a元素应用样式"></a><strong>五、对a元素应用样式</strong></h3><h4 id="设置锚点（两种方案）"><a href="#设置锚点（两种方案）" class="headerlink" title="设置锚点（两种方案）"></a><strong>设置锚点（两种方案）</strong></h4><p><code>a</code>标签的<code>href</code>设置为<code>#id值</code>，则点击时会跳转到页面中设置了相应<code>id值</code>的部分；同时<code>a</code>标签的<code>href</code>也可以设置为<code>#name值</code>，则点击时会跳转到页面<code>a</code>标签中设置了相应<code>name值</code>的部分;如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;a href="#jump"&gt;jump to someWhere&lt;/a&gt;</div><div class="line">...</div><div class="line">&lt;div id="jump"&gt;someWhere&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;a href="#jump"&gt;jump to someWhere&lt;/a&gt;</div><div class="line">...</div><div class="line">&lt;div&gt;&lt;a name="jump"&gt;someWhere&lt;/a&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h4 id="设置伪类"><a href="#设置伪类" class="headerlink" title="设置伪类"></a><strong>设置伪类</strong></h4><p>为<code>a</code>标签设置伪类样式的时候注意顺序：<code>lord</code> <code>vader</code> <code>hates</code> <code>furry</code> <code>animals</code> 对应的顺序分别是：<code>link</code> <code>visited</code> <code>hover</code> <code>focus</code> <code>active</code></p>
+<h4 id="为跳转目标设定样式"><a href="#为跳转目标设定样式" class="headerlink" title="为跳转目标设定样式"></a><strong>为跳转目标设定样式</strong></h4><p>虽然可以跳转到某个页面的指定锚点，但有时还是无法一眼看出想要跳转到的部分在上下文的哪个位置。这时候就可以通过设置目标伪类解决这个问题。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">  /* 跳转到someWhere后，someWhere背景变绿 */ </div><div class="line">    #jump:target&#123;background-color:green;&#125; </div><div class="line">&lt;/style&gt;</div><div class="line">&lt;a href="#jump"&gt;jump to someWhere&lt;/a&gt;</div><div class="line">...</div><div class="line">&lt;div id="jump"&gt;someWhere&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h4 id="为外链添加小图标（属性选择器）"><a href="#为外链添加小图标（属性选择器）" class="headerlink" title="为外链添加小图标（属性选择器）"></a><strong>为外链添加小图标（属性选择器）</strong></h4><p>一个页面中如果有多个链接，在没有提示的情况下我们就不知道它到底是会跳转到其他页面还是会跳转到本页的其他部分。所以为了有效区分这两类链接，一般会在外部链接的右上角添加一个小箭头。而添加小箭头的方式有三种：<br>1、再添加一个标签，然后引用箭头icon，再进行布局（如果没有看这本书以前，我就基本上只能想到这种方式了）但是这样既要添加无畏的标签，还要进行样式布局，实在是太麻烦了。<br>2、先给所有外部链接添加一个类，然后在css里使用<code>background</code>属性,注意添加一个内边距，为图标留出空间。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.external</span>&#123;</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(/img/arrow.png) no-repeat right top;</div><div class="line">    <span class="attribute">padding-right</span>:<span class="number">10px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是这样子需要给每个外部链接添加类，这也太累了吧~<br>3、最优雅的解决方案是，使用<code>CSS3属性选择器</code>中的<strong>部分选择功能</strong>。<code>a[href^=&quot;http:&quot;]</code>这个选择器选中了<code>a</code>标签中<code>href</code>属性值以<code>http:</code>开头的标签。但是这也会选中使用<code>绝对URL</code>的内部链接啊！所以需要对指向自己域名的链接在进行覆盖操作。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span><span class="selector-attr">[href^="http:"]</span>&#123;</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(/img/arrow.png) no-repeat right top;</div><div class="line">    <span class="attribute">padding-right</span>:<span class="number">10px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">a</span><span class="selector-attr">[href^="http://www.yoursite.com"]</span>,</div><div class="line"><span class="selector-tag">a</span><span class="selector-attr">[href^="http://yoursite.com"]</span>&#123;</div><div class="line">    <span class="attribute">background-img</span>: none;</div><div class="line">    <span class="attribute">padding-right</span>: <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，其实还可以把这个特点应用于，指向邮件的链接<code>a[href^=&quot;mailto:&quot;]</code>，下载的链接<code>a[href$=&quot;.pdf&quot;]</code></p>
+<p><strong>注意链接应该只用于GET请求，决不要用于POST请求。</strong>因为如果使用锚链接而不是用表单元素作为删除按钮，Google加速程序会访问这些链接以便缓存它们，这样会无意间删除内容。搜索引擎的spider可以造成同样的后果，递归地删除大量数据。因此绝不要用链接更新服务器。</p>
+<h4 id="CSS精灵（sprite）"><a href="#CSS精灵（sprite）" class="headerlink" title="CSS精灵（sprite）"></a><strong>CSS精灵（sprite）</strong></h4><p>将所有图片合并到一张图片里，然后用CSS只请求一次，后面各个元素通过<code>backgound-position</code>控制位置，得到各自需要的图片。</p>
+<h4 id="！渐变"><a href="#！渐变" class="headerlink" title="！渐变"></a><strong>！渐变</strong></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">background-image:-webkit-gradient(linear,left top,left bottom,from(#ccc), to(#ddd));</div><div class="line">//渐变类型，渐变方向起点、终点，初始颜色、结束颜色和中间的过渡点。</div></pre></td></tr></table></figure>
+<h4 id="！倒影"><a href="#！倒影" class="headerlink" title="！倒影"></a><strong>！倒影</strong></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-webkit-box-reflect:below 2px -webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(0.52,transparent),to(white));</div><div class="line">//倒影的位置和距离，渐变蒙版图像</div></pre></td></tr></table></figure>
+<h3 id="六、对列表应用样式列表和创建导航条"><a href="#六、对列表应用样式列表和创建导航条" class="headerlink" title="六、对列表应用样式列表和创建导航条"></a><strong>六、对列表应用样式列表和创建导航条</strong></h3><h4 id="添加项目符号"><a href="#添加项目符号" class="headerlink" title="添加项目符号"></a><strong>添加项目符号</strong></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/* 去掉缩进和默认的项目符号 */</div><div class="line">ul&#123;</div><div class="line">    margin：0；</div><div class="line">    padding：0；</div><div class="line">    list-style-type:none;</div><div class="line">&#125;</div><div class="line"></div><div class="line">li&#123;</div><div class="line">    background:url(/image/xx.png) no-repeat 0 50%;</div><div class="line">    padding-left: 30px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="简单的垂直导航条"><a href="#简单的垂直导航条" class="headerlink" title="简单的垂直导航条"></a><strong>简单的垂直导航条</strong></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;ul class="nav"&gt;</div><div class="line">    &lt;li&gt;&lt;a href=""&gt;home&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;a href=""&gt;about&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;a href=""&gt;news&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;a href=""&gt;contact&lt;/a&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">  ul.nav&#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    list-style-type: none;</div><div class="line">    width: 8em;</div><div class="line">    background-color: #ccc;</div><div class="line">    border: 1px solid #333;</div><div class="line">  &#125;</div><div class="line">  ul.nav a&#123;</div><div class="line">    display: block;</div><div class="line">    color: #fff;</div><div class="line">    text-decoration: none;</div><div class="line">    border-bottom: 1px solid #1ea4c7;</div><div class="line">    background: url(2.png) no-repeat 5%  50%;</div><div class="line">    padding:1em 3em;</div><div class="line">  &#125;</div><div class="line">  ul.nav li:last-child a&#123;</div><div class="line">    border-bottom: 0;</div><div class="line">  &#125;</div><div class="line">  ul.nav a:hover,</div><div class="line">  ul.nav a:focus,</div><div class="line">  ul.nav .selected a&#123;</div><div class="line">    background-color: #333;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://static.zybuluo.com/chulinyin/klutp0o7azvmpq1knr62m0kb/image_1anrheorh2m1qh51f6q9adi8b9.png" alt="image_1anrheorh2m1qh51f6q9adi8b9.png-3.3kB">     <img src="http://static.zybuluo.com/chulinyin/g6uonhqfwvbjw4g0l30ts9c6/image_1anrhfctl1dcl1nkd19no1iu91ulqm.png" alt="image_1anrhfctl1dcl1nkd19no1iu91ulqm.png-4.3kB"></p>
+<h4 id="突出显示当前页面，而不需要动态地在导航菜单中添加类"><a href="#突出显示当前页面，而不需要动态地在导航菜单中添加类" class="headerlink" title="突出显示当前页面，而不需要动态地在导航菜单中添加类"></a><strong>突出显示当前页面，而不需要动态地在导航菜单中添加类</strong></h4><p>在主体中添加一个ID或类名，然后在导航列表中的每一项中添加一个对应的ID或类名。通过唯一组合的方式，在站点导航中突出显示当前部分或页面。</p>
+<h4 id="！简单的水平导航条-分页器"><a href="#！简单的水平导航条-分页器" class="headerlink" title="！简单的水平导航条(分页器)"></a><strong>！简单的水平导航条(分页器)</strong></h4><p>这里需要注意的是：</p>
+<ol>
+<li><code>html</code>结构中，pre和next的<code>href</code>是会变的，分别是当前选中页的上一页和下一页。</li>
+<li>当前选中页是不包含<code>a</code>标签的，只有<code>li</code>标签</li>
+<li>如果想让<code>ul</code>元素包含整个导航，只需要清除浮动即可。（甚至只需要加一个<code>overflow:hidden</code>即可）</li>
+</ol>
+<p>所以如何加入js写成一个组件呢？</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">&lt;ol class="pagination"&gt;</div><div class="line">  &lt;li&gt;&lt;a href="xx.html?page=1" rel="prev"&gt;prev&lt;/a&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;&lt;a href="xx.html?page=1"&gt;1&lt;/a&gt;&lt;/li&gt;</div><div class="line">  &lt;li class="sel"&gt;2&lt;/li&gt;</div><div class="line">  &lt;li&gt;&lt;a href="xx.html?page=3"&gt;3&lt;/a&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;&lt;a href="xx.html?page=4"&gt;4&lt;/a&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;&lt;a href="xx.html?page=2" rel="next"&gt;next&lt;/a&gt;&lt;/li&gt;</div><div class="line">&lt;/ol&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">  ol.pagination&#123;</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    list-style-type: none;</div><div class="line">  &#125;</div><div class="line">  ol.pagination li&#123;</div><div class="line">    float: left;</div><div class="line">    margin-right: 0.6em;</div><div class="line">  &#125;</div><div class="line">  ol.pagination a,</div><div class="line">  ol.pagination li.sel&#123;</div><div class="line">    display: block;</div><div class="line">    padding: 0.2em 0.5em;</div><div class="line">    border: 1px solid #ccc;</div><div class="line">    text-decoration: none;</div><div class="line">    color: #000;</div><div class="line">  &#125;</div><div class="line">  ol.pagination a:hover,</div><div class="line">  ol.pagination a:focus,</div><div class="line">  ol.pagination li.sel&#123;</div><div class="line">    background-color: #00f;</div><div class="line">    color: #fff;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  ol.pagination a[rel="prev"],</div><div class="line">  ol.pagination a[rel="next"]&#123;</div><div class="line">    border: none;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  ol.pagination a[rel="prev"]:before&#123;</div><div class="line">    content: "\00AB";</div><div class="line">    padding-right: 0.5em;</div><div class="line">  &#125;</div><div class="line">  ol.pagination a[rel="next"]:after&#123;</div><div class="line">    content: "\00BB";</div><div class="line">    padding-right: 0.5em;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://static.zybuluo.com/chulinyin/7rmf7r090siy9mzuz7q9plsv/image_1ansnv99i1i92fj012o31p7017c9.png" alt="image_1ansnv99i1i92fj012o31p7017c9.png-2.7kB"></p>
+<h4 id="！Suckerfish下拉菜单"><a href="#！Suckerfish下拉菜单" class="headerlink" title="！Suckerfish下拉菜单"></a><strong>！Suckerfish下拉菜单</strong></h4><p>我们经常碰道在导航条上需要添加下拉菜单的问题，大多数人都是用js解决的。可是其实可以使用纯CSS解决：<strong>只需要把子导航嵌套在无序列表中，把列表定位到屏幕之外，然后当鼠标悬停在父列表项上时重新定位它。</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">&lt;ul class="nav clearfix"&gt;</div><div class="line">  &lt;li&gt;&lt;a href=""&gt;Home&lt;/a&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;&lt;a href=""&gt;Products&lt;/a&gt;</div><div class="line">    &lt;ul&gt;</div><div class="line">      &lt;li&gt;&lt;a href=""&gt;1&lt;/a&gt;&lt;/li&gt;</div><div class="line">      &lt;li&gt;&lt;a href=""&gt;2&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">  &lt;/li&gt;</div><div class="line">  &lt;li&gt;&lt;a href=""&gt;Services&lt;/a&gt;</div><div class="line">    &lt;ul&gt;</div><div class="line">      &lt;li&gt;&lt;a href=""&gt;design&lt;/a&gt;&lt;/li&gt;</div><div class="line">      &lt;li&gt;&lt;a href=""&gt;development&lt;/a&gt;&lt;/li&gt;</div><div class="line">      &lt;li&gt;&lt;a href=""&gt;consultancy&lt;/a&gt;&lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">  &lt;/li&gt;</div><div class="line">  &lt;li&gt;&lt;a href=""&gt;contact&lt;/a&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">  ul.nav,</div><div class="line">  ul.nav ul&#123;</div><div class="line">    float: left; </div><div class="line">    /*  如果使用hidden，列表长度不是内容长度，而是占据整行 */</div><div class="line">    /* overflow: hidden; */</div><div class="line">    margin: 0;</div><div class="line">    padding: 0;</div><div class="line">    list-style: none;</div><div class="line">    border: 1px solid #486B02;</div><div class="line">    background-color: #8BD400;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  ul.nav li&#123;</div><div class="line">    float: left;</div><div class="line">    width: 8em;</div><div class="line">    background-color: #8BD400;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  /* 精髓代码 */</div><div class="line">  ul.nav li ul&#123;</div><div class="line">    width: 8em;</div><div class="line">    position: absolute;</div><div class="line">    left: -999em;</div><div class="line">  &#125;</div><div class="line">  .nav li:hover ul&#123;</div><div class="line">    left: auto;</div><div class="line">  &#125;</div><div class="line">  /* 精髓代码 */</div><div class="line"></div><div class="line">  ul.nav a&#123;</div><div class="line">    display: block;</div><div class="line">    color: #2B3F00;</div><div class="line">    text-decoration: none;</div><div class="line">    padding: 0.3em 1em;</div><div class="line">    border-right: 1px solid #486B02;</div><div class="line">    border-left: 1px solid #E4FFD3;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  ul.nav li li a&#123;</div><div class="line">    border-top: 1px solid #E4FFD3;</div><div class="line">    border-bottom: 1px solid #486B02;</div><div class="line">    border-left: 0;</div><div class="line">    border-right: 0;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  ul.nav li:last-child a&#123;</div><div class="line">    border-right: 0;</div><div class="line">    border-bottom: 0;</div><div class="line">  &#125;</div><div class="line"> ul a:hover,</div><div class="line"> ul a:focus&#123;</div><div class="line">  color: #E4FFD3;</div><div class="line">  background-color: #6DA203;</div><div class="line"> &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://static.zybuluo.com/chulinyin/5u644qzl4dgdggapp42umcdx/image_1aoduq6594vs11v615601ligpdq9.png" alt="image_1aoduq6594vs11v615601ligpdq9.png-1.4kB"><br><img src="http://static.zybuluo.com/chulinyin/eo8lbkhei2phyn3vssi6b7sd/image_1aodurdid1u176e1dl51ppv3tv13.png" alt="image_1aodurdid1u176e1dl51ppv3tv13.png-2kB"></p>
+<h4 id="图像映射"><a href="#图像映射" class="headerlink" title="图像映射"></a><strong>图像映射</strong></h4><p>利用图像映射可以将图像的一些区域指定为热点。 </p>
+<h3 id="七、对表单和数据表格应用样式"><a href="#七、对表单和数据表格应用样式" class="headerlink" title="七、对表单和数据表格应用样式"></a><strong>七、对表单和数据表格应用样式</strong></h3><h4 id="table的summary属性"><a href="#table的summary属性" class="headerlink" title="table的summary属性"></a><strong>table的summary属性</strong></h4><p>在<code>table</code>标签中使用<code>summary</code>属性，相当于图像的<code>alt</code>属性，应该总结表格中的数据。如一个日历表格：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;table calsss="cal" summary="A calender style date picker"&gt;</div><div class="line">  &lt;caption&gt;&lt;/caption&gt;</div><div class="line">&lt;/table&gt;</div></pre></td></tr></table></figure>
+<h4 id="thead、tbody和tfoot"><a href="#thead、tbody和tfoot" class="headerlink" title="thead、tbody和tfoot"></a><strong>thead、tbody和tfoot</strong></h4><p>如果选择使用<code>thead</code>或<code>tbody</code>，则至少使用一个<code>tobdy</code>。一个表格只能使用一个<code>thead</code>和<code>tfoot</code>，但是可以使用多个<code>tbody</code>元素，将复杂的表格划分为更容易管理的几部分。</p>
+<h4 id="！th的scope属性"><a href="#！th的scope属性" class="headerlink" title="！th的scope属性"></a><strong>！th的scope属性</strong></h4><p>对于表格标题<code>th</code>可以设置<code>scope</code>属性区分行、列标题。<code>scope=&quot;row&quot;</code>为行标题，<code>scope=&quot;col&quot;</code>为列标题。还可以设置<code>rowgroup</code>或<code>colgroup</code>属性，表示它们与多行或多列相关。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;thead&gt;</div><div class="line">  &lt;tr&gt;</div><div class="line">    &lt;th scope="col"&gt;sun&lt;/th&gt;</div><div class="line">    &lt;th scope="col"&gt;mon&lt;/th&gt;</div><div class="line">    &lt;th scope="col"&gt;tue&lt;/th&gt;</div><div class="line">    &lt;th scope="col"&gt;wed&lt;/th&gt;</div><div class="line">    &lt;th scope="col"&gt;tur&lt;/th&gt;</div><div class="line">    &lt;th scope="col"&gt;fri&lt;/th&gt;</div><div class="line">    &lt;th scope="col"&gt;sat&lt;/th&gt;</div><div class="line">  &lt;/tr&gt;</div><div class="line">&lt;/thead&gt;</div></pre></td></tr></table></figure>
+<h4 id="！col和colgroup元素"><a href="#！col和colgroup元素" class="headerlink" title="！col和colgroup元素"></a><strong>！col和colgroup元素</strong></h4><p>虽然利用tr元素能对整行应用样式，但是很难对整列应用样式。而colgroup能够使用col元素对一个或多个列定义和分组。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;table&gt;</div><div class="line">  &lt;colgroup class="a" span="1"&gt;</div><div class="line">  &lt;/colgroup&gt;</div><div class="line">  &lt;colgroup class="bcd" span="3"&gt;</div><div class="line">    &lt;col class="bc" span="2" /&gt;</div><div class="line">    &lt;col class="d" /&gt;</div><div class="line">  &lt;/colgroup&gt;</div><div class="line">  </div><div class="line">  &lt;thead&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">      &lt;th scope="col"&gt;a&lt;/th&gt;</div><div class="line">      &lt;th scope="col"&gt;b&lt;/th&gt;</div><div class="line">      &lt;th scope="col"&gt;c&lt;/th&gt;</div><div class="line">      &lt;th scope="col"&gt;d&lt;/th&gt;</div><div class="line">    &lt;/tr&gt;</div><div class="line">  &lt;/thead&gt;  </div><div class="line">  &lt;tbody&gt;</div><div class="line">    &lt;tr&gt;</div><div class="line">      &lt;td&gt;a&lt;/td&gt;</div><div class="line">      &lt;td&gt;b&lt;/td&gt;</div><div class="line">      &lt;td&gt;c&lt;/td&gt;</div><div class="line">      &lt;td&gt;d&lt;/td&gt;</div><div class="line">    &lt;/tr&gt;</div><div class="line">  &lt;/tbody&gt;</div><div class="line">&lt;/table&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">.a&#123;background-color: #ccc;&#125;</div><div class="line">.bcd&#123;background-color: #999;&#125;</div><div class="line">.bc&#123;background-color: #aaa;&#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://static.zybuluo.com/chulinyin/5v86u6azdcp907c3jvu3xxx7/image_1aoe17muivg3tp1m6p19031ah81g.png" alt="image_1aoe17muivg3tp1m6p19031ah81g.png-1.4kB"></p>
+<h4 id="！border-collapse两个表格边盒模型"><a href="#！border-collapse两个表格边盒模型" class="headerlink" title="！border-collapse两个表格边盒模型"></a><strong>！border-collapse两个表格边盒模型</strong></h4><ul>
+<li><p>在单独模型中，每个单元格周围有边框。<code>border-collapse:seperate</code></p>
+</li>
+<li><p>在叠加模型中，单元格共享边框。<code>border-collapse:collapse</code></p>
+<p>border-spacing可以控制单元格之间的距离。</p>
+</li>
+</ul>
+<h4 id="！把标签和表单控件关联起来的两种方法"><a href="#！把标签和表单控件关联起来的两种方法" class="headerlink" title="！把标签和表单控件关联起来的两种方法"></a><strong>！把标签和表单控件关联起来的两种方法</strong></h4><ul>
+<li>把表单元素嵌套在label元素中<br><code>&lt;label&gt;email &lt;input name=&quot;email&quot; type=&quot;text&quot; /&gt;&lt;label&gt;</code></li>
+<li>把label的for属性设置为相关联的表单元素的id名称<br><code>&lt;label for=&quot;email&quot;&gt;email &lt;label&gt;</code><br><code>&lt;input id=&quot;email&quot; name=&quot;email&quot; type=&quot;text&quot; /&gt;</code></li>
+</ul>
+<h4 id="提交按钮"><a href="#提交按钮" class="headerlink" title="提交按钮"></a><strong>提交按钮</strong></h4><p>用button元素代替type类型为submit的input元素，因为在许多操作系统中禁止修改input按钮的样式，而button元素不受影响。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">button&#123;</div><div class="line">    border:none;</div><div class="line">    background:none;</div><div class="line">    cursor:pointer;</div><div class="line">&#125;</div><div class="line">// 关闭默认样式</div></pre></td></tr></table></figure>
+<h3 id="八、布局"><a href="#八、布局" class="headerlink" title="八、布局"></a><strong>八、布局</strong></h3><blockquote>
+<p>所有CSS布局技术的根本都是3个基本概念：定位、浮动和外边距操纵</p>
+</blockquote>
+<h4 id="！计划布局"><a href="#！计划布局" class="headerlink" title="！计划布局"></a><strong>！计划布局</strong></h4><p>要创建可伸缩且容易维护的CSS系统，首先应该检查设计，寻找重复的模式（包括页面结构中的模式或在站点中元素反复出现的方式），注意结构和意义而不应该太关注表现形式。</p>
+<ol>
+<li>【建筑物外墙】划分大的结构性区域，如容器、页眉、内容区域、页脚。</li>
+<li>【内部承重墙】在内容区域本身开始建立网络结构，寻找内容区域共同的特征而不是视觉表现。</li>
+<li>【建筑物隔断墙】在各个内容区域中寻找不同的布局结构，将这些结构与前一步结合可以形成每个页面的结构计划。（可以开始设计结构和尺寸）</li>
+<li>结构设计完后，可以开始关注不同类型的内容。给每一个内容块起一个有意义的名称，然后分析它们的关系。</li>
+<li>查看每个内容块的结构，看看不同的类型中是否有共同的模式。尽量采用一般的类名，然后根据上下文应用样式。</li>
+<li>找出模式并确定命名约定后，最好马上开始定义将使用的元素。</li>
+</ol>
+<h4 id="基于浮动的布局"><a href="#基于浮动的布局" class="headerlink" title="基于浮动的布局"></a><strong>基于浮动的布局</strong></h4><p>最容易使用，也是最可靠的。为了解决浮动元素不再对包围它们的块框产生任何影响的问题，需要对布局中各个点上的浮动元素进行清理。但常见的做法<strong>不是连续地浮动和清理元素，而是浮动几乎所有东西，然后在整个文档的“战略点”（如页脚）上进行一次或两次清理。还可以使用溢出方法(<code>overflow:hidden</code>)清理某些元素的内容。</strong></p>
+<h4 id="两列浮动布局"><a href="#两列浮动布局" class="headerlink" title="两列浮动布局"></a><strong>两列浮动布局</strong></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;div class="content"&gt;</div><div class="line">  &lt;div class="primary"&gt;&lt;/div&gt;</div><div class="line">  &lt;div class="secondary"&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">  .content .primary&#123;</div><div class="line">    float: right;</div><div class="line">    width: 650px;</div><div class="line">    padding-right: 20px;</div><div class="line">    display: inline;</div><div class="line">  &#125;</div><div class="line">  .content .secondary&#123;</div><div class="line">    float: left;</div><div class="line">    width: 230px;</div><div class="line">    display: inline;</div><div class="line">  &#125;</div><div class="line">  .content&#123;</div><div class="line">    overflow:hidden;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>中间会有20px视觉隔离带是为了防止内容扩展导致浮动元素下降<br>设置<code>display:inline</code>是为了防止<strong>IE中的双外边距浮动产生的bug</strong></p>
+<h4 id="三列浮动布局"><a href="#三列浮动布局" class="headerlink" title="三列浮动布局"></a><strong>三列浮动布局</strong></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;div class="content"&gt;</div><div class="line"></div><div class="line">  &lt;div class="primary"&gt;</div><div class="line">    &lt;div class="primary"&gt;&lt;/div&gt;</div><div class="line">    &lt;div class="secondary"&gt;&lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  </div><div class="line">  &lt;div class="secondary"&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">  .content .primary&#123;</div><div class="line">    float: right;</div><div class="line">    width: 670px;</div><div class="line">    display: inline;</div><div class="line">  &#125;</div><div class="line">  .content .secondary&#123;</div><div class="line">    float: left;</div><div class="line">    width: 230px;</div><div class="line">    display: inline;</div><div class="line">  &#125;</div><div class="line">  .content&#123;</div><div class="line">    overflow:hidden;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  .content .primary .primary&#123;</div><div class="line">    float: left;</div><div class="line">    width: 400px;</div><div class="line">    display: inline;</div><div class="line">  &#125;</div><div class="line">  .content .primary .secondary&#123;</div><div class="line">    float: right;</div><div class="line">    width: 230px;</div><div class="line">    padding-right: 20px;</div><div class="line">    display: inline;</div><div class="line">  &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>可以使用与两列布局技术相同的CSS，将次要内容向左浮动，主要内容向右浮动。然后在主内容div中，将主div向左浮动，次div向右浮动。<strong>其实就是把主内容区域分成两列，从而形成三列效果。</strong></p>
+<h4 id="流式（百分比）布局"><a href="#流式（百分比）布局" class="headerlink" title="流式（百分比）布局"></a><strong>流式（百分比）布局</strong></h4><p>尺寸用百分数设置，流式布局可以非常高效地使用空间。但是，在窗口宽度较小的时候，行变得非常窄，很难阅读。在多列布局中尤其如此。所以，有必要添加以像素或em为单位的min-width。<br>而如果设计横跨浏览器整个窗口，行就变得太长，也很难阅读。</p>
+<ol>
+<li>不要横跨浏览器而是让容器只跨越宽度的一部分，如85%</li>
+<li>还可以考<strong>虑用百分数设置内边距和外边距</strong>，可以防止列太快地变得过宽</li>
+<li>对于非常严重情况，可以选择<strong>为容器设置最大宽度max-width</strong>。</li>
+</ol>
+<h4 id="弹性（em）布局"><a href="#弹性（em）布局" class="headerlink" title="弹性（em）布局"></a><strong>弹性（em）布局</strong></h4><p>虽然流式布局可以充分利用可用空间，但是在大分辨率显示器上，行仍然会过长。相反，在窄窗口中或者在增加文本字号时，行会变得非常短，内容很零碎。</p>
+<p>弹性布局相对于字号（而不是浏览器宽度）来设置宽度。以em为单位设置宽度，可以确保字号增加时整个布局随之扩大。这可以使长行保持在可阅读的范围。</p>
+<p>但是弹性布局也不能充分利用可用空间，另外因为文本字号增加时整个布局会加大，所以弹性布局会变得比浏览器窗口宽，导致水平滚动条出现。为了防止这种情况，可能需要<strong>在容器div上添加100%的max-width</strong>。</p>
+<p><strong>技巧是设置基字号，让1em大致相当于10像素。</strong>比如大多数浏览器上的默认字号是16像素，10像素大约是16像素的62.5%，所以在主体上将字号设置为62.5%即可。</p>
+<h4 id="rem布局"><a href="#rem布局" class="headerlink" title="rem布局"></a><strong>rem布局</strong></h4><p>rem布局最大的好处就在于它是相对于html根元素上的字体大小。</p>
+<h4 id="！高度相等的列"><a href="#！高度相等的列" class="headerlink" title="！高度相等的列"></a><strong>！高度相等的列</strong></h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&lt;div class="wrapper"&gt;</div><div class="line">  &lt;div class="box"&gt;</div><div class="line">    &lt;h1&gt;header1&lt;/h1&gt;</div><div class="line">    &lt;p&gt;For example1......&lt;/p&gt;</div><div class="line">    &lt;div class="bottom"&gt;&lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class="box"&gt;</div><div class="line">    &lt;h1&gt;header2&lt;/h1&gt;</div><div class="line">    &lt;p&gt;For example2......&lt;/p&gt;</div><div class="line">    &lt;div class="bottom"&gt;&lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class="box"&gt;</div><div class="line">    &lt;h1&gt;header3&lt;/h1&gt;</div><div class="line">    &lt;p&gt;For example3......&lt;/p&gt;</div><div class="line">    &lt;div class="bottom"&gt;&lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    .wrapper&#123;</div><div class="line">      width: 100%;</div><div class="line">      overflow: hidden;</div><div class="line">      position: relative;</div><div class="line">      outline: 1px dashed pink;</div><div class="line">    &#125;</div><div class="line">    .box&#123;</div><div class="line">      width: 250px;</div><div class="line">      padding: 20px;</div><div class="line">      margin-bottom: -500px;</div><div class="line">      margin-left: 20px;</div><div class="line">      float: left;</div><div class="line">      display: inline;</div><div class="line">      padding-bottom: 520px;</div><div class="line">      outline: 1px solid gray;</div><div class="line">    &#125;</div><div class="line">    .bottom&#123;</div><div class="line">      position: absolute;</div><div class="line">      bottom: 0;</div><div class="line">      height: 20px;</div><div class="line">      width: 290px;</div><div class="line">      margin-left: -20px;</div><div class="line">      outline: 1px solid green;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<h4 id="！CSS3创建登高文本列"><a href="#！CSS3创建登高文本列" class="headerlink" title="！CSS3创建登高文本列"></a><strong>！CSS3创建登高文本列</strong></h4><p><code>column-count</code>表示列的数量<br><code>column-width</code>表示列的宽度<br><code>column-gap</code>表示列的间距<br><code>column-rule</code>表示分隔的线条（宽 样式 颜色）<br><strong>注意它们都需要加上前缀</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;After philoso......&lt;/p&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    p&#123;</div><div class="line">        -webkit-column-count: 3;</div><div class="line">        -webkit-column-width: 14em;</div><div class="line">        -webkit-column-gap: 2em;</div><div class="line">        -webkit-column-rule: 1px solid #ccc;</div><div class="line">      &#125;</div><div class="line">  &lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>![image_1aofk5sbr1mkh1qu6k62srpf5m.png-6.5kB][7]</p>
+<h4 id="CSS框架与CSS系统"><a href="#CSS框架与CSS系统" class="headerlink" title="CSS框架与CSS系统"></a><strong>CSS框架与CSS系统</strong></h4><p>框架多有助于提高生产力的特性（全局reset、全站排版处理…），但是框架也会改变编写标记的方式，破坏表现与意义的分离。如果选用某个框架，你可能会在每个项目中都使用它，因此思维方式很可能会逐渐僵化。（“如果你有一把锤子，那么什么东西看起来都像是钉子。”）</p>
+<p>而CSS系统是一个工具箱，其中包含可重用的样式和标记模式，可以用它们开发站点专用的框架。它能提供CSS框架的优点，同时避免其缺点。</p>
+<h3 id="九、bug和修复bug"><a href="#九、bug和修复bug" class="headerlink" title="九、bug和修复bug"></a><strong>九、bug和修复bug</strong></h3><p>hack确实是有力的工具，但是需要谨慎地应用，而且一般是作为最后的手段来使用。更为重要的技能是跟踪、隔离和识别bug。只有在知道bug是怎么回事后，才能想办法对付它。</p>
+<p>最常见的CSS问题并非来源于浏览器bug，而是来源于对CSS规范的理解不完整。为了避免这些问题，在处理CSS bug时最好假设是自己做错了什么事。只有在确定不是自己的错之后，才应该考虑是否是浏览器bug的结果。</p>
+<h4 id="！常见的CSS问题"><a href="#！常见的CSS问题" class="headerlink" title="！常见的CSS问题"></a><strong>！常见的CSS问题</strong></h4><ol>
+<li><p>由代码中的打字和语法错误造成的。如：忘了分号。</p>
+<blockquote>
+<p>使用CSS3分析工具检查代码，然后查阅规范。</p>
+</blockquote>
+</li>
+<li><p>特殊性（优先级）和分类次序的问题</p>
+<blockquote>
+<p>property: value !important; &gt; 内联 &gt;  id &gt; class、伪类、属性选择器 &gt; 标签选择器、伪元素选择器</p>
+</blockquote>
+</li>
+<li><p>垂直外边距叠加的问题？<br>如果元素没有垂直边框或内边距，那么它的高度就是它包含的子元素的顶部和底部边框边缘之间的距离。因此，包含的子元素的顶部和底部外边距就突出到容器元素外边。</p>
+<blockquote>
+<p>一个简单的解决方案：添加一个垂直边框或内边距<code>.parent{padding:1px;}</code>，外边距就不在叠加了。</p>
+</blockquote>
+</li>
+</ol>
+<p>不要把浏览器测试留到项目快结束的时候，应该采用连续测试方法，在项目开发过程中用所有主流浏览器检查页面，这样就不会在项目快结束的时候又突然发现很多问题。 </p>
+<ol>
+<li>尽量在一开始就避免bug</li>
+<li>隔离问题</li>
+<li>创建基本测试案例</li>
+<li>修复问题，而不是修复症状</li>
+<li>请求帮助<br>准确描述问题的标题+对问题的简短总结+粘贴基本测试案例/测试案例链接（+带注解的屏幕截图）</li>
+</ol>
+<h4 id="布局（IE6、7）"><a href="#布局（IE6、7）" class="headerlink" title="布局（IE6、7）"></a><strong>布局（IE6、7）</strong></h4><p>IE使用布局概念控制元素的尺寸和定位。那些“拥有布局”的元素负责本身及其子元素的尺寸设置和定位。如果一个元素“没有拥有布局”，那么它的尺寸和位置由最近的拥有布局的祖先元素控制。<strong>默认情况下拥有布局的元素：</strong></p>
+<ul>
+<li>body html(标准模式)</li>
+<li>table tr td</li>
+<li>img hr</li>
+<li>input select texarea button</li>
+<li>firame embed object applet</li>
+<li>marquee</li>
+</ul>
+<p><strong>设置以下属性也会自动使元素拥有布局：</strong></p>
+<ul>
+<li>float: left/right  </li>
+<li>display: inline-block</li>
+<li>width: any  </li>
+<li>height: any</li>
+<li>zoom: any  </li>
+<li>writing-mode: tb-rl</li>
+<li>overflow: hidden/scroll/auto</li>
+<li>min-width: any </li>
+<li>max-width: any except none</li>
+</ul>
+<h4 id="！布局造成的问题："><a href="#！布局造成的问题：" class="headerlink" title="！布局造成的问题："></a><strong>！布局造成的问题：</strong></h4><ol>
+<li>如果段落拥有布局，它就被限制为矩形，因此阻止文本围绕浮动元素</li>
+<li>对于某些元素，布局像是清理了包含元素的浮动，就像设置了<code>overflow:hidden</code>。</li>
+<li>在IE6中，拥有布局的元素会错误地扩展尺寸以便适应内容的尺寸吗，而不是溢到外面。</li>
+<li>拥有布局的元素不会收缩</li>
+<li>相对定位的元素没有布局</li>
+<li>在没有布局的块级链接上，单击区域只覆盖文本</li>
+<li>在滚动时，列表项上的背景图像间歇性的显示和消失。</li>
+</ol>
+<h4 id="IE6条件注释"><a href="#IE6条件注释" class="headerlink" title="IE6条件注释"></a><strong>IE6条件注释</strong></h4><p>条件注释能够根据条件（浏览器版本）显示代码块。（非标准）本质上无害，因此被看作是处理IE特有bug的最好办法。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- [if IE 6] </span></div><div class="line">    &lt;link rel="stylesheet" type="text/css" href="/css/ie6.css"&gt;</div><div class="line">--&gt;</div><div class="line"></div><div class="line"><span class="comment">&lt;!-- [if IE 6]&gt;</span></div><div class="line">Anything here si only seen by IE6</div><div class="line">&lt;![endif]&gt;--&gt;</div></pre></td></tr></table></figure>
+<p>向下显露的条件注释，对IE的所有版本隐藏高级样式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- [if ！IE] </span></div><div class="line">    &lt;link rel="stylesheet" type="text/css" href="/css/advanced.css"&gt;</div><div class="line">--&gt;</div></pre></td></tr></table></figure>
+<h4 id="hack和过滤器"><a href="#hack和过滤器" class="headerlink" title="hack和过滤器"></a><strong>hack和过滤器</strong></h4><p>利用CSS具有很强的向前兼容性（<strong>如果浏览器不理解某个选择器，则忽略整个规则；如果不理解某个属性或值，会忽略整个声明</strong>），添加新的选择器、属性和值应该不会对老式浏览器产生严重的影响。</p>
+<p>因此使用不被支持的CSS作为过滤机制是一种相对安全的方法。但是使用依赖于解析bug的过滤器是一种有点儿冒险的方法，因为它们依赖于bug而不是特性。如果解析bug被修复了，而你试图修复的bug还没有得到解决，那么可能会再次遇到问题。</p>
+<p>hack和过滤器常常会使你的代码失效，作为一般规则，应该使用依赖于不被支持的CSS的过滤器，而不是依赖于某种浏览器bug的过滤器，这可能比较安全。最好完全避免使用过滤器。</p>
+<h4 id="明智地使用hack和过滤器"><a href="#明智地使用hack和过滤器" class="headerlink" title="明智地使用hack和过滤器"></a><strong>明智地使用hack和过滤器</strong></h4><p>不要过分信赖与hack和过滤器。如果只能应用某种hack或过滤器，那么需要以明智且受控制的方式应用它。（hack往往相当复杂，使代码难以阅读）</p>
+<ul>
+<li>如果CSS文件短小简单，并且只需要使用很少的hack，那么将这些hack放在主css文件中并添加注释说明可能是安全的。</li>
+<li>如果CSS文件很长很复杂，或者需要使用的hack比较多，那么最好将它们放在它们自己的样式表中。</li>
+</ul>
+<h5 id="应用星号-HTML-hack"><a href="#应用星号-HTML-hack" class="headerlink" title="应用星号 HTML hack"></a><strong>应用星号 HTML hack</strong></h5><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* for IE6 */</span></div><div class="line">* <span class="selector-tag">html</span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>IE6中有一个匿名的根元素，它包围着hmtl元素。可使用通用选择器指定包围在另一个元素中的HTML元素。</p>
+<h5 id="简化盒模型hack"><a href="#简化盒模型hack" class="headerlink" title="简化盒模型hack"></a><strong>简化盒模型hack</strong></h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/* for IE6 */</div><div class="line">#content&#123;</div><div class="line">    width: 80px;</div><div class="line">    padding: 10px;</div><div class="line">&#125;</div><div class="line">* html #content&#123;</div><div class="line">    width: 100px;</div><div class="line">    w\idth: 80px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="应用子选择器hack"><a href="#应用子选择器hack" class="headerlink" title="应用子选择器hack"></a><strong>应用子选择器hack</strong></h5><p>创建会被IE老版本忽略的规则</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* not for IE6 */</span></div><div class="line"><span class="comment">/* 因为在IE6中PNG不是透明的，且不支持子选择器 */</span></div><div class="line"><span class="selector-tag">html</span>&gt;<span class="selector-tag">body</span>&#123;</div><div class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(bg.png);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="双外边距浮动bug（IE6）"><a href="#双外边距浮动bug（IE6）" class="headerlink" title="双外边距浮动bug（IE6）"></a><strong>双外边距浮动bug（IE6）</strong></h5><p><strong>现象：</strong>使任何浮动元素上的外边距加倍。<br><strong>修复：</strong>只要为元素设置<code>display：inline</code>即可。</p>
+<h5 id="！3像素文本偏移bug（IE6）"><a href="#！3像素文本偏移bug（IE6）" class="headerlink" title="！3像素文本偏移bug（IE6）"></a><strong>！3像素文本偏移bug（IE6）</strong></h5><p><strong>现象：</strong>当文本与一个浮动元素相邻时，在与浮动元素相邻的地方出现莫名其妙的3像素间隙。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.myFloat</span>&#123;</div><div class="line">    <span class="attribute">float</span>:left;</div><div class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">p</span>&#123;</div><div class="line">    <span class="attribute">margin-left</span>:<span class="number">200px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>修复：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;</div><div class="line"><span class="comment">/** </span></div><div class="line">  * 迫使元素拥有布局，不会在IE6中影响元素的实际尺寸（因为将height作为min-height对待），</div><div class="line">  * 但是会影响其他浏览器。所以需要用条件注释，把这些样式转移到单独的css文件中。 </div><div class="line">  */</div><div class="line">    <span class="attribute">height</span>:<span class="number">1%</span>;  </div><div class="line"></div><div class="line"> <span class="comment">/**</span></div><div class="line">  * 拥有布局的元素会被限制为矩形，并且出现在浮动元素的旁边而不是下边（脱离文档流？）</div><div class="line">  * 所以200px的外边距会在IE6中让浮动元素和段落之间产生200px的间隙。所以需要重新设置为0。</div><div class="line">  */</div><div class="line">    <span class="attribute">margin-left</span>:<span class="number">0</span>; </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 去掉浮动元素上的间隙 */</span></div><div class="line"><span class="selector-class">.myFloat</span>&#123;</div><div class="line">    <span class="attribute">margin-right</span>:-<span class="number">3px</span>; </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 解决浮动元素是图像时的bug，在IE5.X下要设置为margin: 0 -3px; */</span></div><div class="line"><span class="selector-tag">img</span><span class="selector-class">.myFloat</span>&#123;</div><div class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="重复字符bug（IE6）"><a href="#重复字符bug（IE6）" class="headerlink" title="重复字符bug（IE6）"></a><strong>重复字符bug（IE6）</strong></h5><p><strong>现象：</strong>当在一系列浮动元素的第一个和最后一个元素之间有多个注释时，最后一个元素中的最后几个字符会在浮动元素下面重复出现。<br><strong>修复：</strong>在HTML中删除注释</p>
+<h5 id="藏猫猫bug（IE6）"><a href="#藏猫猫bug（IE6）" class="headerlink" title="藏猫猫bug（IE6）"></a><strong>藏猫猫bug（IE6）</strong></h5><p><strong>现象：</strong>一个浮动元素后面跟着一些非浮动元素，然后是一个清理元素，所有这些元素包含在一个<strong>设置了背景颜色或图像的父元素</strong>中。如果清理元素碰到了浮动元素，那么中间的非浮动元素看起来消失了，隐藏到了父元素的背景颜色或图像后面，只有在重新加载页面时才再度出现，<br><strong>修复：</strong>去掉父元素上的背景颜色或图像；或者给容器元素应用特定的尺寸；或者给容器指定行高。</p>
+<h5 id="相对容器中的绝对定位（IE6）"><a href="#相对容器中的绝对定位（IE6）" class="headerlink" title="相对容器中的绝对定位（IE6）"></a><strong>相对容器中的绝对定位（IE6）</strong></h5><p><strong>现象：</strong>因为相对定位的元素没有获得<code>IE/Win</code>的内部<code>hasLayout</code>属性，因此它们不创建新的定位上下文，所有绝对定位元素相对于视口进行定位。<br><strong>修复：</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">container</span>&#123;</div><div class="line">    <span class="attribute">height</span>:<span class="number">1%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="十、实例研究"><a href="#十、实例研究" class="headerlink" title="十、实例研究"></a><strong>十、实例研究</strong></h3><h5 id="隐藏和显示文本"><a href="#隐藏和显示文本" class="headerlink" title="隐藏和显示文本"></a><strong>隐藏和显示文本</strong></h5><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#voices</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-class">.11</span> <span class="selector-tag">a</span> <span class="selector-tag">em</span>&#123;</div><div class="line">    <span class="attribute">white-space</span>: nowrap;</div><div class="line">    <span class="attribute">width</span>: <span class="number">135px</span>;</div><div class="line">    <span class="attribute">overflow</span>: hidden;</div><div class="line">    <span class="attribute">text-overflow</span>:ellipsis;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#voices</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span><span class="selector-class">.11</span> <span class="selector-tag">a</span> <span class="selector-tag">em</span><span class="selector-pseudo">:hover</span>&#123;</div><div class="line">    <span class="attribute">white-space</span>: normal;</div><div class="line">    <span class="attribute">overflow</span>: visible;</div><div class="line">    <span class="attribute">text-overflow</span>:inherit;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="！标点符号悬挂"><a href="#！标点符号悬挂" class="headerlink" title="！标点符号悬挂"></a><strong>！标点符号悬挂</strong></h5><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;</div><div class="line">    <span class="attribute">text-indent</span>:-.<span class="number">3em</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="font-face"><a href="#font-face" class="headerlink" title="@font-face"></a><strong>@font-face</strong></h5><p><code>字体嵌入</code>让我们可以在设计中使用任何字体显示HTML文本，而不需要考虑用户的机器上是否安装了这种字体。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">font-face</span>&#123;</div><div class="line">    <span class="attribute">font-family</span>: <span class="string">"Garamond Premier Pro"</span>;</div><div class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(fonts/GaramondPremrPro.otf);</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">h1</span>&#123;</div><div class="line">    <span class="attribute">font-family</span>: <span class="string">"Garamond Premier Pro"</span>，serif;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是没有这么简单！</p>
+<ol>
+<li>浏览器支持问题，IE只支持.eot格式。otf等其他字体格式必须先转换为.ttf，然后再转换为.eot。</li>
+<li>字体厂商的最终用户许可协议（EULA）没有更新以允许字体链接。</li>
+</ol>
+<h3 id="收获总结："><a href="#收获总结：" class="headerlink" title="收获总结："></a><strong>收获总结：</strong></h3><ol>
+<li>巧妙使用注释分组</li>
+<li>规范的重要性</li>
+<li>一些有意思的CSS3属性</li>
+<li>表格中一些有意思的属性</li>
+<li>创建等高列</li>
+<li>兼容IE6，使用hack和过滤器</li>
+<li>一些有意思的bug</li>
+<li>在网页中载入字体</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/精通CSS/" rel="tag">#精通CSS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/18/友情、爱情和亲情之友情/" rel="next" title="友情、爱情和亲情之友情">
+                <i class="fa fa-chevron-left"></i> 友情、爱情和亲情之友情
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/我的实习之路（一）/" rel="prev" title="我的实习之路（一）">
+                我的实习之路（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/25/精通CSS-杂记/"
+           data-title="《精通CSS》笔记" data-url="http://yoursite.com/2016/07/25/精通CSS-杂记/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、设计代码结构"><span class="nav-number">1.</span> <span class="nav-text">一、设计代码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#id和class语义化命名"><span class="nav-number">1.1.</span> <span class="nav-text">id和class语义化命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id和class哪家强"><span class="nav-number">1.2.</span> <span class="nav-text">id和class哪家强</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、为样式找到应用目标"><span class="nav-number">2.</span> <span class="nav-text">二、为样式找到应用目标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#！使用注释进行分组"><span class="nav-number">2.1.</span> <span class="nav-text">！使用注释进行分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计代码的结构"><span class="nav-number">2.2.</span> <span class="nav-text">设计代码的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#样式规范"><span class="nav-number">2.3.</span> <span class="nav-text">样式规范</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、可视化格式模型"><span class="nav-number">3.</span> <span class="nav-text">三、可视化格式模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IE盒模型与标准盒模型"><span class="nav-number">3.1.</span> <span class="nav-text">IE盒模型与标准盒模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外边距叠加"><span class="nav-number">3.2.</span> <span class="nav-text">外边距叠加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改行内框宽高"><span class="nav-number">3.3.</span> <span class="nav-text">修改行内框宽高</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本作为块级元素对待"><span class="nav-number">3.4.</span> <span class="nav-text">文本作为块级元素对待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浮动定位"><span class="nav-number">3.5.</span> <span class="nav-text">浮动定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清除浮动（IE6-）"><span class="nav-number">3.6.</span> <span class="nav-text">清除浮动（IE6-）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、背景图像效果"><span class="nav-number">4.</span> <span class="nav-text">四、背景图像效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建渐变图案"><span class="nav-number">4.1.</span> <span class="nav-text">创建渐变图案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为标题添加项目符号"><span class="nav-number">4.2.</span> <span class="nav-text">为标题添加项目符号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、对a元素应用样式"><span class="nav-number">5.</span> <span class="nav-text">五、对a元素应用样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置锚点（两种方案）"><span class="nav-number">5.1.</span> <span class="nav-text">设置锚点（两种方案）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置伪类"><span class="nav-number">5.2.</span> <span class="nav-text">设置伪类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为跳转目标设定样式"><span class="nav-number">5.3.</span> <span class="nav-text">为跳转目标设定样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为外链添加小图标（属性选择器）"><span class="nav-number">5.4.</span> <span class="nav-text">为外链添加小图标（属性选择器）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS精灵（sprite）"><span class="nav-number">5.5.</span> <span class="nav-text">CSS精灵（sprite）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！渐变"><span class="nav-number">5.6.</span> <span class="nav-text">！渐变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！倒影"><span class="nav-number">5.7.</span> <span class="nav-text">！倒影</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、对列表应用样式列表和创建导航条"><span class="nav-number">6.</span> <span class="nav-text">六、对列表应用样式列表和创建导航条</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加项目符号"><span class="nav-number">6.1.</span> <span class="nav-text">添加项目符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的垂直导航条"><span class="nav-number">6.2.</span> <span class="nav-text">简单的垂直导航条</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#突出显示当前页面，而不需要动态地在导航菜单中添加类"><span class="nav-number">6.3.</span> <span class="nav-text">突出显示当前页面，而不需要动态地在导航菜单中添加类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！简单的水平导航条-分页器"><span class="nav-number">6.4.</span> <span class="nav-text">！简单的水平导航条(分页器)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！Suckerfish下拉菜单"><span class="nav-number">6.5.</span> <span class="nav-text">！Suckerfish下拉菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图像映射"><span class="nav-number">6.6.</span> <span class="nav-text">图像映射</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、对表单和数据表格应用样式"><span class="nav-number">7.</span> <span class="nav-text">七、对表单和数据表格应用样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#table的summary属性"><span class="nav-number">7.1.</span> <span class="nav-text">table的summary属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thead、tbody和tfoot"><span class="nav-number">7.2.</span> <span class="nav-text">thead、tbody和tfoot</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！th的scope属性"><span class="nav-number">7.3.</span> <span class="nav-text">！th的scope属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！col和colgroup元素"><span class="nav-number">7.4.</span> <span class="nav-text">！col和colgroup元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！border-collapse两个表格边盒模型"><span class="nav-number">7.5.</span> <span class="nav-text">！border-collapse两个表格边盒模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！把标签和表单控件关联起来的两种方法"><span class="nav-number">7.6.</span> <span class="nav-text">！把标签和表单控件关联起来的两种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提交按钮"><span class="nav-number">7.7.</span> <span class="nav-text">提交按钮</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、布局"><span class="nav-number">8.</span> <span class="nav-text">八、布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#！计划布局"><span class="nav-number">8.1.</span> <span class="nav-text">！计划布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于浮动的布局"><span class="nav-number">8.2.</span> <span class="nav-text">基于浮动的布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两列浮动布局"><span class="nav-number">8.3.</span> <span class="nav-text">两列浮动布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三列浮动布局"><span class="nav-number">8.4.</span> <span class="nav-text">三列浮动布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流式（百分比）布局"><span class="nav-number">8.5.</span> <span class="nav-text">流式（百分比）布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#弹性（em）布局"><span class="nav-number">8.6.</span> <span class="nav-text">弹性（em）布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rem布局"><span class="nav-number">8.7.</span> <span class="nav-text">rem布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！高度相等的列"><span class="nav-number">8.8.</span> <span class="nav-text">！高度相等的列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！CSS3创建登高文本列"><span class="nav-number">8.9.</span> <span class="nav-text">！CSS3创建登高文本列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS框架与CSS系统"><span class="nav-number">8.10.</span> <span class="nav-text">CSS框架与CSS系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、bug和修复bug"><span class="nav-number">9.</span> <span class="nav-text">九、bug和修复bug</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#！常见的CSS问题"><span class="nav-number">9.1.</span> <span class="nav-text">！常见的CSS问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布局（IE6、7）"><span class="nav-number">9.2.</span> <span class="nav-text">布局（IE6、7）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#！布局造成的问题："><span class="nav-number">9.3.</span> <span class="nav-text">！布局造成的问题：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IE6条件注释"><span class="nav-number">9.4.</span> <span class="nav-text">IE6条件注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hack和过滤器"><span class="nav-number">9.5.</span> <span class="nav-text">hack和过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#明智地使用hack和过滤器"><span class="nav-number">9.6.</span> <span class="nav-text">明智地使用hack和过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用星号-HTML-hack"><span class="nav-number">9.6.1.</span> <span class="nav-text">应用星号 HTML hack</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简化盒模型hack"><span class="nav-number">9.6.2.</span> <span class="nav-text">简化盒模型hack</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用子选择器hack"><span class="nav-number">9.6.3.</span> <span class="nav-text">应用子选择器hack</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#双外边距浮动bug（IE6）"><span class="nav-number">9.6.4.</span> <span class="nav-text">双外边距浮动bug（IE6）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#！3像素文本偏移bug（IE6）"><span class="nav-number">9.6.5.</span> <span class="nav-text">！3像素文本偏移bug（IE6）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重复字符bug（IE6）"><span class="nav-number">9.6.6.</span> <span class="nav-text">重复字符bug（IE6）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#藏猫猫bug（IE6）"><span class="nav-number">9.6.7.</span> <span class="nav-text">藏猫猫bug（IE6）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#相对容器中的绝对定位（IE6）"><span class="nav-number">9.6.8.</span> <span class="nav-text">相对容器中的绝对定位（IE6）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十、实例研究"><span class="nav-number">10.</span> <span class="nav-text">十、实例研究</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#隐藏和显示文本"><span class="nav-number">10.0.1.</span> <span class="nav-text">隐藏和显示文本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#！标点符号悬挂"><span class="nav-number">10.0.2.</span> <span class="nav-text">！标点符号悬挂</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#font-face"><span class="nav-number">10.0.3.</span> <span class="nav-text">@font-face</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收获总结："><span class="nav-number">11.</span> <span class="nav-text">收获总结：</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

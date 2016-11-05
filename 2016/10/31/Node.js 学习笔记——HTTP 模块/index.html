@@ -1,0 +1,903 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js http server 服务器 代理," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="前言最近在看 Node.js v4.6.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）
+
+额，突然发现官方稳定版变成 v6.9.1 了，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js 学习笔记—— HTTP 模块">
+<meta property="og:url" content="http://yoursite.com/2016/10/31/Node.js 学习笔记——HTTP 模块/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="前言最近在看 Node.js v4.6.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）
+
+额，突然发现官方稳定版变成 v6.9.1 了，">
+<meta property="og:updated_time" content="2016-10-30T16:16:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js 学习笔记—— HTTP 模块">
+<meta name="twitter:description" content="前言最近在看 Node.js v4.6.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）
+
+额，突然发现官方稳定版变成 v6.9.1 了，">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/31/Node.js 学习笔记——HTTP 模块/"/>
+
+
+  <title> Node.js 学习笔记—— HTTP 模块 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node.js 学习笔记—— HTTP 模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-31T00:06:48+08:00" content="2016-10-31">
+              2016-10-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/31/Node.js 学习笔记——HTTP 模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/Node.js 学习笔记——HTTP 模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在看 Node.js v4.6.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）</p>
+<blockquote>
+<p>额，突然发现官方稳定版变成 v6.9.1 了，好在这个模块几乎没有多大变化。(＾－＾)V</p>
+</blockquote>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><a href="https://en.wikipedia.org/wiki/Client_(computing" target="_blank" rel="external"><strong>Client</strong></a>) : 客户端，是一块计算机硬件或软件，可以访问由服务器提供的服务。服务器通常在另一个计算机系统上（也可能在本地），在这种情况下，客户端通过网络的方式访问服务。是一个计算机程序，其操作的一部分依靠发送请求到另一个计算机程序（可能在也可能不在另一台计算机上）。比如，web 浏览器就是一个客户端，可用于连接 web 服务器并显示网页。</p>
+<p><a href="https://en.wikipedia.org/wiki/Web_server" target="_blank" rel="external"><strong>Server</strong> :</a> 服务器，是一个计算机程序或者设备，用于为其他程序或者设备（客户端）提供功能。一个管理资源并为用户提供服务的计算机软件。</p>
+<p><strong>web server</strong> : 网络服务器是一个通过 HTTP 处理请求的计算机系统。可以指整个系统，或者特指接收并管理 HTTP 请求的软件。</p>
+<p><strong>HTTP</strong> : HyperText Transfer Protocol ，超文本传输协议。 是在万维网上进行通信时所使用的协议方案。 Web 使用其作为规范，完成客户端到服务器端等一系列运作流程。</p>
+<p><strong>Agent</strong> : 代理（客户端），发起自动 HTTP 请求的半智能 Web 客户端。通常指客户端程序，如浏览器就是一个 Agent 。</p>
+<p><strong>Proxy</strong> : 代理，位于客户端和服务器之间的 HTTP 中间实体。接收由客户端发送的请求并转发给服务器，接收服务器返回的响应并转发给客户端。</p>
+<a id="more"></a>
+<p><a href="https://en.wikipedia.org/wiki/Network_socket" target="_blank" rel="external"><strong>socket</strong></a> : 套接字，是应用层和传输层之间的一个抽象层，它把 TCP/IP 层复杂地抽象为几个简单的接口供应层，调用以实现进程在网络中通信。是一种”打开—读/写—关闭”模式的实现。网络上的两个程序通过一个双向的通信连接实现数据的交换，这个连接的一端成为一个 socket 。</p>
+<ul>
+<li>在一个操作系统和应用中， socket 是指一个被称为 socket 描述符的唯一个整数值，</li>
+<li>在许多教科书中， socket 是指一个由 socket 数字唯一标识的实体。</li>
+<li>在其他教科书中， socket 是指一个本地 socket 地址。例如， IP 地址和端口号的组合。</li>
+<li>在RFC147给的原始定义是，被指定为一个 32 位数字，偶数 sockets 识别为接收 sokcets ，奇数 sokcets 识别为发送 sokcets 。</li>
+</ul>
+<p><strong>trailer</strong> : 通用首部，报文末端的首部一览。（附加在数据块末尾用于促进处理的补充数据，可能包含数据块处理信息或者仅标记结束。）</p>
+<h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><p>引用该模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div></pre></td></tr></table></figure>
+<h3 id="http-模块中的属性"><a href="#http-模块中的属性" class="headerlink" title="http 模块中的属性"></a>http 模块中的属性</h3><ul>
+<li>.METHODS</li>
+<li>.STATUS_CODES</li>
+<li>.globalAgent</li>
+</ul>
+<h4 id="http-METHODS"><a href="#http-METHODS" class="headerlink" title="http.METHODS"></a>http.METHODS</h4><ul>
+<li>return: 数组，由解析器支持的 HTTP 方法组成。</li>
+</ul>
+<h4 id="http-STATUS-CODES"><a href="#http-STATUS-CODES" class="headerlink" title="http.STATUS_CODES"></a>http.STATUS_CODES</h4><ul>
+<li>return: 对象，标准 HTTP 响应状态码的集合，键为状态码字符串，值为原因短语。</li>
+</ul>
+<h4 id="http-globalAgent"><a href="#http-globalAgent" class="headerlink" title="http.globalAgent"></a>http.globalAgent</h4><ul>
+<li>return: 全局的Agent实例，是所有 http 客户端请求的默认值。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Agent &#123;</div><div class="line">  <span class="attr">domain</span>: <span class="literal">null</span>,</div><div class="line">  <span class="attr">_events</span>: &#123; <span class="attr">free</span>: [<span class="built_in">Function</span>] &#125;,</div><div class="line">  <span class="attr">_eventsCount</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">_maxListeners</span>: <span class="literal">undefined</span>,</div><div class="line">  <span class="attr">defaultPort</span>: <span class="number">80</span>,</div><div class="line">  <span class="attr">protocol</span>: <span class="string">'http:'</span>,</div><div class="line">  <span class="attr">options</span>: &#123; <span class="attr">path</span>: <span class="literal">null</span> &#125;,</div><div class="line">  <span class="attr">requests</span>: &#123;&#125;,</div><div class="line">  <span class="attr">sockets</span>: &#123;&#125;,</div><div class="line">  <span class="attr">freeSockets</span>: &#123;&#125;,</div><div class="line">  <span class="attr">keepAliveMsecs</span>: <span class="number">1000</span>,</div><div class="line">  <span class="attr">keepAlive</span>: <span class="literal">false</span>,</div><div class="line">  <span class="attr">maxSockets</span>: <span class="literal">Infinity</span>,</div><div class="line">  <span class="attr">maxFreeSockets</span>: <span class="number">256</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="http-模块中的方法"><a href="#http-模块中的方法" class="headerlink" title="http 模块中的方法"></a>http 模块中的方法</h3><ul>
+<li>.request(options[, callback])</li>
+<li>.get(options[,calllback])</li>
+<li>.createServer([requestListener])</li>
+</ul>
+<h4 id="http-request-options-callback"><a href="#http-request-options-callback" class="headerlink" title="http.request(options[, callback])"></a>http.request(options[, callback])</h4><p>Node.js 每个服务器控制若干个连接，发出HTTP 请求。该函数允许你透明地发送请求。</p>
+<ul>
+<li>options: 对象或字符串，如果是字符串，自动用 url.parese() 解析。<ul>
+<li>protocol: 使用的协议，默认 ‘http:’ 。</li>
+<li>host: 请求发向的服务器的域名或者 IP 地址，默认 ‘localhost’ 。</li>
+<li>hostname: host 的别称。为了支持 url.parse() hostname 优于 host 。</li>
+<li>family: 当解析 host 和 hostname 时使用的 IP 地址族，有效值为 4 或 6 。当没有指定时， IP v4 和 v6 都将被使用。</li>
+<li>port: 远程服务器的端口，默认为 80 。</li>
+<li>localAddress: 绑定网络连接的本地接口。</li>
+<li>socketPath: Unix Domain Socket (域名套接字)，使用 host:port or socketPath 。</li>
+<li>method: 指定 HTTP 请求方法的字符串，默认为 ‘GET’ 。</li>
+<li>path: 请求路径，默认为 ‘/‘ 。如果有的话，应该包括查询字符串，如 ‘/index.html?page=12’ 。</li>
+<li>headers: 包含请求头部的对象。</li>
+<li>auth: 基础身份验证，如 ‘user:password’ 计算一个身份验证头部。</li>
+<li>agent: 控制代理行为。当代理被使用，请求默认为 Connection: keep-alive 。可能的值：<ul>
+<li>undefined: 默认，未这个域名和端口使用 http.globalAgent 。</li>
+<li>Agent: 对象，明确地使用在 Agent 的传递</li>
+<li>false: 用一个 Agent 跳出连接池，默认请求 Connetion: close 。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>callback: 函数，<code>(res) =&gt;{...}</code> 作为 response 事件的一次性监听器。</li>
+<li>return: http.ClientRequest 类的实例。是一个可写的流，可用于上传文件。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> postData = <span class="string">'hello world'</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  <span class="attr">hostname</span>: <span class="string">'www.google.com'</span>,</div><div class="line">  <span class="attr">port</span>: <span class="number">80</span>,</div><div class="line">  <span class="attr">path</span>: <span class="string">'/upload'</span>,</div><div class="line">  <span class="attr">method</span>: <span class="string">'POST'</span>,</div><div class="line">  <span class="attr">headers</span>: &#123;</div><div class="line">    <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span>,</div><div class="line">    <span class="string">'Content-Length'</span>: Buffer.byteLength(postData)</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> req = http.request(options, (res) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`STATUS: <span class="subst">$&#123;res.statusCode&#125;</span>`</span>);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`HEADERS: <span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(res.headers)&#125;</span>`</span>);</div><div class="line">  res.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">  <span class="built_in">console</span>.log(res.httpVersion);</div><div class="line">  <span class="built_in">console</span>.log(res.statusCode);</div><div class="line">  <span class="built_in">console</span>.log(res.statusMessage);</div><div class="line">  res.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`BODY: <span class="subst">$&#123;chunk&#125;</span>`</span>);</div><div class="line">  &#125;);</div><div class="line">  res.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'No more data in response.'</span>)</div><div class="line">  &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 监听请求错误</span></div><div class="line">req.on(<span class="string">'error'</span>, (e) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`problem with request: <span class="subst">$&#123;e.message&#125;</span>`</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 向请求主体写入数据</span></div><div class="line">req.write(postData);</div><div class="line">req.end(); <span class="comment">// 表示请求完成，必须调用。</span></div></pre></td></tr></table></figure>
+<h4 id="http-get-options-callback"><a href="#http-get-options-callback" class="headerlink" title="http.get(options[,callback])"></a>http.get(options[,callback])</h4><p>是请求的 GET 方法版。与 http.request的唯一不同之处在于它自动设置了 GET 方法并调用 req.end() 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> req = http.get(<span class="string">'http://www.google.com/index.html'</span>, (res) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`Got response: <span class="subst">$&#123;res.statusCode&#125;</span>`</span>);</div><div class="line">  res.resume();</div><div class="line">&#125;).on(<span class="string">'error'</span>, (e) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`Got error: <span class="subst">$&#123;e.message&#125;</span>`</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="http-createServer-requestListener"><a href="#http-createServer-requestListener" class="headerlink" title="http.createServer([requestListener])"></a>http.createServer([requestListener])</h4><ul>
+<li>requestListener: 函数，<code>(req)=&gt;{}</code> 被自动添加到 request 事件。</li>
+<li>return: http.Server 的实例。</li>
+</ul>
+<h3 id="http-模块中的类-构造函数"><a href="#http-模块中的类-构造函数" class="headerlink" title="http 模块中的类/构造函数"></a>http 模块中的类/构造函数</h3><ul>
+<li>.IncomingMessage</li>
+<li>.ClientRequest</li>
+<li>.ServerResponse</li>
+<li>.Server</li>
+<li>.Agent</li>
+</ul>
+<h4 id="http-IncomingMessage"><a href="#http-IncomingMessage" class="headerlink" title="http.IncomingMessage"></a>http.IncomingMessage</h4><p>一个 IncomingMessage 对象通过 http.Server 或者 http.ClientRequest 被创建，并作为传递给 request 事件和 response 事件的第一个参数。可用于<strong>访问响应状态、头部和数据</strong>。</p>
+<blockquote>
+<p>request 事件在 http.Server 类中，response 事件在 http.ClientRequest 类中。</p>
+</blockquote>
+<p>实现了 Readable Stream 接口，同时有以下额外的事件、方法和属性。</p>
+<h5 id="事件"><a href="#事件" class="headerlink" title="事件"></a><strong>事件</strong></h5><h5 id="aborted-中止事件"><a href="#aborted-中止事件" class="headerlink" title="aborted 中止事件"></a>aborted 中止事件</h5><p>当请求被客户端中止，且网络套接字已关闭时触发。</p>
+<h5 id="close-关闭事件"><a href="#close-关闭事件" class="headerlink" title="close 关闭事件"></a>close 关闭事件</h5><p>表明底层连接被关闭。就像 end 事件，该事件每次响应只发生一次。</p>
+<h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a><strong>属性</strong></h5><h5 id="message-method"><a href="#message-method" class="headerlink" title="message.method"></a>message.method</h5><p>仅对从 http.Server 获取的请求有效。存储该次请求的方法。只读。</p>
+<h5 id="message-url"><a href="#message-url" class="headerlink" title="message.url"></a>message.url</h5><p>仅对从 http.Server 获取的请求有效。存储该次请求的地址。</p>
+<h5 id="message-httpVersion"><a href="#message-httpVersion" class="headerlink" title="message. httpVersion"></a>message. httpVersion</h5><p>请求或响应报文中 http 的版本。值为 ‘1.0’ 或者 ’1.1‘ 。</p>
+<ul>
+<li>message.httpVersionMajor: 第一位整数</li>
+<li>message.httpVersionMinor: 第二位整数</li>
+</ul>
+<h5 id="message-statusCode"><a href="#message-statusCode" class="headerlink" title="message.statusCode"></a>message.statusCode</h5><p>仅对从 http.ClientRequest 获取的响应有效。存储该次响应的状态码。</p>
+<h5 id="message-statusMessage"><a href="#message-statusMessage" class="headerlink" title="message.statusMessage"></a>message.statusMessage</h5><p>仅对从 http.ClientRequest 获取的响应有效。存储该次响应的状态信息（原因短语）。</p>
+<h5 id="message-rawHeaders"><a href="#message-rawHeaders" class="headerlink" title="message.rawHeaders"></a>message.rawHeaders</h5><p>正如它们所接收到的原请求或响应的头部列表。键值都在同一个数组中。偶数索引是键名，奇数索引是值。</p>
+<h5 id="message-headers"><a href="#message-headers" class="headerlink" title="message.headers"></a>message.headers</h5><p>请求或者响应的头部对象。</p>
+<h5 id="message-socket"><a href="#message-socket" class="headerlink" title="message.socket"></a>message.socket</h5><p>与连接相关的 net.Socket 对象。</p>
+<h5 id="message-rawTrailers"><a href="#message-rawTrailers" class="headerlink" title="message.rawTrailers"></a>message.rawTrailers</h5><p>正如它们所接收到的原请求或者响应的报文拖挂的键和值，只填充 end 事件。</p>
+<h5 id="message-trailers"><a href="#message-trailers" class="headerlink" title="message.trailers"></a>message.trailers</h5><p>请求或响应的报文拖挂。</p>
+<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a><strong>方法</strong></h5><h5 id="message-destory-error"><a href="#message-destory-error" class="headerlink" title="message.destory([error])"></a>message.destory([error])</h5><p>在接收到 IncomingMessage 的套接字上调用该方法。</p>
+<h5 id="message-setTimeout-msecs-callback"><a href="#message-setTimeout-msecs-callback" class="headerlink" title="message.setTimeout(msecs, callback)"></a>message.setTimeout(msecs, callback)</h5><p>调用 message.connection.setTimeout(msecs, callback) 。</p>
+<ul>
+<li><p>return message</p>
+<p>​</p>
+</li>
+</ul>
+<h4 id="http-ClientRequest"><a href="#http-ClientRequest" class="headerlink" title="http.ClientRequest"></a>http.ClientRequest</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> req = http.request(options[,callback]);</div></pre></td></tr></table></figure>
+<p>该对象被 http.request() 方法内部创建并返回。它代表一个正在进行中的且头部已经被排队的请求。头部通过使用setHeader(name, value) 、 getHeader(name) 、 removeHeader(name) API 仍然是易变的。当关闭连接时，真的头部将和第一个数据包一起被发送。</p>
+<p>为了取得响应，可以为 request 对象添加一个 response 事件的监听器。当响应头部被接收到时， response 事件将从 request 对象被触发。 response 事件有一个参数，是 http.IncomingMessage 的实例。</p>
+<p>在 response 事件期间， 可以为响应对象添加监听器， 特别是监听 data 事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="keyword">var</span> req = http.request(options, (res) =&gt; &#123;</div><div class="line">  res.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`BODY: <span class="subst">$&#123;chunk&#125;</span>`</span>);</div><div class="line">  &#125;);</div><div class="line">  res.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'No more data in response.'</span>)</div><div class="line">  &#125;)</div><div class="line">&#125;);</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
+<p>如果没有添加 response 处理函数， 则响应报文将被全部丢弃。然而，如果你添加了一个 response 事件处理函数， 则你<strong>必须</strong>从响应对象消耗数据， 或者每当有一个 readable 事件，通过调用 response.read() 读取，或者通过调用一个 data 事件处理函数，或者通过调用 .resume() 方法。直到数据被耗尽， end 事件才被触发。 同样，直到数据被读取它才消耗内存，这样可以最终导致“进程内存不足”错误。</p>
+<p>实现了 Writeable Stream 接口，有以下事件、方法和属性：</p>
+<h5 id="事件-1"><a href="#事件-1" class="headerlink" title="事件"></a><strong>事件</strong></h5><h5 id="response-响应事件"><a href="#response-响应事件" class="headerlink" title="response 响应事件"></a>response 响应事件</h5><p>在调用 <code>http.request(options[,callback])</code> 方法时作为第二参数传入。该事件仅被触发一次。形参是 http.IncomingMessage 的实例。</p>
+<h5 id="connect-连接事件"><a href="#connect-连接事件" class="headerlink" title="connect 连接事件"></a>connect 连接事件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">response, socket, head</span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>每次服务器响应 CONNET 方法的请求时触发。如果该事件没有被监听，收到 CONNECT 方法的客户端将关闭它们的连接。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  <span class="attr">port</span>: <span class="number">1337</span>,</div><div class="line">  <span class="attr">hostname</span>: <span class="string">'127.0.0.1'</span>,</div><div class="line">  <span class="attr">method</span>: <span class="string">'CONNECT'</span>,</div><div class="line">  <span class="attr">path</span>: <span class="string">'www.google.com:80'</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> req = http.request(options);</div><div class="line">req.end();</div><div class="line"></div><div class="line">req.on(<span class="string">'connect'</span>, (res, socket, head) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'got connected!'</span>);</div><div class="line"></div><div class="line">  <span class="comment">// make a request over an HTTP tunnel</span></div><div class="line">  socket.write(<span class="string">'GET / HTTP/1.1\r\n'</span> +</div><div class="line">               <span class="string">'Host: www.google.com:80\r\n'</span> +</div><div class="line">               <span class="string">'Connection: close\r\n'</span> +</div><div class="line">               <span class="string">'\r\n'</span>);</div><div class="line">  socket.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(chunk.toString());</div><div class="line">  &#125;);</div><div class="line">  socket.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">    proxy.close();</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h5 id="upgrade-升级事件"><a href="#upgrade-升级事件" class="headerlink" title="upgrade 升级事件"></a>upgrade 升级事件</h5><p>每次服务器响应升级请求时触发。如果该事件没有被监听，收到一个升级头部字段的客户端将关闭它们的连接。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// make a request</span></div><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  <span class="attr">port</span>: <span class="number">1337</span>,</div><div class="line">  <span class="attr">hostname</span>: <span class="string">'127.0.0.1'</span>,</div><div class="line">  <span class="attr">headers</span>: &#123;</div><div class="line">  <span class="string">'Connection'</span>: <span class="string">'Upgrade'</span>,</div><div class="line">  <span class="string">'Upgrade'</span>: <span class="string">'websocket'</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> req = http.request(options);</div><div class="line">req.end();</div><div class="line"></div><div class="line">req.on(<span class="string">'upgrade'</span>, (res, socket, upgradeHead) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'got upgraded!'</span>);</div><div class="line">  socket.end();</div><div class="line">  process.exit(<span class="number">0</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h5 id="continue-继续事件"><a href="#continue-继续事件" class="headerlink" title="continue 继续事件"></a>continue 继续事件</h5><p>当服务器发送一个 ‘100 Continue’ HTTP 响应状态码时触发， 通常是因为请求包含了 ‘Expect: 100-continue’ 。这是一个客户端应该发送请求主体的指令。</p>
+<h5 id="socket-套接字事件"><a href="#socket-套接字事件" class="headerlink" title="socket 套接字事件"></a>socket 套接字事件</h5><p>当一个套接字被分配到这个请求时触发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">req.on(<span class="string">'socket'</span>, (socket) =&gt; &#123;&#125;);</div></pre></td></tr></table></figure>
+<h5 id="abort-中止事件"><a href="#abort-中止事件" class="headerlink" title="abort 中止事件"></a>abort 中止事件</h5><p>当请求已经被客户端中止时触发。该事件仅在第一次调用 req.abort() 方法时触发。</p>
+<h5 id="aborted-中止事件-1"><a href="#aborted-中止事件-1" class="headerlink" title="aborted 中止事件"></a>aborted 中止事件</h5><p>当请求已经被服务器终止，且网络套接字已关闭时触发。</p>
+<h5 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a><strong>属性</strong></h5><h5 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a><strong>方法</strong></h5><h5 id="request-write-chunk-encoding-callback"><a href="#request-write-chunk-encoding-callback" class="headerlink" title="request.write(chunk[, encoding]{, callback})"></a>request.write(chunk[, encoding]{, callback})</h5><p>发送主体的一个块。通过多次调用该方法，用户可以流一个请求主体到一个服务器。这种情况下，当创建请求时，建议使用 [‘Transefer-Encoding’, ‘chunked’] 头行</p>
+<h5 id="request-flushHeaders"><a href="#request-flushHeaders" class="headerlink" title="request.flushHeaders()"></a>request.flushHeaders()</h5><p>可以让你绕过优化，并启动请求。</p>
+<h5 id="request-abort"><a href="#request-abort" class="headerlink" title="request.abort()"></a>request.abort()</h5><p>标记为中止请求。调用该方法将导致响应报文中剩下的数据被丢弃，套接字被销毁。</p>
+<h5 id="request-end-data-encoding-callback"><a href="#request-end-data-encoding-callback" class="headerlink" title="request.end([data]{, encoding}[, callback])"></a>request.end([data]{, encoding}[, callback])</h5><p>结束发送请求。如果主体的任何部分未被发送，它将它们冲进流中。如果请求被分块，浙江发送终止符 ‘0\r\n\r\n’ 。</p>
+<p>如果 data 被指定了， 这相当于调用 response.write(data, encoding) 之后调用 request.end(callback) 。</p>
+<p>如果 callback 被指定了，当请求流结束时它将被调用。</p>
+<h5 id="request-setNoDelay-noDelay"><a href="#request-setNoDelay-noDelay" class="headerlink" title="request.setNoDelay([noDelay])"></a>request.setNoDelay([noDelay])</h5><h5 id="request-setSocketKeepAlive-enable-initialDelay"><a href="#request-setSocketKeepAlive-enable-initialDelay" class="headerlink" title="request.setSocketKeepAlive([enable]{, initialDelay})"></a>request.setSocketKeepAlive([enable]{, initialDelay})</h5><h5 id="request-setTimeout-msecs-callback"><a href="#request-setTimeout-msecs-callback" class="headerlink" title="request.setTimeout(msecs[, callback])"></a>request.setTimeout(msecs[, callback])</h5><h3 id="http-ServerResponse"><a href="#http-ServerResponse" class="headerlink" title="http.ServerResponse"></a>http.ServerResponse</h3><p>该对象被一个HTTP 服务器内部创建，而不是被用户创建。它作为第二个参数被传给 request 事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> server1 = http.createServer(<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</div><div class="line">  res.on(<span class="string">'close'</span>,()=&gt;&#123;&#125;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>该对象实现，但没有继承 Writeable Stream 接口。有以下事件、方法和属性：</p>
+<h5 id="事件-2"><a href="#事件-2" class="headerlink" title="事件"></a><strong>事件</strong></h5><h5 id="close-关闭事件-1"><a href="#close-关闭事件-1" class="headerlink" title="close 关闭事件"></a>close 关闭事件</h5><p>表示底层连接在 response.end() 被调用或者刷新前被终止。</p>
+<h5 id="finish-结束事件"><a href="#finish-结束事件" class="headerlink" title="finish 结束事件"></a>finish 结束事件</h5><p>当响应被发送时触发。更特别地，当响应头部和主体的最后片段为了在网络上传输已被移交给操作系统时，该事件被触发。这不意味着客户端已经的收到了任何东西。</p>
+<p>在这个事件之后，将不再有事件在 response 对象上被触发。</p>
+<h5 id="属性-2"><a href="#属性-2" class="headerlink" title="属性"></a><strong>属性</strong></h5><h5 id="response-statusCode"><a href="#response-statusCode" class="headerlink" title="response.statusCode"></a>response.statusCode</h5><p>在使用隐式头部（ 也就是不显示调用 response.writeHead() ）的情况下 ，当头部被刷新时，该属性可以控制将被发送到客户端的状态码，</p>
+<h5 id="response-statusMessage"><a href="#response-statusMessage" class="headerlink" title="response.statusMessage"></a>response.statusMessage</h5><p>如同response.stausCode，但该方法是控制状态码的。如果该属性没有被设置，则状态码的标准信息将被使用。</p>
+<p>在响应头部被发送到客户端后，该属性表示被发送的状态信息。</p>
+<h5 id="response-headerSent"><a href="#response-headerSent" class="headerlink" title="response.headerSent"></a>response.headerSent</h5><ul>
+<li>布尔，只读。判断头部是否已被发送。</li>
+</ul>
+<h5 id="response-finished"><a href="#response-finished" class="headerlink" title="response.finished"></a>response.finished</h5><ul>
+<li>布尔，表示响应是否已完成。开始为 false ，在执行 response.end() 后，值为true 。</li>
+</ul>
+<h5 id="response-sendDate"><a href="#response-sendDate" class="headerlink" title="response.sendDate"></a>response.sendDate</h5><ul>
+<li>布尔值，默认为 true 。true 时，如果头部中还未出现Date ， Date 头部会自动生成并发送到响应中。</li>
+</ul>
+<h5 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a><strong>方法</strong></h5><h5 id="response-setHeader-name-value"><a href="#response-setHeader-name-value" class="headerlink" title="response.setHeader(name, value)"></a>response.setHeader(name, value)</h5><p>为隐式头部设置一个单个的头部值。如果头部已经存在于待发送头部中，其值将被代替。当你需要用统一名称发送多个头部字段时，可使用一个字符串数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">response.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>);</div><div class="line">response.setHeader(<span class="string">'Set-Cookie'</span>, [<span class="string">'type=ninja'</span>, <span class="string">'language=javascript'</span>]);</div></pre></td></tr></table></figure>
+<p>当头部已经被该方法设置，它们将与传给 response.writeHead() 的任何头部合并，且传给 response.writeHead() 的头部有优先权。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// returns content-type = text/plain</span></div><div class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req,res</span>) =&gt;</span> &#123;</div><div class="line">  res.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>);</div><div class="line">  res.setHeader(<span class="string">'X-Foo'</span>, <span class="string">'bar'</span>);</div><div class="line">  res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</div><div class="line">  res.end(<span class="string">'ok'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h5 id="response-writeHead-statusCode-statusMessage-headers"><a href="#response-writeHead-statusCode-statusMessage-headers" class="headerlink" title="response.writeHead(statusCode[, statusMessage]{, headers})"></a>response.writeHead(statusCode[, statusMessage]{, headers})</h5><p>像请求发送一个响应头部。</p>
+<ul>
+<li>headers: 响应头部</li>
+</ul>
+<p>如果你在调用该方法前调用了 response.write() 或者 reposne.end() ，隐式/易变的头部将被计算并为你调用该方法。</p>
+<h5 id="response-getHeader-name"><a href="#response-getHeader-name" class="headerlink" title="response.getHeader(name)"></a>response.getHeader(name)</h5><p>仅可在头部获取隐式刷新前调用。</p>
+<h5 id="response-removeHeader-name"><a href="#response-removeHeader-name" class="headerlink" title="response.removeHeader(name)"></a>response.removeHeader(name)</h5><h5 id="reponse-write-chunk-encoding-callback"><a href="#reponse-write-chunk-encoding-callback" class="headerlink" title="reponse.write(chunk[, encoding]{, callback})"></a>reponse.write(chunk[, encoding]{, callback})</h5><p>如果该方法被调用，而 response.writeHead() 方法还未被调用，这将切换到隐式头部模式，并刷新隐式头部。</p>
+<p>该方法发送请求主体的一个块。该方法可被多次调用以提供连续的主体部分。</p>
+<p>当数据块被刷新时，触发 callback 。</p>
+<p>第一次被调用时，发送缓冲头部信息和第一个主体到客户端。第二次被调用时，Node.js 假定你要流数据， 并且分开发送。这就是说，响应被缓冲到主体的第一块。</p>
+<p>当整个数据被成功地冲到核心缓冲时，返回true ；当全部或者部分数据在用户内存中被排列时，返回false。 当缓冲再次空闲时，drain 事件将被触发。</p>
+<h5 id="response-end-data-encoding-callback"><a href="#response-end-data-encoding-callback" class="headerlink" title="response.end([data]{, encoding}[, callback])"></a>response.end([data]{, encoding}[, callback])</h5><p>该方法告知服务器所有响应头部和主体已经被发送；服务器应该认为这条信息完整了。该方法必须在每个响应中被调用。</p>
+<p>如果指定了 data ，相当于调用 response.write(data, encoding) 之后调用 response.end(callback) 。</p>
+<p>当响应流结束时， callback会被调用。</p>
+<h5 id="response-addTrailers-headers"><a href="#response-addTrailers-headers" class="headerlink" title="response.addTrailers(headers)"></a>response.addTrailers(headers)</h5><p>该方法添加 HTTP 跟踪头部（一个在信息尾部的头部）到响应。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">response.writeHead(<span class="number">200</span>, &#123; <span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>,</div><div class="line">                          <span class="string">'Trailer'</span>: <span class="string">'Content-MD5'</span> &#125;);</div><div class="line">response.write(fileData);</div><div class="line">response.addTrailers(&#123;<span class="string">'Content-MD5'</span>: <span class="string">'7895bf4b8828b55ceaf47747b4bca667'</span>&#125;);</div><div class="line">response.end();</div></pre></td></tr></table></figure>
+<h5 id="response-writeContinue"><a href="#response-writeContinue" class="headerlink" title="response.writeContinue()"></a>response.writeContinue()</h5><p>发送一个 HTTP/1.1 100 Cotinue 信息到客户端， 表示请求主体应该被发送。</p>
+<h5 id="response-setTimeout-msecs-callback"><a href="#response-setTimeout-msecs-callback" class="headerlink" title="response.setTimeout(msecs, callback)"></a>response.setTimeout(msecs, callback)</h5><h4 id="http-Server"><a href="#http-Server" class="headerlink" title="http.Server"></a>http.Server</h4><p>该类继承自 net.Server 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;&#125;)</div></pre></td></tr></table></figure>
+<p>有以下事件、方法和属性：</p>
+<h5 id="事件-3"><a href="#事件-3" class="headerlink" title="事件"></a><strong>事件</strong></h5><h5 id="request-请求事件"><a href="#request-请求事件" class="headerlink" title="request 请求事件"></a>request 请求事件</h5><p>作为 <code>http.createServer((req, res) =&gt; {})</code> 的参数。每当有请求时触发。注意每次连接可能有多次请求（在 keep-alive 的条件下）。request 是 http.IncomingMessage 的实例。 response 是 http.ServerResponse 的实例。</p>
+<h5 id="connect-连接事件-1"><a href="#connect-连接事件-1" class="headerlink" title="connect 连接事件"></a>connect 连接事件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">request, socket, head</span>)</span></div></pre></td></tr></table></figure>
+<p>每次客户端请求 CONNET 方法时触发。如果该事件没有被监听，请求CONNECT 方法的客户端将关闭它们的连接。</p>
+<p>注意该事件被触发后，请求的套接字将不会有 data 事件监听器，意味着为了操作在套接字上发送到服务器的数据你将需要绑定它。</p>
+<h5 id="connection-连接事件"><a href="#connection-连接事件" class="headerlink" title="connection 连接事件"></a>connection 连接事件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>当一个新的 TCP 流被建立时触发。 socket 是 net.Socket 类的对象。通常用户不会想要访问该事件。特别地，套接字不会由于协议解析器怎样连接到套接字而触发 readable 事件。 socket 也可以在 resquest.connection 中被访问。</p>
+<h5 id="upgrade-升级事件-1"><a href="#upgrade-升级事件-1" class="headerlink" title="upgrade 升级事件"></a>upgrade 升级事件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">request, socket, head</span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>每次客户端请求一次 http 升级时触发。如果事件没有被监听，则请求一次升级的客户端将关闭它们的连接。</p>
+<h5 id="checkContinue-检查继续事件"><a href="#checkContinue-检查继续事件" class="headerlink" title="checkContinue 检查继续事件"></a>checkContinue 检查继续事件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>每次带有一个 http Expect:100-continue 的请求被接收时触发。如果该事件没有被监听，服务器将自动地响应一个 100 Continue 。</p>
+<p>如果客户端应该继续发送请求主体，处理该事件涉及调用 response.writeContinue() ，或者如果客户端不应该继续发送请求主体，生成一个合适的 HTTP 响应报文 。</p>
+<blockquote>
+<p>注意： 当该事件被触发和处理，request 事件将不会被触发。</p>
+</blockquote>
+<h5 id="close-关闭事件-2"><a href="#close-关闭事件-2" class="headerlink" title="close 关闭事件"></a>close 关闭事件</h5><p>当服务器关闭时触发。</p>
+<h5 id="clientError-客户端错误事件"><a href="#clientError-客户端错误事件" class="headerlink" title="clientError 客户端错误事件"></a>clientError 客户端错误事件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">exception, socket</span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>如果一个客户端连接出发了一个 error 事件，它将被转发到这里。</p>
+<h5 id="属性-3"><a href="#属性-3" class="headerlink" title="属性"></a><strong>属性</strong></h5><h5 id="server-maxHeadersCount"><a href="#server-maxHeadersCount" class="headerlink" title="server.maxHeadersCount"></a>server.maxHeadersCount</h5><p>默认为 1000 。被设为 0- 时将取消限制。</p>
+<h5 id="server-timeout"><a href="#server-timeout" class="headerlink" title="server.timeout"></a>server.timeout</h5><ul>
+<li>数字，默认 120000 （2分钟）</li>
+</ul>
+<p>在一个套接字被假定已超时前，静止的毫秒数。设为0，禁止在传入连接上的任何类型的自动超时行为</p>
+<blockquote>
+<p>注意，套接字超时逻辑被设置在连接上，因此改变该值仅影响到服务器的新连接。</p>
+</blockquote>
+<h5 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a><strong>方法</strong></h5><h5 id="server-listen-port-hostname-backlog-callback"><a href="#server-listen-port-hostname-backlog-callback" class="headerlink" title="server.listen(port[,hostname]{,backlog}[,callback])"></a>server.listen(port[,hostname]{,backlog}[,callback])</h5><p>开始接收指定端口和主机名的连接。如果主机名被省略，当 IPv6 可获取时，服务器将接收在任何 IPv6 地址（::），否则将接受任何 IPv4 地址（0.0.0.0）上的连接。使用端口值 0 ，让操作系统分配可用的端口。</p>
+<p>提供一个文件名代替端口和主机名，监听一个 Unix 套接字。</p>
+<p>Backlog 是挂起连接的队列的最大长度。默认为511，实际值取决于你的 OS 通过unix 上的系统控制设置（如 tcp_max_syn_backlog 和 somaxconn）。</p>
+<p>该方法是异步的。callback 将被作为 listening 事件的对象被添加。</p>
+<h5 id="server-listen-path-callback"><a href="#server-listen-path-callback" class="headerlink" title="server.listen(path[, callback])"></a>server.listen(path[, callback])</h5><p>开启一个 UNIX 服务器，在给定 path 上监听连接。</p>
+<p>该方法是异步的。callback 将被作为 listening 事件的对象被添加。</p>
+<h5 id="server-listen-handle-callback"><a href="#server-listen-handle-callback" class="headerlink" title="server.listen(handle[, callback])"></a>server.listen(handle[, callback])</h5><ul>
+<li>handle: 对象，一个服务器、套接字或者一个 <code>{fd: &lt;n&gt;}</code> 对象。</li>
+<li>callback: 函数</li>
+</ul>
+<p>这将导致服务器接收指定 handle 上的连接，但是它假定文件描述符或者 handle 已经被绑定到一个端口或者域套接字。</p>
+<p>在 Windows 上不支持监听一个文件描述符。</p>
+<p>该方法是异步的。callback 将被作为 listening 事件的对象被添加。</p>
+<h4 id="http-Agent"><a href="#http-Agent" class="headerlink" title="http.Agent"></a>http.Agent</h4><p>HTTP 代理用于汇集用在 HTTP 客户端请求中的套接字。</p>
+<p>HTTP 代理还默认客户端请求使用 Connetion:keep-alive 。如果没有挂起的 HTTP 请求正在等待一个关闭的套接字变成空闲的套接字。这意味着，当在载荷作用下仍不要求开发者手动关闭 HTTP请求时， Node.js 的池使用 KeepAlive 是有利于 keep-alive 的。</p>
+<p>如果你选择使用 HTTP KeepAlive ，你可以创建一个 flag 被设为 true 的代理对象。接着，代理将保持未使用的 sockets 在一个池中，以供后用。它们被明确地标记以便不保持 Node.js 进程运行。然而，明确地 destory() KeepAlive 代理当它们不再被使用时，依然是一个好主意，那样的话 Sockets 将被关闭。</p>
+<p>当套接字发射一个 close 事件或者一个特殊的 agentRemove 事件时， Sockets 从代理池中移除。这意味着如果你打算长时间保持一个 HTTP 请求打开，并且不想它呆在池中，你可以做下面这些事：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">http.get(options, (res) =&gt; &#123;</div><div class="line">  <span class="comment">// Do something</span></div><div class="line">&#125;).on(<span class="string">'socket'</span>, (socket) =&gt; &#123;</div><div class="line">  socket.emit(<span class="string">'agentRemove'</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>另外，你可以选择在池外完全地使用 agent: false :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">http.get(&#123;</div><div class="line">  <span class="attr">hostname</span>: <span class="string">'localhost'</span>,</div><div class="line">  <span class="attr">port</span>: <span class="number">80</span>,</div><div class="line">  <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">  <span class="attr">agent</span>: <span class="literal">false</span>  <span class="comment">// create a new agent just for this one request</span></div><div class="line">&#125;, (res) =&gt; &#123;</div><div class="line">  <span class="comment">// Do stuff with response</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h5 id="属性-4"><a href="#属性-4" class="headerlink" title="属性"></a><strong>属性</strong></h5><h5 id="agent-requests"><a href="#agent-requests" class="headerlink" title="agent.requests"></a>agent.requests</h5><p>一个对象，包含还没未被分配到套接字的请求。不要修改。</p>
+<h5 id="agent-sockets"><a href="#agent-sockets" class="headerlink" title="agent.sockets"></a>agent.sockets</h5><p>一个对象，包含目前被代理使用中的套接字数组。不要修改。</p>
+<h5 id="agent-freeSockets"><a href="#agent-freeSockets" class="headerlink" title="agent.freeSockets"></a>agent.freeSockets</h5><p>一个对象，包含，当HTTP KeepAlive 被使用时，目前等待被代理使用的套接字数组。不要修改。</p>
+<h5 id="agent-maxSocket"><a href="#agent-maxSocket" class="headerlink" title="agent.maxSocket"></a>agent.maxSocket</h5><p>默认设为 Infinity 。确定每打开一个源，代理可以有多少个并发套接字。源是一个 ‘host:port’ 或者 ‘host:port:localAddress’ 组合。</p>
+<h5 id="agent-maxFreeSocket"><a href="#agent-maxFreeSocket" class="headerlink" title="agent.maxFreeSocket"></a>agent.maxFreeSocket</h5><p>默认设为 256 。为了代理支持 HTTP KeepAlive ，这个设置了在空闲状态下将被打开的最大套接字数量。</p>
+<h5 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a><strong>方法</strong></h5><h5 id="new-Agent-options"><a href="#new-Agent-options" class="headerlink" title="new Agent([options])"></a>new Agent([options])</h5><p>options: 对象，设置代理的一组可配置选项。</p>
+<ul>
+<li>keepAlive: 布尔，默认为 false 。保持套接字在一个池周围，以便将来被其他请求使用。</li>
+<li>keepAliveMsecs: 整数，默认为 1000 。当使用 HTTP KeepAlive 时， 在被保持活跃的套接字上多久发送一个 TCP KeepAlive 包。（仅当 keepAlive 被设为 true 时有意义）。</li>
+<li>maxSockets: 数字，默认为 Infinity 。每个主机允许的最大套接字数量。</li>
+<li>maxFreeSockets: 数字，默认为 256 。空闲状态下打开的最大套接字数量。</li>
+</ul>
+<p>默认被 http.request() 使用的 http.globalAgent 将所有这些值设置为各自的默认值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> keepAliveAgent = <span class="keyword">new</span> http.Agentt(&#123; <span class="attr">keepAlive</span>: <span class="literal">true</span> &#125;);</div><div class="line">options.agent = keepAliveAgent;</div><div class="line">http.request(options, (res) =&gt; &#123;&#125;)</div></pre></td></tr></table></figure>
+<h5 id="agent-getName-options"><a href="#agent-getName-options" class="headerlink" title="agent.getName(options)"></a>agent.getName(options)</h5><p>为一组请求选项获取一个唯一名称，以确定一个连接是否被重用。在一个 http 代理中，这返回 <code>host:port:localAddress</code> 。在 https 代理中，名字包含 CA 、 cert 、 ciphers 、 和其他具体的HTTP/ TLS 选项，确定套接字的可重用性。</p>
+<p>options:</p>
+<ul>
+<li>host: 服务器的域名或者 IP 地址（请求发送到该服务器）</li>
+<li>port: 远程服务器端口</li>
+<li>locaAddrss: 当发送请求时，绑定网络连接的本地接口。</li>
+</ul>
+<h5 id="agent-destory"><a href="#agent-destory" class="headerlink" title="agent.destory()"></a>agent.destory()</h5><p>摧毁目前正被代理使用的任何套接字。</p>
+<p>通常没必要做这个。然而，如果你正在使用一个启用 KeepAlive 的代理，则当你知道代理将不再被使用时，最好明确地关闭代理。否则在服务器终止套接字之前，它们可能挂起相当长的时间。</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>启动一个本地服务器，显示请求报文的起始行和头部。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 引入所需模块</span></div><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123; </div><div class="line">  <span class="comment">// 保存请求收到的数据块，也就是响应报文发送的主体</span></div><div class="line">  <span class="keyword">var</span> postData = <span class="string">''</span>;</div><div class="line">  <span class="keyword">var</span> reqUrl = url.parse(req.url);</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(reqUrl.pathname === <span class="string">'/'</span>) &#123;</div><div class="line">    <span class="comment">// 写响应报文的起始行和头部</span></div><div class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain; charset=UTF-8'</span>&#125;);</div><div class="line">    <span class="comment">// 写响应报文的主体</span></div><div class="line">    res.write(<span class="string">`<span class="subst">$&#123;req.method&#125;</span> <span class="subst">$&#123;req.url&#125;</span> HTTP/<span class="subst">$&#123;req.httpVersion&#125;</span>`</span> + <span class="string">'\r\n'</span>);</div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> h <span class="keyword">in</span> req.headers)&#123;</div><div class="line">      res.write(<span class="string">`<span class="subst">$&#123;h&#125;</span>: <span class="subst">$&#123;req.headers[h]&#125;</span>`</span> +<span class="string">'\r\n'</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> postData = <span class="string">''</span>;</div><div class="line">    req.on(<span class="string">'data'</span>, (chunk) =&gt; &#123; postData += chunk &#125;);</div><div class="line">    req.on(<span class="string">'end'</span>, () =&gt; &#123; res.end() &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.listen(<span class="number">8080</span>, () =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Listening at localhost:8080'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>启动一个本地服务器，当输入 URL 没有添加访问路径 path 时，作为将 Node.js 作为代理服务器，访问指定的线上网址并显示（如下面代码中访问了锤子科技的官网）；如果输入 URL 添加了访问路径 path ，则访问该路径下的文件并显示，没有该文件则显示错误信息。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 引入所需模块</span></div><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 创建一个服务器对象， http.Server 的实例。</span></div><div class="line"><span class="keyword">const</span> server = <span class="keyword">new</span> http.Server();</div><div class="line">server.listen(<span class="number">8080</span>, () =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Listening at localhost:8080'</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.on(<span class="string">'request'</span>,  (req, res) =&gt; &#123;</div><div class="line">  <span class="comment">// 解析请求的URL</span></div><div class="line">  <span class="keyword">var</span> reqUrl = url.parse(req.url);</div><div class="line">  </div><div class="line">  <span class="comment">// 如果没有输入文件地址，则将Node.js作为代理服务器，</span></div><div class="line">  <span class="comment">// 访问指定网址，并将访问内容 pipe 到服务器的res中。</span></div><div class="line">  <span class="keyword">if</span>(reqUrl.pathname === <span class="string">'/'</span>) &#123;</div><div class="line">    <span class="keyword">var</span> options = &#123;</div><div class="line">      <span class="attr">hostname</span>: <span class="string">'www.smartisan.com'</span>,</div><div class="line">      <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">      <span class="attr">path</span>: <span class="string">'/'</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> rquest1 = http.request(options,(response) =&gt; &#123;</div><div class="line">      <span class="comment">// 这句简直完美</span></div><div class="line">      response.pipe(res)</div><div class="line">    &#125;).end();</div><div class="line"></div><div class="line">    <span class="comment">// 或者</span></div><div class="line">    <span class="comment">// res.writeHead(302,&#123; "Location": 'http://www.smartisan.com' &#125;);</span></div><div class="line">    <span class="comment">// res.end();</span></div><div class="line">  &#125; <span class="keyword">else</span>&#123;</div><div class="line">    <span class="comment">// 如果添加了路径，则访问指定文件</span></div><div class="line">    <span class="keyword">var</span> filename = reqUrl.pathname.substring(<span class="number">1</span>);</div><div class="line">    <span class="keyword">var</span> type;</div><div class="line">    <span class="keyword">switch</span>(filename.substring(filename.lastIndexOf(<span class="string">'.'</span>) + <span class="number">1</span>))&#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">'html'</span>:</div><div class="line">      <span class="keyword">case</span> <span class="string">'htm'</span>:</div><div class="line">        type = <span class="string">'text/html; charset=UTF-8'</span>; </div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="string">'css'</span>:</div><div class="line">        type = <span class="string">'text/css; charset=UTF-8'</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="string">'js'</span>:</div><div class="line">        type = <span class="string">'application/javascript; charset=UTF-8'</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="string">'txt'</span>:</div><div class="line">        type = <span class="string">'text/plain; charset=UTF-8'</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="string">'mainfest'</span>:</div><div class="line">        type = <span class="string">'text/cache-mainfest; charset=UTF-8'</span>;</div><div class="line">      <span class="keyword">default</span>:</div><div class="line">        type = <span class="string">'application/octet-stream'</span>;</div><div class="line">        <span class="keyword">break</span>;     </div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`request file: <span class="subst">$&#123;filename&#125;</span>`</span>);</div><div class="line">    </div><div class="line">    <span class="comment">// 读取指定的文件内容，并将内容写入到响应报文中。</span></div><div class="line">    fs.readFile(filename, (err, content) =&gt; &#123;</div><div class="line">      <span class="keyword">if</span>(err)&#123;</div><div class="line">        res.writeHead(<span class="number">404</span>,&#123;</div><div class="line">          <span class="string">'Content-Type'</span>: <span class="string">'text/plain; charset=UTF-8'</span></div><div class="line">        &#125;);</div><div class="line">        res.write(err.message);</div><div class="line">        res.end();</div><div class="line">      &#125;<span class="keyword">else</span>&#123;</div><div class="line">        res.writeHead(<span class="number">200</span>, &#123;</div><div class="line">          <span class="string">'Content-type'</span>: type</div><div class="line">        &#125;);</div><div class="line">        res.write(content);</div><div class="line">        res.end();</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>确切地来说该模块一共只有两种方法：http.request() 和 http.createServer() ， http.get() 不算在内是因为它只是 http.request() 的简化版。</p>
+<p><strong>http.request() 将 Node.js 变为一个客户端，可以向任何可访问的服务器发送 HTTP 请求报文。</strong></p>
+<p>该方法通过参数 options 设置请求报文（头行、首部、主体）。通过可选参数 callback 回调函数，处理服务器的响应事件。通过回调函数的形参—— response 对象，监听 data 和 end 等事件、访问响应报文。</p>
+<p>该方法返回一个请求对象，或者说是客户端。通过该对象可以监听响应的 connect 、 upgrade 、 continue 、 socket 、 abort 、 aborted 事件，并处理。也可通过调用该对象的方法处理发送的请求、结束请求。</p>
+<p><strong>http。createServer() 将 Node.js 变为一个服务器，可以向任何指定的本地访问发送 HTTP 响应报文。</strong></p>
+<p>该方法通过参数 callback 回调函数，处理客户端的请求事件。通过调用回调函数的形参—— request 对象，监听 data 和 end 等事件、访问请求报文；通过调用回调函数的形参—— response 对象，设置/获取响应报文格式、结束响应。</p>
+<p>该方法返回一个响应对象，或者说是服务器。通过该对象可以 .listen() 方法监听指定端口或路径或handle 的请求，可以监听 connect 、 connection 、 upgrade 、 checkContinue 、 close 、clientError 事件，</p>
+<p><strong>如果将以上两种方法结合，则可将 Node.js 变为一个代理。</strong></p>
+<blockquote>
+<p>以上总结可能有不恰当之处，欢迎打脸。(。・_・) /~~~</p>
+</blockquote>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://nodejs.org/dist/latest-v4.x/docs/api/http.html" target="_blank" rel="external">Node.js v4.6.1 官方文档</a></p>
+<p>阮一峰老师的<a href="http://javascript.ruanyifeng.com/nodejs/http.html" target="_blank" rel="external">《 JavaScript 标准参考教程 (alpha) 》—— Http 模块</a></p>
+<p>维基百科</p>
+<p>《 HTTP 权威指南 》</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js-http-server-服务器-代理/" rel="tag">#Node.js http server 服务器 代理</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/18/《思维的乐趣》——花剌子模信使问题/" rel="next" title="《思维的乐趣》——花剌子模信使问题">
+                <i class="fa fa-chevron-left"></i> 《思维的乐趣》——花剌子模信使问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/05/遇见 MacBook Pro/" rel="prev" title="遇见 MackBook Pro">
+                遇见 MackBook Pro <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/31/Node.js 学习笔记——HTTP 模块/"
+           data-title="Node.js 学习笔记—— HTTP 模块" data-url="http://yoursite.com/2016/10/31/Node.js 学习笔记——HTTP 模块/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#起步"><span class="nav-number">3.</span> <span class="nav-text">起步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-模块中的属性"><span class="nav-number">4.</span> <span class="nav-text">http 模块中的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http-METHODS"><span class="nav-number">4.1.</span> <span class="nav-text">http.METHODS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-STATUS-CODES"><span class="nav-number">4.2.</span> <span class="nav-text">http.STATUS_CODES</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-globalAgent"><span class="nav-number">4.3.</span> <span class="nav-text">http.globalAgent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-模块中的方法"><span class="nav-number">5.</span> <span class="nav-text">http 模块中的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http-request-options-callback"><span class="nav-number">5.1.</span> <span class="nav-text">http.request(options[, callback])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-get-options-callback"><span class="nav-number">5.2.</span> <span class="nav-text">http.get(options[,callback])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-createServer-requestListener"><span class="nav-number">5.3.</span> <span class="nav-text">http.createServer([requestListener])</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-模块中的类-构造函数"><span class="nav-number">6.</span> <span class="nav-text">http 模块中的类/构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http-IncomingMessage"><span class="nav-number">6.1.</span> <span class="nav-text">http.IncomingMessage</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件"><span class="nav-number">6.1.1.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aborted-中止事件"><span class="nav-number">6.1.2.</span> <span class="nav-text">aborted 中止事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#close-关闭事件"><span class="nav-number">6.1.3.</span> <span class="nav-text">close 关闭事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性"><span class="nav-number">6.1.4.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-method"><span class="nav-number">6.1.5.</span> <span class="nav-text">message.method</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-url"><span class="nav-number">6.1.6.</span> <span class="nav-text">message.url</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-httpVersion"><span class="nav-number">6.1.7.</span> <span class="nav-text">message. httpVersion</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-statusCode"><span class="nav-number">6.1.8.</span> <span class="nav-text">message.statusCode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-statusMessage"><span class="nav-number">6.1.9.</span> <span class="nav-text">message.statusMessage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-rawHeaders"><span class="nav-number">6.1.10.</span> <span class="nav-text">message.rawHeaders</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-headers"><span class="nav-number">6.1.11.</span> <span class="nav-text">message.headers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-socket"><span class="nav-number">6.1.12.</span> <span class="nav-text">message.socket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-rawTrailers"><span class="nav-number">6.1.13.</span> <span class="nav-text">message.rawTrailers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-trailers"><span class="nav-number">6.1.14.</span> <span class="nav-text">message.trailers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法"><span class="nav-number">6.1.15.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-destory-error"><span class="nav-number">6.1.16.</span> <span class="nav-text">message.destory([error])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#message-setTimeout-msecs-callback"><span class="nav-number">6.1.17.</span> <span class="nav-text">message.setTimeout(msecs, callback)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-ClientRequest"><span class="nav-number">6.2.</span> <span class="nav-text">http.ClientRequest</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件-1"><span class="nav-number">6.2.1.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-响应事件"><span class="nav-number">6.2.2.</span> <span class="nav-text">response 响应事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#connect-连接事件"><span class="nav-number">6.2.3.</span> <span class="nav-text">connect 连接事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#upgrade-升级事件"><span class="nav-number">6.2.4.</span> <span class="nav-text">upgrade 升级事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#continue-继续事件"><span class="nav-number">6.2.5.</span> <span class="nav-text">continue 继续事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#socket-套接字事件"><span class="nav-number">6.2.6.</span> <span class="nav-text">socket 套接字事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#abort-中止事件"><span class="nav-number">6.2.7.</span> <span class="nav-text">abort 中止事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aborted-中止事件-1"><span class="nav-number">6.2.8.</span> <span class="nav-text">aborted 中止事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性-1"><span class="nav-number">6.2.9.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法-1"><span class="nav-number">6.2.10.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-write-chunk-encoding-callback"><span class="nav-number">6.2.11.</span> <span class="nav-text">request.write(chunk[, encoding]{, callback})</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-flushHeaders"><span class="nav-number">6.2.12.</span> <span class="nav-text">request.flushHeaders()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-abort"><span class="nav-number">6.2.13.</span> <span class="nav-text">request.abort()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-end-data-encoding-callback"><span class="nav-number">6.2.14.</span> <span class="nav-text">request.end([data]{, encoding}[, callback])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-setNoDelay-noDelay"><span class="nav-number">6.2.15.</span> <span class="nav-text">request.setNoDelay([noDelay])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-setSocketKeepAlive-enable-initialDelay"><span class="nav-number">6.2.16.</span> <span class="nav-text">request.setSocketKeepAlive([enable]{, initialDelay})</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-setTimeout-msecs-callback"><span class="nav-number">6.2.17.</span> <span class="nav-text">request.setTimeout(msecs[, callback])</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-ServerResponse"><span class="nav-number">7.</span> <span class="nav-text">http.ServerResponse</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件-2"><span class="nav-number">7.0.1.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#close-关闭事件-1"><span class="nav-number">7.0.2.</span> <span class="nav-text">close 关闭事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#finish-结束事件"><span class="nav-number">7.0.3.</span> <span class="nav-text">finish 结束事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性-2"><span class="nav-number">7.0.4.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-statusCode"><span class="nav-number">7.0.5.</span> <span class="nav-text">response.statusCode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-statusMessage"><span class="nav-number">7.0.6.</span> <span class="nav-text">response.statusMessage</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-headerSent"><span class="nav-number">7.0.7.</span> <span class="nav-text">response.headerSent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-finished"><span class="nav-number">7.0.8.</span> <span class="nav-text">response.finished</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-sendDate"><span class="nav-number">7.0.9.</span> <span class="nav-text">response.sendDate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法-2"><span class="nav-number">7.0.10.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-setHeader-name-value"><span class="nav-number">7.0.11.</span> <span class="nav-text">response.setHeader(name, value)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-writeHead-statusCode-statusMessage-headers"><span class="nav-number">7.0.12.</span> <span class="nav-text">response.writeHead(statusCode[, statusMessage]{, headers})</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-getHeader-name"><span class="nav-number">7.0.13.</span> <span class="nav-text">response.getHeader(name)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-removeHeader-name"><span class="nav-number">7.0.14.</span> <span class="nav-text">response.removeHeader(name)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#reponse-write-chunk-encoding-callback"><span class="nav-number">7.0.15.</span> <span class="nav-text">reponse.write(chunk[, encoding]{, callback})</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-end-data-encoding-callback"><span class="nav-number">7.0.16.</span> <span class="nav-text">response.end([data]{, encoding}[, callback])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-addTrailers-headers"><span class="nav-number">7.0.17.</span> <span class="nav-text">response.addTrailers(headers)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-writeContinue"><span class="nav-number">7.0.18.</span> <span class="nav-text">response.writeContinue()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-setTimeout-msecs-callback"><span class="nav-number">7.0.19.</span> <span class="nav-text">response.setTimeout(msecs, callback)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-Server"><span class="nav-number">7.1.</span> <span class="nav-text">http.Server</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件-3"><span class="nav-number">7.1.1.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-请求事件"><span class="nav-number">7.1.2.</span> <span class="nav-text">request 请求事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#connect-连接事件-1"><span class="nav-number">7.1.3.</span> <span class="nav-text">connect 连接事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#connection-连接事件"><span class="nav-number">7.1.4.</span> <span class="nav-text">connection 连接事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#upgrade-升级事件-1"><span class="nav-number">7.1.5.</span> <span class="nav-text">upgrade 升级事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#checkContinue-检查继续事件"><span class="nav-number">7.1.6.</span> <span class="nav-text">checkContinue 检查继续事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#close-关闭事件-2"><span class="nav-number">7.1.7.</span> <span class="nav-text">close 关闭事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#clientError-客户端错误事件"><span class="nav-number">7.1.8.</span> <span class="nav-text">clientError 客户端错误事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性-3"><span class="nav-number">7.1.9.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server-maxHeadersCount"><span class="nav-number">7.1.10.</span> <span class="nav-text">server.maxHeadersCount</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server-timeout"><span class="nav-number">7.1.11.</span> <span class="nav-text">server.timeout</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法-3"><span class="nav-number">7.1.12.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server-listen-port-hostname-backlog-callback"><span class="nav-number">7.1.13.</span> <span class="nav-text">server.listen(port[,hostname]{,backlog}[,callback])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server-listen-path-callback"><span class="nav-number">7.1.14.</span> <span class="nav-text">server.listen(path[, callback])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#server-listen-handle-callback"><span class="nav-number">7.1.15.</span> <span class="nav-text">server.listen(handle[, callback])</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http-Agent"><span class="nav-number">7.2.</span> <span class="nav-text">http.Agent</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#属性-4"><span class="nav-number">7.2.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#agent-requests"><span class="nav-number">7.2.2.</span> <span class="nav-text">agent.requests</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#agent-sockets"><span class="nav-number">7.2.3.</span> <span class="nav-text">agent.sockets</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#agent-freeSockets"><span class="nav-number">7.2.4.</span> <span class="nav-text">agent.freeSockets</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#agent-maxSocket"><span class="nav-number">7.2.5.</span> <span class="nav-text">agent.maxSocket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#agent-maxFreeSocket"><span class="nav-number">7.2.6.</span> <span class="nav-text">agent.maxFreeSocket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法-4"><span class="nav-number">7.2.7.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new-Agent-options"><span class="nav-number">7.2.8.</span> <span class="nav-text">new Agent([options])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#agent-getName-options"><span class="nav-number">7.2.9.</span> <span class="nav-text">agent.getName(options)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#agent-destory"><span class="nav-number">7.2.10.</span> <span class="nav-text">agent.destory()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">8.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

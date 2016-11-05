@@ -1,0 +1,678 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="codecademy JQuery," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="初见JQuery(2)
+今天继续在codecademy网站学习JQuery名主要学习了以下的内容：
+###1. 选中、创建、添加、移动、移除HTML元素1234567891011121314151617181920212223$p = $(&amp;apos;p&amp;apos;); //选中p元素$p = $(&amp;apos;&amp;lt;p&amp;gt;..&amp;lt;/p&amp;gt;&amp;apos;); //创建p元素// 在选定元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初见JQuery(2)">
+<meta property="og:url" content="http://yoursite.com/2016/05/14/初见JQuery（2）/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="初见JQuery(2)
+今天继续在codecademy网站学习JQuery名主要学习了以下的内容：
+###1. 选中、创建、添加、移动、移除HTML元素1234567891011121314151617181920212223$p = $(&amp;apos;p&amp;apos;); //选中p元素$p = $(&amp;apos;&amp;lt;p&amp;gt;..&amp;lt;/p&amp;gt;&amp;apos;); //创建p元素// 在选定元">
+<meta property="og:updated_time" content="2016-05-15T15:12:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初见JQuery(2)">
+<meta name="twitter:description" content="初见JQuery(2)
+今天继续在codecademy网站学习JQuery名主要学习了以下的内容：
+###1. 选中、创建、添加、移动、移除HTML元素1234567891011121314151617181920212223$p = $(&amp;apos;p&amp;apos;); //选中p元素$p = $(&amp;apos;&amp;lt;p&amp;gt;..&amp;lt;/p&amp;gt;&amp;apos;); //创建p元素// 在选定元">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/14/初见JQuery（2）/"/>
+
+
+  <title> 初见JQuery(2) | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                初见JQuery(2)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-14T23:24:19+08:00" content="2016-05-14">
+              2016-05-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/14/初见JQuery（2）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/14/初见JQuery（2）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="初见JQuery-2"><a href="#初见JQuery-2" class="headerlink" title="初见JQuery(2)"></a>初见JQuery(2)</h1><hr>
+<p>今天继续在codecademy网站学习JQuery名主要学习了以下的内容：</p>
+<p>###1. 选中、创建、添加、移动、移除HTML元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">$p = $(&apos;p&apos;); //选中p元素</div><div class="line">$p = $(&apos;&lt;p&gt;..&lt;/p&gt;&apos;); //创建p元素</div><div class="line"></div><div class="line">// 在选定元素的所有子元素之后插入</div><div class="line">$(&quot;cssSelector&quot;).append(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&apos;&lt;p&gt;Stuff!&lt;/p&gt;&apos;).appendTo(&apos;cssSelector&apos;);</div><div class="line"></div><div class="line">// 在选定元素的所有子元素之前插入p元素</div><div class="line">$(&quot;cssSelector&quot;).prepend(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&apos;&lt;p&gt;Stuff!&lt;/p&gt;&apos;).preappendTo(&apos;cssSelector&apos;);</div><div class="line"></div><div class="line">//在选定元素之后插入p元素</div><div class="line">$(&quot;cssSelector&quot;).after(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;).insertAfter(&quot;cssSelector&quot;);</div><div class="line"></div><div class="line">//在选定元素之前插入p元素</div><div class="line">$(&quot;cssSelector&quot;).before(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;).insertBefore(&quot;cssSelector&quot;);</div><div class="line"></div><div class="line">$(&quot;cssSelector&quot;).after($(&apos;p&apos;));//选定p元素，并将其移动到选定元素之后</div><div class="line"></div><div class="line">$(&apos;cssSelector&apos;).empty(); //移除选定元素的所有子元素</div><div class="line">$(&apos;cssSelector&apos;).remove(); //移除选定元素及其子元素</div></pre></td></tr></table></figure></p>
+<p>###2. 修改class属性、style属性和内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// 添加、移除、切换class属性</div><div class="line">$(&apos;cssSelector&apos;).addClass(&apos;className&apos;);</div><div class="line">$(&apos;cssSelector&apos;).removeClass(&apos;className&apos;);</div><div class="line">$(&apos;cssSelector&apos;).toggleClass(&apos;className&apos;); //切换类名，有→无，无→有</div><div class="line">$(&apos;cssSelector&apos;).hasClass(&apos;className&apos;);//返回ture or false</div><div class="line">// 修改css</div><div class="line">$(&apos;cssSelector&apos;).height(&apos;200px&apos;);</div><div class="line">$(&apos;cssSelector&apos;).width(&apos;200px&apos;); //设置宽高的函数</div><div class="line">//获取或改变css属性</div><div class="line">$(&apos;cssSelector&apos;).css(&apos;attributes&apos;);</div><div class="line">$(&apos;cssSelector&apos;).css(&apos;attributes&apos;,&apos;value&apos;); </div><div class="line">$(&apos;cssSelector&apos;).css(&#123;&apos;attributes&apos;,&apos;value&apos;&#125;); </div><div class="line"></div><div class="line"></div><div class="line">//修改内容（注意三者区别有点像js中的innerHTML,innerText,value）</div><div class="line">$(&apos;p&apos;).html(); //获取第一个p元素的html内容，返回字符串</div><div class="line">$(&apos;p&apos;).html(&apos;htmString&apos;); //修改第一个p元素的html内容,返回p节点JQ对象</div><div class="line"></div><div class="line">$(&apos;p&apos;).text(); //获取所有p元素及其后代子元素的文本内容，并连接成字符串返回</div><div class="line">$(&apos;p&apos;).text(&apos;&lt;b /&gt;some text&apos;); //修改所有p元素的内容，返回JQ对象</div><div class="line"></div><div class="line">$(&apos;input&apos;).val();//获取或修改第一个input表单元素的内容</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>.html(),.text(),.val()三个方法功能上的对比</strong><br>1、.html(),.text(),.val()三种方法都是用来读取选定元素的内容。<br>2、.html()是用来读取元素的HTML内容（包括其Html标签）<br>3、.text()用来读取元素的纯文本内容，包括其后代元素<br>4、.val()是用来读取表单元素的”value”值。<br>5、和.text()方法不能使用在表单元素上,而.val()只能使用在表单元素上；另外.html()方法使用在多个元素上时，只读取第一个元素；.val()方法和.html()相同，如果其应用在多个元素上时，只能读取第一个表单元素的”value”值，但是.text()和他们不一样，如果.text()应用在多个元素上时，将会读取所有选中元素的文本内容。<br><strong>javascript 中 innerHTML()、innerTEXT()、outerHTML()、outerTEXT() 的区别：</strong><br>1、innerHTML 设置或获取位于对象起始和结束标签内的 HTML<br>2、outerHTML 设置或获取对象及其内容的 HTML 形式<br>3、innerText 设置或获取位于对象起始和结束标签内的文本<br>4、outerText 设置(包括标签)或获取(不包括标签)对象的文本<br>引用网上文章<a href="http://m.studyofnet.com/news/437.html" target="_blank" rel="external">jquery中text(),val(),html()区别</a></p>
+<p>###3. 事件绑定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 一般的事件绑定</div><div class="line">$(&apos;cssSelector&apos;).click(function()&#123;&#125;);</div><div class="line">// 动态的事件绑定</div><div class="line">$(document).on(&apos;click&apos;,&apos;cssSelector&apos;,function()&#123;&#125;);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>###4. 一般模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(document).ready(function()&#123;</div><div class="line">    $(&apos;thingToTouch&apos;).event(function()&#123;</div><div class="line">        $(&apos;thingToAffect&apos;).effect();</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>###5. 一些常用事件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$(&apos;&apos;).click/dblclick/hover/focus/keydown</div><div class="line">//鼠标hover的时候执行第一个函数，离开的是偶执行第二个函数</div><div class="line">$(&apos;&apos;).hover(</div><div class="line">    function()&#123;&#125;,</div><div class="line">    function()&#123;&#125;</div><div class="line">)</div><div class="line">//通过这个可以实现一个小游戏（贪食蛇）</div><div class="line">$(document).keydown(function(key) &#123;</div><div class="line">    switch(parseInt(key.which,10)) &#123;</div><div class="line">	// 按方向键←</div><div class="line">	case 37:</div><div class="line">		$(&apos;img&apos;).animate(&#123;left: &quot;-=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	// 按方向键↑</div><div class="line">	case 38:</div><div class="line">		$(&apos;img&apos;).animate(&#123;top: &quot;-=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	// 按方向键→</div><div class="line">	case 39:</div><div class="line">		$(&apos;img&apos;).animate(&#123;left: &quot;+=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	// 按方向键↓</div><div class="line">	case 40:</div><div class="line">		$(&apos;img&apos;).animate(&#123;top: &quot;+=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">&#125;); </div><div class="line">//.animate(&#123;object&#125; [,speed])接受一个类似于css的object，然后选择的元素的样式就会从原来的状态变为我们animate接受的状态。</div></pre></td></tr></table></figure></p>
+<p>###6. JQuery UI<br>首先你得去官网下载这个库，或者直接在link的地址中添加绝对地址<code>http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css</code>在script标签的地址中添加绝对地址<code>http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(&apos;cssSelector&apos;).effect(&apos;explode&apos;); //爆炸效果</div><div class="line">$(&apos;cssSelector&apos;).effect(&apos;bounce&apos;,&#123;times:2&#125;,500);  //500ms内弹跳2次</div><div class="line">$(&apos;cssSelector&apos;).effect(&apos;slide&apos;); //滑动出现</div><div class="line">$(&apos;cssSelector&apos;).draggable(); //使div或Img元素可拖动</div><div class="line">$(&apos;cssSelector&apos;).resizable(); //使div元素的宽高通过鼠标拖动改变</div><div class="line">$(&apos;ol&apos;).selectable();  //使ol或ul列表变得可选择</div><div class="line">$(&apos;ol&apos;).sortable(); //使列表变得可拖动排序</div></pre></td></tr></table></figure></p>
+<p>好看的列表折叠展开效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;menu&quot;&gt;</div><div class="line">    &lt;h3&gt;&lt;/h3&gt;</div><div class="line">    &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</div><div class="line">    </div><div class="line">    &lt;h3&gt;jQuery UI&lt;/h3&gt;</div><div class="line">    &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</div><div class="line">    </div><div class="line">    &lt;h3&gt;&lt;/h3&gt;</div><div class="line">    &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">        </div><div class="line">&lt;script&gt;</div><div class="line">    $(document).ready(function() &#123;</div><div class="line">      $(&quot;#menu&quot;).accordion(&#123;collapsible: true, active: false&#125;);</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>###逻辑<br>今天晚饭过后本来想看个搜索一个关于逻辑的TED演讲，然后一不小心搜到了台湾大学的公开课<a href="http://ocw.aca.ntu.edu.tw/ntu-ocw/index.php/ocw/cou/100S105/2" target="_blank" rel="external">官方网址</a>，老师幽默风趣的上课方式一下子就吸引到了我。（这课在网易公开课上也能搜到）</p>
+<blockquote>
+<p>逻辑就是研究说话的‘道理’的学科</p>
+</blockquote>
+<p><strong>用数学集合的概念去论证一些东西</strong></p>
+<blockquote>
+<ol>
+<li>所有人都会死，苏格拉底是人，所以苏格拉底会死。</li>
+<li>所有人都会死，苏格拉底会死，所以苏格拉底是人。</li>
+</ol>
+</blockquote>
+<p>显然命题1逻辑是正确的，而命题2逻辑是错误的。可以将以上两个论证抽象为：</p>
+<blockquote>
+<ol>
+<li>所有A都是B，P是A，所以P是B；</li>
+<li>所有A都是B，P是B，所以P是A；</li>
+</ol>
+</blockquote>
+<p><strong>比较论证最好不要有</strong><br>一般我们都讨厌拿别人的比较，然后要求自己像别人一样。比如：</p>
+<blockquote>
+<p>XX家孩子学习如何用功，成绩如何好，获了什么什么奖，毕业找到了什么什么工作。你也要用功一点，这样以后能够找到好工作。</p>
+</blockquote>
+<p>所以我们也最好不要用比较论证的方式去论证一些东西。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/codecademy-JQuery/" rel="tag">#codecademy JQuery</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/13/初见JQuery（1）/" rel="next" title="初见JQuery(1)">
+                <i class="fa fa-chevron-left"></i> 初见JQuery(1)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/15/初见JQuery（3）/" rel="prev" title="初见JQuery（3）">
+                初见JQuery（3） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/14/初见JQuery（2）/"
+           data-title="初见JQuery(2)" data-url="http://yoursite.com/2016/05/14/初见JQuery（2）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初见JQuery-2"><span class="nav-number">1.</span> <span class="nav-text">初见JQuery(2)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

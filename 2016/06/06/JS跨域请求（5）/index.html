@@ -1,0 +1,666 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MV* 跨域 Comet JavaScript SSE Web Sockets," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="日常闲扯虽然很早的时候心中就默默决定以后于我来说没有所谓的周末，也没有所谓的法定节假日，只有一些自己定义的日子，但是这两天真的不在状态，晚上睡得晚，早上起得晚，白天也是一会清醒一会困得要死，快被折磨疯了。讲道理，明明已经睡够8小时了，为什么中午和晚上还是会困呢？
+今天在研究js的架构方面，也就是传说中的MVC、MVVM、MV*模式。反正不管怎么样就是要把Model(模型)和View（视图）通过一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS跨域请求（5）">
+<meta property="og:url" content="http://yoursite.com/2016/06/06/JS跨域请求（5）/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="日常闲扯虽然很早的时候心中就默默决定以后于我来说没有所谓的周末，也没有所谓的法定节假日，只有一些自己定义的日子，但是这两天真的不在状态，晚上睡得晚，早上起得晚，白天也是一会清醒一会困得要死，快被折磨疯了。讲道理，明明已经睡够8小时了，为什么中午和晚上还是会困呢？
+今天在研究js的架构方面，也就是传说中的MVC、MVVM、MV*模式。反正不管怎么样就是要把Model(模型)和View（视图）通过一个">
+<meta property="og:image" content="http://yoursite.com/JS跨域请求（5）/1.PNG">
+<meta property="og:image" content="http://yoursite.com/JS跨域请求（5）/2.PNG">
+<meta property="og:updated_time" content="2016-06-24T15:11:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS跨域请求（5）">
+<meta name="twitter:description" content="日常闲扯虽然很早的时候心中就默默决定以后于我来说没有所谓的周末，也没有所谓的法定节假日，只有一些自己定义的日子，但是这两天真的不在状态，晚上睡得晚，早上起得晚，白天也是一会清醒一会困得要死，快被折磨疯了。讲道理，明明已经睡够8小时了，为什么中午和晚上还是会困呢？
+今天在研究js的架构方面，也就是传说中的MVC、MVVM、MV*模式。反正不管怎么样就是要把Model(模型)和View（视图）通过一个">
+<meta name="twitter:image" content="http://yoursite.com/JS跨域请求（5）/1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/06/JS跨域请求（5）/"/>
+
+
+  <title> JS跨域请求（5） | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JS跨域请求（5）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-06T01:05:45+08:00" content="2016-06-06">
+              2016-06-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/06/JS跨域请求（5）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/06/JS跨域请求（5）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="日常闲扯"><a href="#日常闲扯" class="headerlink" title="日常闲扯"></a>日常闲扯</h2><p>虽然很早的时候心中就默默决定以后于我来说没有所谓的周末，也没有所谓的法定节假日，只有一些自己定义的日子，但是这两天真的不在状态，晚上睡得晚，早上起得晚，白天也是一会清醒一会困得要死，快被折磨疯了。讲道理，明明已经睡够8小时了，为什么中午和晚上还是会困呢？</p>
+<p>今天在研究js的架构方面，也就是传说中的MVC、MVVM、MV*模式。反正不管怎么样就是要把Model(模型)和View（视图）通过一个中间者分离开来，同时又通过这个中间者进行相互联系。这样以后，一块代码中就不会出现模型和视图相互耦合导致难以阅读理解和维护了。</p>
+<p>那什么是模型呢?模型就是单纯的指一些数据，比如说一个用户的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    name: &apos;小李&apos;，</div><div class="line">    age: 20,</div><div class="line">    weight: &apos;60KG&apos;,</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那什么是视图呢？视图就是指我们在网页上看到的东西，装逼一点说就是UI（用户界面）。比如说一个“个人信息显示列表”，一开始是一些初始信息，但是我们可以进行增删等操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;div id = &apos;personalInfromation&apos;&gt;</div><div class="line">    &lt;p&gt;姓名: &lt;span&gt;小李&lt;/span&gt;&lt;button&gt;编辑&lt;button&gt;&lt;/p&gt;</div><div class="line">    &lt;p&gt;年龄: &lt;span&gt;20&lt;/span&gt;&lt;button&gt;编辑&lt;button&gt;&lt;/p&gt;</div><div class="line">    &lt;p&gt;体重: &lt;span&gt;60KG&lt;/span&gt;&lt;button&gt;编辑&lt;button&gt;&lt;/p&gt;</div><div class="line">    ...</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>一般我们可能在代码中直接监听单击事件，然后获取输入，然后改变数据对象，同时修改显示。<br>现在我们把监听事件、获取输入、更新数据等统一交给一个对象去搞定。</p>
+<p>再说的<strong>直观点</strong>，比如说现在有4个买家和4个卖家，一般模式的话，买家和卖家相互沟通，卖家告诉买家有什么货，然后买家从卖家那里拿货，卖家会不停更新自己的货，这样子买家和卖家如果并不是一一对应的关系话，他们之间的联系就会形成网状结构。<br><img src="JS跨域请求（5）/1.PNG" alt=""></p>
+<p>然而如果这时候突然跳出来一个中转商，卖家把自己有的货告诉他，买家把自己要的货告诉他，由他来进行信息的发布和货物的分配，那么三者之间的联系就会简单。所有的卖家都指向他，所有的买家也指向他。<br><img src="JS跨域请求（5）/2.PNG" alt=""></p>
+<p>下面进入……</p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h4 id="2-4、Web-Sockets（服务器发送事件）"><a href="#2-4、Web-Sockets（服务器发送事件）" class="headerlink" title="2.4、Web Sockets（服务器发送事件）"></a>2.4、Web Sockets（服务器发送事件）</h4><p>先来说说它有多么优秀吧~</p>
+<ul>
+<li>全双工、双向通信</li>
+<li>取得响应后从HTTP协议升级为Web Socktet协议</li>
+<li>能够在客户端和浏览器之间发送非常少的数据，而不像HTTP那样字节级的开销，非常适合移动端</li>
+<li>可实现跨域</li>
+</ul>
+<p>当然它自然也有缺点：</p>
+<ul>
+<li>因为它使用的是自定义协议，所以制定协议的时间比JS的API的时间还要长</li>
+<li>存在一致性和安全性问题</li>
+<li>不兼容IE</li>
+</ul>
+<p><strong>下面献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">//实例化一个对象</div><div class="line">var socket = new WebSocket(&apos;ws://www.example.com/serve.php&apos;);</div><div class="line"></div><div class="line">//socket.readyState表示当前状态：</div><div class="line">WebSocket.OPENING; //正在连接</div><div class="line">WebSocket.OPEN; //已经建立连接</div><div class="line">WebSocket.CLOSING; //正在关闭连接</div><div class="line">WebSocket.OPEN; //已经关闭连接</div><div class="line"></div><div class="line">socket.close(); //关闭连接</div><div class="line">socket.send(string/json); //向服务器发送数据</div><div class="line"></div><div class="line">//客户端收到来自服务器的数据，触发message事件</div><div class="line">socket.onmessage = function(event)&#123;</div><div class="line"> var data = event.data</div><div class="line"> //处理数据</div><div class="line">&#125;; </div><div class="line"></div><div class="line">//成功建立连接时触发open事件</div><div class="line">socket.onopen = function()&#123;&#125;; </div><div class="line"></div><div class="line">//发生错误时触发error事件，连接不能持续</div><div class="line">socket.onerror = function()&#123;&#125;; </div><div class="line"></div><div class="line">//关闭连接时触发close事件</div><div class="line">//event.clean表示连接是否已经明确地关闭</div><div class="line">//event.code是服务器返回的数值状态码</div><div class="line">//event.reason表示包含服务器发回的消息</div><div class="line">socket.onclose = function(event)&#123;</div><div class="line"> console.log(&apos;Was clean&apos;+event.wasClean+&apos;Code:&apos;+event.code+&apos;Reason=&apos;+event.reason);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>至此，跨域部分算是完了……</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MV-跨域-Comet-JavaScript-SSE-Web-Sockets/" rel="tag">#MV* 跨域 Comet JavaScript SSE Web Sockets</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/05/JS跨域请求（4）/" rel="next" title="JS跨域请求（4）">
+                <i class="fa fa-chevron-left"></i> JS跨域请求（4）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/07/深夜日记（12）/" rel="prev" title="深夜日记（12）">
+                深夜日记（12） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/06/JS跨域请求（5）/"
+           data-title="JS跨域请求（5）" data-url="http://yoursite.com/2016/06/06/JS跨域请求（5）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#日常闲扯"><span class="nav-number">1.</span> <span class="nav-text">日常闲扯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正题"><span class="nav-number">2.</span> <span class="nav-text">正题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4、Web-Sockets（服务器发送事件）"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.4、Web Sockets（服务器发送事件）</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

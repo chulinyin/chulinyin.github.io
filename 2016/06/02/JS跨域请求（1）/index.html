@@ -1,0 +1,677 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="跨域 CORS JavaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="今天一大早就去面试了，在公交车上颠簸近一个半小时，然后下车走了10多分钟的路后，终于在9.30的时候到了面试的公司“淘粉吧”，公司内部装修的还是蛮有格调的，氛围挺轻松写意的。在会议室做了一份笔试题，然后面试了20分钟左右，就马上又赶去公交车站了（因为要赶在12.30前回学校拍照，错过了就会很麻烦）。在车上的时候，又接到了HR的电话，让我马上过去复试，因为刚刚面试我的主管没有找到HR,也就是说他刚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS跨域请求（1）">
+<meta property="og:url" content="http://yoursite.com/2016/06/02/JS跨域请求（1）/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="今天一大早就去面试了，在公交车上颠簸近一个半小时，然后下车走了10多分钟的路后，终于在9.30的时候到了面试的公司“淘粉吧”，公司内部装修的还是蛮有格调的，氛围挺轻松写意的。在会议室做了一份笔试题，然后面试了20分钟左右，就马上又赶去公交车站了（因为要赶在12.30前回学校拍照，错过了就会很麻烦）。在车上的时候，又接到了HR的电话，让我马上过去复试，因为刚刚面试我的主管没有找到HR,也就是说他刚">
+<meta property="og:updated_time" content="2016-06-02T17:10:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS跨域请求（1）">
+<meta name="twitter:description" content="今天一大早就去面试了，在公交车上颠簸近一个半小时，然后下车走了10多分钟的路后，终于在9.30的时候到了面试的公司“淘粉吧”，公司内部装修的还是蛮有格调的，氛围挺轻松写意的。在会议室做了一份笔试题，然后面试了20分钟左右，就马上又赶去公交车站了（因为要赶在12.30前回学校拍照，错过了就会很麻烦）。在车上的时候，又接到了HR的电话，让我马上过去复试，因为刚刚面试我的主管没有找到HR,也就是说他刚">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/02/JS跨域请求（1）/"/>
+
+
+  <title> JS跨域请求（1） | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JS跨域请求（1）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-02T00:20:04+08:00" content="2016-06-02">
+              2016-06-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/02/JS跨域请求（1）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/02/JS跨域请求（1）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>今天一大早就去面试了，在公交车上颠簸近一个半小时，然后下车走了10多分钟的路后，终于在9.30的时候到了面试的公司“淘粉吧”，公司内部装修的还是蛮有格调的，氛围挺轻松写意的。<br>在会议室做了一份笔试题，然后面试了20分钟左右，就马上又赶去公交车站了（因为要赶在12.30前回学校拍照，错过了就会很麻烦）。<br>在车上的时候，又接到了HR的电话，让我马上过去复试，因为刚刚面试我的主管没有找到HR,也就是说他刚刚是在没有看到我简历的情况下，面试了我二十分钟。所以我不得不明天再去一趟。<br>不过也是福祸相依吧，如果那个主管是在拿到我的简历的情况下面试我的，时间估计得持续一小时，那样的话我就来不及赶回学校了，就不得不补拍照的坑了。</p>
+</blockquote>
+<p>今天下午就去图书馆了，加上晚上的时间基本都在重新看一遍《JS高级程序设计》里的：</p>
+<ul>
+<li>ajax请求和跨域请求</li>
+<li>高级函数的应用（作用域安全的构造函数、惰性载入函数(使初始化判断只进行一次)</li>
+<li>函数绑定及柯里化[fnc.bind()]）</li>
+<li>自定义事件</li>
+<li>模块模式的编程。</li>
+</ul>
+<p>然后开始分析网易云课堂上老师讲<strong>组件</strong>的时候给的两个demo，瞬间有了许多领悟。后面我准备再了解下怎么把各个模块组合起来，还有什么模板解析技术，我就要开始重构当初那个大作业的js代码了。现在回过头去看当初写的代码，确实太嫩了。</p>
+<p>下面就如标题所述，开始讲一下跨域请求吧~</p>
+<h3 id="为什么要跨域"><a href="#为什么要跨域" class="headerlink" title="为什么要跨域"></a>为什么要跨域</h3><p>因为通过XHR实现Ajax通信有一个主要限制————跨域安全策略。默认情况下，XHR对象只能访问与包含它的页面位于同一个域中的资源。可是有时候我们需要使用跨域资源。那就只能依靠一些跨域技术了。</p>
+<h3 id="1、CORS跨域资源共享"><a href="#1、CORS跨域资源共享" class="headerlink" title="1、CORS跨域资源共享"></a>1、CORS跨域资源共享</h3><p>这是W3C指定制定的一个标准，使用自定义的HTTP头部让浏览器和服务器沟通，在发送请求的时候，需要给请求报文添加一个额外的Origin首部字段，值为页面的源信息（协议+域名+端口），如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Origin: http://www.chulinyin.com</div></pre></td></tr></table></figure></p>
+<p>然后服务器就根据这个首部字段决定是否响应，如果响应的话，响应报文中的Access-Control-Allow-Origin的首部字段中就会包含相同的源信息，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Origin: http://www.chulinyin.com</div></pre></td></tr></table></figure></p>
+<p>如果响应报文没有这个首部字段或者值不匹配，浏览器就会驳回请求。</p>
+<blockquote>
+<p>注意，请求和响应报文中都不会包含Cookie信息。</p>
+</blockquote>
+<h4 id="1-1、IE中CORS的实现"><a href="#1-1、IE中CORS的实现" class="headerlink" title="1.1、IE中CORS的实现"></a>1.1、IE中CORS的实现</h4><p>IE8中使用了与XHR相似的XDR对象，它有一些不同之处：</p>
+<ul>
+<li>cookie不随请求发送，也不随响应返回</li>
+<li>只能设置请求首部字段中的Content-Type字段</li>
+<li>不能访问响应报文的首部信息</li>
+<li>只支持GET和POST请求</li>
+<li>所有的XDR请求都是异步执行的</li>
+<li>接收到响应后只能访问响应文本，没有办法确定响应的状态码</li>
+<li>用load事件和error事件监测响应成功或失败</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var xdr = XDomainRequest();</div><div class="line">xdr.onload = function()&#123;</div><div class="line">    console.log(xdr.responseText);</div><div class="line">&#125;</div><div class="line">xdr.error = function()&#123;</div><div class="line">    conlose.log(&apos;An error occurred.&apos;)</div><div class="line">&#125;</div><div class="line">xdr.open(&quot;get&quot;,&quot;http://www.somewhere-else.com/page&quot;);</div><div class="line">xdr.send(null);</div><div class="line">//POST方法：</div><div class="line">xdr.open(&apos;post&apos;,&apos;http://www.somewhere-else.com/page&apos;);</div><div class="line">xdr.contentType = &apos;application/x-www-form-urlencoded&apos;;</div><div class="line">xdr.send(&apos;name1=value1&amp;name2=value2&apos;);</div></pre></td></tr></table></figure>
+<h4 id="1-2、其他浏览器中CORS的实现"><a href="#1-2、其他浏览器中CORS的实现" class="headerlink" title="1.2、其他浏览器中CORS的实现"></a>1.2、其他浏览器中CORS的实现</h4><p>直接使用原生的XHR对象即可，不过也有一些限制：</p>
+<ul>
+<li>不能使用setRequestHeader()设置自定义的头部</li>
+<li>不能发送和接收Cookie</li>
+<li>调用getAllResponseHeaders()方法会返回空字符串<br>因为可能会和同域请求难以区分，所以如果是同域的请求最好使用相对的URL，跨域请求使用绝对URL。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var xhr = XMLHTTPRequest();</div><div class="line">xhr.onreadystatechange = function(callback)&#123;</div><div class="line">    if(xhr.readySate == 4)&#123;</div><div class="line">        if(xhr.status&gt;=200&amp;&amp;xhr.status&lt;300||xhr.status==304)&#123;</div><div class="line">            callback(xhr.responseText);</div><div class="line">            console.log(&apos;success&apos;);</div><div class="line">        &#125;else&#123;</div><div class="line">            console.log(&apos;Request was unsuccessful:&apos; + xhr.status);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">xhr.open(&quot;get&quot;,&apos;http://www.somewhere-else.com/page&apos;,ture);</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-3、CORS的跨浏览器实现"><a href="#1-3、CORS的跨浏览器实现" class="headerlink" title="1.3、CORS的跨浏览器实现"></a>1.3、CORS的跨浏览器实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">function createCORSRequest(method,url)&#123;</div><div class="line">    var xhr = new XMLHTTPRequest();</div><div class="line">    if(&apos;withCredentials&apos; in xhr)&#123;</div><div class="line">        xhr.open(method,url,ture);</div><div class="line">    &#125;else if(typeof XDomianRequest != &quot;undefined&quot; )&#123;</div><div class="line">        xhr = new XDomainRequest();</div><div class="line">        xhr.open(method,url);</div><div class="line">    &#125;else&#123;</div><div class="line">        xhr = null;</div><div class="line">    &#125;</div><div class="line">    return xhr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var request = createCORSRequest(&apos;get&apos;,&apos;http://www.somewhere-else.com/page&apos;);</div><div class="line">if(request)&#123;</div><div class="line">    request.onload = function(callback)&#123;</div><div class="line">        callback(xhr.reponseText);</div><div class="line">    &#125;;</div><div class="line">    request.send();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、其他跨域技术"><a href="#2、其他跨域技术" class="headerlink" title="2、其他跨域技术"></a>2、其他跨域技术</h3><p>明天再写……</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/跨域-CORS-JavaScript/" rel="tag">#跨域 CORS JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/01/初见HTTP（4）/" rel="next" title="初见HTTP（4）">
+                <i class="fa fa-chevron-left"></i> 初见HTTP（4）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/03/JS跨域请求（2）/" rel="prev" title="JS跨域请求（2）">
+                JS跨域请求（2） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/02/JS跨域请求（1）/"
+           data-title="JS跨域请求（1）" data-url="http://yoursite.com/2016/06/02/JS跨域请求（1）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要跨域"><span class="nav-number">1.</span> <span class="nav-text">为什么要跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、CORS跨域资源共享"><span class="nav-number">2.</span> <span class="nav-text">1、CORS跨域资源共享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、IE中CORS的实现"><span class="nav-number">2.1.</span> <span class="nav-text">1.1、IE中CORS的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、其他浏览器中CORS的实现"><span class="nav-number">2.2.</span> <span class="nav-text">1.2、其他浏览器中CORS的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、CORS的跨浏览器实现"><span class="nav-number">2.3.</span> <span class="nav-text">1.3、CORS的跨浏览器实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、其他跨域技术"><span class="nav-number">3.</span> <span class="nav-text">2、其他跨域技术</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

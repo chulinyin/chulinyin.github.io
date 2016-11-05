@@ -1,0 +1,666 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="drop-shadow," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="今天早上在看微信公众号【前端大全】的时候意外地看到了这篇文章PNG格式小图标的CSS任意颜色赋色技术,原文是张旭鑫写的，附上原文链接！
+以下是我理解之后自己写的：
+原理很简单，就是利用了CSS3的特性：(注意需要写前缀)123456selector&amp;#123;    -webkit-filter: drop-shadow（1px 2px 3px #f00）;    -moz-filter: dro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用CSS修改PNG格式的图标颜色">
+<meta property="og:url" content="http://yoursite.com/2016/06/23/用CSS修改PNG格式的图标颜色/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="今天早上在看微信公众号【前端大全】的时候意外地看到了这篇文章PNG格式小图标的CSS任意颜色赋色技术,原文是张旭鑫写的，附上原文链接！
+以下是我理解之后自己写的：
+原理很简单，就是利用了CSS3的特性：(注意需要写前缀)123456selector&amp;#123;    -webkit-filter: drop-shadow（1px 2px 3px #f00）;    -moz-filter: dro">
+<meta property="og:image" content="http://yoursite.com/用CSS修改PNG格式的图标颜色/weibo.PNG">
+<meta property="og:image" content="http://yoursite.com/用CSS修改PNG格式的图标颜色/weibo1.PNG">
+<meta property="og:image" content="http://yoursite.com/用CSS修改PNG格式的图标颜色/weibo2.PNG">
+<meta property="og:image" content="http://yoursite.com/用CSS修改PNG格式的图标颜色/weibo3.PNG">
+<meta property="og:updated_time" content="2016-06-23T16:07:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用CSS修改PNG格式的图标颜色">
+<meta name="twitter:description" content="今天早上在看微信公众号【前端大全】的时候意外地看到了这篇文章PNG格式小图标的CSS任意颜色赋色技术,原文是张旭鑫写的，附上原文链接！
+以下是我理解之后自己写的：
+原理很简单，就是利用了CSS3的特性：(注意需要写前缀)123456selector&amp;#123;    -webkit-filter: drop-shadow（1px 2px 3px #f00）;    -moz-filter: dro">
+<meta name="twitter:image" content="http://yoursite.com/用CSS修改PNG格式的图标颜色/weibo.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/23/用CSS修改PNG格式的图标颜色/"/>
+
+
+  <title> 用CSS修改PNG格式的图标颜色 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用CSS修改PNG格式的图标颜色
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-23T23:54:13+08:00" content="2016-06-23">
+              2016-06-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/23/用CSS修改PNG格式的图标颜色/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/23/用CSS修改PNG格式的图标颜色/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天早上在看微信公众号【前端大全】的时候意外地看到了这篇文章<a href="https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&amp;mid=2651550947&amp;idx=1&amp;sn=93542fe40b79a5f9090ae9e28ab56383&amp;scene=0&amp;pass_ticket=DHwLdE%2FHiW5xtoGbFJhrR12asgFwynag0yfuu4W%2Fk3RFNIL0wAJYW76dxoCi5qfS" target="_blank" rel="external">PNG格式小图标的CSS任意颜色赋色技术</a>,原文是<code>张旭鑫</code>写的，附上<a href="http://www.zhangxinxu.com/wordpress/2016/06/png-icon-change-color-by-css/" target="_blank" rel="external">原文链接</a>！</p>
+<p><strong>以下是我理解之后自己写的：</strong></p>
+<p>原理很简单，就是利用了CSS3的特性：(注意需要写前缀)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">selector&#123;</div><div class="line">    -webkit-filter: drop-shadow（1px 2px 3px #f00）;</div><div class="line">    -moz-filter: drop-shadow（1px 2px 3px #f00）;</div><div class="line">    -o-filter: drop-shadow（1px 2px 3px #f00）;</div><div class="line">    filter: drop-shadow（1px 2px 3px #f00）;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上对所选元素进行了投影，向左偏移1px,向下偏移2px,模糊半径为3px，叠加颜色为纯红。也就是在原图左下方会出现一个红色模糊的图。</p>
+<blockquote>
+<p>这里需要注意下filter: drop-shadow(..)和box-shadow：..的区别，drop-shadow是对图片的不透明区域进行投影，box-shadow顾名思义是对图片的盒子做投影。也就是说如果图片中间有一些透明区域，使用drop-shadow的时候会投影会保留透明区域，投射出来的和原图一样带透明，而使用box-shadow的时候投射出来的就是一个实体红色小块。说了这么多还是直接上代码看图吧:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.ds&#123;</div><div class="line">    -webkit-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    -moz-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    -o-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">&#125;</div><div class="line">.bs&#123;</div><div class="line">	box-shadow: 0px 20px 0px #f00;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="用CSS修改PNG格式的图标颜色/weibo.PNG" alt="demo1"></p>
+<p>好了，现在我们可能会想着，那我只要在父级元素设置个<code>overflow:hidden</code>，然后再用<code>relative</code>把原图移出去使投影出现在父级元素中，不就OK了？like this:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;img src=&quot;icon.png&quot;&gt;&lt;/div&gt;</div><div class="line">div&#123;</div><div class="line">    width:20px;</div><div class="line">    height:20px;</div><div class="line">    overflow:hidden;</div><div class="line">&#125;</div><div class="line">img&#123;</div><div class="line">    -webkit-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    -moz-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    -o-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    position: relative;</div><div class="line">    left: -20px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="用CSS修改PNG格式的图标颜色/weibo1.PNG" alt=""><br>……↓<br><img src="用CSS修改PNG格式的图标颜色/weibo2.PNG" alt=""><br>那真的是too young,too simple!张鑫旭就遇到了这个坑，他发现只要原图在父级元素中不可见，那么投影也会消失！他后来提出了给原图添加<code>border-right:20px solid transparent;</code>也就是让原图的右边框以透明的形式出现在父级元素中！于是就会神奇的发现，成功了！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;img src=&quot;icon.png&quot;&gt;&lt;/div&gt;</div><div class="line">div&#123;</div><div class="line">    width:20px;</div><div class="line">    height:20px;</div><div class="line">    overflow:hidden;</div><div class="line">&#125;</div><div class="line">img&#123;</div><div class="line">    -webkit-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    -moz-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    -o-filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    filter: drop-shadow(20px 0px 0px #f00);</div><div class="line">    position: relative;</div><div class="line">    left: -20px;</div><div class="line">    border-right:20px solid transparent;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="用CSS修改PNG格式的图标颜色/weibo3.PNG" alt=""></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>什么！？有什么用？</p>
+<ol>
+<li>不用傻逼地切两个仅仅是颜色不一样的icon了！</li>
+<li>当icon状态因用户点击变化的时候，不用再麻烦地修改url了，只需要在css中添加好状态，然后用js改下class就OK了！</li>
+<li>节约资源，性能优化！</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/drop-shadow/" rel="tag">#drop-shadow</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/22/window-sessionStorage的妙用（2）/" rel="next" title="window.sessionStorage的妙用（2）">
+                <i class="fa fa-chevron-left"></i> window.sessionStorage的妙用（2）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/24/深夜日记（24）/" rel="prev" title="深夜日记（24）">
+                深夜日记（24） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/23/用CSS修改PNG格式的图标颜色/"
+           data-title="用CSS修改PNG格式的图标颜色" data-url="http://yoursite.com/2016/06/23/用CSS修改PNG格式的图标颜色/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">1.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

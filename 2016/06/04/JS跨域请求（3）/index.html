@@ -1,0 +1,657 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="跨域 Comet JavaScript SSE," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="日常闲扯今天上午看了一个NBA总决赛的第一场，勇士不出意外地赢了。个人觉得观赏性远远没有勇士和雷霆的比赛高，当然也有可能是今天两边主力发挥都不太好的原因。
+下午就去看我们量新学院的10周年晚会同时也是毕业生晚会，不对！不能称之为“晚会”，因为是在下午1：30开始的Σ( ° △ °|||)︴。这种事情我个人觉得还是相当浪费时间以及无聊的，但我还是去了是因为想去支持一下我的好朋友（主席团老二）同时也算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS跨域请求（3）">
+<meta property="og:url" content="http://yoursite.com/2016/06/04/JS跨域请求（3）/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="日常闲扯今天上午看了一个NBA总决赛的第一场，勇士不出意外地赢了。个人觉得观赏性远远没有勇士和雷霆的比赛高，当然也有可能是今天两边主力发挥都不太好的原因。
+下午就去看我们量新学院的10周年晚会同时也是毕业生晚会，不对！不能称之为“晚会”，因为是在下午1：30开始的Σ( ° △ °|||)︴。这种事情我个人觉得还是相当浪费时间以及无聊的，但我还是去了是因为想去支持一下我的好朋友（主席团老二）同时也算">
+<meta property="og:updated_time" content="2016-06-03T17:50:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS跨域请求（3）">
+<meta name="twitter:description" content="日常闲扯今天上午看了一个NBA总决赛的第一场，勇士不出意外地赢了。个人觉得观赏性远远没有勇士和雷霆的比赛高，当然也有可能是今天两边主力发挥都不太好的原因。
+下午就去看我们量新学院的10周年晚会同时也是毕业生晚会，不对！不能称之为“晚会”，因为是在下午1：30开始的Σ( ° △ °|||)︴。这种事情我个人觉得还是相当浪费时间以及无聊的，但我还是去了是因为想去支持一下我的好朋友（主席团老二）同时也算">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/04/JS跨域请求（3）/"/>
+
+
+  <title> JS跨域请求（3） | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JS跨域请求（3）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-04T01:48:06+08:00" content="2016-06-04">
+              2016-06-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/04/JS跨域请求（3）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/04/JS跨域请求（3）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="日常闲扯"><a href="#日常闲扯" class="headerlink" title="日常闲扯"></a>日常闲扯</h2><p>今天上午看了一个NBA总决赛的第一场，勇士不出意外地赢了。个人觉得观赏性远远没有勇士和雷霆的比赛高，当然也有可能是今天两边主力发挥都不太好的原因。</p>
+<p>下午就去看我们量新学院的10周年晚会同时也是毕业生晚会，不对！不能称之为“晚会”，因为是在下午1：30开始的Σ( ° △ °|||)︴。这种事情我个人觉得还是相当浪费时间以及无聊的，但我还是去了是因为想去支持一下我的好朋友（主席团老二）同时也算是给自己放松一下，哈哈~</p>
+<p>晚上的时候，先把要交的实验报告写完，然后就开始逛了逛网易云课堂，发现了一个叫<code>网易云课堂前端开发交流会</code>的课程，里面有一些以前网易前端工程师的直播分享，然后看了郑海波老师的《自学前端的常见问题与方法指导》以及蔡剑飞老师的《我的网易十年前端路》，获益良多。我觉得对学习一个东西的方法论以及大概的路线先有一个了解之后再去学习就会少一点盲目多一点自信。</p>
+<p>下面进入……</p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>前面简单总结了下用JS实现跨域请求的原因，以及标准的CORS方法、非标准的图像Ping方法和非标准的JSONP方法。</p>
+<h4 id="2-3、Comet"><a href="#2-3、Comet" class="headerlink" title="2.3、Comet"></a>2.3、Comet</h4><p>是一种更加高级的Ajax技术，它是服务器向页面推送数据，而不是像Ajax那样从页面向服务器请求数据。<br>有两种实现Comet的方式：<code>长轮询</code>和<code>HTTP流</code><br>1、 长轮询<br>为什么叫“长轮询”？因为有一个“短轮询”啊~o(￣▽￣)d </p>
+<blockquote>
+<p>所谓<code>短轮询</code>就是指传统的请求：浏览器定时向服务器发送请求，每次服务器收到请求之后就马上回应。</p>
+</blockquote>
+<p>而…..</p>
+<blockquote>
+<p><code>长轮询</code>就是指浏览器是不定时向服务器发送请求的（此时请求时机取决于服务器），当服务器收到请求之后，它会检查资源是否有更新，如果没有，就会保持连接，直到等到资源更新的时候，再把响应发送给浏览器。而浏览器在收到响应的时候，会立即自动再发送一个请求。</p>
+</blockquote>
+<p><strong>以上需自行脑补画面</strong><br>2、 HTTP流<br>HTTP流就更加简单了，服务器在收到浏览器请求后就一直保持连接（直到页面关闭或者写代码主动关闭），然后定时向浏览器发送响应数据（不论是否更新）。</p>
+<p>而在js代码中利用XHR对象就可以实现HTTP流（所以IE下又跪了）。通过监听readystatechange事件并检测readyState的值是否为3（为什么是3呢？因为等于3的时候，xhr.responseText中就会包含接收到的数据啊~），然后比较此前收到的数据，从而截取获得最新的数据。</p>
+<p><strong>献上改自书中的代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">function createStreamingClient(url,progress,finished)&#123;</div><div class="line">    var xhr = new XMLHTTPRequest(),</div><div class="line">        received = 0;</div><div class="line">    xhr.open(&apos;get&apos;,url,true);</div><div class="line">    xhr.readystatechange = fucntion()&#123;</div><div class="line">        var  data = &apos;&apos;;</div><div class="line">        if(xhr.readyState == 3)&#123;</div><div class="line">            data = xhr.responseText.substring(received);//截取最新部分数据</div><div class="line">            received += data.length;//累加取得最新数据的位置</div><div class="line">            progress(data);//将最新数据传入回调函数中</div><div class="line">        &#125;else if(xhr.readyState == 4)&#123;</div><div class="line">            finished(xhr.responseText);//将响应的全部内容传入回调</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    xhr.send(null);</div><div class="line">    return xhr;//为什么还要返回这个？</div><div class="line">&#125;</div><div class="line">var progress = function(data)&#123;</div><div class="line">    console.log(&apos;Received: &apos;+data);</div><div class="line">&#125;</div><div class="line">var finish = function(data)&#123;</div><div class="line">    console.log(&apos;Done&apos;);</div><div class="line">&#125;</div><div class="line">var client = createStreamingClient(&apos;XXX.php&apos;,progress,finish);</div></pre></td></tr></table></figure></p>
+<h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>已经快两点了……明天见。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/跨域-Comet-JavaScript-SSE/" rel="tag">#跨域 Comet JavaScript SSE</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/03/JS跨域请求（2）/" rel="next" title="JS跨域请求（2）">
+                <i class="fa fa-chevron-left"></i> JS跨域请求（2）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/05/JS跨域请求（4）/" rel="prev" title="JS跨域请求（4）">
+                JS跨域请求（4） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/04/JS跨域请求（3）/"
+           data-title="JS跨域请求（3）" data-url="http://yoursite.com/2016/06/04/JS跨域请求（3）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#日常闲扯"><span class="nav-number">1.</span> <span class="nav-text">日常闲扯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正题"><span class="nav-number">2.</span> <span class="nav-text">正题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3、Comet"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.3、Comet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3、SSE（服务器发送事件）"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.3、SSE（服务器发送事件）</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

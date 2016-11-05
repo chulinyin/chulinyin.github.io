@@ -1,0 +1,664 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="日记 收获 思考," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="又有好久没有写点东西了，之所以拖着不写是因为相比之下我有更加重要的事情需要完成（当然也不排除是自己太懒的可能）。
+快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。刚开始时因为不知道究竟去做什么项目，于是就决定先简单做一个自己的网页版简历试试水。但途中却意外地涌现出很多奇妙的想法，把这些想法拼凑起来就是一个大型项目的雏形。这点让我很是兴奋~因为首先这个项目是有实际意义的，甚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深夜日记-关于收获">
+<meta property="og:url" content="http://yoursite.com/2016/09/13/这几天的收获/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="又有好久没有写点东西了，之所以拖着不写是因为相比之下我有更加重要的事情需要完成（当然也不排除是自己太懒的可能）。
+快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。刚开始时因为不知道究竟去做什么项目，于是就决定先简单做一个自己的网页版简历试试水。但途中却意外地涌现出很多奇妙的想法，把这些想法拼凑起来就是一个大型项目的雏形。这点让我很是兴奋~因为首先这个项目是有实际意义的，甚">
+<meta property="og:updated_time" content="2016-09-12T16:29:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深夜日记-关于收获">
+<meta name="twitter:description" content="又有好久没有写点东西了，之所以拖着不写是因为相比之下我有更加重要的事情需要完成（当然也不排除是自己太懒的可能）。
+快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。刚开始时因为不知道究竟去做什么项目，于是就决定先简单做一个自己的网页版简历试试水。但途中却意外地涌现出很多奇妙的想法，把这些想法拼凑起来就是一个大型项目的雏形。这点让我很是兴奋~因为首先这个项目是有实际意义的，甚">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/13/这几天的收获/"/>
+
+
+  <title> 深夜日记-关于收获 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深夜日记-关于收获
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-13T00:22:43+08:00" content="2016-09-13">
+              2016-09-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日记/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/13/这几天的收获/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/这几天的收获/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>又有好久没有写点东西了，之所以拖着不写是因为相比之下我有更加重要的事情需要完成（当然也不排除是自己太懒的可能）。</p>
+<h4 id="快速地学习前端工程化的知识（vue-webpack），并尽快产出一个项目。"><a href="#快速地学习前端工程化的知识（vue-webpack），并尽快产出一个项目。" class="headerlink" title="快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。"></a>快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。</h4><p>刚开始时因为不知道究竟去做什么项目，于是就决定先简单做一个自己的网页版简历试试水。但途中却意外地涌现出很多奇妙的想法，把这些想法拼凑起来就是一个大型项目的雏形。这点让我很是兴奋~因为首先这个项目是有实际意义的，甚至是可以产生盈利的，其次如果能够顺利完成它，我想我就能突破现在的瓶颈，顺利进入到下一个阶段了。但是恐怕得等到校招之后我才会去动手实现它，在此之前还是先尽量把我那个简单的网页版简历做得尽善尽美，然后搞懂vue和webpack。</p>
+<h4 id="把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。"><a href="#把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。" class="headerlink" title="把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。"></a>把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。</h4><p>这么说可能有点玄乎，我可以详细解释一下。</p>
+<blockquote>
+<p>大概在一个月前，我开始思考我作为一个独立个体应该如何去提高自己。</p>
+</blockquote>
+<p>这样说可能太过简单，提高自己所指也有些虚无缥缈。于是我当时开始想，<strong>除去外物后，人所拥有的一些东西是什么？</strong>我总结后发现可能是下面这些：</p>
+<ul>
+<li>外在：脸、身高、穿着、身材、品味……</li>
+<li>品质：明辨是非、诚实守信、负责……</li>
+<li>能力：听说看写，以及最重要的思想内核。</li>
+</ul>
+<p>所以我就准备从这三方面开始着手提高自己。</p>
+<h5 id="外在"><a href="#外在" class="headerlink" title="外在"></a>外在</h5><p>外在除了身高，其他其实都可以通过自己的行动去改变。虽然外在相对于另外两种可能一文不值，但是它还是有很多好处的。你的外在是别人对你第一印象的基础，而让他人有个好印象还是挺好的，所以提高外在似乎是一个不错的选择。另外一个健康的身体是一切的基础，没了它一切都是白搭。所以我决定开始<strong>定期锻炼</strong>、<strong>学习基本的穿衣搭配</strong>、<strong>尽力提高自己的审美品味</strong>。</p>
+<h5 id="品质"><a href="#品质" class="headerlink" title="品质"></a>品质</h5><p>品质这种东西看不见摸不着，但是却能够被感知。培养一些优秀的品质，也是提高自己的一种方式，但是哪些才是优秀的品质呢？爱国？孝顺？不不不，自从看了王小波的《思维的乐趣》，我认为明辨是非才是最重要的品质，同时也是最难培养的品质。当自己越来越能够明辨是非的时候，其实也就知道哪些品质是优秀的了~</p>
+<p>那明辨是非的定义是什么呢？简单来说就是能够分清一件事情的因果、好坏吧~那怎么培养呢？多用正确的方式思考！比如：<strong>把个人情感放一边，基于证据去判断一件事情，在证据不充分的时候不下定论，当发现证据错误的时候及时修正判断</strong> ；<strong>观察地更精确一点、估量事情更仔细认真一点、做决定更小心一点</strong>。</p>
+<h5 id="能力"><a href="#能力" class="headerlink" title="能力"></a>能力</h5><p>最后就是能力了，本来我以为能力应该是指自己现有的技能，但是我突然发现这样想太过于狭隘了，相比之下更重要的是<strong>理解事物</strong>、<strong>学习事物</strong>和<strong>输出有价值的东西</strong>的能力。综合概括就是听说看写。也就是人的输入和输出功能，</p>
+<p>当然最重要的还是大脑处理输入的能力，也就是最重要的思想内核。所以我先把输入和输出能力放在一边，开始想办法提高自己的思想内核。可是怎么才能提高自己的CPU呢？一个种可能是去不断处理输入，渐渐形成自己的思维方式，但是这样有点慢而且可能会把自己搞糊涂。于是我就想，只能先直接吸收优秀的人的思想了，就是说直接先假定那种思想是好的。这么做可能很快，但是风险极大！所以挑选优秀的人写的优秀的书成了至关重要的一步！</p>
+<p>其实有一种很有意思的现象，如果你看了一本好书，你可能就会在这本书中发现其他好书，然后一路发现好书。但是如果你看了一本坏书，那自然可能就是一路坏书了。这种现象类似于自动控制系统中的正反馈，好的越好、坏的越坏。</p>
+<p>那怎么找好书呢？《论语》、《大学》……这些中华古典名著算不算是好书呢？因为我没有通读过，所以我不知道，但是我想我是不会再去读它们了，除非哪一天我需要一些反面教材。我先来说说我看过的并且自认为是好书的书：《思维的乐趣》、《黑客与画家》、《Beyond feelings: a guide to critical thinking》、《鲁迅全集》，这些是能够直接产生作用的书，而且这些书里面也有一些优秀的人以及一些好书。还有一些书可能是潜移默化的，其中道理是需要自己去领悟的，通常是小说：《兄弟》、《活着》、《许三观卖血记》、《三体》、《红与黑》，这些是我看过小说中自认为比较好的。</p>
+<h4 id="发现和承认自己的不足，并有改进的欲望。"><a href="#发现和承认自己的不足，并有改进的欲望。" class="headerlink" title="发现和承认自己的不足，并有改进的欲望。"></a>发现和承认自己的不足，并有改进的欲望。</h4><p>这可能是最为重要的收获了，一直以来我都没有刻意地去发现发现自己的不足，也没有刻意地想着去提高。可是现在因为要开始面对<strong>自己将步入社会并完全独立</strong>这个事实，我也终于开始去思考未来的人生，开始思考以前完全没有想过的东西。</p>
+<p>昨天刚看完王小波的《思维的乐趣》，收获可以用巨大来形容吧。这个暑假干的最明智的事情可能就是看了这本书和重看了《黑客与画家》。遇到一本好书，真的是时看时新啊~说实话，真的很羡慕他们的智慧、能够透过现象看到本质的一些东西的能力、能够较好地控制自己的情绪的能力、能够早早就心智成熟，知道自己真正需要什么。</p>
+<p>我才21，未来的路还很长。</p>
+<p>我已21，人生的三分之一。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/日记-收获-思考/" rel="tag">#日记 收获 思考</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/03/一封离职信/" rel="next" title="一封离职信">
+                <i class="fa fa-chevron-left"></i> 一封离职信
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/13/高性能JS-杂记/" rel="prev" title="《高性能JS》笔记">
+                《高性能JS》笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/13/这几天的收获/"
+           data-title="深夜日记-关于收获" data-url="http://yoursite.com/2016/09/13/这几天的收获/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#快速地学习前端工程化的知识（vue-webpack），并尽快产出一个项目。"><span class="nav-number">1.</span> <span class="nav-text">快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。"><span class="nav-number">2.</span> <span class="nav-text">把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#外在"><span class="nav-number">2.1.</span> <span class="nav-text">外在</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#品质"><span class="nav-number">2.2.</span> <span class="nav-text">品质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#能力"><span class="nav-number">2.3.</span> <span class="nav-text">能力</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发现和承认自己的不足，并有改进的欲望。"><span class="nav-number">3.</span> <span class="nav-text">发现和承认自己的不足，并有改进的欲望。</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

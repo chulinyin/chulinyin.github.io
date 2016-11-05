@@ -1,0 +1,741 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DOM编程艺术 JavaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="内容就是一切。如果没有内容，创建网站就没用了。标记良好的内容就是一切。所谓“渐进增强”就是用一些额外的信息层去包裹原始数据。（即使额外的信息因为特殊原因无法实现，但至少能够保证用户能够看到必要的原始数据）按照“渐进增强”原则创建出来的网页几乎都符合“平稳退化”原则
+CSS负责提供表示的信息，JS负责提供行为的信息。
+向CSS学习
+从结构与行为分离
+渐进增强，使用对象（能力）检测
+向后兼容12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《DOM编程艺术》笔记">
+<meta property="og:url" content="http://yoursite.com/2016/07/03/DOM编程艺术-杂记/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="内容就是一切。如果没有内容，创建网站就没用了。标记良好的内容就是一切。所谓“渐进增强”就是用一些额外的信息层去包裹原始数据。（即使额外的信息因为特殊原因无法实现，但至少能够保证用户能够看到必要的原始数据）按照“渐进增强”原则创建出来的网页几乎都符合“平稳退化”原则
+CSS负责提供表示的信息，JS负责提供行为的信息。
+向CSS学习
+从结构与行为分离
+渐进增强，使用对象（能力）检测
+向后兼容12345">
+<meta property="og:updated_time" content="2016-09-13T15:26:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《DOM编程艺术》笔记">
+<meta name="twitter:description" content="内容就是一切。如果没有内容，创建网站就没用了。标记良好的内容就是一切。所谓“渐进增强”就是用一些额外的信息层去包裹原始数据。（即使额外的信息因为特殊原因无法实现，但至少能够保证用户能够看到必要的原始数据）按照“渐进增强”原则创建出来的网页几乎都符合“平稳退化”原则
+CSS负责提供表示的信息，JS负责提供行为的信息。
+向CSS学习
+从结构与行为分离
+渐进增强，使用对象（能力）检测
+向后兼容12345">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/03/DOM编程艺术-杂记/"/>
+
+
+  <title> 《DOM编程艺术》笔记 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《DOM编程艺术》笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-03T23:56:14+08:00" content="2016-07-03">
+              2016-07-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/03/DOM编程艺术-杂记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/03/DOM编程艺术-杂记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>内容就是一切。如果没有内容，创建网站就没用了。<br>标记良好的内容就是一切。<br>所谓“渐进增强”就是用一些额外的信息层去包裹原始数据。（即使额外的信息因为特殊原因无法实现，但至少能够保证用户能够看到必要的原始数据）按照“渐进增强”原则创建出来的网页几乎都符合“平稳退化”原则</p>
+<p>CSS负责提供表示的信息，JS负责提供行为的信息。</p>
+<h3 id="向CSS学习"><a href="#向CSS学习" class="headerlink" title="向CSS学习"></a>向CSS学习</h3><ol>
+<li>从结构与行为分离</li>
+<li>渐进增强，使用对象（能力）检测</li>
+<li>向后兼容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// one row to judge</div><div class="line">if(!document.getElementsByTagName || !document.getElementById)return false;</div><div class="line">if(!document.getElementById(&apos;idName&apos;)) return false;</div><div class="line"></div><div class="line">// sevral rows to judge</div><div class="line">if(!document.getElementsByTagName)&#123;</div><div class="line">    return false;</div><div class="line">&#125;</div><div class="line">if(!document.getElementById)&#123;</div><div class="line">    return false;</div><div class="line">&#125;</div><div class="line">if(!document.getElementById(&apos;idName&apos;))&#123;</div><div class="line">    return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>如果想用JS给某网页添加一些行为，就不应该让JS代码对这个网页的结构有任何依赖</strong></p>
+<blockquote>
+<p><strong>结构化程序设计：</strong>函数应该只有一个入口和一个出口。<br>但是，如果一个函数有多个出口，只要这些出口集中在函数的开头部分，就是可以接受的，并且如此可读性会大大增强。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function fncName()&#123;</div><div class="line">    if(document.getElementsByTagName)&#123;</div><div class="line">        if(document.getElementById)&#123;</div><div class="line">            if(document.getElementById(&apos;idName&apos;))&#123;</div><div class="line">                // start the code</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// 以上核心代码嵌套太深，会难以理解阅读</div></pre></td></tr></table></figure>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ol>
+<li>尽量减少访问DOM和尽量减少HTML标记</li>
+<li>合并和放置脚本</li>
+<li>压缩脚本（代码压缩工具）</li>
+</ol>
+<p>如果要操作DOM，最保险的做法就是使用<code>window.onload</code>事件，但是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">window.onload = fnc1;</div><div class="line">window.onload = fnc2;</div></pre></td></tr></table></figure></p>
+<p>以上代码只会最终绑定fnc2，所以一般使用以下匿名函数的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">window.onload = function()&#123;</div><div class="line">    fnc1();</div><div class="line">    fnc2();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上是简单的解决方案了，不过还有一个弹性最佳的解决方案。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function addLoadEvent(fnc)&#123;</div><div class="line">    var oldonLoad = window.onload;</div><div class="line">    if(typeof oladonLoad != &apos;function&apos;)&#123;</div><div class="line">        window.onload = fnc;</div><div class="line">    &#125;else&#123;</div><div class="line">        window.onload = function()&#123;</div><div class="line">            oldonLoad();</div><div class="line">            fnc();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">addLoadEvent(fnc1);</div><div class="line">addLoadEvent(fnc2);</div></pre></td></tr></table></figure></p>
+<h3 id="在JS中的检查判断"><a href="#在JS中的检查判断" class="headerlink" title="在JS中的检查判断"></a>在JS中的检查判断</h3><p>为了能更好的渐进增强，在JS中做一些检查判断是必不可少的。但同时，这样无疑会使代码更加复杂，可读性降低。</p>
+<blockquote>
+<p>在实际工作中，你要自己决定是否真的需要这些检查。它们针对的是HTML文档有可能不在你控制范围内的情形。理想情况下，JS不应该对HTML的内容和结构做太多的假设。</p>
+</blockquote>
+<h4 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h4><p><code>newEle.parentNode.insertBefore(newEle,targetEle)</code><br>编写<code>insertAfter</code>函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function insertAfter(newEle,targetEle)&#123;</div><div class="line">    var parentNode = newEle.parentNode;</div><div class="line">    if(parentNode.lastChild == targetEle)&#123;</div><div class="line">        parentNode.appendChild(newEle);</div><div class="line">    &#125;else&#123;</div><div class="line">        parentNode.insertBefore(newEle,targetEle.nextSibling)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="同步文档"><a href="#同步文档" class="headerlink" title="同步文档"></a>同步文档</h4><p>初始页面中的内容？</p>
+<p>Ajax可以做到只更新页面中的一小部分，而不用刷新整个页面。它对页面的请求以异步的方式发送到服务器。而服务器不会用整个页面来响应请求，它会在后台处理请求，与此同时用户还能继浏览页面与页面交互。你的脚本则可以按需加载和创建页面内容，而不会打断用户的浏览体验。利用Ajax，Web应用可以呈现类似于桌面应用般的体验。</p>
+<p>Ajax的核心是XMLHttpRequest对象，以往的请求都是由浏览器发出，而JS通过这个对象可以自己发送请求，同时也自己处理响应。</p>
+<p>在其他浏览器中，通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var xhr = new XMLHttpRequest();</div></pre></td></tr></table></figure></p>
+<p>创建新对象，而在IE中就变得有些变态：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">fucntion getHTTPObject()&#123;</div><div class="line">    if(typerof XMLHttpRequest == &quot;undefined&quot;)&#123;</div><div class="line">        XMLHttpRequest = function()&#123;</div><div class="line">            try&#123;</div><div class="line">                return new ActiveXObject(&apos;Msxml2.XMLHTTP.6.0&apos;);</div><div class="line">            &#125;catche(e)&#123;&#125;</div><div class="line">            try&#123;</div><div class="line">                return new ActiveXObject(&apos;Msxml2.XMLHTTP.3.0&apos;);</div><div class="line">            &#125;cateche(e)&#123;&#125;</div><div class="line">            try&#123;</div><div class="line">                return new ActiveXObject(&apos;Msxml2.XMLHTTP&apos;);</div><div class="line">            &#125;catche(e)&#123;&#125;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">        return new XMLHttpRequest();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var xhr = getHTTPObject();</div></pre></td></tr></table></figure></p>
+<p>注意同源策略，使用XMLHttpRequest对象发送的请求只能访问与其所在的HTML处于同一个域中数据，不能向其它域发送请求。<br>Ajax虽然有许多优点，但是它缺少状态记录的现象会与浏览器的一些使用惯例产生冲突，导致用户无法使用后退按钮或者无法为特定状态下的页面添加书签。</p>
+<p>从一开始就依赖Ajax构建核心应用，无异于从一开始就使用JS：伪协议去处理点击链接的操作。对于后者更好的方式当然是只使用常规的链接，然后通过JS去拦截默认动作。同样的道理，构建Ajax网站的最好方法，也是先构建一个常规的网站，然后用Ajax拦住发送到服务器的请求，并将请求转交给XMLHtppRequest对象处理。（这样Ajax功能就扮演了一个位于常规站点之上的层）<br>Hijax：渐进增强地使用Ajax。<br>列如表单的提交，如果禁用了JS依然可以让表单直接提交到后台，后台处理并响应后刷新页面。但如果没有禁用JS则可以通过监听submit事件，阻止默认提交，用Ajax去处理。</p>
+<h4 id="使用DOM动态添加网页内内容"><a href="#使用DOM动态添加网页内内容" class="headerlink" title="使用DOM动态添加网页内内容"></a>使用DOM动态添加网页内内容</h4><p>注意不要把一些重要的内容通过DOM添加到网页上，因为这样没有平稳退化的空间，其次搜索机器人不支持JS。</p>
+<p><strong>渐进增强的原则思想：</strong>应该总是从最核心的部分，也就是从内容开始。应该根据内容使用标记实现良好的结构，然后再逐步加强这些内容。如用CSS改进呈现效果，用DOM添加行为。</p>
+<p>对于自闭合的标签，最后记得记得加上‘空格+/’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;img src=&quot;..&quot; /&gt;</div></pre></td></tr></table></figure></p>
+<p>数组也可以这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var defs = new Array();</div><div class="line">defs[key] = description;</div><div class="line">// 注意这里的key可为任何对象</div></pre></td></tr></table></figure></p>
+<p>始终记住：JS只应该用来充实文档的内容，要避免使用DOM技术来创建核心内容。</p>
+<h3 id="CSS-DOM"><a href="#CSS-DOM" class="headerlink" title="CSS-DOM"></a>CSS-DOM</h3><h4 id="1-在用DOM取样式的时候，如果遇到类似于font-size这种样式，就不能再用"><a href="#1-在用DOM取样式的时候，如果遇到类似于font-size这种样式，就不能再用" class="headerlink" title="1. 在用DOM取样式的时候，如果遇到类似于font-size这种样式，就不能再用"></a>1. 在用DOM取样式的时候，如果遇到类似于<code>font-size</code>这种样式，就不能再用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ele.style.font-size;</div></pre></td></tr></table></figure>
+<p>取得样式了，因为减号之类的操作符是保留字，不允许用在函数或变量的名字里。这同时意味着它们也不能用在方法或属性的名字里。所以当需要引用一个中间带减号的CSS属性时，用<code>驼峰命名</code>法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ele.style.fontSize;</div></pre></td></tr></table></figure></p>
+<h4 id="2-style对象只能取得内联的样式，而不能取得引用的样式"><a href="#2-style对象只能取得内联的样式，而不能取得引用的样式" class="headerlink" title="2. style对象只能取得内联的样式，而不能取得引用的样式"></a>2. style对象只能取得内联的样式，而不能取得引用的样式</h4><h4 id="3-就像不应该利用DOM创建重要内容，也不应该利用它去创建重要样式"><a href="#3-就像不应该利用DOM创建重要内容，也不应该利用它去创建重要样式" class="headerlink" title="3. 就像不应该利用DOM创建重要内容，也不应该利用它去创建重要样式"></a>3. 就像不应该利用DOM创建重要内容，也不应该利用它去创建重要样式</h4><h4 id="4-设置表格偶数行的代码："><a href="#4-设置表格偶数行的代码：" class="headerlink" title="4. 设置表格偶数行的代码："></a>4. 设置表格偶数行的代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function stripeTables()&#123;</div><div class="line">    if(document.getElementsByTagName) return false;</div><div class="line">    var tables = document.getELementsByTagName(&apos;table&apos;);</div><div class="line">    var trs,odd;</div><div class="line">    for(var i=0;i&lt;table.length;i++)&#123;</div><div class="line">        trs = table[i].getElementsByTageName(&apos;tr&apos;);</div><div class="line">        for(var j=0;j&lt;trs.length;j++)&#123;</div><div class="line">            if(odd)&#123;</div><div class="line">                trs[i].backgroundColor = &apos;#ccc&apos;;</div><div class="line">                trs[i].color = &apos;#fff&apos;;</div><div class="line">                odd = false</div><div class="line">            &#125;else&#123;</div><div class="line">                odd = true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="5-用CSS解决还是用DOM来设置样式，需要考虑："><a href="#5-用CSS解决还是用DOM来设置样式，需要考虑：" class="headerlink" title="5. 用CSS解决还是用DOM来设置样式，需要考虑："></a>5. 用CSS解决还是用DOM来设置样式，需要考虑：</h4><pre><code>- 这个问题最简单的解决方案是什么
+- 哪种解决方案会等到更多浏览器的支持
+- 做出最明智的选择，必须对CSS和DOM技术都有足够深入的了解
+</code></pre><h4 id="6-addClass函数"><a href="#6-addClass函数" class="headerlink" title="6. addClass函数"></a>6. addClass函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function addClass(ele,value)&#123;</div><div class="line">    if(!ele.className)&#123;</div><div class="line">        ele.className = value;</div><div class="line">    &#125;else&#123;</div><div class="line">        ele.className += &apos;&apos;;</div><div class="line">        ele.className += value;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="7-抽象就是把一个非常具体的东西改进为一个比较通用的东西的过程"><a href="#7-抽象就是把一个非常具体的东西改进为一个比较通用的东西的过程" class="headerlink" title="7. 抽象就是把一个非常具体的东西改进为一个比较通用的东西的过程"></a>7. <strong><code>抽象</code></strong>就是把一个非常具体的东西改进为一个比较通用的东西的过程</h4><h3 id="JS实现动画"><a href="#JS实现动画" class="headerlink" title="JS实现动画"></a>JS实现动画</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function move()&#123;</div><div class="line">    if(end)&#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">    if(pos&lt;finalPos)&#123;</div><div class="line">        pos++</div><div class="line">    &#125;</div><div class="line">    ele.style.pos = pos;</div><div class="line">    moveId = setTimeout(move,100)</div><div class="line">&#125;</div><div class="line">// 可以通过返回一个值结束循环？因为会跳出函数，不再执行setTimeout()了</div></pre></td></tr></table></figure>
+<p>以上函数存在一个问题，当被多次调用的时候，不管前面一个是否已经执行完成，都会马上执行下一个。所以需要在一开始就需要清除定时器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function move()&#123;</div><div class="line">    clearTimeout(moveId);</div><div class="line">    if(end)&#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">    if(pos&lt;finalPos)&#123;</div><div class="line">        pos++</div><div class="line">    &#125;</div><div class="line">    ele.style.pos = pos;</div><div class="line">    moveId = setTimeout(move,100)</div><div class="line">&#125;</div><div class="line">// 可以通过返回一个值结束循环？因为会跳出函数，不再执行setTimeout()了</div></pre></td></tr></table></figure></p>
+<p>但因为moveId是全局变量，第一次判断的时候会报错，而如果把它变成局部变量，clearTimeout函数调用语句会无法工作，因为…?。</p>
+<p>重要：<strong>所以需要一个介于全局变量与布局变量之间的东西—元素属性。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function move()&#123;</div><div class="line">    if(ele.moveId)&#123;</div><div class="line">        clearTimeout(ele.moveId);</div><div class="line">    &#125;</div><div class="line">    if(end)&#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">    if(pos&lt;finalPos)&#123;</div><div class="line">        pos++</div><div class="line">    &#125;</div><div class="line">    ele.style.pos = pos;</div><div class="line">    ele.moveId = setTimeout(move,100)</div><div class="line">&#125;</div><div class="line">// 可以通过返回一个值结束循环？因为会跳出函数，不再执行setTimeout()了</div></pre></td></tr></table></figure></p>
+<p>对于那些纯粹是为了能够JS代码能够实现动画效果或者其他效果而存在的HTML标记，不要直接写在HTML里，而是用DOM插入吧~因为这样当JS被禁用的时候，无用的标签也会同时消失。</p>
+<h3 id="H5"><a href="#H5" class="headerlink" title="H5"></a>H5</h3><p><code>modernizr</code>–JS开源库，有富特性检测功能，可以对H5文档进行更好的控制</p>
+<p>canvas不仅可以绘制矢量路径，还可以通过它显示和操作位图图像。比如将彩色图片变为灰度图片。<br>canvas不具有可访问性（对于屏幕阅读器等）</p>
+<p>注意使用H5的video和audio标签时的兼容性，以及不同格式资源的先后顺序。比如video：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;video&gt;</div><div class="line">    &lt;source src = &quot;movie.mp4&quot;&gt;</div><div class="line">    &lt;source src = &quot;movie.webm&quot;&gt;</div><div class="line">    &lt;source src = &quot;movie.ogv&quot;&gt;</div><div class="line">&lt;/video&gt;</div></pre></td></tr></table></figure></p>
+<p>新的H5表单类型</p>
+<ul>
+<li>email</li>
+<li>url</li>
+<li>date</li>
+<li>number</li>
+<li>range 生成滑动条</li>
+<li>search</li>
+<li>tel</li>
+<li>color</li>
+</ul>
+<p>新的属性</p>
+<ul>
+<li>autocomplete</li>
+<li>autofocus</li>
+<li>form 对<form>标签外部的表单元素分组</form></li>
+<li>min、max、step</li>
+<li>pattern 用于定义一个正则表达式，验证输入</li>
+<li>placeholder 提示信息</li>
+<li>required 必填</li>
+</ul>
+<p>HTML JavaScript</p>
+<ul>
+<li>使用localStorage 和 sessoinStorage在客户端存储大型和复杂数据集的更有效方案</li>
+<li>使用WebSocket与服务器脚本进行开放的双向通信</li>
+<li>使用Web Worker在后台执行JS</li>
+<li>标准的拖放实现</li>
+<li>在浏览器中实现地理位置服务</li>
+</ul>
+<p>CSS文件组成</p>
+<ol>
+<li>保存与整体布局有关的样式</li>
+<li>作为专门的颜色样式表</li>
+<li>保存与版式有关的样式</li>
+</ol>
+<p>重要：<strong> 通过检测URL与当前链接地址（a.href）的匹配性（location.href.indexOf(a.href)!=-1），来确定当前在哪个页面，然后就可以设置class。</strong>比如当时主页的时候为body设置class=”index”，这样当不同页面引用同一个css文件的时候就可以根据body的类名命名样式</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DOM编程艺术-JavaScript/" rel="tag">#DOM编程艺术 JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/03/深夜日记（28）/" rel="next" title="深夜日记（28）">
+                <i class="fa fa-chevron-left"></i> 深夜日记（28）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/04/深夜日记（29）/" rel="prev" title="深夜日记（29）">
+                深夜日记（29） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/03/DOM编程艺术-杂记/"
+           data-title="《DOM编程艺术》笔记" data-url="http://yoursite.com/2016/07/03/DOM编程艺术-杂记/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#向CSS学习"><span class="nav-number">1.</span> <span class="nav-text">向CSS学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能"><span class="nav-number">2.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在JS中的检查判断"><span class="nav-number">3.</span> <span class="nav-text">在JS中的检查判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#节点操作"><span class="nav-number">3.1.</span> <span class="nav-text">节点操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步文档"><span class="nav-number">3.2.</span> <span class="nav-text">同步文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用DOM动态添加网页内内容"><span class="nav-number">3.3.</span> <span class="nav-text">使用DOM动态添加网页内内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-DOM"><span class="nav-number">4.</span> <span class="nav-text">CSS-DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-在用DOM取样式的时候，如果遇到类似于font-size这种样式，就不能再用"><span class="nav-number">4.1.</span> <span class="nav-text">1. 在用DOM取样式的时候，如果遇到类似于font-size这种样式，就不能再用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-style对象只能取得内联的样式，而不能取得引用的样式"><span class="nav-number">4.2.</span> <span class="nav-text">2. style对象只能取得内联的样式，而不能取得引用的样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-就像不应该利用DOM创建重要内容，也不应该利用它去创建重要样式"><span class="nav-number">4.3.</span> <span class="nav-text">3. 就像不应该利用DOM创建重要内容，也不应该利用它去创建重要样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-设置表格偶数行的代码："><span class="nav-number">4.4.</span> <span class="nav-text">4. 设置表格偶数行的代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-用CSS解决还是用DOM来设置样式，需要考虑："><span class="nav-number">4.5.</span> <span class="nav-text">5. 用CSS解决还是用DOM来设置样式，需要考虑：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-addClass函数"><span class="nav-number">4.6.</span> <span class="nav-text">6. addClass函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-抽象就是把一个非常具体的东西改进为一个比较通用的东西的过程"><span class="nav-number">4.7.</span> <span class="nav-text">7. 抽象就是把一个非常具体的东西改进为一个比较通用的东西的过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS实现动画"><span class="nav-number">5.</span> <span class="nav-text">JS实现动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#H5"><span class="nav-number">6.</span> <span class="nav-text">H5</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="codeSchool JQuery Udacity," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="初见JQuery（4）
+
+今天把codeSchool里的免费的Jquery基础全部和进阶的第一课学完了，后面的课程就需要付费了，问题是它不支持支付宝。下面是今天所学：
+
+1. Ajax成功回调函数1234$.ajax(&amp;apos;address&amp;apos;,&amp;#123;    success:function(response)&amp;#123;&amp;#125;&amp;#125;)$.get(&amp;apos;addr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初见JQuery（4）">
+<meta property="og:url" content="http://yoursite.com/2016/05/17/初见JQuery（4）/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="初见JQuery（4）
+
+今天把codeSchool里的免费的Jquery基础全部和进阶的第一课学完了，后面的课程就需要付费了，问题是它不支持支付宝。下面是今天所学：
+
+1. Ajax成功回调函数1234$.ajax(&amp;apos;address&amp;apos;,&amp;#123;    success:function(response)&amp;#123;&amp;#125;&amp;#125;)$.get(&amp;apos;addr">
+<meta property="og:updated_time" content="2016-05-24T16:11:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初见JQuery（4）">
+<meta name="twitter:description" content="初见JQuery（4）
+
+今天把codeSchool里的免费的Jquery基础全部和进阶的第一课学完了，后面的课程就需要付费了，问题是它不支持支付宝。下面是今天所学：
+
+1. Ajax成功回调函数1234$.ajax(&amp;apos;address&amp;apos;,&amp;#123;    success:function(response)&amp;#123;&amp;#125;&amp;#125;)$.get(&amp;apos;addr">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/17/初见JQuery（4）/"/>
+
+
+  <title> 初见JQuery（4） | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                初见JQuery（4）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T00:19:21+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/17/初见JQuery（4）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/17/初见JQuery（4）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="初见JQuery（4）"><a href="#初见JQuery（4）" class="headerlink" title="初见JQuery（4）"></a>初见JQuery（4）</h1><hr>
+<blockquote>
+<p>今天把codeSchool里的免费的Jquery基础全部和进阶的第一课学完了，后面的课程就需要付费了，问题是它不支持支付宝。下面是今天所学：</p>
+</blockquote>
+<h3 id="1-Ajax成功回调函数"><a href="#1-Ajax成功回调函数" class="headerlink" title="1. Ajax成功回调函数"></a>1. Ajax成功回调函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.ajax(&apos;address&apos;,&#123;</div><div class="line">    success:function(response)&#123;&#125;</div><div class="line">&#125;)</div><div class="line">$.get(&apos;address&apos;,function(response)&#123;&#125;)</div></pre></td></tr></table></figure>
+<h3 id="2-Ajax添加请求参数"><a href="#2-Ajax添加请求参数" class="headerlink" title="2. Ajax添加请求参数"></a>2. Ajax添加请求参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.ajax(&apos;address&apos;,&#123;</div><div class="line">    data:&#123;&apos;name&apos;:&apos;value&apos;&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="3-Ajax错误回调函数"><a href="#3-Ajax错误回调函数" class="headerlink" title="3. Ajax错误回调函数"></a>3. Ajax错误回调函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.ajax(&apos;address&apos;,&#123;</div><div class="line">    error:function(request,errorType,errorMessage)&#123;&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="4-Ajax设置定时请求"><a href="#4-Ajax设置定时请求" class="headerlink" title="4. Ajax设置定时请求"></a>4. Ajax设置定时请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.ajax(&apos;address&apos;,&#123;</div><div class="line">    timeout:num</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="5-Ajax设置正式send前的回调函数（可以设置一些交互，表明正在获取数据，而不至于让用户不知所措）"><a href="#5-Ajax设置正式send前的回调函数（可以设置一些交互，表明正在获取数据，而不至于让用户不知所措）" class="headerlink" title="5. Ajax设置正式send前的回调函数（可以设置一些交互，表明正在获取数据，而不至于让用户不知所措）"></a>5. Ajax设置正式send前的回调函数（可以设置一些交互，表明正在获取数据，而不至于让用户不知所措）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$.ajax(&apos;address&apos;,&#123;</div><div class="line">    beforeSend: function()&#123;</div><div class="line">     $(&apos;tips&apos;).addClass(&apos;isLoading&apos;);</div><div class="line">    &#125;;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="6-Ajax设置完成请求后的回调函数（可以设置一些交互，表明正在获取数据结束）"><a href="#6-Ajax设置完成请求后的回调函数（可以设置一些交互，表明正在获取数据结束）" class="headerlink" title="6.Ajax设置完成请求后的回调函数（可以设置一些交互，表明正在获取数据结束）"></a>6.Ajax设置完成请求后的回调函数（可以设置一些交互，表明正在获取数据结束）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$.ajax(&apos;address&apos;,&#123;</div><div class="line">    complete: function()&#123;</div><div class="line">     $(&apos;tips&apos;).removeClass(&apos;isLoading&apos;);</div><div class="line">    &#125;;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="7-注意巧用事件委托"><a href="#7-注意巧用事件委托" class="headerlink" title="7.注意巧用事件委托"></a>7.注意巧用事件委托</h3><p>因为很多绑定到ajax请求后返回插入到HTML中的节点上的事件不能运行，所以要讲事件先绑定到父元素上（事件委托）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(document).ready(function()&#123;</div><div class="line">    $.ajax(&apos;adress&apos;,&#123;</div><div class="line">        ....</div><div class="line">    &#125;); / 从服务器获取了一个Img节点并插入到html中</div><div class="line">    $(&apos;img&apos;).on(&apos;click&apos;,function()&#123;</div><div class="line">     ...</div><div class="line">    &#125;); //为Img节点添加单击事件</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>表面上看起来上面这段代码时奏效的，可是实际上，因为ajax是异步执行的，所以在还没有成功请求之前，就已经执行了下面添加事件的代码，于是就会报错（因为img节点找不到），所以这时候我们就可以利用<strong>事件委托</strong>了。</p>
+<blockquote>
+<p>以下代码来自<a href="https://www.codeschool.com/courses/jquery-the-return-flight" target="_blank" rel="external">https://www.codeschool.com/courses/jquery-the-return-flight</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(document).ready(function()&#123;</div><div class="line">    $.ajax(&apos;adress&apos;,&#123;</div><div class="line">        ....</div><div class="line">    &#125;); / 从服务器获取了一个Img节点并插入到html中</div><div class="line">    $(&apos;imgParent&apos;).on(&apos;click&apos;,&apos;img&apos;,function()&#123;</div><div class="line">     ...</div><div class="line">    &#125;); //使用事件委托，将事件绑定到img的父节点上</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="8-关于JS和JQ代码耦合的问题（其实也可以说是业务逻辑和应用逻辑耦合的问题）"><a href="#8-关于JS和JQ代码耦合的问题（其实也可以说是业务逻辑和应用逻辑耦合的问题）" class="headerlink" title="8. 关于JS和JQ代码耦合的问题（其实也可以说是业务逻辑和应用逻辑耦合的问题）"></a>8. 关于JS和JQ代码耦合的问题（其实也可以说是业务逻辑和应用逻辑耦合的问题）</h3><p>在写代码的时候我们不经意间就会写出下面面条式的代码，可读性差，可维护性差<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">$(document).ready(function(</div><div class="line">    //单击按钮，请求数据</div><div class="line">    $(&apos;.confirmation&apos;).on(&apos;click&apos;, &apos;button&apos;, function()&#123;</div><div class="line">        $.ajax(&apos;confirmation.html&apos;, &#123;</div><div class="line">            timeout: 3000,</div><div class="line">            success: function(response) &#123;</div><div class="line">                $(&apos;.ticket&apos;).html(response).slideDown(); </div><div class="line">            &#125;,</div><div class="line">            error: function(request, errorType, errorMessage) &#123;</div><div class="line">                alert(&apos;Error: &apos; + errorType + </div><div class="line">                      &apos; with message: &apos; + errorMessage);</div><div class="line">            &#125;,</div><div class="line">            beforeSend: function()&#123; </div><div class="line">                $(&apos;.confirmation&apos;).addClass(&apos;is-loading&apos;); </div><div class="line">            &#125;,</div><div class="line">            complete: function()&#123; </div><div class="line">                $(&apos;.confirmation&apos;).removeClass(&apos;is-loading&apos;); </div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">    //对返回的插到html中的节点绑定单击事件</div><div class="line">    $(&apos;.confirmation&apos;).on(&apos;click&apos;, &apos;.view-boarding-pass&apos;, function(event) &#123;</div><div class="line">        event.preventDefault();</div><div class="line">        $(&apos;.view-boarding-pass&apos;).hide();</div><div class="line">        $(&apos;.boarding-pass&apos;).show();</div><div class="line">    &#125;);</div><div class="line">))</div></pre></td></tr></table></figure></p>
+<p>首先我们可以把ready中的东西看成是一个模块，我们在ready之后只需要初始化模块就好了。（抽象化编程）于是代码就变成了下面这个样子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var confirmation = &#123;</div><div class="line">    init：function()&#123;</div><div class="line">        $(&apos;.confirmation&apos;).on(&apos;click&apos;, &apos;button&apos;, function() &#123;</div><div class="line">            $.ajax(&apos;confirmation.html&apos;, &#123; ... &#125;);</div><div class="line">        &#125;)</div><div class="line">        $(&apos;.confirmation&apos;).on(&apos;click&apos;, &apos;.view-boarding-pass&apos;, function(event) &#123; ... &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">$(document).ready(function()&#123;</div><div class="line">    confirmation.init();</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>可是光是这样就好了？看看init里面，还是让人眼花缭乱，说明还需要对其抽象,我们需要再把事件处理函数抽出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var confirmation = &#123;</div><div class="line">    init：function()&#123;</div><div class="line">        $(&apos;.confirmation&apos;).on(&apos;click&apos;, &apos;button&apos;,this.loadConfirmation);</div><div class="line">        $(&apos;.confirmation&apos;).on(&apos;click&apos;, &apos;.view-boarding-pass&apos;，this.showBoardingPass);</div><div class="line">    &#125;,</div><div class="line">    loadConfirmation：function()&#123;</div><div class="line">        $.ajax(&apos;confirmation.html&apos;, &#123; ... &#125;);</div><div class="line">    &#125;,</div><div class="line">    showBoardingPass function(event)&#123;&#125;</div><div class="line">&#125;;</div><div class="line">$(document).ready(function()&#123;</div><div class="line">    confirmation.init();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这样子是不是就好很多了呢？逻辑很清晰，代码也解耦的差不多了。</p>
+<p>创建构造函数VS创建对象<br>上面的confirmation对象虽然已经抽象得差不多了，可是这个对象不可复用！当我想创建一个相似的对象时，我就只能再重新写一个。（Don’t repeat your code!）在编程中，写多段相似的代码显然是一件愚蠢的事情。所以我们最好把这个对象改造成构造函数的形式，类似于C++和Java中的类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">function Confirmation(ele) &#123;</div><div class="line">    //创建对象的节点</div><div class="line">    this.ele = ele;</div><div class="line">    //载入数据方法：请求数据并将返回节点插入到ticket节点下，然后节点下拉显示。</div><div class="line">    this.loadConfirmation = function()&#123;</div><div class="line">        $.ajax(&apos;confirmation.html&apos;, &#123;</div><div class="line">            success: function(response) &#123;</div><div class="line">                $(&apos;.ticket&apos;).html(response).slideDown(); </div><div class="line">            &#125;,</div><div class="line">            ...</div><div class="line">        &#125;);</div><div class="line">    &#125;;</div><div class="line">    this.showBoardingPass = function(event)&#123;...&#125;;</div><div class="line">    </div><div class="line">    //为节点下的button绑定事件，单击执行对象载入数据方法</div><div class="line">    this.ele.on(&apos;click&apos;,&apos;button&apos;,this.loadConfirmation);</div><div class="line">    this.ele.on(&apos;click&apos;,&apos;.view-boarding-pass&apos;,this.showBoardingPass);</div><div class="line">&#125;</div><div class="line">$(document).ready(function()&#123;</div><div class="line">    var paris = new Confirmation($(&apos;paris&apos;));//为pairs节点创建一个paris对象</div><div class="line">    var london = new Confirmation($(&apos;london&apos;));</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>注意ajax请求成功回调函数中，这样写的话，会使多个ticket同时下拉显示，而不仅仅是单击的那个。<br>我们只需要将对应对象下的<code>.ticket</code>节点保存为对象属性就好了，这样就不会出现是一个集合的情况了。但是同时注意在<code>$.ajax()</code>中出现的<strong><code>this</code>可能不是指向confirmation对象</strong>，所以还需要在请求对象中<strong>设置context属性，并值设为confirmation</strong>,使this指向confirmation对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function Confirmation(ele) &#123;</div><div class="line">    //创建对象的节点</div><div class="line">    this.ele = ele;</div><div class="line">    this.ticket = this.ele.find(&apos;.ticket&apos;);</div><div class="line">    //载入数据方法：请求数据并将返回节点插入到ticket节点下，然后节点下拉显示。</div><div class="line">    this.loadConfirmation = function()&#123;</div><div class="line">        $.ajax(&apos;confirmation.html&apos;, &#123;</div><div class="line">            context: confirmation,</div><div class="line">            success: function(response) &#123;</div><div class="line">                this.ticket.html(response).slideDown(); </div><div class="line">            &#125;,</div><div class="line">            ...</div><div class="line">        &#125;);</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>怎样把代码写得简洁优雅是一个程序员的必修课，也是一个难点。只能反复修改提炼，慢慢养成写高质量代码的习惯。</p>
+<h3 id="写在最后的日记"><a href="#写在最后的日记" class="headerlink" title="写在最后的日记"></a>写在最后的日记</h3><p>今天下午接到了一家公司HR的电话，约我后天下午去面试，说实话当时在一个小时内我的心情是激动+不安，因为这可以说是我的第一次面试，紧张和不知所措是在所难免的，好在明天还有一天时间可以好好准备，加油吧~</p>
+<p>另外，今天晚图书馆遇到郭郭姐，在闭馆后闲聊了一会。当我知道她居然辞掉了在上海‘东方梦工厂’的后端工作，已经开始在准备考研的时候，我真的被震惊了，因为我知道她对技术的热爱有多深。细问之后居然是因为她父母的原因，他们想让她考研，读完研后去部队工作（她父母都是部队出身的）。情况严重到：如果她不听他们的话，就要断绝关系了。<br>我不知道如何安慰她，因为如果我让她安心考研，那就等于让她放弃自己；如果我让她去工作，那等于让她放弃她父母。这种两难的抉择，想必她选得十分痛苦。<br>这件事情也让我久久不能平静，想了很多很多，我也在想如果换做是我，我会怎么办？</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/codeSchool-JQuery-Udacity/" rel="tag">#codeSchool JQuery Udacity</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/15/初见JQuery（3）/" rel="next" title="初见JQuery（3）">
+                <i class="fa fa-chevron-left"></i> 初见JQuery（3）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/18/深夜日记（4）/" rel="prev" title="深夜日记（4）">
+                深夜日记（4） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/17/初见JQuery（4）/"
+           data-title="初见JQuery（4）" data-url="http://yoursite.com/2016/05/17/初见JQuery（4）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初见JQuery（4）"><span class="nav-number">1.</span> <span class="nav-text">初见JQuery（4）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Ajax成功回调函数"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. Ajax成功回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Ajax添加请求参数"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Ajax添加请求参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Ajax错误回调函数"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. Ajax错误回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Ajax设置定时请求"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. Ajax设置定时请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Ajax设置正式send前的回调函数（可以设置一些交互，表明正在获取数据，而不至于让用户不知所措）"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. Ajax设置正式send前的回调函数（可以设置一些交互，表明正在获取数据，而不至于让用户不知所措）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Ajax设置完成请求后的回调函数（可以设置一些交互，表明正在获取数据结束）"><span class="nav-number">1.0.6.</span> <span class="nav-text">6.Ajax设置完成请求后的回调函数（可以设置一些交互，表明正在获取数据结束）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-注意巧用事件委托"><span class="nav-number">1.0.7.</span> <span class="nav-text">7.注意巧用事件委托</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-关于JS和JQ代码耦合的问题（其实也可以说是业务逻辑和应用逻辑耦合的问题）"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. 关于JS和JQ代码耦合的问题（其实也可以说是业务逻辑和应用逻辑耦合的问题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最后的日记"><span class="nav-number">1.0.9.</span> <span class="nav-text">写在最后的日记</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="模块化编程 C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="今天早上在复习网易云课堂前端微专业中的“产品架构”那一块内容，主要是想理清在一款产品开发中，前端所扮演的角色以及前端的开发流程。起因是最近突然接触到了MV*架构模式，接触到工程化开发，可是有点丈二和尚摸不着头脑。经过了几个小时的复习，大致搞清楚了视图层、模型层、控制层到底是什么意思，也了解了什么叫模板以及它的作用。
+
+我们在浏览器中输入URL（地址）后，浏览器会向服务器发送一份请求，然后控制层根据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初见模块化编程（1）">
+<meta property="og:url" content="http://yoursite.com/2016/06/09/初见模块化编程（1）/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="今天早上在复习网易云课堂前端微专业中的“产品架构”那一块内容，主要是想理清在一款产品开发中，前端所扮演的角色以及前端的开发流程。起因是最近突然接触到了MV*架构模式，接触到工程化开发，可是有点丈二和尚摸不着头脑。经过了几个小时的复习，大致搞清楚了视图层、模型层、控制层到底是什么意思，也了解了什么叫模板以及它的作用。
+
+我们在浏览器中输入URL（地址）后，浏览器会向服务器发送一份请求，然后控制层根据">
+<meta property="og:updated_time" content="2016-06-08T16:56:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初见模块化编程（1）">
+<meta name="twitter:description" content="今天早上在复习网易云课堂前端微专业中的“产品架构”那一块内容，主要是想理清在一款产品开发中，前端所扮演的角色以及前端的开发流程。起因是最近突然接触到了MV*架构模式，接触到工程化开发，可是有点丈二和尚摸不着头脑。经过了几个小时的复习，大致搞清楚了视图层、模型层、控制层到底是什么意思，也了解了什么叫模板以及它的作用。
+
+我们在浏览器中输入URL（地址）后，浏览器会向服务器发送一份请求，然后控制层根据">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/09/初见模块化编程（1）/"/>
+
+
+  <title> 初见模块化编程（1） | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                初见模块化编程（1）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-09T00:49:09+08:00" content="2016-06-09">
+              2016-06-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/09/初见模块化编程（1）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/09/初见模块化编程（1）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天早上在复习网易云课堂前端微专业中的“产品架构”那一块内容，主要是想理清在一款产品开发中，<code>前端所扮演的角色</code>以及<code>前端的开发流程</code>。起因是最近突然接触到了MV*架构模式，接触到工程化开发，可是有点丈二和尚摸不着头脑。经过了几个小时的复习，大致搞清楚了视图层、模型层、控制层到底是什么意思，也了解了什么叫模板以及它的作用。</p>
+<blockquote>
+<p>我们在浏览器中输入URL（地址）后，浏览器会向服务器发送一份请求，然后控制层根据请求从数据层获取所需数据，再从视图层获取模板结构，然后将数据和模板整合成一个页面文件，发送给浏览器，这时候浏览器上就会显示部分页面。然后浏览器可能会发送异步请求（ajax）,再载入其余页面。</p>
+</blockquote>
+<p>因为了解的还不是很全面深入，只是有个总体的感觉，所以还是留待下次再写吧~</p>
+<p>下面先初步讲下模块化编程吧~<br>模块化编程在C++体现地异常明显，下面开始我的<strong>半吊子C++概述</strong>：</p>
+<p>1.在C++中每个类都会有一个.h文件里面声明了类的公有、私有成员和方法，里面不写具体的代码（相当于声明一个对象所有的接口）。比如说：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// Person.h</div><div class="line">class Person&#123;</div><div class="line">    public:</div><div class="line">        char *name;</div><div class="line">        Person(char *name);//构造函数，可用于初始化成员</div><div class="line">        void sayAge();</div><div class="line">    private:</div><div class="line">        int age;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.然后在这个对象下会有若干个.h文件，一般用于对一些方法进行具体的描述:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// Person.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">Person::Person(char *name,int age)&#123;</div><div class="line">    this-&gt;name = name;</div><div class="line">    this-&gt;age = age;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// say.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">void Person::sayAge()&#123;</div><div class="line">    return age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.最后会有一个主程序叫main.cpp文件，开始调用各个对象完成所需的业务逻辑。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// main.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">void main()&#123;</div><div class="line">    Person person1(&apos;xiaoming&apos;,20);</div><div class="line">    cout&lt;&lt;&quot;age=&quot;&lt;&lt;person1.sayAge()&lt;&lt;endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>那这样做的好处是什么呢？</strong><br>在构建大型项目的时候，往往是多人协同开发，每个人负责开发不同的特性。这样写的好处就是：</p>
+<ul>
+<li>我不必了解你内部的具体代码实现，我只要看一眼你的.h文件就知道你负责的类该如何使用。</li>
+<li>进行主程序编写的时候，只要把需要用到的类包含进来，然后实例化对象之后就可以调用了。</li>
+<li>后期进行维护也会变得异常方便，如果想要增加新功能，只需要新增类或者类方法即可，如果需要修改功能，也能马上找到对应的类，然后去修改对应的方法即可。</li>
+</ul>
+<p><strong>以上就是所谓的模块化编程，在构建大型项目的时候超级有用！</strong></p>
+<p>好，那么接下来，问题来了：</p>
+<blockquote>
+<p>既然模块化编程这么好用，我为什么不能用在JS当中呢？这样可以构建网页应用，不是很爽吗？</p>
+</blockquote>
+<p>下次再说……<br>（又快1点了，主要是自己给自己挖了个坑，想用自己拿蹩脚的C++解释模块化编程，结果一开始写就发现自己已经全忘了，不得不上网查查资料，再翻翻书ค(TㅅT)）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模块化编程-C/" rel="tag">#模块化编程 C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/08/深夜日记（13）/" rel="next" title="深夜日记（13）">
+                <i class="fa fa-chevron-left"></i> 深夜日记（13）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/10/初见模块化编程（2）/" rel="prev" title="初见模块化编程（2）">
+                初见模块化编程（2） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/09/初见模块化编程（1）/"
+           data-title="初见模块化编程（1）" data-url="http://yoursite.com/2016/06/09/初见模块化编程（1）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
