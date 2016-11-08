@@ -249,6 +249,145 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/08/Node.js 学习笔记——fs 模块/" itemprop="url">
+                  Node.js 学习笔记—— fs 模块
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-08T23:36:48+08:00" content="2016-11-08">
+              2016-11-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/08/Node.js 学习笔记——fs 模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/08/Node.js 学习笔记——fs 模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/08/Node.js 学习笔记——fs 模块/" class="leancloud_visitors" data-flag-title="Node.js 学习笔记—— fs 模块">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）</p>
+<h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>fs: file systerm 文件系统。</p>
+<p>POSIX: Portable Operating System Interface of UNIX ，UNIX 上的可移植性操作系统接口。</p>
+<p><a href="https://en.wikipedia.org/wiki/Stream_(computing">stream</a>): 在计算机科学中，一个stream是一个随时间推移提供的数据元素的序列。一个 stream 可以被认为是一个传送带上一次处理一个而不是大批量的物品，在Unix以及相关基于 C 语言的系统中，一个 stream 是一个数据源或数据库，通常是单个字节或字符。 Streams 是当读取或写入文件，或在网络套接字上通信时通信的抽象使用。标准 streams是提供给所有程序的 3 位 stream 。（在计算机编程中，<a href="https://en.wikipedia.org/wiki/Standard_streams">标准 streams</a> 是，当一个电脑程序开始执行时，预连接程序和它的环境之间的输入输出通信通道。三个输出输入连接被称为：标准输入、标准输出、标准错误。）</p>
+<p>fd: file descriptor 文件描述符，是一个整数。</p>
+<p>fs.appendFile() 和 fs.writeFile 的区别：append 是在文件末尾开始写入，而 write 是将原来的内容删除后从头开始写入。</p>
+<h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><p>引用该模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div></pre></td></tr></table></figure>
+<p>该模块的输入输出口基本上是 POSIX 文件操作命令的简单包装，且几乎所有方法有同步和异步两种模式。（一般异步方法是 fs.xxx(… , callback)，同步方法是 fs.xxxSync(…) 。）</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/08/Node.js 学习笔记——fs 模块/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/05/遇见 MacBook Pro/" itemprop="url">
                   遇见 MackBook Pro
                 </a>
@@ -1559,146 +1698,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/22/沉默的大多数/" itemprop="url">
-                  沉默的大多数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-22T07:30:06+08:00" content="2016-09-22">
-              2016-09-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/读书随感/" itemprop="url" rel="index">
-                    <span itemprop="name">读书随感</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/22/沉默的大多数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/22/沉默的大多数/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/22/沉默的大多数/" class="leancloud_visitors" data-flag-title="沉默的大多数">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>开始第二遍看《思维的乐趣》了，我会对我觉得有意思的部分做摘录，然后讨论一番，希望能够帮助我在思维中享受到某些乐趣。</p>
-</blockquote>
-<p>人要永远做小孩子虽办不到，但想要保持沉默是能办到的。在公众场合什么都不说，到了私下里则妙语连珠，换言之，对信得过的人什么都说，对信不过的人什么都不说。（中国人的通病？）</p>
-<blockquote>
-<p>所以这里的保持沉默是在相对情况而不是绝对情况下的吗？对信不过的人保持沉默，对信得过的人，畅所欲言。那如何判断一个人是否信得过？</p>
-<p>我所理解的“信得过”是指，你相信他不会把你的言论传播出去，即使传播也必定有所保留，不会把你暴露，总而言之就是不会让你受损，甚至会让你受益。然而受损和受益的判断标准又是相对的，每个人的标准有所不同。比如说，他可能认为使你头发短些是无损的，甚至是有好处的，可是你可能认为这样会让你受损。所以，信得过也是相对的？</p>
-<p>然而按作者所说，他把人泾渭分明地分成两类，然后对之以完全相反的两种态度，真的能够做得到吗？判断信得过的依据又是什么呢？</p>
-<p>我自问做不到如此，而且我认为作者想要说明的可能是“沉默和信得过应该成反比，也就是对越信不过的人，越保持沉默”。可是这样一来情况变得更加复杂了，因此我这个认为极有可能是错误的。所以，我现在困惑的是，<strong>分界线到底在哪里？纯粹依靠个人直觉吗？</strong></p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/22/沉默的大多数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1744,7 +1743,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-count">90</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1761,7 +1760,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
