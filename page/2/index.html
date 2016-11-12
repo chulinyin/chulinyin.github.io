@@ -249,6 +249,174 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/24/关于JS中的布尔操作符/" itemprop="url">
+                  关于JS中的布尔操作符
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-24T00:03:55+08:00" content="2016-09-24">
+              2016-09-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/24/关于JS中的布尔操作符/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/24/关于JS中的布尔操作符/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/24/关于JS中的布尔操作符/" class="leancloud_visitors" data-flag-title="关于JS中的布尔操作符">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>今天开始第二遍看高程了，当看到布尔操作符的时候，我就彻底被它搞晕了。书上所描述的规则过于繁琐，比如逻辑与那里：</p>
+<blockquote>
+<ul>
+<li>如果第一个操作数是对象，则返回第二个操作数；</li>
+<li>如果第二个操作数是对象，则只有在第一个操作数的求值结果为true的情况下才会返回该对象；</li>
+<li>如果两个操作数都是对象，则返回第二操作数；</li>
+<li>如果有一个操作数是null/NaN/undefined，则返回null/NaN/undefined；（这句话是错的！<code>false &amp;&amp; null</code>的结果是<code>false</code>）</li>
+<li>……</li>
+</ul>
+</blockquote>
+<p>然而这才只是逻辑与啊！还有逻辑或，算了，我不列了。总之，这部分描述地实在太过于啰嗦。所以有感而发，写个简明易懂版。</p>
+<h4 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a>Boolean类型</h4><p>想要了解布尔操作符，最好先了解一下JS中的基本类型——<code>Boolean类型</code>，该类型只有两个值：<code>true</code>和<code>false</code>。</p>
+<p>由于JS是一门弱类型的语言，所以在做一些计算或者判断的时候，会存在隐式类型转换。比如在做<code>if()条件判断</code>的时候，其中的值会被转换成为布尔值。所以<strong>实际上JS中所有类型的值（或者说变量）都可以转换为布尔值</strong>。那么哪些值转换后会是true，哪些值转换后会变成false呢？</p>
+<ul>
+<li>会被转为false的值：undefined、null、false、0、NaN、空字符串。</li>
+<li>会被转为true的值：除了会被转为false的值(＾－＾)V，如：true、除0和NaN以外的任何数字、任何对象、任何非空字符串。</li>
+</ul>
+<blockquote>
+<p>如果想把一个变量显示地转换成布尔值，可以通过<code>Boolean(variable)</code>或者<code>!!variable</code>。</p>
+</blockquote>
+<h4 id="逻辑非（-）"><a href="#逻辑非（-）" class="headerlink" title="逻辑非（!）"></a>逻辑非（!）</h4><p>看了前言，再看逻辑非操作符就很简单了，<code>! variable</code> 其实就是 <code>! Boolean(variable)</code>。也就是只要把转换为布尔值后的结果再反一下即可。</p>
+<h4 id="逻辑与（-amp-amp-）、逻辑或（-）"><a href="#逻辑与（-amp-amp-）、逻辑或（-）" class="headerlink" title="逻辑与（&amp;&amp;）、逻辑或（||）"></a>逻辑与（&amp;&amp;）、逻辑或（||）</h4><p><code>expr1 &amp;&amp; expr2</code>的结果，其实一句话即可概括：</p>
+<blockquote>
+<p>如果expr1 能转换成false（<code>Boolean(variable)===false</code>），则结果为expr1，否则结果为expr2。</p>
+</blockquote>
+<p>同理<code>expr1 || expr2</code>的结果：</p>
+<blockquote>
+<p>如果expr1 能转换成true（<code>Boolean(variable)===true</code>），则结果为expr1，否则结果为expr2。</p>
+</blockquote>
+<p><strong>注意：</strong>expr1和expr2不一定为布尔值，也就是说，结果可以是其他类型的值，如<code>null &amp;&amp; 2</code>的结果为<code>null</code>、<code>1 &amp;&amp; &#39;cc&#39;</code>的结果为<code>&#39;cc&#39;</code>、<code>&#39;cc&#39; || 2</code>的结果为<code>&#39;cc&#39;</code>、<code>&#39;&#39; || [1,2]</code>的结果为<code>[1,2]</code>。</p>
+<h4 id="短路操作"><a href="#短路操作" class="headerlink" title="短路操作"></a>短路操作</h4><p>除此以外，还需要额外注意一下<strong>短路操作</strong>：</p>
+<blockquote>
+<p>如果第一个操作数能够决定结果，那么就不会再对第二个操作数求值。</p>
+</blockquote>
+<p>因为<code>false &amp;&amp; (anything) === false</code> 、<code>true || (anything) === true</code>，所以在这两种情况下，不会再运行第二个表达式。由此，会有一种比较有意思的现象：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">2</span> &amp;&amp; variable; <span class="comment">// error: variable is not defined</span></div><div class="line"></div><div class="line"><span class="number">0</span> &amp;&amp; variable; <span class="comment">// 0</span></div></pre></td></tr></table></figure></p>
+<p>而借由这个效应，JS中常常用逻辑或设置默认值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">funciton doSomething(opt)&#123;</div><div class="line">  <span class="keyword">var</span> opt = opt || &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><ul>
+<li>JavaScript高级程序设计（第三版） 人民邮电出版社   <code>3.4.4节Boolean类型</code>及<code>3.5.3节布尔操作符</code>。</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Logical_Operators" target="_blank" rel="external">逻辑运算符</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/22/沉默的大多数/" itemprop="url">
                   沉默的大多数
                 </a>
@@ -1577,175 +1745,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-categories " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/14/渲染树构建、布局及绘制/" itemprop="url">
-                  渲染树构建、布局及绘制
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-14T09:13:11+08:00" content="2016-08-14">
-              2016-08-14
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index">
-                    <span itemprop="name">CSS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/14/渲染树构建、布局及绘制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/14/渲染树构建、布局及绘制/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/08/14/渲染树构建、布局及绘制/" class="leancloud_visitors" data-flag-title="渲染树构建、布局及绘制">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>自认为运气比较好地过了线上笔试，过两天就要去面试了，于是开始找一些前端面试题作为准备。由于前端涉及的领域实在是太广，整理的过程挺艰辛的，不过也收获了很多以前没有了解到的知识点。我会选一些比较好的放到博客上。</p>
-</blockquote>
-<h4 id="网页生成过程："><a href="#网页生成过程：" class="headerlink" title="网页生成过程："></a>网页生成过程：</h4><ol>
-<li>HTML代码转化成DOM</li>
-<li>CSS代码转化成CSSOM（CSS Object Model）</li>
-<li>DOM 树与 CSSOM 树融合成渲染树（渲染树只包括渲染页面需要的节点）</li>
-<li>布局（layout），计算渲染树每个节点的几何信息（精确位置及尺寸）</li>
-<li>将布局绘制（paint）在屏幕上（把渲染树中的每个节点转换为屏幕上的实际像素）</li>
-</ol>
-<h4 id="渲染树的构建："><a href="#渲染树的构建：" class="headerlink" title="渲染树的构建："></a>渲染树的构建：</h4><ol>
-<li>从 DOM 树的根节点开始，遍历每个可见的节点。<ul>
-<li>某些节点完全不可见（例如 script 标签、meta 标签等），因为它们不会在渲染结果中反映，所以会被忽略。</li>
-<li>某些节点通过 CSS 隐藏，因此在渲染树中也会被忽略。比如有节点有一条显式规则设置了 <code>display:none</code> 属性，所以不会出现在渲染树中。</li>
-</ul>
-</li>
-<li>给每个可见节点找到相应匹配的 CSSOM 规则，并应用这些规则。</li>
-<li>最终输出渲染树，其中包括了内容以及屏幕所有可见内容的样式信息。</li>
-</ol>
-<h4 id="CSS重绘和重排"><a href="#CSS重绘和重排" class="headerlink" title="CSS重绘和重排"></a>CSS重绘和重排</h4><ul>
-<li><strong>重绘：</strong>是一个元素外观的改变所触发的浏览器行为，例如改变visibility、背景色等属性。浏览器会根据元素的新属性重新绘制元素，使元素呈现新的外观。重绘不会带来新的布局，重绘不一定会引起重排。</li>
-<li><strong>重排：</strong>渲染树重新计算。重排一定会带来重绘。一个元素的重排通常带来一系列的反应，甚至会触发整个文档的重绘和重排，性能代价是高昂的。，下面的情况会发生重排：<ul>
-<li>DOM元素的几何属性的变化（尺寸、位置等）</li>
-<li>DOM树的结构变化（节点的增减、移动）</li>
-<li>获取某些属性（offsetTop、offsetLeft、 offsetWidth、offsetHeight、scrollTop、scrollLeft、scrollWidth、scrollHeight、 clientTop、clientLeft、clientWidth）。</li>
-<li>调整浏览器窗口的大小等</li>
-</ul>
-</li>
-</ul>
-<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><p>所以根据以上特点，可以对代码进行性能优化。具体请点击下面的参考文章，写得很详细了。</p>
-<h4 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h4><ul>
-<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=zh-cn" target="_blank" rel="external">渲染树构建、布局及绘制</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html" target="_blank" rel="external">网页性能管理详解</a></li>
-<li><a href="https://www.zybuluo.com/Sakura-W/note/168812" target="_blank" rel="external">渲染、重绘、重排技巧</a></li>
-<li><a href="http://www.yatessss.com/2016/04/29/%E9%87%8D%E7%BB%98reflow%E4%B8%8E%E9%87%8D%E6%8E%92repaint.html" target="_blank" rel="external">重绘reflow与重排repaint</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1786,7 +1790,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1803,7 +1807,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

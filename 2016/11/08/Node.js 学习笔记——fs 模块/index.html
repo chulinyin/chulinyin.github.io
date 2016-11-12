@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="前言最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）
 概念：fs: file systerm 文件系统">
-<meta property="og:updated_time" content="2016-11-08T15:41:10.000Z">
+<meta property="og:updated_time" content="2016-11-08T15:57:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js 学习笔记—— fs 模块">
 <meta name="twitter:description" content="前言最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）
@@ -327,13 +327,13 @@
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）</p>
 <h3 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h3><p>fs: file systerm 文件系统。</p>
-<p>POSIX: Portable Operating System Interface of UNIX ，UNIX 上的可移植性操作系统接口。</p>
-<p><a href="https://en.wikipedia.org/wiki/Stream_(computing" target="_blank" rel="external">stream</a>): 在计算机科学中，一个stream是一个随时间推移提供的数据元素的序列。一个 stream 可以被认为是一个传送带上一次处理一个而不是大批量的物品，在Unix以及相关基于 C 语言的系统中，一个 stream 是一个数据源或数据库，通常是单个字节或字符。 Streams 是当读取或写入文件，或在网络套接字上通信时通信的抽象使用。标准 streams是提供给所有程序的 3 位 stream 。（在计算机编程中，<a href="https://en.wikipedia.org/wiki/Standard_streams" target="_blank" rel="external">标准 streams</a> 是，当一个电脑程序开始执行时，预连接程序和它的环境之间的输入输出通信通道。三个输出输入连接被称为：标准输入、标准输出、标准错误。）</p>
+<p>POSIX: Portable Operating System Interface of UNIX ，UNIX 的可移植性操作系统接口。</p>
+<p>stream: 在计算机科学中，一个stream是一个随时间推移提供的数据元素的序列。一个 stream 可以被认为是一个传送带上一次处理一个而不是大批量的物品，在Unix以及相关基于 C 语言的系统中，一个 stream 是一个数据源或数据库，通常是单个字节或字符。 Streams 是当读取或写入文件，或在网络套接字上通信时通信的抽象使用。标准 streams是提供给所有程序的 3 位 stream 。（在计算机编程中，<a href="https://en.wikipedia.org/wiki/Standard_streams" target="_blank" rel="external">标准 streams</a> 是，当一个电脑程序开始执行时，预连接程序和它的环境之间的输入输出通信通道。三个输出输入连接被称为：标准输入、标准输出、标准错误。）</p>
 <p>fd: file descriptor 文件描述符，是一个整数。</p>
-<p>fs.appendFile() 和 fs.writeFile 的区别：append 是在文件末尾开始写入，而 write 是将原来的内容删除后从头开始写入。</p>
+<p><code>fs.appendFile()</code> 和 <code>fs.writeFile()</code> 的区别：append 是在文件末尾开始写入，而 write 是将原来的内容删除后从头开始写入。</p>
 <h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><p>引用该模块：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div></pre></td></tr></table></figure>
-<p>该模块的输入输出口基本上是 POSIX 文件操作命令的简单包装，且几乎所有方法有同步和异步两种模式。（一般异步方法是 fs.xxx(… , callback)，同步方法是 fs.xxxSync(…) 。）</p>
+<p>该模块的输入输出口基本上是 POSIX 文件操作命令的简单包装，且几乎所有方法有同步和异步两种模式。一般异步方法是 <code>fs.xxx(... , callback)</code> ，同步方法是 <code>fs.xxxSync(…)</code> 。</p>
 <a id="more"></a>
 <h3 id="fs模块中的属性"><a href="#fs模块中的属性" class="headerlink" title="fs模块中的属性"></a>fs模块中的属性</h3><p>无</p>
 <h3 id="fs模块中的方法"><a href="#fs模块中的方法" class="headerlink" title="fs模块中的方法"></a>fs模块中的方法</h3><h4 id="流"><a href="#流" class="headerlink" title="流"></a>流</h4><ul>
@@ -586,6 +586,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/11/12/Node.js 学习笔记——url querystring 模块/" rel="prev" title="Node.js 学习笔记—— url querystring 模块">
+                Node.js 学习笔记—— url querystring 模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -656,7 +660,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">90</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -673,7 +677,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

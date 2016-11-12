@@ -1,0 +1,801 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js http url querystring," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="URL (stable)1const url = require(&apos;url&apos;)
+方法url.parse(urlString[, parseQueryString[, slashesDenoteHost]])
+parseQueryString: 布尔值，默认为 false 。如果为true，则返回的 URL 对象的 query 属性奖总是被设为 querystring 模块的 parse() 方法返">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js 学习笔记—— url querystring 模块">
+<meta property="og:url" content="http://chulinyin.com/2016/11/12/Node.js 学习笔记——url querystring 模块/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="URL (stable)1const url = require(&apos;url&apos;)
+方法url.parse(urlString[, parseQueryString[, slashesDenoteHost]])
+parseQueryString: 布尔值，默认为 false 。如果为true，则返回的 URL 对象的 query 属性奖总是被设为 querystring 模块的 parse() 方法返">
+<meta property="og:updated_time" content="2016-11-12T16:07:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js 学习笔记—— url querystring 模块">
+<meta name="twitter:description" content="URL (stable)1const url = require(&apos;url&apos;)
+方法url.parse(urlString[, parseQueryString[, slashesDenoteHost]])
+parseQueryString: 布尔值，默认为 false 。如果为true，则返回的 URL 对象的 query 属性奖总是被设为 querystring 模块的 parse() 方法返">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://chulinyin.com/2016/11/12/Node.js 学习笔记——url querystring 模块/"/>
+
+
+  <title> Node.js 学习笔记—— url querystring 模块 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node.js 学习笔记—— url querystring 模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-12T23:55:48+08:00" content="2016-11-12">
+              2016-11-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/12/Node.js 学习笔记——url querystring 模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/12/Node.js 学习笔记——url querystring 模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/12/Node.js 学习笔记——url querystring 模块/" class="leancloud_visitors" data-flag-title="Node.js 学习笔记—— url querystring 模块">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="URL-stable"><a href="#URL-stable" class="headerlink" title="URL (stable)"></a>URL (stable)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>)</div></pre></td></tr></table></figure>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><h5 id="url-parse-urlString-parseQueryString-slashesDenoteHost"><a href="#url-parse-urlString-parseQueryString-slashesDenoteHost" class="headerlink" title="url.parse(urlString[, parseQueryString[, slashesDenoteHost]])"></a>url.parse(urlString[, parseQueryString[, slashesDenoteHost]])</h5><ul>
+<li><strong>parseQueryString:</strong> 布尔值，默认为 false 。如果为true，则返回的 URL 对象的 query 属性奖总是被设为 querystring 模块的 parse() 方法返回的对象。如果为 false ， 则返回的 URL 对象的 query 属性将是一个未被解析的字符串。</li>
+<li><strong>slashesDenoteHost:</strong> 布尔值，默认为 false 。如果为 true ，则字符 <code>//</code> 之后， 下一个 <code>/</code> 之前的字符串将被解释为 <code>host</code> 。例如，给 <code>//foo/bar</code> ，返回结果将是 <code>{host: &#39;foo&#39;, pathname: &#39;/bar&#39;}</code> 而不是 <code>{pathname: &#39;//foo/bar&#39;}</code> 。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">url.parse(<span class="string">'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 返回</span></div><div class="line">&#123; </div><div class="line">  <span class="attr">protocol</span>: <span class="string">'http:'</span>,</div><div class="line">  <span class="attr">slashes</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">auth</span>: <span class="string">'user:pass'</span>,</div><div class="line">  <span class="attr">host</span>: <span class="string">'host.com:8080'</span>,</div><div class="line">  <span class="attr">port</span>: <span class="string">'8080'</span>,</div><div class="line">  <span class="attr">hostname</span>: <span class="string">'host.com'</span>,</div><div class="line">  <span class="attr">hash</span>: <span class="string">'#hash'</span>,</div><div class="line">  <span class="attr">search</span>: <span class="string">'?query=string'</span>,</div><div class="line">  <span class="attr">query</span>: <span class="string">'query=string'</span>,</div><div class="line">  <span class="comment">// 如果 parseQueryString 被设为 true</span></div><div class="line">  <span class="comment">// query: &#123;query: 'string'&#125;,</span></div><div class="line">  pathname: <span class="string">'/p/a/t/h'</span>,</div><div class="line">  <span class="attr">path</span>: <span class="string">'/p/a/t/h?query=string'</span>,</div><div class="line">  <span class="attr">href</span>: <span class="string">'http://user:pass@host.com:8080/p/a/t/h?query=string#hash'</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="url-format-urlObject"><a href="#url-format-urlObject" class="headerlink" title="url.format(urlObject)"></a>url.format(urlObject)</h5><ul>
+<li><strong>urlObject:</strong> 对象或字符串。 如果是一个字符串，通过把它传给 <code>url.parse()</code> ，转换为一个对象。</li>
+</ul>
+<p>返回一个衍生自 <code>urlObject</code> 的格式化的 URL 字符串。相当于 <code>url.parese()</code> 的逆向输出。不过它的解析规则还是蛮繁杂的，具体请参考官网。</p>
+<h5 id="url-resolve-from-to"><a href="#url-resolve-from-to" class="headerlink" title="url.resolve(from, to)"></a>url.resolve(from, to)</h5><ul>
+<li><strong>from：</strong> 要被解析的基础 URL 。</li>
+<li><strong>to:</strong> 被解析的 HREF URL 。</li>
+</ul>
+<p>用一种类似于网页浏览器解析一个锚标签的方式，相对于一个 基础 URL ，解析一个目标 URL 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">url.resolve(<span class="string">'/one/two/three'</span>, <span class="string">'four'</span>)         <span class="comment">// '/one/two/four'</span></div><div class="line">url.resolve(<span class="string">'http://example.com/'</span>, <span class="string">'/one'</span>)    <span class="comment">// 'http://example.com/one'</span></div><div class="line">url.resolve(<span class="string">'http://example.com/one'</span>, <span class="string">'/two'</span>) <span class="comment">// 'http://example.com/two'</span></div></pre></td></tr></table></figure>
+<h4 id="忽略字符"><a href="#忽略字符" class="headerlink" title="忽略字符"></a>忽略字符</h4><p>URL 仅被允许包含一个确定范围的字符。空格和下面这些字符将在 URL 对象的属性中被自动忽略</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;&gt; <span class="string">" ` \r \n \t &#123; &#125; | ^ '</span></div></pre></td></tr></table></figure>
+<p>如，ASCII 空格  字符被编码为 <code>%20</code> ，斜杆 <code>/</code> 被编码为 <code>%3C</code> 。</p>
+<h3 id="Query-String-stable"><a href="#Query-String-stable" class="headerlink" title="Query String (stable)"></a>Query String (stable)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> querystring = <span class="built_in">require</span>(<span class="string">'querystring'</span>)</div></pre></td></tr></table></figure>
+<h4 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h4><h5 id="querystring-parese-str-sep-eq-options"><a href="#querystring-parese-str-sep-eq-options" class="headerlink" title="querystring.parese(str[, sep[, eq[, options]]])"></a>querystring.parese(str[, sep[, eq[, options]]])</h5><p>str: 要解析的 URL 查询字符串</p>
+<p>sep:  默认为 <code>‘&amp;’</code> ，用于在一个查询字符串中界定<strong>键值对</strong>的子串。</p>
+<p>eq: 默认为 <code>&#39;=&#39;</code> ，用于在一个查询字符串中界定<strong>键值</strong>的子串。</p>
+<p>options: 对象</p>
+<ul>
+<li>decodeURICompnent: 函数，默认为 <code>querystring.unescape()</code> 用于当在一个查询字符串中解码百分比编码字符时。</li>
+<li>maxKeys: 数字，默认为 1000 。指定能解析的最大键数。指定 0 来移除键的计数限制。</li>
+</ul>
+<p>把一个 URL 查询字符串解析成一个键值对的集合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">querystring(<span class="string">'foo=bar&amp;abc=xyz&amp;abc=123'</span>);</div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// &#123;</span></div><div class="line"><span class="comment">//   foo: 'bar',</span></div><div class="line"><span class="comment">//   abc: ['xyz','123']</span></div><div class="line"><span class="comment">// &#125;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，该方法返回的对象没有原型地继承 JS 的 Object 对象，因此没有 toString() 等方法。</p>
+</blockquote>
+<p>默认在查询字符串中的百分比编码字符被假定使用 UTF-8 编码。如果一个替代的字符编码被使用了，则 decodeURIComponent 选项需要被指定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">querystring.parse(<span class="string">'w=%D6%D0%CE%C4&amp;foo=bar'</span>, <span class="literal">null</span>, <span class="literal">null</span>,</div><div class="line">  &#123; <span class="attr">decodeURIComponent</span>: gbkDecodeURIComponent &#125;)</div></pre></td></tr></table></figure>
+<h5 id="querystring-stringify-obj-sep-eq-options"><a href="#querystring-stringify-obj-sep-eq-options" class="headerlink" title="querystring.stringify(obj[, sep[, eq[, options]]])"></a>querystring.stringify(obj[, sep[, eq[, options]]])</h5><p>obj: 把一个对象序列化为一个 URL 查询字符串。</p>
+<p>options:</p>
+<ul>
+<li>encodeURIComponent: 函数，默认为 <code>querystring.escape()</code> 用于当在一个查询字符串中将 URL-unsafe 字符转换为百分比编码时。</li>
+</ul>
+<p>通过遍历对象自身的属性，生成一个 URL 查询字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">querystring.stringify(&#123;<span class="attr">foo</span>:<span class="string">'bar'</span>, baz;[<span class="string">'qux'</span>,<span class="string">'quux'</span>],<span class="attr">corge</span>:<span class="string">''</span>&#125;);</div><div class="line"><span class="comment">// 'foo=bar&amp;baz=qux&amp;baz=quux&amp;corge='</span></div><div class="line"></div><div class="line">querystring.stringify(&#123;<span class="attr">foo</span>: <span class="string">'bar'</span>, <span class="attr">baz</span>: <span class="string">'qux'</span>&#125;, <span class="string">';'</span>, <span class="string">':'</span>)</div><div class="line"><span class="comment">// returns 'foo:bar;baz:qux'</span></div></pre></td></tr></table></figure>
+<p>默认在查询字符串中的百分比编码字符被假定使用 UTF-8 编码。如果一个替代的字符编码被使用了，则 encodeURIComponent 选项需要被指定。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">querystring.parse(&#123; <span class="attr">w</span>: <span class="string">'中文'</span>, <span class="attr">foo</span>: <span class="string">'bar'</span> &#125;, <span class="literal">null</span>, <span class="literal">null</span>,</div><div class="line">  &#123; <span class="attr">encodeURIComponent</span>: gbkEncodeURIComponent &#125;)</div></pre></td></tr></table></figure>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>Node.js v6.9.1官方文档](<a href="https://nodejs.org/dist/latest-v6.x/docs/api/" target="_blank" rel="external">https://nodejs.org/dist/latest-v6.x/docs/api/</a>)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js-http-url-querystring/" rel="tag">#Node.js http url querystring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/08/Node.js 学习笔记——fs 模块/" rel="next" title="Node.js 学习笔记—— fs 模块">
+                <i class="fa fa-chevron-left"></i> Node.js 学习笔记—— fs 模块
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/12/Node.js 学习笔记——url querystring 模块/"
+           data-title="Node.js 学习笔记—— url querystring 模块" data-url="http://chulinyin.com/2016/11/12/Node.js 学习笔记——url querystring 模块/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-stable"><span class="nav-number">1.</span> <span class="nav-text">URL (stable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#url-parse-urlString-parseQueryString-slashesDenoteHost"><span class="nav-number">1.1.1.</span> <span class="nav-text">url.parse(urlString[, parseQueryString[, slashesDenoteHost]])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url-format-urlObject"><span class="nav-number">1.1.2.</span> <span class="nav-text">url.format(urlObject)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url-resolve-from-to"><span class="nav-number">1.1.3.</span> <span class="nav-text">url.resolve(from, to)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#忽略字符"><span class="nav-number">1.2.</span> <span class="nav-text">忽略字符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-String-stable"><span class="nav-number">2.</span> <span class="nav-text">Query String (stable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法："><span class="nav-number">2.1.</span> <span class="nav-text">方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#querystring-parese-str-sep-eq-options"><span class="nav-number">2.1.1.</span> <span class="nav-text">querystring.parese(str[, sep[, eq[, options]]])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#querystring-stringify-obj-sep-eq-options"><span class="nav-number">2.1.2.</span> <span class="nav-text">querystring.stringify(obj[, sep[, eq[, options]]])</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">3.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("dtz5YifF8WHLzMkG3byRjSM8-gzGzoHsz", "dKrJHG1PJWQKqRRc1YrOva9E");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
