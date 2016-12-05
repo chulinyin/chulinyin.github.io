@@ -88,11 +88,11 @@
 下午就去看我们量新学院的10周年晚会同时也是毕业生晚会，不对！不能称之为“晚会”，因为是在下午1：30开始的Σ( ° △ °|||)︴。这种事情我个人觉得还是相当浪费时间以及无聊的，但我还是去了是因为想去支持一下我的好朋友（主席团老二）同时也算">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS跨域请求（3）">
-<meta property="og:url" content="http://chulinyin.com/2016/06/04/JS跨域请求（3）/index.html">
+<meta property="og:url" content="http://hchulinyin.com/2016/06/04/JS跨域请求（3）/index.html">
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="日常闲扯今天上午看了一个NBA总决赛的第一场，勇士不出意外地赢了。个人觉得观赏性远远没有勇士和雷霆的比赛高，当然也有可能是今天两边主力发挥都不太好的原因。
 下午就去看我们量新学院的10周年晚会同时也是毕业生晚会，不对！不能称之为“晚会”，因为是在下午1：30开始的Σ( ° △ °|||)︴。这种事情我个人觉得还是相当浪费时间以及无聊的，但我还是去了是因为想去支持一下我的好朋友（主席团老二）同时也算">
-<meta property="og:updated_time" content="2016-06-03T17:50:31.000Z">
+<meta property="og:updated_time" content="2016-11-25T07:06:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS跨域请求（3）">
 <meta name="twitter:description" content="日常闲扯今天上午看了一个NBA总决赛的第一场，勇士不出意外地赢了。个人觉得观赏性远远没有勇士和雷霆的比赛高，当然也有可能是今天两边主力发挥都不太好的原因。
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://chulinyin.com/2016/06/04/JS跨域请求（3）/"/>
+  <link rel="canonical" href="http://hchulinyin.com/2016/06/04/JS跨域请求（3）/"/>
 
 
   <title> JS跨域请求（3） | 褚林银的秘密基地 </title>
@@ -340,7 +340,7 @@
 </blockquote>
 <p><strong>以上需自行脑补画面</strong><br>2、 HTTP流<br>HTTP流就更加简单了，服务器在收到浏览器请求后就一直保持连接（直到页面关闭或者写代码主动关闭），然后定时向浏览器发送响应数据（不论是否更新）。</p>
 <p>而在js代码中利用XHR对象就可以实现HTTP流（所以IE下又跪了）。通过监听readystatechange事件并检测readyState的值是否为3（为什么是3呢？因为等于3的时候，xhr.responseText中就会包含接收到的数据啊~），然后比较此前收到的数据，从而截取获得最新的数据。</p>
-<p><strong>献上改自书中的代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">function createStreamingClient(url,progress,finished)&#123;</div><div class="line">    var xhr = new XMLHTTPRequest(),</div><div class="line">        received = 0;</div><div class="line">    xhr.open(&apos;get&apos;,url,true);</div><div class="line">    xhr.readystatechange = fucntion()&#123;</div><div class="line">        var  data = &apos;&apos;;</div><div class="line">        if(xhr.readyState == 3)&#123;</div><div class="line">            data = xhr.responseText.substring(received);//截取最新部分数据</div><div class="line">            received += data.length;//累加取得最新数据的位置</div><div class="line">            progress(data);//将最新数据传入回调函数中</div><div class="line">        &#125;else if(xhr.readyState == 4)&#123;</div><div class="line">            finished(xhr.responseText);//将响应的全部内容传入回调</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    xhr.send(null);</div><div class="line">    return xhr;//为什么还要返回这个？</div><div class="line">&#125;</div><div class="line">var progress = function(data)&#123;</div><div class="line">    console.log(&apos;Received: &apos;+data);</div><div class="line">&#125;</div><div class="line">var finish = function(data)&#123;</div><div class="line">    console.log(&apos;Done&apos;);</div><div class="line">&#125;</div><div class="line">var client = createStreamingClient(&apos;XXX.php&apos;,progress,finish);</div></pre></td></tr></table></figure></p>
+<p><strong>献上改自书中的代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createStreamingClient</span>(<span class="params">url,progress,finished</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHTTPRequest(),</div><div class="line">        received = <span class="number">0</span>;</div><div class="line">    xhr.open(<span class="string">'get'</span>,url,<span class="literal">true</span>);</div><div class="line">    xhr.readystatechange = fucntion()&#123;</div><div class="line">        <span class="keyword">var</span>  data = <span class="string">''</span>;</div><div class="line">        <span class="keyword">if</span>(xhr.readyState == <span class="number">3</span>)&#123;</div><div class="line">            data = xhr.responseText.substring(received);<span class="comment">//截取最新部分数据</span></div><div class="line">            received += data.length;<span class="comment">//累加取得最新数据的位置</span></div><div class="line">            progress(data);<span class="comment">//将最新数据传入回调函数中</span></div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>)&#123;</div><div class="line">            finished(xhr.responseText);<span class="comment">//将响应的全部内容传入回调</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    xhr.send(<span class="literal">null</span>);</div><div class="line">    <span class="keyword">return</span> xhr;<span class="comment">//为什么还要返回这个？</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> progress = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Received: '</span>+data);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> finish = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Done'</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> client = createStreamingClient(<span class="string">'XXX.php'</span>,progress,finish);</div></pre></td></tr></table></figure></p>
 <h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>已经快两点了……明天见。</p>
 
       
@@ -410,7 +410,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/04/JS跨域请求（3）/"
-           data-title="JS跨域请求（3）" data-url="http://chulinyin.com/2016/06/04/JS跨域请求（3）/">
+           data-title="JS跨域请求（3）" data-url="http://hchulinyin.com/2016/06/04/JS跨域请求（3）/">
       </div>
     
   </div>
@@ -455,7 +455,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -472,7 +472,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

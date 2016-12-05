@@ -87,7 +87,7 @@
 <meta name="description" content="褚林银的秘密基地">
 <meta property="og:type" content="website">
 <meta property="og:title" content="褚林银的秘密基地">
-<meta property="og:url" content="http://chulinyin.com/page/4/index.html">
+<meta property="og:url" content="http://hchulinyin.com/page/4/index.html">
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="褚林银的秘密基地">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,7 @@
 
 
 
-  <link rel="canonical" href="http://chulinyin.com/page/4/"/>
+  <link rel="canonical" href="http://hchulinyin.com/page/4/"/>
 
 
   <title> 褚林银的秘密基地 </title>
@@ -227,6 +227,297 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/15/早起日记-工作中遇到的前端坑/" itemprop="url">
+                  早起日记-关于工作中遇到的前端坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T07:22:39+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工作/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/早起日记-工作中遇到的前端坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/早起日记-工作中遇到的前端坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/15/早起日记-工作中遇到的前端坑/" class="leancloud_visitors" data-flag-title="早起日记-关于工作中遇到的前端坑">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果从6.21号入职开始算的话，我以实习生的身份进入公司已经有将近一个月的时间了。在这个5人前端组里，过得还是十分轻松愉快的。</p>
+<ul>
+<li>没有什么险恶的钩心斗角（当然也有可能是我还是个小不点），组里的人也都很好相处；</li>
+<li>正式员工也没有架子，有什么问题他们都会积极和你一起解决。</li>
+</ul>
+<p>当然有利也有弊，轻松愉快的另一面就是：我有时会很闲，闲得自己在看文档学习甚至会打瞌睡，以致于让我觉得领工资受之有愧。</p>
+<p>不过闲归闲，这礼拜阿冰师傅给了我两个简单的需要上线的活动页面让我独立完成，有问题找他。我当时有点兴奋，因为总算可以有点事情做了。虽然页面很简单，逻辑也很简单，但途中还是遇到了不少坑，也学到了不少东西，比如说：</p>
+<ol>
+<li>如果要适配各种屏幕的手机，一般只能做到宽度自适应。（因为如果同时做到高度自适应的后果可能就是页面比例变形）。而这个时候，如果你制作的是一个单页的话（也就是说设计稿页面的高度恰好是一个屏幕的高度），<ul>
+<li>在长宽比大的手机（like iphone 6plus）中，会在底下出现一块空白，</li>
+<li>在长宽比小的手机（like iphone 4）中，需要滑动才能看到剩余部分</li>
+</ul>
+</li>
+<li>如果在微信朋友圈打开分享链接，是无法直接唤起已有APP的。<ul>
+<li>在iOS系统下，会跳转到APP Store，然后再按打开按钮，才能唤起APP；</li>
+<li>而在Android系统下，就比较恶心了。微信会先跳转到腾讯应用宝下载页面，然后如果你这时候点【腾讯应用宝安全打开】，它会自动下载腾讯应用宝；如果你点【普通打开】，它会提示在普通打开下会存在安全隐患，然后给你两个选项【继续】和【安全打开】，按照人类的逻辑，这时候我不管点哪一个都应该唤起APP。然而结果是，你如果点【安全打开】，又会进入下载。必须点继续才能唤起APP。</li>
+</ul>
+</li>
+<li>还有一些历史遗留问题，我使用了公司规范里的一些函数，结果有几个函数内部的地址不正确，导致在IOS和Android下结果不一样。后来我们找了半小时，然后问主管（我们的老大）洋哥，然后洋哥再找客户端开发人员，才找到问题所在。</li>
+</ol>
+<p>对于问题1，目前只能通过给<code>body</code>设置一个背景色，让它和页面底部的颜色一致，使页面在大屏手机下不至于出现一块空白。而小屏手机页面无法完全展示，需要滑动才能看到其余部分的问题还是没法解决。【除非设计稿一开始的尺寸是按照小屏手机来设计的】。</p>
+<p>不知不觉已经7月半了，我得加速看算法和数据结构才行了！<br>Fighting!</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/10/深夜日记-关于买东西/" itemprop="url">
+                  深夜日记--关于买东西
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-10T23:48:22+08:00" content="2016-07-10">
+              2016-07-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日记/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/10/深夜日记-关于买东西/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/10/深夜日记-关于买东西/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/10/深夜日记-关于买东西/" class="leancloud_visitors" data-flag-title="深夜日记--关于买东西">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>早在两个月前我就产生了买一个机械键盘的想法，当时的我是这么想的：</p>
+<blockquote>
+<p>既然已经决定要在<strong>前端</strong>这条道路上走到黑，那买一个好点的键盘是必须的，因为“工欲善其事，必先利其器”嘛~而且既然真的是用来干大事，那必须选一把利器！</p>
+</blockquote>
+<p>就像我为了慢跑特意自个儿从美亚海淘买了一双asics的跑鞋（因为据说asics有强烈的踩屎感，而且是跑鞋界做得最好的之一，当然价格嘛，你懂的~），在那时候我就锁定了键盘键界的信仰——<strong>Filco</strong>，虽然有点贵，但是多用几年，时间上的耐久+体验上的满足，完全可以赚回来。</p>
+<p>然而因为那时候还没有那么急用，再加上1000多的价格真的有点贵，于是便一拖再拖。这一拖就拖到了现在，不过也好在我终于下定了决心，前天下单，今天到了。促使我买下来的原因有两个：</p>
+<ol>
+<li>对机械键盘强烈的渴望，幻想着它能给我打字带来极度的享受。</li>
+<li>能分期，而且马上就发工资了。</li>
+</ol>
+<p>感觉如何呢？因为我没有用过机械键盘，只能说比笔记本自带的键盘好太多！！！可惜我的电脑丫的居然没有自带蓝牙，不然我现在桌面上就可以少两条线了~</p>
+<p>我发现自己现在在某些方面花钱越来越喜欢买好的（贵的）东西了，我想着应该算得上是一种好现象，说明我对生活的要求越来越高了~</p>
+<p>而现在我最想买的就是一台MacBook Pro（想试试苹果系统的魅力）~等我工资过5K了，就攒钱开始买！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1638,274 +1929,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/29/深夜日记（27）/" itemprop="url">
-                  深夜日记（27）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T23:33:25+08:00" content="2016-06-29">
-              2016-06-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/29/深夜日记（27）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/29/深夜日记（27）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/29/深夜日记（27）/" class="leancloud_visitors" data-flag-title="深夜日记（27）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天在公司上午的时候睡意朦胧，下午的时候眼睛又开始痛，总之这个效率我自己都很不满意。不过总算是把静态页面写完了，JS逻辑部分因为用了JQ再加上像<code>flexible</code>、<code>swiper</code>、<code>lazyLoad</code>等组件，因此真正需要我写的只有大概100-200行而已，明天估计就能搞定了~</p>
-<p>下面还是说说反思吧~</p>
-<p>一开始我自以为写静态页面已经不成问题了，可是这么一个简单的手机单页，真正写起来的时候，突然发现我手太生了，写起来很慢很慢。1写HTML还没有养成自己的风格，写CSS的时候又没有总结出一套自己的布局理论，所以总之就是一片混乱~远远没有达到得心应手的地步。</p>
-<p>以上情况只能说明我写得太少太少了（也是，我算上这个总共也就写了两个完整的页面），其次总结得也太少了。任重道远呐~</p>
-<p>哦！对了，这次写静态页面的时候，淌过了不少坑，有不懂的地方可以请教别人的感觉真棒！另外即使写完了，还是一眼被阿冰师傅瞧出很多坑。哈哈哈！加油吧！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/28/深夜日记（26）/" itemprop="url">
-                  深夜日记（26）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-28T23:44:38+08:00" content="2016-06-28">
-              2016-06-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/28/深夜日记（26）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/28/深夜日记（26）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/28/深夜日记（26）/" class="leancloud_visitors" data-flag-title="深夜日记（26）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天早上虽然定了和往常一样6.30的闹钟，但是差点睡过头，因为我居然在意识模糊的时候把闹钟摁掉了。这一切都只能归咎于实在太晚睡了，我凌晨2.30的时候才睡着~至于为什么呢？</p>
-<p>这事说来话长，周日晚上的时候我们9点在一个教室开党支部会，结果却是两个人在扯时间，扯来扯去……而另外几个人听得云里雾里，不知道自己要干什么。（从此处可以看出半小时效率之低）在40分钟后的最后5分钟我们终于知道我们原来要补5篇“两学一做”，然后有主题和日期的要求，并且要求再周一晚上之前完成。（这直接列个表发群里不就好了吗？浪费时间……）</p>
-<p>然后晚上回寝室后正当我准备开始完成此次组织派下来的任务时，居然又通知我暂时不用写了（不过此时我还是挺高兴的，能不写当然好~）可是万万没想到，就在周一（昨天）晚上10点的时候，又通知我需要写，并且周二下午就要上交！可是我6.30就要起床去上班啊，这也就是说我必须熬夜写完……</p>
-<p>我能怎么办？只能文思泉涌、龙飞凤舞地开始写，不时地抄一段党章。可是可笑的是，这所谓的“两学一做”的会议我们一次都没有开过，凌空杜撰，老师和学生都是好本事！上级领导也是组织了一次好运动！</p>
-<p>另外在抄几段党章的过程中，我深深地被‘感动’到了……</p>
-<p>今天总算搬到了租的地方，虽然1400对我来说是很贵，但是住的还挺舒心的，挺满意的，至少不用把大把时间浪费在赶路上~</p>
-<p>加油吧！明天布置下自己房间，再添个书桌和椅子就圆满了~</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1951,7 +1974,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1968,7 +1991,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

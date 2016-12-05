@@ -88,18 +88,18 @@
 今天在研究js的架构方面，也就是传说中的MVC、MVVM、MV*模式。反正不管怎么样就是要把Model(模型)和View（视图）通过一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS跨域请求（5）">
-<meta property="og:url" content="http://chulinyin.com/2016/06/06/JS跨域请求（5）/index.html">
+<meta property="og:url" content="http://hchulinyin.com/2016/06/06/JS跨域请求（5）/index.html">
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="日常闲扯虽然很早的时候心中就默默决定以后于我来说没有所谓的周末，也没有所谓的法定节假日，只有一些自己定义的日子，但是这两天真的不在状态，晚上睡得晚，早上起得晚，白天也是一会清醒一会困得要死，快被折磨疯了。讲道理，明明已经睡够8小时了，为什么中午和晚上还是会困呢？
 今天在研究js的架构方面，也就是传说中的MVC、MVVM、MV*模式。反正不管怎么样就是要把Model(模型)和View（视图）通过一个">
-<meta property="og:image" content="http://chulinyin.com/JS跨域请求（5）/1.PNG">
-<meta property="og:image" content="http://chulinyin.com/JS跨域请求（5）/2.PNG">
-<meta property="og:updated_time" content="2016-06-24T15:11:03.000Z">
+<meta property="og:image" content="http://hchulinyin.com/JS跨域请求（5）/1.PNG">
+<meta property="og:image" content="http://hchulinyin.com/JS跨域请求（5）/2.PNG">
+<meta property="og:updated_time" content="2016-11-25T07:24:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS跨域请求（5）">
 <meta name="twitter:description" content="日常闲扯虽然很早的时候心中就默默决定以后于我来说没有所谓的周末，也没有所谓的法定节假日，只有一些自己定义的日子，但是这两天真的不在状态，晚上睡得晚，早上起得晚，白天也是一会清醒一会困得要死，快被折磨疯了。讲道理，明明已经睡够8小时了，为什么中午和晚上还是会困呢？
 今天在研究js的架构方面，也就是传说中的MVC、MVVM、MV*模式。反正不管怎么样就是要把Model(模型)和View（视图）通过一个">
-<meta name="twitter:image" content="http://chulinyin.com/JS跨域请求（5）/1.PNG">
+<meta name="twitter:image" content="http://hchulinyin.com/JS跨域请求（5）/1.PNG">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://chulinyin.com/2016/06/06/JS跨域请求（5）/"/>
+  <link rel="canonical" href="http://hchulinyin.com/2016/06/06/JS跨域请求（5）/"/>
 
 
   <title> JS跨域请求（5） | 褚林银的秘密基地 </title>
@@ -349,7 +349,7 @@
 <li>存在一致性和安全性问题</li>
 <li>不兼容IE</li>
 </ul>
-<p><strong>下面献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">//实例化一个对象</div><div class="line">var socket = new WebSocket(&apos;ws://www.example.com/serve.php&apos;);</div><div class="line"></div><div class="line">//socket.readyState表示当前状态：</div><div class="line">WebSocket.OPENING; //正在连接</div><div class="line">WebSocket.OPEN; //已经建立连接</div><div class="line">WebSocket.CLOSING; //正在关闭连接</div><div class="line">WebSocket.OPEN; //已经关闭连接</div><div class="line"></div><div class="line">socket.close(); //关闭连接</div><div class="line">socket.send(string/json); //向服务器发送数据</div><div class="line"></div><div class="line">//客户端收到来自服务器的数据，触发message事件</div><div class="line">socket.onmessage = function(event)&#123;</div><div class="line"> var data = event.data</div><div class="line"> //处理数据</div><div class="line">&#125;; </div><div class="line"></div><div class="line">//成功建立连接时触发open事件</div><div class="line">socket.onopen = function()&#123;&#125;; </div><div class="line"></div><div class="line">//发生错误时触发error事件，连接不能持续</div><div class="line">socket.onerror = function()&#123;&#125;; </div><div class="line"></div><div class="line">//关闭连接时触发close事件</div><div class="line">//event.clean表示连接是否已经明确地关闭</div><div class="line">//event.code是服务器返回的数值状态码</div><div class="line">//event.reason表示包含服务器发回的消息</div><div class="line">socket.onclose = function(event)&#123;</div><div class="line"> console.log(&apos;Was clean&apos;+event.wasClean+&apos;Code:&apos;+event.code+&apos;Reason=&apos;+event.reason);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>下面献上书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实例化一个对象</span></div><div class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">'ws://www.example.com/serve.php'</span>);</div><div class="line"></div><div class="line"><span class="comment">//socket.readyState表示当前状态：</span></div><div class="line">WebSocket.OPENING; <span class="comment">//正在连接</span></div><div class="line">WebSocket.OPEN; <span class="comment">//已经建立连接</span></div><div class="line">WebSocket.CLOSING; <span class="comment">//正在关闭连接</span></div><div class="line">WebSocket.OPEN; <span class="comment">//已经关闭连接</span></div><div class="line"></div><div class="line">socket.close(); <span class="comment">//关闭连接</span></div><div class="line">socket.send(string/json); <span class="comment">//向服务器发送数据</span></div><div class="line"></div><div class="line"><span class="comment">//客户端收到来自服务器的数据，触发message事件</span></div><div class="line">socket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line"> <span class="keyword">var</span> data = event.data</div><div class="line"> <span class="comment">//处理数据</span></div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="comment">//成功建立连接时触发open事件</span></div><div class="line">socket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </div><div class="line"></div><div class="line"><span class="comment">//发生错误时触发error事件，连接不能持续</span></div><div class="line">socket.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </div><div class="line"></div><div class="line"><span class="comment">//关闭连接时触发close事件</span></div><div class="line"><span class="comment">//event.clean表示连接是否已经明确地关闭</span></div><div class="line"><span class="comment">//event.code是服务器返回的数值状态码</span></div><div class="line"><span class="comment">//event.reason表示包含服务器发回的消息</span></div><div class="line">socket.onclose = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line"> <span class="built_in">console</span>.log(<span class="string">'Was clean'</span>+event.wasClean+<span class="string">'Code:'</span>+event.code+<span class="string">'Reason='</span>+event.reason);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p><strong>至此，跨域部分算是完了……</strong></p>
 
       
@@ -419,7 +419,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/06/JS跨域请求（5）/"
-           data-title="JS跨域请求（5）" data-url="http://chulinyin.com/2016/06/06/JS跨域请求（5）/">
+           data-title="JS跨域请求（5）" data-url="http://hchulinyin.com/2016/06/06/JS跨域请求（5）/">
       </div>
     
   </div>
@@ -464,7 +464,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -481,7 +481,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

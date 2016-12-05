@@ -87,10 +87,10 @@
 <meta name="description" content="日常闲扯晚上在图书馆借书，借到了《JavaScript DOM编程艺术》、《JavaScript设计模式》和《JavaScript DOM高级程序设计》，设计模式这本书是不小心看到的，然后又想到昨天网易云课堂上蔡剑飞老师说的关于计算机基础的设计模式，就顺手翻开来看下，内容还不错，罗列了一些面向对象的主要设计模式，并用JS实现了。明天打算再借一本关于数据结构的和一本关于算法的，等考完试就抓紧开始看了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS跨域请求（4）">
-<meta property="og:url" content="http://chulinyin.com/2016/06/05/JS跨域请求（4）/index.html">
+<meta property="og:url" content="http://hchulinyin.com/2016/06/05/JS跨域请求（4）/index.html">
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="日常闲扯晚上在图书馆借书，借到了《JavaScript DOM编程艺术》、《JavaScript设计模式》和《JavaScript DOM高级程序设计》，设计模式这本书是不小心看到的，然后又想到昨天网易云课堂上蔡剑飞老师说的关于计算机基础的设计模式，就顺手翻开来看下，内容还不错，罗列了一些面向对象的主要设计模式，并用JS实现了。明天打算再借一本关于数据结构的和一本关于算法的，等考完试就抓紧开始看了">
-<meta property="og:updated_time" content="2016-06-04T16:27:31.000Z">
+<meta property="og:updated_time" content="2016-11-25T07:16:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS跨域请求（4）">
 <meta name="twitter:description" content="日常闲扯晚上在图书馆借书，借到了《JavaScript DOM编程艺术》、《JavaScript设计模式》和《JavaScript DOM高级程序设计》，设计模式这本书是不小心看到的，然后又想到昨天网易云课堂上蔡剑飞老师说的关于计算机基础的设计模式，就顺手翻开来看下，内容还不错，罗列了一些面向对象的主要设计模式，并用JS实现了。明天打算再借一本关于数据结构的和一本关于算法的，等考完试就抓紧开始看了">
@@ -114,7 +114,7 @@
 
 
 
-  <link rel="canonical" href="http://chulinyin.com/2016/06/05/JS跨域请求（4）/"/>
+  <link rel="canonical" href="http://hchulinyin.com/2016/06/05/JS跨域请求（4）/"/>
 
 
   <title> JS跨域请求（4） | 褚林银的秘密基地 </title>
@@ -324,8 +324,8 @@
       
         <h2 id="日常闲扯"><a href="#日常闲扯" class="headerlink" title="日常闲扯"></a>日常闲扯</h2><p>晚上在图书馆借书，借到了《JavaScript DOM编程艺术》、《JavaScript设计模式》和《JavaScript DOM高级程序设计》，设计模式这本书是不小心看到的，然后又想到昨天网易云课堂上蔡剑飞老师说的关于计算机基础的设计模式，就顺手翻开来看下，内容还不错，罗列了一些面向对象的主要设计模式，并用JS实现了。明天打算再借一本关于数据结构的和一本关于算法的，等考完试就抓紧开始看了。<br>哦！对了，等明天开始我必须开始重构我那个糟糕的大作业了。计划用模块化编程的方式~</p>
 <p>下面进入……</p>
-<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>SSE是根据Comet推出的API，可以用API创建到服务器的单向连接，而服务器通过这个连接可以发送任意数量的数据。SSE支持短轮询、长轮询和HTTP流，而且能够在断开连接的时候自动确定什么时候再次连接。（So easy!）不过还是有一些要求的：响应报文的MIME类型必须是<code>text/event-stream</code>，而且浏览器中的API能够解析格式输出。（什么？IE支持吗？当然不支持……）</p>
-<p><strong>下面献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var source = new EventSource(&apos;myevents.php&apos;); //实例化事件流</div><div class="line">var state = source.readyState; </div><div class="line">//state = 0:正在连接到服务器 1:打开了连接 2:关闭了连接</div><div class="line"></div><div class="line">source.onopen = function()&#123;&#125;; //建立连接时触发</div><div class="line"></div><div class="line">//从服务器接收到新事件时触发</div><div class="line">source.onmessage = function(event)&#123; </div><div class="line">    var data = event.data; //服务器发回的数据</div><div class="line">&#125;;</div><div class="line"></div><div class="line">source.onerror = funciton()&#123;&#125;; //无法建立连接时触发</div><div class="line"></div><div class="line">source.close(); //强制关闭连接并不再重新连接</div></pre></td></tr></table></figure></p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>SSE是根据只读Comet推出的API，可以用API创建到服务器的单向连接，而服务器通过这个连接可以发送任意数量的数据。SSE支持短轮询、长轮询和HTTP流，而且能够在断开连接的时候自动确定什么时候再次连接。（So easy!）不过还是有一些要求的：响应报文的MIME类型必须是<code>text/event-stream</code>，而且浏览器中的API能够解析格式输出。（什么？IE支持吗？当然不支持……）</p>
+<p><strong>下面献上书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(<span class="string">'myevents.php'</span>); <span class="comment">//实例化事件流</span></div><div class="line"><span class="keyword">var</span> state = source.readyState; </div><div class="line"><span class="comment">//state = 0:正在连接到服务器 1:打开了连接 2:关闭了连接</span></div><div class="line"></div><div class="line">source.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">//建立连接时触发</span></div><div class="line"></div><div class="line"><span class="comment">//从服务器接收到新事件时触发</span></div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </div><div class="line">    <span class="keyword">var</span> data = event.data; <span class="comment">//服务器发回的数据</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">source.onerror = funciton()&#123;&#125;; <span class="comment">//无法建立连接时触发</span></div><div class="line"></div><div class="line">source.close(); <span class="comment">//强制关闭连接并不再重新连接</span></div></pre></td></tr></table></figure></p>
 <h4 id="2-4、Web-Sockets（服务器发送事件）"><a href="#2-4、Web-Sockets（服务器发送事件）" class="headerlink" title="2.4、Web Sockets（服务器发送事件）"></a>2.4、Web Sockets（服务器发送事件）</h4><p><strong>可以提供全双工、双向通信……</strong><br>下面的明日再说~</p>
 
       
@@ -395,7 +395,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/05/JS跨域请求（4）/"
-           data-title="JS跨域请求（4）" data-url="http://chulinyin.com/2016/06/05/JS跨域请求（4）/">
+           data-title="JS跨域请求（4）" data-url="http://hchulinyin.com/2016/06/05/JS跨域请求（4）/">
       </div>
     
   </div>
@@ -440,7 +440,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -457,7 +457,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

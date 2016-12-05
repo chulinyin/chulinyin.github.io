@@ -1,0 +1,837 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js assert 测试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="前言最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。
+Assertion Testing模块（Locked）
+可用于测试常量；
+旨在用于内部使用，但">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js 学习笔记—— assert 模块">
+<meta property="og:url" content="http://hchulinyin.com/2016/11/20/Node.js 学习笔记—— assert 模块/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="前言最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。
+Assertion Testing模块（Locked）
+可用于测试常量；
+旨在用于内部使用，但">
+<meta property="og:updated_time" content="2016-11-20T11:08:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js 学习笔记—— assert 模块">
+<meta name="twitter:description" content="前言最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。
+Assertion Testing模块（Locked）
+可用于测试常量；
+旨在用于内部使用，但">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://hchulinyin.com/2016/11/20/Node.js 学习笔记—— assert 模块/"/>
+
+
+  <title> Node.js 学习笔记—— assert 模块 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node.js 学习笔记—— assert 模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-20T22:06:48+08:00" content="2016-11-20">
+              2016-11-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/20/Node.js 学习笔记—— assert 模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/20/Node.js 学习笔记—— assert 模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/11/20/Node.js 学习笔记—— assert 模块/" class="leancloud_visitors" data-flag-title="Node.js 学习笔记—— assert 模块">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>最近在看 Node.js v6.9.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。</p>
+<h4 id="Assertion-Testing模块（Locked）"><a href="#Assertion-Testing模块（Locked）" class="headerlink" title="Assertion Testing模块（Locked）"></a>Assertion Testing模块（Locked）</h4><ul>
+<li>可用于测试常量；</li>
+<li>旨在用于内部使用，但是可通过<code>require(&#39;assert&#39;)</code> 被用在应用中；</li>
+<li>不是测试框架；</li>
+</ul>
+<h4 id="抛出错误"><a href="#抛出错误" class="headerlink" title="抛出错误"></a>抛出错误</h4><h5 id="assert-fail-actual-expected-message-operator"><a href="#assert-fail-actual-expected-message-operator" class="headerlink" title="assert.fail(actual, expected, message, operator)"></a><code>assert.fail(actual, expected, message, operator)</code></h5><ul>
+<li><p>抛出 AssertionError</p>
+</li>
+<li><p>如果 <code>Boolean(message) === false</code>，则抛出 <code>AssertionError: ${actual} ${operator} ${expected}</code> 。</p>
+</li>
+<li><p>如果 message 被定义了,则抛出 <code>AssertionError: ${message}</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assert.fail(<span class="number">1</span>, <span class="number">2</span>, <span class="literal">undefined</span>, <span class="string">'&lt;'</span>); <span class="comment">// AssertionError: 1 &lt; 2</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assert.fail(<span class="number">1</span>, <span class="number">2</span>, <span class="string">'not equal'</span>, <span class="string">'&lt;'</span>); <span class="comment">// AssertionError: not equal</span></div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<h4 id="判断一个值是否为true"><a href="#判断一个值是否为true" class="headerlink" title="判断一个值是否为true"></a>判断一个值是否为true</h4><h5 id="assert-ok-value-message"><a href="#assert-ok-value-message" class="headerlink" title="assert.ok(value[, message])"></a>assert.ok(value[, message])</h5><ul>
+<li>如果 <code>Boolean(value) === true</code>，则ok</li>
+<li>否则，抛出 <code>AssertionError: value == true</code> 或 <code>AssertionError:${message}</code></li>
+<li>也可以用 <code>assert(value[, message])</code> 表示</li>
+</ul>
+<h5 id="assert-ifError-value"><a href="#assert-ifError-value" class="headerlink" title="assert.ifError(value)"></a>assert.ifError(value)</h5><ul>
+<li>如果 <code>Boolean(value) === true</code>，则抛出 <code>Throw ${value}</code></li>
+<li>否则为 <code>ok</code></li>
+</ul>
+<a id="more"></a>
+<h4 id="判断两个数是否相等"><a href="#判断两个数是否相等" class="headerlink" title="判断两个数是否相等"></a>判断两个数是否相等</h4><h5 id="assert-equal-actual-expected-message"><a href="#assert-equal-actual-expected-message" class="headerlink" title="assert.equal(actual, expected[, message])"></a>assert.equal(actual, expected[, message])</h5><ul>
+<li><p><code>actual == expected</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">assert.equal(<span class="number">1</span>,<span class="string">'1'</span>);</div><div class="line">assert.equal&#123;&#123;<span class="attr">a</span>:&#123;<span class="attr">b</span>:<span class="number">1</span>&#125;&#125;, &#123;<span class="attr">a</span>:&#123;<span class="attr">b</span>:<span class="number">1</span>&#125;&#125;&#125;; <span class="comment">// error</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="assert-strictEqual-actual-expected-message"><a href="#assert-strictEqual-actual-expected-message" class="headerlink" title="assert.strictEqual(actual, expected[, message])"></a>assert.strictEqual(actual, expected[, message])</h5><ul>
+<li><code>actual === expected</code></li>
+</ul>
+<h5 id="assert-deepEqual-actual-expected-message"><a href="#assert-deepEqual-actual-expected-message" class="headerlink" title="assert.deepEqual(actual, expected[, message])"></a>assert.deepEqual(actual, expected[, message])</h5><ul>
+<li><code>actual == expected</code></li>
+</ul>
+<ul>
+<li><p>只有可枚举的自身属性会被考虑。（不测试对象原型，附加 symbols ，或者不可枚举的属性），只要两个对象的属性一一对应，且值相等，则两者相等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assert.deepEqual(<span class="built_in">Error</span>(<span class="string">'a'</span>),<span class="built_in">Error</span>(<span class="string">'b'</span>)) <span class="comment">// no AssertionError</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>深度相等意味着，子对象的可枚举的自身属性也会被测试</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> obj1 = &#123;<span class="attr">a</span>:&#123;<span class="attr">b</span>:<span class="number">1</span>&#125;&#125;,</div><div class="line">      obj2 = &#123;<span class="attr">a</span>:&#123;<span class="attr">b</span>:<span class="number">2</span>&#125;&#125;,</div><div class="line">      obj3 = &#123;<span class="attr">a</span>:&#123;<span class="attr">b</span>:<span class="number">1</span>&#125;&#125;;</div><div class="line"><span class="keyword">const</span> obj4 = <span class="built_in">Object</span>.create(obj1);</div><div class="line">assert.deepEqual(obj1,obj1);</div><div class="line">assert.deepEqual(obj1,obj3);</div><div class="line">assert.equal(obj1,obj3); <span class="comment">// error</span></div><div class="line">assert.deepEqual(obj1,obj2); <span class="comment">// error,values of b are different</span></div><div class="line">assert.deepEqual(obj1,obj4); <span class="comment">// error,原型被忽略</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="assert-deepStrictEqual-actul-expected-message"><a href="#assert-deepStrictEqual-actul-expected-message" class="headerlink" title="assert.deepStrictEqual(actul, expected[, message])"></a>assert.deepStrictEqual(actul, expected[, message])</h5><ul>
+<li><p><code>actual === expected</code></p>
+</li>
+<li><p>会比较对象的原型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">assert.deepEqual(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">a</span>:<span class="string">'1'</span>&#125;);</div><div class="line">assert.deepStrictEqual(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;,&#123;<span class="attr">a</span>:<span class="string">'1'</span>&#125;);<span class="comment">// error</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="assert-notEqual-actual-expected-message"><a href="#assert-notEqual-actual-expected-message" class="headerlink" title="assert.notEqual(actual, expected[, message])"></a>assert.notEqual(actual, expected[, message])</h5><h5 id="assert-notStrictEqual-…"><a href="#assert-notStrictEqual-…" class="headerlink" title="assert.notStrictEqual(…)"></a>assert.notStrictEqual(…)</h5><h5 id="assert-notDeepEqual-…"><a href="#assert-notDeepEqual-…" class="headerlink" title="assert.notDeepEqual(…)"></a>assert.notDeepEqual(…)</h5><h5 id="assert-notDeepStrictEqual-…"><a href="#assert-notDeepStrictEqual-…" class="headerlink" title="assert.notDeepStrictEqual(…)"></a>assert.notDeepStrictEqual(…)</h5><h4 id="判断一个函数是否有抛出指定错误"><a href="#判断一个函数是否有抛出指定错误" class="headerlink" title="判断一个函数是否有抛出指定错误"></a>判断一个函数是否有抛出指定错误</h4><h5 id="assert-throws-block-error-message"><a href="#assert-throws-block-error-message" class="headerlink" title="assert.throws(block[, error][, message])"></a><code>assert.throws(block[, error][, message])</code></h5><ul>
+<li><p>立即调用block函数</p>
+<ul>
+<li>如果没有抛出错误，则抛出 <code>Assertion: Missing expected exception (${error}) .$(message)</code></li>
+<li>如果抛出了错误，且类型和 error 匹配，则ok</li>
+<li>如果抛出了错误，但类型和 error 不一样，则将会继续抛出原来的错误。</li>
+</ul>
+</li>
+<li><p>error可以是构造函数、正则表达式、验证函数（但是不能为字符串）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">assert.throws(</div><div class="line">	<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;,</div><div class="line">	<span class="built_in">Error</span>,</div><div class="line">	<span class="string">'no error'</span></div><div class="line">) <span class="comment">// Assertion: Missing expected exception (Error) .no error</span></div><div class="line"></div><div class="line">assert.throws(&#123;</div><div class="line">  	() =&gt; &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'wrong value'</span>);</div><div class="line">  	&#125;,</div><div class="line">    <span class="built_in">Error</span>        </div><div class="line">&#125;) <span class="comment">//ok</span></div><div class="line">assert.throws(&#123;</div><div class="line">  	() =&gt; &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'wrong value'</span>);</div><div class="line">  	&#125;,</div><div class="line">    /value/        </div><div class="line">&#125;) <span class="comment">//ok</span></div><div class="line"></div><div class="line">assert.throws(&#123;</div><div class="line">  	() =&gt; &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'wrong value'</span>);</div><div class="line">  	&#125;,</div><div class="line">    /dd/        </div><div class="line">&#125;) <span class="comment">//wrong value</span></div><div class="line">assert.throws(&#123;</div><div class="line">  	() =&gt; &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'wrong value'</span>);</div><div class="line">  	&#125;,</div><div class="line">    <span class="built_in">TypeError</span>        </div><div class="line">&#125;) <span class="comment">//wrong value</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="assert-doesNotThrow-block-error-message"><a href="#assert-doesNotThrow-block-error-message" class="headerlink" title="assert.doesNotThrow(block[, error][ , message])"></a><code>assert.doesNotThrow(block[, error][ , message])</code></h5><ul>
+<li><p>会立即调用block函数</p>
+<ul>
+<li>如果抛出了错误，且类型和error一样，则抛出错误提示<code>Throws: AssertionError: Got unwanted exception (${error}. ${message})</code></li>
+<li>如果抛出了错误，但类型和 error 不一样，或者 error 没有指定，则会将错误传回调用方，即抛出原来的错误。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">assert.doesNotThrow(</div><div class="line">	<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'wrong value'</span>);</div><div class="line">	&#125;,</div><div class="line">	<span class="built_in">TypeError</span>,</div><div class="line">    <span class="string">'haha'</span></div><div class="line">) <span class="comment">// AssertionError: Got unwanted exception (TypeError). haha</span></div><div class="line">assert.doesNotThrow(</div><div class="line">	<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'wrong value'</span>);</div><div class="line">	&#125;,</div><div class="line">  	<span class="built_in">SyntaxError</span></div><div class="line">) <span class="comment">// wrong value</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>### </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js-assert-测试/" rel="tag">#Node.js assert 测试</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/12/Node.js 学习笔记——url querystring 模块/" rel="next" title="Node.js 学习笔记—— url querystring 模块">
+                <i class="fa fa-chevron-left"></i> Node.js 学习笔记—— url querystring 模块
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/04/日记-责任/" rel="prev" title="关于责任的一点思考">
+                关于责任的一点思考 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/20/Node.js 学习笔记—— assert 模块/"
+           data-title="Node.js 学习笔记—— assert 模块" data-url="http://hchulinyin.com/2016/11/20/Node.js 学习笔记—— assert 模块/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Assertion-Testing模块（Locked）"><span class="nav-number">2.</span> <span class="nav-text">Assertion Testing模块（Locked）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抛出错误"><span class="nav-number">3.</span> <span class="nav-text">抛出错误</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-fail-actual-expected-message-operator"><span class="nav-number">3.1.</span> <span class="nav-text">assert.fail(actual, expected, message, operator)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断一个值是否为true"><span class="nav-number">4.</span> <span class="nav-text">判断一个值是否为true</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-ok-value-message"><span class="nav-number">4.1.</span> <span class="nav-text">assert.ok(value[, message])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-ifError-value"><span class="nav-number">4.2.</span> <span class="nav-text">assert.ifError(value)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断两个数是否相等"><span class="nav-number">5.</span> <span class="nav-text">判断两个数是否相等</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-equal-actual-expected-message"><span class="nav-number">5.1.</span> <span class="nav-text">assert.equal(actual, expected[, message])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-strictEqual-actual-expected-message"><span class="nav-number">5.2.</span> <span class="nav-text">assert.strictEqual(actual, expected[, message])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-deepEqual-actual-expected-message"><span class="nav-number">5.3.</span> <span class="nav-text">assert.deepEqual(actual, expected[, message])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-deepStrictEqual-actul-expected-message"><span class="nav-number">5.4.</span> <span class="nav-text">assert.deepStrictEqual(actul, expected[, message])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-notEqual-actual-expected-message"><span class="nav-number">5.5.</span> <span class="nav-text">assert.notEqual(actual, expected[, message])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-notStrictEqual-…"><span class="nav-number">5.6.</span> <span class="nav-text">assert.notStrictEqual(…)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-notDeepEqual-…"><span class="nav-number">5.7.</span> <span class="nav-text">assert.notDeepEqual(…)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-notDeepStrictEqual-…"><span class="nav-number">5.8.</span> <span class="nav-text">assert.notDeepStrictEqual(…)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断一个函数是否有抛出指定错误"><span class="nav-number">6.</span> <span class="nav-text">判断一个函数是否有抛出指定错误</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-throws-block-error-message"><span class="nav-number">6.1.</span> <span class="nav-text">assert.throws(block[, error][, message])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#assert-doesNotThrow-block-error-message"><span class="nav-number">6.2.</span> <span class="nav-text">assert.doesNotThrow(block[, error][ , message])</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("dtz5YifF8WHLzMkG3byRjSM8-gzGzoHsz", "dKrJHG1PJWQKqRRc1YrOva9E");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

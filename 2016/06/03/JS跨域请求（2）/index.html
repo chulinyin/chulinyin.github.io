@@ -94,7 +94,7 @@
 你认为互联网公">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS跨域请求（2）">
-<meta property="og:url" content="http://chulinyin.com/2016/06/03/JS跨域请求（2）/index.html">
+<meta property="og:url" content="http://hchulinyin.com/2016/06/03/JS跨域请求（2）/index.html">
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="日常闲扯今天下午又去面试了，这次是HR面，没有问技术方面的问题（她也不懂啊( ^_^ )），主要问了一些简历上的内容以及其他的问题，印象比较深的是下面这几个：
 
@@ -104,7 +104,7 @@
 所以你认为是你自己能力还不够，所以不去面试网易吗？
 你目前为止投过几份简历，面试了哪几家?
 你认为互联网公">
-<meta property="og:updated_time" content="2016-06-02T17:10:50.000Z">
+<meta property="og:updated_time" content="2016-11-25T07:01:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS跨域请求（2）">
 <meta name="twitter:description" content="日常闲扯今天下午又去面试了，这次是HR面，没有问技术方面的问题（她也不懂啊( ^_^ )），主要问了一些简历上的内容以及其他的问题，印象比较深的是下面这几个：
@@ -135,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://chulinyin.com/2016/06/03/JS跨域请求（2）/"/>
+  <link rel="canonical" href="http://hchulinyin.com/2016/06/03/JS跨域请求（2）/"/>
 
 
   <title> JS跨域请求（2） | 褚林银的秘密基地 </title>
@@ -359,20 +359,21 @@
 <p>还有就是今天逛讨论区的时候（突然好后悔当初没有去关注讨论区），知道了模板到底是干嘛用的（用来生成不变的结构，然后可以嵌入动态的数据），也知道了前端架构师的职责。当然产品前端里一些什么同步/异步数据规范、页面入口规范什么的还是不知道是什么鬼。</p>
 <p>最后觉得网易云课堂的这个微专业课程真的很好，良心课程，把网易内部自己总结出来的东西都分享出来了，可以让我们少走很多弯路，而且每次看都有不一样的领悟。</p>
 <p><strong>（好长的前戏o(╯□╰)o）以上是今天的经历，下面进入……</strong></p>
-<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>昨天写了看《JS高程》关于跨域那一部分的笔记——<a href="http://chulinyin.com/2016/06/02/JS%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/">JS跨域请求（1）</a>，主要是规范的跨域技术CORS，下面继续写下其他的跨域技术：</p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>昨天写了看《JS高程》关于跨域那一部分的笔记——<a href="http://chulinyin.com/2016/06/02/JS%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/" target="_blank" rel="external">JS跨域请求（1）</a>，主要是规范的跨域技术CORS，下面继续写下其他的跨域技术：</p>
 <h3 id="2、其他跨域技术"><a href="#2、其他跨域技术" class="headerlink" title="2、其他跨域技术"></a>2、其他跨域技术</h3><p>在CORS出现以前，前端工程师们是怎么实现跨域请求的呢？</p>
 <h4 id="2-1、图像Ping"><a href="#2-1、图像Ping" class="headerlink" title="2.1、图像Ping"></a>2.1、图像Ping</h4><p>这是一种与服务器端进行简单、单向的跨域通信方式。</p>
 <ul>
-<li>优点：请求的数据是通过查询字符串的形式发送的，而响应可以使任何内容。不过通常是图片或204响应，最常用于跟踪用户点击页面或动态广告曝光次数。</li>
+<li>优点：请求的数据是通过查询字符串的形式发送的，而响应可以是任何内容。不过通常是图片或204响应，最常用于跟踪用户点击页面或动态广告曝光次数。</li>
 <li>缺点：只能发送GET请求，同时也无法访问响应文本。</li>
 </ul>
 <p><strong>献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var img = new Image();</div><div class="line">img.onload = functiion()&#123;</div><div class="line">    console.log(&apos;successful&apos;);</div><div class="line">&#125;</div><div class="line">img.onerror = function()&#123;</div><div class="line">    console.log(&apos;unsuccessful&apos;);</div><div class="line">&#125;</div><div class="line">img.src = &apos;http://www.example.com/test?name=Nicholas&apos;;</div></pre></td></tr></table></figure></p>
 <h4 id="2-1、JSONP-JSON-with-padding"><a href="#2-1、JSONP-JSON-with-padding" class="headerlink" title="2.1、JSONP (JSON with padding)"></a>2.1、JSONP (JSON with padding)</h4><p>图像Ping利用了<code>&lt;img&gt;</code>元素，而JSONP则利用了动态<code>&lt;script&gt;元素</code>，使用的时候也是令<code>src=&#39;跨域的URL&#39;</code>，这就令JSONP成为了有效的JS代码，在请求完成后，就会立即执行。<br>JSONP由两部分组成：<code>回调函数</code>+<code>JSON数据</code>，一般回调函数是通过请求中的查询字符串实现的。</p>
 <ul>
 <li>优点：能直接访问响应文本，支持浏览器与服务器的双向通信。</li>
-<li>缺点：是从其他域中加载代码并执行，如果其他域不安全就不能用了。另外，确定JSONP请求失败只能通过计时器定时检测是否受到响应（耗费性能）。</li>
+<li>缺点：是从其他域中加载代码并执行，如果其他域不安全就不能用了。另外，确定JSONP请求失败，只能通过 HTML5 新增的 onerror 事件处理程序（目前没有得到浏览器支持），或者计时器定时检测是否受到响应（耗费性能）。</li>
 </ul>
-<p><strong>献上改自书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function hadleReponse(response)&#123;</div><div class="line">    console.log(&apos;successful&apos;);</div><div class="line">    // do something with response</div><div class="line">    //var responseObj = JSON.parse(response);</div><div class="line">    //...</div><div class="line">&#125;</div><div class="line">var script = document.createElement(&apos;script&apos;);</div><div class="line">script.src = &apos;http:///example.com/json/?callback=handleResponse&apos;;</div><div class="line">document.body.insertBefore(script,document.body.firstChild);</div></pre></td></tr></table></figure></p>
+<p><strong>献上改自书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hadleReponse</span>(<span class="params">response</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'successful'</span>);</div><div class="line">    <span class="comment">// do something with response</span></div><div class="line">    <span class="comment">//var responseObj = JSON.parse(response);</span></div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.src = <span class="string">'http://example.com/json/?callback=handleResponse'</span>;</div><div class="line"><span class="built_in">document</span>.body.appendChild(script);</div><div class="line"></div><div class="line"><span class="comment">// 在远程服务器上会有如下代码 handleResponse(&#123;"name":"vaule"&#125;)</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 动态加载 js 代码</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url, callback</span>)</span>&#123;</div><div class="line">  </div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>)</div><div class="line">    script.type = <span class="string">"text/javascript"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (script.readyState)&#123;  <span class="comment">//IE</span></div><div class="line">        script.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">if</span> (script.readyState == <span class="string">"loaded"</span> ||</div><div class="line">                    script.readyState == <span class="string">"complete"</span>)&#123;</div><div class="line">                script.onreadystatechange = <span class="literal">null</span>;</div><div class="line">                callback();</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">//Others</span></div><div class="line">        script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            callback();</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">  	script.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'ERROR: '</span> + err);</div><div class="line">  	&#125;</div><div class="line"></div><div class="line">    script.src = url;</div><div class="line">    <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 参考自：https://www.nczonline.net/blog/2009/06/23/loading-javascript-without-blocking/</span></div></pre></td></tr></table></figure>
 <h4 id="2-3、Comet"><a href="#2-3、Comet" class="headerlink" title="2.3、Comet"></a>2.3、Comet</h4><p>是一种更加高级的Ajax技术，它是服务器向页面推送数据，而不是像Ajax那样从页面向服务器请求数据。<br>有两种实现Comet的方式：<code>长轮询</code>和<code>HTTP流</code></p>
 <p>……明天继续，实在太晚了(￣o￣) . z Z</p>
 
@@ -443,7 +444,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/03/JS跨域请求（2）/"
-           data-title="JS跨域请求（2）" data-url="http://chulinyin.com/2016/06/03/JS跨域请求（2）/">
+           data-title="JS跨域请求（2）" data-url="http://hchulinyin.com/2016/06/03/JS跨域请求（2）/">
       </div>
     
   </div>
@@ -488,7 +489,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -505,7 +506,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

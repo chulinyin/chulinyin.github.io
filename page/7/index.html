@@ -87,7 +87,7 @@
 <meta name="description" content="褚林银的秘密基地">
 <meta property="og:type" content="website">
 <meta property="og:title" content="褚林银的秘密基地">
-<meta property="og:url" content="http://chulinyin.com/page/7/index.html">
+<meta property="og:url" content="http://hchulinyin.com/page/7/index.html">
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="褚林银的秘密基地">
 <meta name="twitter:card" content="summary">
@@ -113,7 +113,7 @@
 
 
 
-  <link rel="canonical" href="http://chulinyin.com/page/7/"/>
+  <link rel="canonical" href="http://hchulinyin.com/page/7/"/>
 
 
   <title> 褚林银的秘密基地 </title>
@@ -227,6 +227,307 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/09/初见模块化编程（1）/" itemprop="url">
+                  初见模块化编程（1）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-09T00:49:09+08:00" content="2016-06-09">
+              2016-06-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/09/初见模块化编程（1）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/09/初见模块化编程（1）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/09/初见模块化编程（1）/" class="leancloud_visitors" data-flag-title="初见模块化编程（1）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天早上在复习网易云课堂前端微专业中的“产品架构”那一块内容，主要是想理清在一款产品开发中，<code>前端所扮演的角色</code>以及<code>前端的开发流程</code>。起因是最近突然接触到了MV*架构模式，接触到工程化开发，可是有点丈二和尚摸不着头脑。经过了几个小时的复习，大致搞清楚了视图层、模型层、控制层到底是什么意思，也了解了什么叫模板以及它的作用。</p>
+<blockquote>
+<p>我们在浏览器中输入URL（地址）后，浏览器会向服务器发送一份请求，然后控制层根据请求从数据层获取所需数据，再从视图层获取模板结构，然后将数据和模板整合成一个页面文件，发送给浏览器，这时候浏览器上就会显示部分页面。然后浏览器可能会发送异步请求（ajax）,再载入其余页面。</p>
+</blockquote>
+<p>因为了解的还不是很全面深入，只是有个总体的感觉，所以还是留待下次再写吧~</p>
+<p>下面先初步讲下模块化编程吧~<br>模块化编程在C++体现地异常明显，下面开始我的<strong>半吊子C++概述</strong>：</p>
+<p>1.在C++中每个类都会有一个.h文件里面声明了类的公有、私有成员和方法，里面不写具体的代码（相当于声明一个对象所有的接口）。比如说：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// Person.h</div><div class="line">class Person&#123;</div><div class="line">    public:</div><div class="line">        char *name;</div><div class="line">        Person(char *name);//构造函数，可用于初始化成员</div><div class="line">        void sayAge();</div><div class="line">    private:</div><div class="line">        int age;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.然后在这个对象下会有若干个.h文件，一般用于对一些方法进行具体的描述:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// Person.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">Person::Person(char *name,int age)&#123;</div><div class="line">    this-&gt;name = name;</div><div class="line">    this-&gt;age = age;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// say.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">void Person::sayAge()&#123;</div><div class="line">    return age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.最后会有一个主程序叫main.cpp文件，开始调用各个对象完成所需的业务逻辑。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// main.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">void main()&#123;</div><div class="line">    Person person1(&apos;xiaoming&apos;,20);</div><div class="line">    cout&lt;&lt;&quot;age=&quot;&lt;&lt;person1.sayAge()&lt;&lt;endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>那这样做的好处是什么呢？</strong><br>在构建大型项目的时候，往往是多人协同开发，每个人负责开发不同的特性。这样写的好处就是：</p>
+<ul>
+<li>我不必了解你内部的具体代码实现，我只要看一眼你的.h文件就知道你负责的类该如何使用。</li>
+<li>进行主程序编写的时候，只要把需要用到的类包含进来，然后实例化对象之后就可以调用了。</li>
+<li>后期进行维护也会变得异常方便，如果想要增加新功能，只需要新增类或者类方法即可，如果需要修改功能，也能马上找到对应的类，然后去修改对应的方法即可。</li>
+</ul>
+<p><strong>以上就是所谓的模块化编程，在构建大型项目的时候超级有用！</strong></p>
+<p>好，那么接下来，问题来了：</p>
+<blockquote>
+<p>既然模块化编程这么好用，我为什么不能用在JS当中呢？这样可以构建网页应用，不是很爽吗？</p>
+</blockquote>
+<p>下次再说……<br>（又快1点了，主要是自己给自己挖了个坑，想用自己拿蹩脚的C++解释模块化编程，结果一开始写就发现自己已经全忘了，不得不上网查查资料，再翻翻书ค(TㅅT)）</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/08/深夜日记（13）/" itemprop="url">
+                  深夜日记（13）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-08T00:17:26+08:00" content="2016-06-08">
+              2016-06-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日记/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/08/深夜日记（13）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/08/深夜日记（13）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/08/深夜日记（13）/" class="leancloud_visitors" data-flag-title="深夜日记（13）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>今天中午的时候收到了‘淘粉吧’HR的电话，先给我分析了我的优点，然后紧接着说我的缺点是没有项目合作经验……balabala……就在我以为要黄的时候，她话锋一转，说经过内部商议后决定给我offer，然后给我讲了待遇问题以及问我什么时候能够去报到。（这里HR其实有点运用心理技巧……）</p>
+<p>首先关于待遇，她说是120一天，工作时间从9.30-6.30，双休。我听到后感觉还不错，可后来和女朋友交流了后发现，这双休的时候究竟算不算钱呢？这就有点奇怪了，如果不算钱，那还叫双休吗？如果算钱，那更不科学，你都没有给公司创造价值，凭什么给你钱？我仔细想了想，决定还是不再去追问了。因为如果有的话，那就很好，没有的话也可以接受，我的自我定位是学习项目，拼命长经验去的。如果工作不满意，可以在秋招的时候再找个更合适的。</p>
+<p>然后我问了一些关于公司的管理模式、实习生的培养模式、员工的考核制度等，大体上有个印象，但具体还是得深入公司内部之后才会知道啊~</p>
+<p>接下来就要考虑住的问题了……因为G20，暑假学校不让住，那就只能自己去找租房子的地方，这里感觉又会有很多坑等着我去踩。</p>
+<ul>
+<li>如果住学校周边，来回就很麻烦，但是胜在租金便宜以及搬迁简单。</li>
+<li>如果住公司附近，来回是方便多了（至少不用坐1个半小时的公交车），但是租金肯定很贵，找合租也麻烦，还要搬东西，最后估计还会有点难找，因为我可能只会住两个月。</li>
+</ul>
+<p>先自己尝试着找一下，不行的话就问下我哥，看看能不能帮上忙。至于为什么不一开始就找哥哥帮忙？</p>
+<ol>
+<li>是想锻炼下自己的独立自主能力</li>
+<li>是不想麻烦亲戚（有点社交恐惧）</li>
+<li>是觉得万一我哥以为我是想住他家去，把这当成是变相请求，那就麻烦大了（因为他不会收我钱，其次我住的可能也会不自在，他们也会不自在）</li>
+</ol>
+<h2 id="读书笔记"><a href="#读书笔记" class="headerlink" title="读书笔记"></a>读书笔记</h2><p>今天早上终于成功按时起床，然后看了近一小时的《Beyond feelings,a guide to criticle thinking》。下面是一些笔记：</p>
+<p><strong>Four groups of people who are more prone to errors</strong></p>
+<ol>
+<li>Who seldom reason at all, but think and act as these around them do. Such people want to avoid the difficulty that accompanies thinking for themselves.</li>
+<li>Who are determined to let passion rather than reason govern their lives. Such people are only influenced only by reasoning that supports their prejudices.</li>
+<li>Who sincerely follow reason, but lack sound, overall good sense, and so do not look at all sides of an issue. Such people tend to talk with one type of person, read one type of book, and so are exposed to only one viewpoint.</li>
+<li>Who never bother to reexamine an opinion once it has been formed. These people are often the most error prone of all, for they forfeit all opportunity to correct mistaken opinions when new evidence arises.</li>
+</ol>
+<p>以上这段话来自书中原文，略有改动。它吧更容易犯错的人分为了四类。一种是自己几乎没有什么道理，确认自己很有道理的人；一种是让情绪控制自己的人；一种是真的会寻找理由，但是却看的不全面的人；还有一种是从来不改变自己已有观点的人。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -490,7 +791,7 @@
 <li>存在一致性和安全性问题</li>
 <li>不兼容IE</li>
 </ul>
-<p><strong>下面献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">//实例化一个对象</div><div class="line">var socket = new WebSocket(&apos;ws://www.example.com/serve.php&apos;);</div><div class="line"></div><div class="line">//socket.readyState表示当前状态：</div><div class="line">WebSocket.OPENING; //正在连接</div><div class="line">WebSocket.OPEN; //已经建立连接</div><div class="line">WebSocket.CLOSING; //正在关闭连接</div><div class="line">WebSocket.OPEN; //已经关闭连接</div><div class="line"></div><div class="line">socket.close(); //关闭连接</div><div class="line">socket.send(string/json); //向服务器发送数据</div><div class="line"></div><div class="line">//客户端收到来自服务器的数据，触发message事件</div><div class="line">socket.onmessage = function(event)&#123;</div><div class="line"> var data = event.data</div><div class="line"> //处理数据</div><div class="line">&#125;; </div><div class="line"></div><div class="line">//成功建立连接时触发open事件</div><div class="line">socket.onopen = function()&#123;&#125;; </div><div class="line"></div><div class="line">//发生错误时触发error事件，连接不能持续</div><div class="line">socket.onerror = function()&#123;&#125;; </div><div class="line"></div><div class="line">//关闭连接时触发close事件</div><div class="line">//event.clean表示连接是否已经明确地关闭</div><div class="line">//event.code是服务器返回的数值状态码</div><div class="line">//event.reason表示包含服务器发回的消息</div><div class="line">socket.onclose = function(event)&#123;</div><div class="line"> console.log(&apos;Was clean&apos;+event.wasClean+&apos;Code:&apos;+event.code+&apos;Reason=&apos;+event.reason);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p><strong>下面献上书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//实例化一个对象</span></div><div class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">'ws://www.example.com/serve.php'</span>);</div><div class="line"></div><div class="line"><span class="comment">//socket.readyState表示当前状态：</span></div><div class="line">WebSocket.OPENING; <span class="comment">//正在连接</span></div><div class="line">WebSocket.OPEN; <span class="comment">//已经建立连接</span></div><div class="line">WebSocket.CLOSING; <span class="comment">//正在关闭连接</span></div><div class="line">WebSocket.OPEN; <span class="comment">//已经关闭连接</span></div><div class="line"></div><div class="line">socket.close(); <span class="comment">//关闭连接</span></div><div class="line">socket.send(string/json); <span class="comment">//向服务器发送数据</span></div><div class="line"></div><div class="line"><span class="comment">//客户端收到来自服务器的数据，触发message事件</span></div><div class="line">socket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line"> <span class="keyword">var</span> data = event.data</div><div class="line"> <span class="comment">//处理数据</span></div><div class="line">&#125;; </div><div class="line"></div><div class="line"><span class="comment">//成功建立连接时触发open事件</span></div><div class="line">socket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </div><div class="line"></div><div class="line"><span class="comment">//发生错误时触发error事件，连接不能持续</span></div><div class="line">socket.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </div><div class="line"></div><div class="line"><span class="comment">//关闭连接时触发close事件</span></div><div class="line"><span class="comment">//event.clean表示连接是否已经明确地关闭</span></div><div class="line"><span class="comment">//event.code是服务器返回的数值状态码</span></div><div class="line"><span class="comment">//event.reason表示包含服务器发回的消息</span></div><div class="line">socket.onclose = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line"> <span class="built_in">console</span>.log(<span class="string">'Was clean'</span>+event.wasClean+<span class="string">'Code:'</span>+event.code+<span class="string">'Reason='</span>+event.reason);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p><strong>至此，跨域部分算是完了……</strong></p>
 
           
@@ -622,8 +923,8 @@
           
             <h2 id="日常闲扯"><a href="#日常闲扯" class="headerlink" title="日常闲扯"></a>日常闲扯</h2><p>晚上在图书馆借书，借到了《JavaScript DOM编程艺术》、《JavaScript设计模式》和《JavaScript DOM高级程序设计》，设计模式这本书是不小心看到的，然后又想到昨天网易云课堂上蔡剑飞老师说的关于计算机基础的设计模式，就顺手翻开来看下，内容还不错，罗列了一些面向对象的主要设计模式，并用JS实现了。明天打算再借一本关于数据结构的和一本关于算法的，等考完试就抓紧开始看了。<br>哦！对了，等明天开始我必须开始重构我那个糟糕的大作业了。计划用模块化编程的方式~</p>
 <p>下面进入……</p>
-<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>SSE是根据Comet推出的API，可以用API创建到服务器的单向连接，而服务器通过这个连接可以发送任意数量的数据。SSE支持短轮询、长轮询和HTTP流，而且能够在断开连接的时候自动确定什么时候再次连接。（So easy!）不过还是有一些要求的：响应报文的MIME类型必须是<code>text/event-stream</code>，而且浏览器中的API能够解析格式输出。（什么？IE支持吗？当然不支持……）</p>
-<p><strong>下面献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var source = new EventSource(&apos;myevents.php&apos;); //实例化事件流</div><div class="line">var state = source.readyState; </div><div class="line">//state = 0:正在连接到服务器 1:打开了连接 2:关闭了连接</div><div class="line"></div><div class="line">source.onopen = function()&#123;&#125;; //建立连接时触发</div><div class="line"></div><div class="line">//从服务器接收到新事件时触发</div><div class="line">source.onmessage = function(event)&#123; </div><div class="line">    var data = event.data; //服务器发回的数据</div><div class="line">&#125;;</div><div class="line"></div><div class="line">source.onerror = funciton()&#123;&#125;; //无法建立连接时触发</div><div class="line"></div><div class="line">source.close(); //强制关闭连接并不再重新连接</div></pre></td></tr></table></figure></p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>SSE是根据只读Comet推出的API，可以用API创建到服务器的单向连接，而服务器通过这个连接可以发送任意数量的数据。SSE支持短轮询、长轮询和HTTP流，而且能够在断开连接的时候自动确定什么时候再次连接。（So easy!）不过还是有一些要求的：响应报文的MIME类型必须是<code>text/event-stream</code>，而且浏览器中的API能够解析格式输出。（什么？IE支持吗？当然不支持……）</p>
+<p><strong>下面献上书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(<span class="string">'myevents.php'</span>); <span class="comment">//实例化事件流</span></div><div class="line"><span class="keyword">var</span> state = source.readyState; </div><div class="line"><span class="comment">//state = 0:正在连接到服务器 1:打开了连接 2:关闭了连接</span></div><div class="line"></div><div class="line">source.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">//建立连接时触发</span></div><div class="line"></div><div class="line"><span class="comment">//从服务器接收到新事件时触发</span></div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </div><div class="line">    <span class="keyword">var</span> data = event.data; <span class="comment">//服务器发回的数据</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">source.onerror = funciton()&#123;&#125;; <span class="comment">//无法建立连接时触发</span></div><div class="line"></div><div class="line">source.close(); <span class="comment">//强制关闭连接并不再重新连接</span></div></pre></td></tr></table></figure></p>
 <h4 id="2-4、Web-Sockets（服务器发送事件）"><a href="#2-4、Web-Sockets（服务器发送事件）" class="headerlink" title="2.4、Web Sockets（服务器发送事件）"></a>2.4、Web Sockets（服务器发送事件）</h4><p><strong>可以提供全双工、双向通信……</strong><br>下面的明日再说~</p>
 
           
@@ -768,7 +1069,7 @@
 </blockquote>
 <p><strong>以上需自行脑补画面</strong><br>2、 HTTP流<br>HTTP流就更加简单了，服务器在收到浏览器请求后就一直保持连接（直到页面关闭或者写代码主动关闭），然后定时向浏览器发送响应数据（不论是否更新）。</p>
 <p>而在js代码中利用XHR对象就可以实现HTTP流（所以IE下又跪了）。通过监听readystatechange事件并检测readyState的值是否为3（为什么是3呢？因为等于3的时候，xhr.responseText中就会包含接收到的数据啊~），然后比较此前收到的数据，从而截取获得最新的数据。</p>
-<p><strong>献上改自书中的代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">function createStreamingClient(url,progress,finished)&#123;</div><div class="line">    var xhr = new XMLHTTPRequest(),</div><div class="line">        received = 0;</div><div class="line">    xhr.open(&apos;get&apos;,url,true);</div><div class="line">    xhr.readystatechange = fucntion()&#123;</div><div class="line">        var  data = &apos;&apos;;</div><div class="line">        if(xhr.readyState == 3)&#123;</div><div class="line">            data = xhr.responseText.substring(received);//截取最新部分数据</div><div class="line">            received += data.length;//累加取得最新数据的位置</div><div class="line">            progress(data);//将最新数据传入回调函数中</div><div class="line">        &#125;else if(xhr.readyState == 4)&#123;</div><div class="line">            finished(xhr.responseText);//将响应的全部内容传入回调</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    xhr.send(null);</div><div class="line">    return xhr;//为什么还要返回这个？</div><div class="line">&#125;</div><div class="line">var progress = function(data)&#123;</div><div class="line">    console.log(&apos;Received: &apos;+data);</div><div class="line">&#125;</div><div class="line">var finish = function(data)&#123;</div><div class="line">    console.log(&apos;Done&apos;);</div><div class="line">&#125;</div><div class="line">var client = createStreamingClient(&apos;XXX.php&apos;,progress,finish);</div></pre></td></tr></table></figure></p>
+<p><strong>献上改自书中的代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createStreamingClient</span>(<span class="params">url,progress,finished</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHTTPRequest(),</div><div class="line">        received = <span class="number">0</span>;</div><div class="line">    xhr.open(<span class="string">'get'</span>,url,<span class="literal">true</span>);</div><div class="line">    xhr.readystatechange = fucntion()&#123;</div><div class="line">        <span class="keyword">var</span>  data = <span class="string">''</span>;</div><div class="line">        <span class="keyword">if</span>(xhr.readyState == <span class="number">3</span>)&#123;</div><div class="line">            data = xhr.responseText.substring(received);<span class="comment">//截取最新部分数据</span></div><div class="line">            received += data.length;<span class="comment">//累加取得最新数据的位置</span></div><div class="line">            progress(data);<span class="comment">//将最新数据传入回调函数中</span></div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>)&#123;</div><div class="line">            finished(xhr.responseText);<span class="comment">//将响应的全部内容传入回调</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    xhr.send(<span class="literal">null</span>);</div><div class="line">    <span class="keyword">return</span> xhr;<span class="comment">//为什么还要返回这个？</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> progress = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Received: '</span>+data);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> finish = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Done'</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> client = createStreamingClient(<span class="string">'XXX.php'</span>,progress,finish);</div></pre></td></tr></table></figure></p>
 <h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>已经快两点了……明天见。</p>
 
           
@@ -914,20 +1215,21 @@
 <p>还有就是今天逛讨论区的时候（突然好后悔当初没有去关注讨论区），知道了模板到底是干嘛用的（用来生成不变的结构，然后可以嵌入动态的数据），也知道了前端架构师的职责。当然产品前端里一些什么同步/异步数据规范、页面入口规范什么的还是不知道是什么鬼。</p>
 <p>最后觉得网易云课堂的这个微专业课程真的很好，良心课程，把网易内部自己总结出来的东西都分享出来了，可以让我们少走很多弯路，而且每次看都有不一样的领悟。</p>
 <p><strong>（好长的前戏o(╯□╰)o）以上是今天的经历，下面进入……</strong></p>
-<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>昨天写了看《JS高程》关于跨域那一部分的笔记——<a href="http://chulinyin.com/2016/06/02/JS%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/">JS跨域请求（1）</a>，主要是规范的跨域技术CORS，下面继续写下其他的跨域技术：</p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>昨天写了看《JS高程》关于跨域那一部分的笔记——<a href="http://chulinyin.com/2016/06/02/JS%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/" target="_blank" rel="external">JS跨域请求（1）</a>，主要是规范的跨域技术CORS，下面继续写下其他的跨域技术：</p>
 <h3 id="2、其他跨域技术"><a href="#2、其他跨域技术" class="headerlink" title="2、其他跨域技术"></a>2、其他跨域技术</h3><p>在CORS出现以前，前端工程师们是怎么实现跨域请求的呢？</p>
 <h4 id="2-1、图像Ping"><a href="#2-1、图像Ping" class="headerlink" title="2.1、图像Ping"></a>2.1、图像Ping</h4><p>这是一种与服务器端进行简单、单向的跨域通信方式。</p>
 <ul>
-<li>优点：请求的数据是通过查询字符串的形式发送的，而响应可以使任何内容。不过通常是图片或204响应，最常用于跟踪用户点击页面或动态广告曝光次数。</li>
+<li>优点：请求的数据是通过查询字符串的形式发送的，而响应可以是任何内容。不过通常是图片或204响应，最常用于跟踪用户点击页面或动态广告曝光次数。</li>
 <li>缺点：只能发送GET请求，同时也无法访问响应文本。</li>
 </ul>
 <p><strong>献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var img = new Image();</div><div class="line">img.onload = functiion()&#123;</div><div class="line">    console.log(&apos;successful&apos;);</div><div class="line">&#125;</div><div class="line">img.onerror = function()&#123;</div><div class="line">    console.log(&apos;unsuccessful&apos;);</div><div class="line">&#125;</div><div class="line">img.src = &apos;http://www.example.com/test?name=Nicholas&apos;;</div></pre></td></tr></table></figure></p>
 <h4 id="2-1、JSONP-JSON-with-padding"><a href="#2-1、JSONP-JSON-with-padding" class="headerlink" title="2.1、JSONP (JSON with padding)"></a>2.1、JSONP (JSON with padding)</h4><p>图像Ping利用了<code>&lt;img&gt;</code>元素，而JSONP则利用了动态<code>&lt;script&gt;元素</code>，使用的时候也是令<code>src=&#39;跨域的URL&#39;</code>，这就令JSONP成为了有效的JS代码，在请求完成后，就会立即执行。<br>JSONP由两部分组成：<code>回调函数</code>+<code>JSON数据</code>，一般回调函数是通过请求中的查询字符串实现的。</p>
 <ul>
 <li>优点：能直接访问响应文本，支持浏览器与服务器的双向通信。</li>
-<li>缺点：是从其他域中加载代码并执行，如果其他域不安全就不能用了。另外，确定JSONP请求失败只能通过计时器定时检测是否受到响应（耗费性能）。</li>
+<li>缺点：是从其他域中加载代码并执行，如果其他域不安全就不能用了。另外，确定JSONP请求失败，只能通过 HTML5 新增的 onerror 事件处理程序（目前没有得到浏览器支持），或者计时器定时检测是否受到响应（耗费性能）。</li>
 </ul>
-<p><strong>献上改自书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function hadleReponse(response)&#123;</div><div class="line">    console.log(&apos;successful&apos;);</div><div class="line">    // do something with response</div><div class="line">    //var responseObj = JSON.parse(response);</div><div class="line">    //...</div><div class="line">&#125;</div><div class="line">var script = document.createElement(&apos;script&apos;);</div><div class="line">script.src = &apos;http:///example.com/json/?callback=handleResponse&apos;;</div><div class="line">document.body.insertBefore(script,document.body.firstChild);</div></pre></td></tr></table></figure></p>
+<p><strong>献上改自书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hadleReponse</span>(<span class="params">response</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'successful'</span>);</div><div class="line">    <span class="comment">// do something with response</span></div><div class="line">    <span class="comment">//var responseObj = JSON.parse(response);</span></div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.src = <span class="string">'http://example.com/json/?callback=handleResponse'</span>;</div><div class="line"><span class="built_in">document</span>.body.appendChild(script);</div><div class="line"></div><div class="line"><span class="comment">// 在远程服务器上会有如下代码 handleResponse(&#123;"name":"vaule"&#125;)</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 动态加载 js 代码</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url, callback</span>)</span>&#123;</div><div class="line">  </div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>)</div><div class="line">    script.type = <span class="string">"text/javascript"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (script.readyState)&#123;  <span class="comment">//IE</span></div><div class="line">        script.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">if</span> (script.readyState == <span class="string">"loaded"</span> ||</div><div class="line">                    script.readyState == <span class="string">"complete"</span>)&#123;</div><div class="line">                script.onreadystatechange = <span class="literal">null</span>;</div><div class="line">                callback();</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">//Others</span></div><div class="line">        script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            callback();</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">  	script.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'ERROR: '</span> + err);</div><div class="line">  	&#125;</div><div class="line"></div><div class="line">    script.src = url;</div><div class="line">    <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 参考自：https://www.nczonline.net/blog/2009/06/23/loading-javascript-without-blocking/</span></div></pre></td></tr></table></figure>
 <h4 id="2-3、Comet"><a href="#2-3、Comet" class="headerlink" title="2.3、Comet"></a>2.3、Comet</h4><p>是一种更加高级的Ajax技术，它是服务器向页面推送数据，而不是像Ajax那样从页面向服务器请求数据。<br>有两种实现Comet的方式：<code>长轮询</code>和<code>HTTP流</code></p>
 <p>……明天继续，实在太晚了(￣o￣) . z Z</p>
 
@@ -1088,15 +1390,24 @@
 <li>接收到响应后只能访问响应文本，没有办法确定响应的状态码</li>
 <li>用load事件和error事件监测响应成功或失败</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var xdr = XDomainRequest();</div><div class="line">xdr.onload = function()&#123;</div><div class="line">    console.log(xdr.responseText);</div><div class="line">&#125;</div><div class="line">xdr.error = function()&#123;</div><div class="line">    conlose.log(&apos;An error occurred.&apos;)</div><div class="line">&#125;</div><div class="line">xdr.open(&quot;get&quot;,&quot;http://www.somewhere-else.com/page&quot;);</div><div class="line">xdr.send(null);</div><div class="line">//POST方法：</div><div class="line">xdr.open(&apos;post&apos;,&apos;http://www.somewhere-else.com/page&apos;);</div><div class="line">xdr.contentType = &apos;application/x-www-form-urlencoded&apos;;</div><div class="line">xdr.send(&apos;name1=value1&amp;name2=value2&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xdr = XDomainRequest();</div><div class="line">xdr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(xdr.responseText);</div><div class="line">&#125;</div><div class="line">xdr.error = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    conlose.log(<span class="string">'An error occurred.'</span>)</div><div class="line">&#125;</div><div class="line">xdr.open(<span class="string">"get"</span>,<span class="string">"http://www.somewhere-else.com/page"</span>);</div><div class="line">xdr.send(<span class="literal">null</span>);</div><div class="line"><span class="comment">//POST方法：</span></div><div class="line">xdr.open(<span class="string">'post'</span>,<span class="string">'http://www.somewhere-else.com/page'</span>);</div><div class="line">xdr.contentType = <span class="string">'application/x-www-form-urlencoded'</span>;</div><div class="line">xdr.send(<span class="string">'name1=value1&amp;name2=value2'</span>);</div></pre></td></tr></table></figure>
 <h4 id="1-2、其他浏览器中CORS的实现"><a href="#1-2、其他浏览器中CORS的实现" class="headerlink" title="1.2、其他浏览器中CORS的实现"></a>1.2、其他浏览器中CORS的实现</h4><p>直接使用原生的XHR对象即可，不过也有一些限制：</p>
 <ul>
 <li>不能使用setRequestHeader()设置自定义的头部</li>
 <li>不能发送和接收Cookie</li>
-<li>调用getAllResponseHeaders()方法会返回空字符串<br>因为可能会和同域请求难以区分，所以如果是同域的请求最好使用相对的URL，跨域请求使用绝对URL。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var xhr = XMLHTTPRequest();</div><div class="line">xhr.onreadystatechange = function(callback)&#123;</div><div class="line">    if(xhr.readySate == 4)&#123;</div><div class="line">        if(xhr.status&gt;=200&amp;&amp;xhr.status&lt;300||xhr.status==304)&#123;</div><div class="line">            callback(xhr.responseText);</div><div class="line">            console.log(&apos;success&apos;);</div><div class="line">        &#125;else&#123;</div><div class="line">            console.log(&apos;Request was unsuccessful:&apos; + xhr.status);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">xhr.open(&quot;get&quot;,&apos;http://www.somewhere-else.com/page&apos;,ture);</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure>
-</li>
+<li>调用getAllResponseHeaders()方法会返回空字符串<br>因为可能会和同域请求难以区分，所以如果是同域的请求最好使用相对的URL，跨域请求使用绝对URL。</li>
 </ul>
-<h4 id="1-3、CORS的跨浏览器实现"><a href="#1-3、CORS的跨浏览器实现" class="headerlink" title="1.3、CORS的跨浏览器实现"></a>1.3、CORS的跨浏览器实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">function createCORSRequest(method,url)&#123;</div><div class="line">    var xhr = new XMLHTTPRequest();</div><div class="line">    if(&apos;withCredentials&apos; in xhr)&#123;</div><div class="line">        xhr.open(method,url,ture);</div><div class="line">    &#125;else if(typeof XDomianRequest != &quot;undefined&quot; )&#123;</div><div class="line">        xhr = new XDomainRequest();</div><div class="line">        xhr.open(method,url);</div><div class="line">    &#125;else&#123;</div><div class="line">        xhr = null;</div><div class="line">    &#125;</div><div class="line">    return xhr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var request = createCORSRequest(&apos;get&apos;,&apos;http://www.somewhere-else.com/page&apos;);</div><div class="line">if(request)&#123;</div><div class="line">    request.onload = function(callback)&#123;</div><div class="line">        callback(xhr.reponseText);</div><div class="line">    &#125;;</div><div class="line">    request.send();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = XMLHTTPRequest();</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(xhr.readySate == <span class="number">4</span>)&#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>||xhr.status==<span class="number">304</span>)&#123;</div><div class="line">            callback(xhr.responseText);</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'success'</span>);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'Request was unsuccessful:'</span> + xhr.status);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">xhr.open(<span class="string">"get"</span>,<span class="string">'http://www.somewhere-else.com/page'</span>,ture);</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<h4 id="1-3、CORS的跨浏览器实现"><a href="#1-3、CORS的跨浏览器实现" class="headerlink" title="1.3、CORS的跨浏览器实现"></a>1.3、CORS的跨浏览器实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 简单的（非 preflightted 和不带凭据的）跨浏览器的跨域请求方案</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCORSRequest</span>(<span class="params">method,url</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHTTPRequest();</div><div class="line">    <span class="keyword">if</span>(<span class="string">'withCredentials'</span> <span class="keyword">in</span> xhr)&#123;</div><div class="line">        xhr.open(method,url,ture);</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> XDomianRequest != <span class="string">"undefined"</span> )&#123;</div><div class="line">        xhr = <span class="keyword">new</span> XDomainRequest();</div><div class="line">        xhr.open(method,url);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        xhr = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> xhr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> request = createCORSRequest(<span class="string">'get'</span>,<span class="string">'http://www.somewhere-else.com/page'</span>);</div><div class="line"><span class="keyword">if</span>(request)&#123;</div><div class="line">    request.onload = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">        callback(xhr.reponseText);</div><div class="line">    &#125;;</div><div class="line">    request.send();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>XMLHttpRequest 和 XDomainRequest 对象共同的属性、方法、事件：</p>
+<ul>
+<li>responseText</li>
+<li>open()</li>
+<li>send()</li>
+<li>abort()</li>
+<li>onload，用于代替 onreadystatechange 检测成功</li>
+<li>onerror，用于代替 onreadystatechange 检测错误</li>
+</ul>
 <h3 id="2、其他跨域技术"><a href="#2、其他跨域技术" class="headerlink" title="2、其他跨域技术"></a>2、其他跨域技术</h3><p>明天再写……</p>
 
           
@@ -1410,289 +1721,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/深夜日记（11）/" itemprop="url">
-                  深夜日记（11）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T00:10:59+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/30/深夜日记（11）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/深夜日记（11）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/30/深夜日记（11）/" class="leancloud_visitors" data-flag-title="深夜日记（11）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="自控力"><a href="#自控力" class="headerlink" title="自控力"></a>自控力</h2><p>这两天效率出奇的低，一方面是被学校无聊的期末考以及一些恼人的杂事所纠缠不清，另一方面是关于暑假实习的焦虑，最后也是最主要的当然就是自己的自控力出现了问题。</p>
-<p>比如我会控制不住刷微信的频率（这还是在我已经卸载了微博客户端的情况下），我也会不时打一会部落冲突。这两个占据了我很多的空余时间，甚至当我在做重要事情的时候，也会突然不自觉地拿起手机。（比如就在几分钟前）</p>
-<p>还有让我看不起自己的地方是，我明明知道我在5分钟前刚刷过朋友圈，为什么刚拿起手机就又马上打开了微信呢？我明明知道别人在朋友圈发送了什么东西，很多都是与我无关的，我为什么还是要重复去做这种无意义的事呢？</p>
-<p><strong>所以自控力差真的是一种病</strong>，所以做可以忘我的事情真的很重要，不论是兴趣驱动、压力驱动亦或是责任感驱动。</p>
-<p><strong>我发现我现在控制自控力最好的办法就是把自己逼到绝路，让自己无路可选。</strong>比如:</p>
-<ul>
-<li>去年为了戒掉小说，我就干脆直接把阅读软件删了，然后不去想它，不去碰它，克制自己把它下载回来的冲动。结果</li>
-<li>去年为了戒掉CF和梦幻西游，我也是直接把游戏给卸载了。</li>
-<li>上个月为了抑制自己刷微博的频率，也是直接从手机里把它卸了。</li>
-</ul>
-<p>大禹治水是用疏导的方式，而不是用堵的方式。我相信这个在戒隐方面也是有用的，可是我做不到。明天是时候找找书，或者搜搜知乎，看看有没有什么科学的方法锻炼自己的自控力了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/29/深夜日记（10）/" itemprop="url">
-                  深夜日记（10）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-29T00:39:35+08:00" content="2016-05-29">
-              2016-05-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/29/深夜日记（10）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/深夜日记（10）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/29/深夜日记（10）/" class="leancloud_visitors" data-flag-title="深夜日记（10）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="结论驱动型证明"><a href="#结论驱动型证明" class="headerlink" title="结论驱动型证明"></a>结论驱动型证明</h2><p>生活中好像存在一种<strong>论证现象</strong>叫做<strong>结论驱动</strong>。（自己编的一个词）</p>
-<p>比如说，我在和你讲道理的时候，先讲我的论据1234……，然后再根据这些看起来很充分的论据，得出最后的结论（也就是我想要告诉你的道理）。</p>
-<p>其实那个结论很有可能是我一开始就想要得到的结论，也就是说它是我已经形成的想法（甚至是在我知道论据之前），然后为了证明这个结论，我就开始去寻找对应的论据。所以这里我做的只是证明结论（已有观点），而不是通过一些现象去发现并证明结论。</p>
-<blockquote>
-<p>简单点就是说，是由果推因，而不是由因推果。而<strong>由果推因常常会造成偏见</strong>。因为</p>
-<ol>
-<li>你的前提可能一开始就是不成立的，然而你去找到了证明你的结论的论据。</li>
-<li>你的前提仅仅在某种情况下是成立的，然而你通过不断证明这个前提，而忽略了限制因素，也没有考虑到其他情况下会得出什么结论。</li>
-</ol>
-</blockquote>
-<p>由此，我也突然联想到《Beyond feelings: a guide to critical thinking》在那4章‘what does it mean to know ’讲到的：</p>
-<blockquote>
-<p>事实上，记者是可以在“客观报道”中隐藏自己的观点。当他知道自己想要表达的想法之后，他只需要不停地打专家电话，直到遇到一些说出自己想法的专家，然后就去采访他们就可以了。</p>
-</blockquote>
-<p>这种现象在一些公众号中很常见，在一些成功励志学中更常见，有时候让人防不胜防，因为一些结论和它的论证看起来是如此的正确。所以看到一些观点的时候（即使它还附带着看起来很充分的论据），还是要留个心眼，不要轻易接受和相信，需要自己查证一下，这些观点是不是“结论驱动型证明”。</p>
-<p>也仅以此篇提醒自己。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1738,7 +1766,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1755,7 +1783,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
