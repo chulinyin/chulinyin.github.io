@@ -249,6 +249,186 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/25/精通CSS-杂记/" itemprop="url">
+                  《精通CSS》笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T23:53:29+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/25/精通CSS-杂记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/25/精通CSS-杂记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/25/精通CSS-杂记/" class="leancloud_visitors" data-flag-title="《精通CSS》笔记">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <hr>
+<h3 id="一、设计代码结构"><a href="#一、设计代码结构" class="headerlink" title="一、设计代码结构"></a><strong>一、设计代码结构</strong></h3><h4 id="id和class语义化命名"><a href="#id和class语义化命名" class="headerlink" title="id和class语义化命名"></a><strong><code>id</code>和<code>class</code>语义化命名</strong></h4><p>在分配ID和类名的时候，使用语义化的命名方式，有意义的类名的最大优点就是<strong>可以在整个网站中重用它们</strong>。比如:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- bad  --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- good --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>多个单词可以考虑用连字符<code>-</code>，因为比驼峰命名更加清晰。</p>
+<h4 id="id和class哪家强"><a href="#id和class哪家强" class="headerlink" title="id和class哪家强"></a><strong><code>id</code>和<code>class</code>哪家强</strong></h4><p>一般原则是，类应该应用于概念上相似的元素，这些元素可以出现在同一页面上的多个位置，而ID则应该应用于不同的唯一元素。只有在绝对确定这个元素只会出现一次的情况下，才应该使用ID。如果你认为以后可能需要相似的元素，就使用类。</p>
+<p>不要过度使用类，会在文档中添加无意义的代码。<br>不要过度使用<code>div</code>,这是代码结构不合理且过分复杂的一个信号。</p>
+<h3 id="二、为样式找到应用目标"><a href="#二、为样式找到应用目标" class="headerlink" title="二、为样式找到应用目标"></a><strong>二、为样式找到应用目标</strong></h3><p>按逻辑对样式进行分组以及通过添加注释使代码更容易阅读。</p>
+<h4 id="！使用注释进行分组"><a href="#！使用注释进行分组" class="headerlink" title="！使用注释进行分组"></a><strong>！使用注释进行分组</strong></h4><p>使用注释，通过搜索<code>@关键字</code>的办法快速找到对应部分。通过关键字可以区分重要的注释，如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* @todo remember to .. */</span> 表示需要修改、修复或复查</div><div class="line"><span class="comment">/* @bugfix ... */</span> 表示代码或特定浏览器遇到的问题</div><div class="line"><span class="comment">/* @workaround ... */</span> 表示不完善的权宜之计</div></pre></td></tr></table></figure>
+<h4 id="设计代码的结构"><a href="#设计代码的结构" class="headerlink" title="设计代码的结构"></a><strong>设计代码的结构</strong></h4><ol>
+<li>一般性样式 /<em> @goup general styles </em>/<ul>
+<li>主体样式</li>
+<li>reset样式</li>
+<li>链接</li>
+<li>标题</li>
+<li>其他元素</li>
+</ul>
+</li>
+<li>辅助样式 /<em> @goup helper styles </em>/<ul>
+<li>表单</li>
+<li>通知和错误</li>
+<li>一致的条目</li>
+</ul>
+</li>
+<li>页面结构 /<em> @goup page structure </em>/<ul>
+<li>标题、页脚和导航</li>
+<li>布局</li>
+<li>其他页面结构元素</li>
+</ul>
+</li>
+<li>页面组件 /<em> @goup page components </em>/<ul>
+<li>各个页面</li>
+</ul>
+</li>
+<li>覆盖 /<em> @goup page overrides </em>/</li>
+</ol>
+<h4 id="样式规范"><a href="#样式规范" class="headerlink" title="样式规范"></a><strong>样式规范</strong></h4><p>程序员、内容管理员和其他前端开发人员可能需要了解代码的元素和设计是如何工作的，而建立样式规范是维护或实现站点的好方法。可以确保网站开发以可控的方式进行，同时防止样式随着时间的推移变得散乱。还非常有助于向新职员或承包商介绍他们不熟悉、可能是很复杂的系统。</p>
+<ol>
+<li>静态样式规范：一个文档、网页或小型站点<br>解释代码和站点的视觉设计是如何组合在一起的。<ul>
+<li>最基本的样式规范应该描述一般性设计原则，如如何处理标题和其他排版元素、网格结构的设计方式是什么，以及如何使用哪个调色板。</li>
+<li>好的样式规范还应描述文章、新闻条目和通知等重复元素的处理方法，决定他们应该如何实现和不应该如何实现。</li>
+<li>更详细的样式规范可以包含编码标准，使用的HTML/CSS版本、选择的可访问性级别、浏览器支持细节和一般的编码最佳实践。</li>
+</ul>
+</li>
+<li>动态样式规范<br>因为及时更新静态样式规范需要花费大量精力，所以它们常常很快就与当前网站不同步了。所以使用动态的样式规范（“<code>模式组合</code>”）</li>
+</ol>
+<blockquote>
+<p>模式组合是一个页面或一系列页面，它们使用当前的样式表显示站点上可能出现的每种样式排列组合，从标题级别和文本样式直到特定的内容和布局类型。</p>
+</blockquote>
+<h3 id="三、可视化格式模型"><a href="#三、可视化格式模型" class="headerlink" title="三、可视化格式模型"></a><strong>三、可视化格式模型</strong></h3>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/25/精通CSS-杂记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/18/友情、爱情和亲情之友情/" itemprop="url">
                   友情、爱情和亲情之友情
                 </a>
@@ -1472,137 +1652,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/03/深夜日记（28）/" itemprop="url">
-                  深夜日记（28）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-03T00:44:12+08:00" content="2016-07-03">
-              2016-07-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/03/深夜日记（28）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/03/深夜日记（28）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/03/深夜日记（28）/" class="leancloud_visitors" data-flag-title="深夜日记（28）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天发现一种很可怕的现象，如果这种现象发生在古代我还能理解一二，但是让我惊恐的是这事儿居然发生在如今这个科技发达、信息传播速度极快的世界里。看来科技虽然能一定得改变人们的认知方式，但是对于某些装睡着的、不停自我催眠以至于沉醉在自我世界中不肯醒来的人似乎无效，他们貌似已经“百毒不侵”。</p>
-<p>为什么他们能够做到对外界反应不闻不问，甚至把外界的讥讽看成是赞扬，无耻地在自己内部开启庆功宴？为什么一个leader沉醉在自己的世界里的时候，下面的人都跟着附和？他们是在装疯卖傻，还是真的认同？</p>
-<p>某度为什么会有这么低的品味？看来一个leader的素质和品味真的决定了一个产品或者说整个公司的天花板。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1648,7 +1697,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">94</span>
+              <span class="site-state-item-count">95</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1665,7 +1714,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
