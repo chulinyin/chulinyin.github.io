@@ -1,0 +1,782 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="串口通信,Arduino,Processing,serial port communication," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="终于真正地开始准备毕业设计的东西了，虽然最终到底要实现什么样的功能还没有具体定下来，但是有些肯定用得到的东西还是可以先准备起来了～
+导师上个月粗略给我规划的毕业设计方案是在原有六足机器人（以前我们一组人一起完成的一个项目）的基础上加传感器，从而实现六足机器人姿态的实时检测。当时导师给出的步骤是：先是对传感器的选型（要有理有据），然后整合到现有的六足机器上，再搭建实验平台（如斜坡、凹凸地）进行测试，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arduino 和 Processing 的串口通信">
+<meta property="og:url" content="http://chulinyin.com/2016/12/09/Arduino 和 Processing 的学习/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="终于真正地开始准备毕业设计的东西了，虽然最终到底要实现什么样的功能还没有具体定下来，但是有些肯定用得到的东西还是可以先准备起来了～
+导师上个月粗略给我规划的毕业设计方案是在原有六足机器人（以前我们一组人一起完成的一个项目）的基础上加传感器，从而实现六足机器人姿态的实时检测。当时导师给出的步骤是：先是对传感器的选型（要有理有据），然后整合到现有的六足机器上，再搭建实验平台（如斜坡、凹凸地）进行测试，">
+<meta property="og:image" content="https://app.yinxiang.com/shard/s70/res/60afc873-fef6-400b-a4a8-6f86195fa27c">
+<meta property="og:image" content="https://app.yinxiang.com/shard/s70/res/3f04015c-452e-43bd-9fee-eabebe802e75">
+<meta property="og:image" content="https://app.yinxiang.com/shard/s70/res/3b00c78d-895d-4bd8-84be-423a4150a8cd">
+<meta property="og:updated_time" content="2016-12-09T15:11:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Arduino 和 Processing 的串口通信">
+<meta name="twitter:description" content="终于真正地开始准备毕业设计的东西了，虽然最终到底要实现什么样的功能还没有具体定下来，但是有些肯定用得到的东西还是可以先准备起来了～
+导师上个月粗略给我规划的毕业设计方案是在原有六足机器人（以前我们一组人一起完成的一个项目）的基础上加传感器，从而实现六足机器人姿态的实时检测。当时导师给出的步骤是：先是对传感器的选型（要有理有据），然后整合到现有的六足机器上，再搭建实验平台（如斜坡、凹凸地）进行测试，">
+<meta name="twitter:image" content="https://app.yinxiang.com/shard/s70/res/60afc873-fef6-400b-a4a8-6f86195fa27c">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://chulinyin.com/2016/12/09/Arduino 和 Processing 的学习/"/>
+
+
+  <title> Arduino 和 Processing 的串口通信 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Arduino 和 Processing 的串口通信
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-09T23:10:51+08:00" content="2016-12-09">
+              2016-12-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/毕业设计/" itemprop="url" rel="index">
+                    <span itemprop="name">毕业设计</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/09/Arduino 和 Processing 的学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/09/Arduino 和 Processing 的学习/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/09/Arduino 和 Processing 的学习/" class="leancloud_visitors" data-flag-title="Arduino 和 Processing 的串口通信">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>终于真正地开始准备毕业设计的东西了，虽然最终到底要实现什么样的功能还没有具体定下来，但是有些肯定用得到的东西还是可以先准备起来了～</p>
+<p>导师上个月粗略给我规划的毕业设计方案是在原有六足机器人（以前我们一组人一起完成的一个项目）的基础上加传感器，从而实现六足机器人姿态的实时检测。当时导师给出的步骤是：先是对传感器的选型（要有理有据），然后整合到现有的六足机器上，再搭建实验平台（如斜坡、凹凸地）进行测试，最后对测试所得进行分析。</p>
+<p>我以为应该不会很难，结果第一步就把我卡得死死的。前阵子一直在想如何通过理论计算推导出传感器的选型依据，结果看了一些硕士、博士论文之后，彻底懵逼 :( ，如丈二和尚摸不着头脑。（话说，丈二和尚是谁啊？算了，管他呢……）然后今天就和另外一人商量着去找下导师，看看导师能否提供一些帮助。结果老师发短信让我们下周一再去……</p>
+<p>于是，我只能静下心想一想有什么是到时候肯定需要完成的，我可以先提前准备起来。皇天不负有心人，我突然想到，既然是实时姿态检测，那最终上位机肯定需要得到六足机器人的欧拉角，也就是重心与地面参考系三个轴的夹角（看了一些论文之后，还是有些收获的 ^-^），而我想最好还能根据这些数据在上位机上实时渲染出 3D 图像，也就是能够让六足机器人的姿态可视化。</p>
+<a id="more"></a>
+<p>结合我以前对 Arduino 的浅入学习以及网上的一些查资料，我发现 Processing 和 Arduino 结合后，简直犹如倚天屠龙在手，遇神杀神，遇佛杀佛。可是，我对于 Arduino 其实真的只是浅尝辄止，而且之前压根就不知道有 Processing 这个东西，更不知道这丫的还能做上位机。于是，我深吸一口气，鼓起破釜沉舟的勇气，其实不就是了解一些 API 吗？基本的语法其实就是 C 和 JAVA 啊，虽然我 C 和 JAVA 都几乎不懂，但是我会 JS 啊，一门通，门门通，怕什么，搞起来！</p>
+<p>好了，说了这么多引（fei）言（hua）。进入正题，花了一下午和晚上，终于知道了如何让 Arduino 和 Processing 实现双工通信，并掌握了对 Processing 的最基本使用方法。另外发现了一个新大陆，就是 HTML5 中的 canvas 的API 和 Processing 中用于画图的 API 真的很像！接下来就是代码啦～</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">/* code in Arduino: */</div><div class="line">#define LED_PIN 13</div><div class="line">int output = 0;</div><div class="line">char input = 'L';</div><div class="line"></div><div class="line">void setup() &#123;</div><div class="line">  // 让 13 号 IO 口变为输出模式</div><div class="line">  pinMode(LED_PIN, OUTPUT);</div><div class="line">  // 启动串口通信，波特率设为 9600</div><div class="line">  Serial.begin(9600);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void loop() &#123;</div><div class="line">  // 串口发送</div><div class="line">  Serial.write(output);</div><div class="line">  output ++;</div><div class="line">  </div><div class="line">  // 串口读取</div><div class="line">  while(Serial.available())&#123;</div><div class="line">    input = Serial.read(); </div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  // 根据读取的字符，点亮或者熄灭 LED 灯</div><div class="line">  if (input == 'H') &#123; // If H was received</div><div class="line">    digitalWrite(LED_PIN, HIGH); </div><div class="line">  &#125; else &#123;</div><div class="line">    digitalWrite(LED_PIN, LOW); </div><div class="line">  &#125;</div><div class="line">  delay(500);</div><div class="line">&#125;</div><div class="line">/* code in Arduino */</div><div class="line"></div><div class="line">/* code in Processing: */</div></pre></td></tr></table></figure>
+<p>然后，再在Processing 中输入下面代码。（注意需要先下载 <a href="https://github.com/sojamo/controlp5" target="_blank" rel="external">controlp5库</a>）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* code in Processing: */</span></div><div class="line"></div><div class="line"><span class="comment">// 导入库</span></div><div class="line"><span class="keyword">import</span> processing.serial.*;</div><div class="line"><span class="keyword">import</span> controlP5.*;</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="comment">// 类似于 JS 中的实例化？</span></div><div class="line">Serial serialPort;</div><div class="line">ControlP5 cp5;</div><div class="line"></div><div class="line"><span class="comment">// 定义波特率，串口输入和输出</span></div><div class="line"><span class="keyword">final</span> <span class="keyword">int</span> BAUD_RATE = <span class="number">9600</span>;</div><div class="line"><span class="keyword">int</span> input;</div><div class="line"><span class="keyword">char</span> output ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="comment">// 定义画布大小</span></div><div class="line">  size(<span class="number">700</span>, <span class="number">400</span>,P3D);</div><div class="line"></div><div class="line">  String[] portNameList = Serial.list();</div><div class="line"></div><div class="line">  cp5 = <span class="keyword">new</span> ControlP5(<span class="keyword">this</span>);  </div><div class="line">  <span class="comment">// 创建可用串口的下拉列表</span></div><div class="line">  cp5.addScrollableList(<span class="string">"portList"</span>)</div><div class="line">     .setPosition(<span class="number">50</span>, <span class="number">100</span>)</div><div class="line">     .setSize(<span class="number">200</span>, <span class="number">100</span>)</div><div class="line">     .setBarHeight(<span class="number">20</span>)</div><div class="line">     .setItemHeight(<span class="number">20</span>)</div><div class="line">     .addItems(portNameList); </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="comment">// 设置背景色和前景色</span></div><div class="line">  background(<span class="number">0</span>);</div><div class="line">  fill(<span class="number">100</span>);</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(serialPort != <span class="keyword">null</span>)&#123;</div><div class="line">    <span class="keyword">if</span>( serialPort.available() &gt; <span class="number">0</span>)&#123;</div><div class="line">      input = serialPort.read();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(mouseOverRect() == <span class="keyword">true</span>)&#123;  </div><div class="line">      fill(<span class="number">204</span>);                    </div><div class="line">      serialPort.write(<span class="string">'H'</span>);           </div><div class="line">      output = <span class="string">'H'</span>;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;                        </div><div class="line">      fill(<span class="number">100</span>);                      </div><div class="line">      serialPort.write(<span class="string">'L'</span>);            </div><div class="line">      output = <span class="string">'L'</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 画一个矩形</span></div><div class="line">  rect(<span class="number">550</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>);         <span class="comment">// Draw a square</span></div><div class="line"></div><div class="line">  <span class="comment">// 显示文字</span></div><div class="line">  text(<span class="string">"Last Received: "</span> + input,<span class="number">350</span>,<span class="number">120</span>);</div><div class="line">  text(<span class="string">"Last sent: "</span> + output, <span class="number">350</span>, <span class="number">150</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 下拉列表点击的事件监听器？</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">portList</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="comment">// 关闭之前打开的串口</span></div><div class="line">  <span class="keyword">if</span>(serialPort != <span class="keyword">null</span>)&#123;</div><div class="line">    serialPort.stop();</div><div class="line">    serialPort = <span class="keyword">null</span>;</div><div class="line">    println(<span class="string">"Stopped the previous serial port"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 得到当前选中的串口名称</span></div><div class="line">  String currentPortName = cp5.get(ScrollableList.class, <span class="string">"portList"</span>)</div><div class="line">                              .getItem(n)</div><div class="line">                              .get(<span class="string">"name"</span>)</div><div class="line">    						   + <span class="string">""</span>;</div><div class="line">  </div><div class="line">  <span class="comment">// 打开选中的串口</span></div><div class="line">  <span class="keyword">try</span>&#123;</div><div class="line">    serialPort = <span class="keyword">new</span> Serial(<span class="keyword">this</span>, Serial.list()[n], BAUD_RATE);</div><div class="line">    println(<span class="string">"Succss: connect the serial port: "</span> + currentPortName);</div><div class="line">  &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">    System.err.println(<span class="string">"Error: can not connect the serial port: "</span> + currentPortName);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 检查鼠标是否经过一个矩形区域</span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">mouseOverRect</span><span class="params">()</span> </span>&#123; <span class="comment">// Test if mouse is over square</span></div><div class="line">  <span class="keyword">return</span> ((mouseX &gt;= <span class="number">550</span>) &amp;&amp; (mouseX &lt;= <span class="number">650</span>) &amp;&amp; (mouseY &gt;= <span class="number">100</span>) &amp;&amp; (mouseY &lt;= <span class="number">200</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，上无码图！<br><img src="https://app.yinxiang.com/shard/s70/res/60afc873-fef6-400b-a4a8-6f86195fa27c" alt=""></p>
+<p><img src="https://app.yinxiang.com/shard/s70/res/3f04015c-452e-43bd-9fee-eabebe802e75" alt=""></p>
+<p><img src="https://app.yinxiang.com/shard/s70/res/3b00c78d-895d-4bd8-84be-423a4150a8cd" alt=""></p>
+<p>最后感谢以下参考资料：</p>
+<ol>
+<li><a href="">ControlP5scrollableList</a></li>
+<li><a href="https://www.processing.org/reference/" target="_blank" rel="external">processing-reference</a></li>
+<li><a href="http://stackoverflow.com/questions/29107544/serial-com-port-selection-by-dropdownlist-in-processing" target="_blank" rel="external">stackoverflow-Serial COM Port Selection by DropDownList in processing</a></li>
+</ol>
+<p>明天把 Arduino 连上六轴传感器 MPU6050 后再继续搞! ~O(∩_∩)O~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/串口通信/" rel="tag">#串口通信</a>
+          
+            <a href="/tags/Arduino/" rel="tag">#Arduino</a>
+          
+            <a href="/tags/Processing/" rel="tag">#Processing</a>
+          
+            <a href="/tags/serial-port-communication/" rel="tag">#serial port communication</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/08/11月总结/" rel="next" title="11月总结">
+                <i class="fa fa-chevron-left"></i> 11月总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/09/Arduino 和 Processing 的学习/"
+           data-title="Arduino 和 Processing 的串口通信" data-url="http://chulinyin.com/2016/12/09/Arduino 和 Processing 的学习/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">96</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("dtz5YifF8WHLzMkG3byRjSM8-gzGzoHsz", "dKrJHG1PJWQKqRRc1YrOva9E");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
