@@ -249,6 +249,146 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/31/Node.js 学习笔记——HTTP 模块/" itemprop="url">
+                  Node.js 学习笔记—— HTTP 模块
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-31T00:06:48+08:00" content="2016-10-31">
+              2016-10-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/31/Node.js 学习笔记——HTTP 模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/31/Node.js 学习笔记——HTTP 模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/31/Node.js 学习笔记——HTTP 模块/" class="leancloud_visitors" data-flag-title="Node.js 学习笔记—— HTTP 模块">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在看 Node.js v4.6.1 的官方文档，发现有点儿难啃。我认为是官方文档介绍顺序的问题（当然可能是我太笨了），它没有对 API 作适当的分类和排序，只是按照字母顺序粗暴地罗列了API，这导致文档条理不清晰，看起来比较费劲。因此，我对几个我认为比较重要的模块进行再整理分类，下面是一些笔记。（如果嫌啰嗦，直接看应用部分和总结部分即可。）</p>
+<blockquote>
+<p>额，突然发现官方稳定版变成 v6.9.1 了，好在这个模块几乎没有多大变化。(＾－＾)V</p>
+</blockquote>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><a href="https://en.wikipedia.org/wiki/Client_(computing"><strong>Client</strong></a>) : 客户端，是一块计算机硬件或软件，可以访问由服务器提供的服务。服务器通常在另一个计算机系统上（也可能在本地），在这种情况下，客户端通过网络的方式访问服务。是一个计算机程序，其操作的一部分依靠发送请求到另一个计算机程序（可能在也可能不在另一台计算机上）。比如，web 浏览器就是一个客户端，可用于连接 web 服务器并显示网页。</p>
+<p><a href="https://en.wikipedia.org/wiki/Web_server"><strong>Server</strong> :</a> 服务器，是一个计算机程序或者设备，用于为其他程序或者设备（客户端）提供功能。一个管理资源并为用户提供服务的计算机软件。</p>
+<p><strong>web server</strong> : 网络服务器是一个通过 HTTP 处理请求的计算机系统。可以指整个系统，或者特指接收并管理 HTTP 请求的软件。</p>
+<p><strong>HTTP</strong> : HyperText Transfer Protocol ，超文本传输协议。 是在万维网上进行通信时所使用的协议方案。 Web 使用其作为规范，完成客户端到服务器端等一系列运作流程。</p>
+<p><strong>Agent</strong> : 代理（客户端），发起自动 HTTP 请求的半智能 Web 客户端。通常指客户端程序，如浏览器就是一个 Agent 。</p>
+<p><strong>Proxy</strong> : 代理，位于客户端和服务器之间的 HTTP 中间实体。接收由客户端发送的请求并转发给服务器，接收服务器返回的响应并转发给客户端。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/31/Node.js 学习笔记——HTTP 模块/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/18/《思维的乐趣》——花剌子模信使问题/" itemprop="url">
                   《思维的乐趣》——花剌子模信使问题
                 </a>
@@ -1567,158 +1707,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/13/这几天的收获/" itemprop="url">
-                  深夜日记-关于收获
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-13T00:22:43+08:00" content="2016-09-13">
-              2016-09-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/13/这几天的收获/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/13/这几天的收获/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/13/这几天的收获/" class="leancloud_visitors" data-flag-title="深夜日记-关于收获">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>又有好久没有写点东西了，之所以拖着不写是因为相比之下我有更加重要的事情需要完成（当然也不排除是自己太懒的可能）。</p>
-<h4 id="快速地学习前端工程化的知识（vue-webpack），并尽快产出一个项目。"><a href="#快速地学习前端工程化的知识（vue-webpack），并尽快产出一个项目。" class="headerlink" title="快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。"></a>快速地学习前端工程化的知识（vue+webpack），并尽快产出一个项目。</h4><p>刚开始时因为不知道究竟去做什么项目，于是就决定先简单做一个自己的网页版简历试试水。但途中却意外地涌现出很多奇妙的想法，把这些想法拼凑起来就是一个大型项目的雏形。这点让我很是兴奋~因为首先这个项目是有实际意义的，甚至是可以产生盈利的，其次如果能够顺利完成它，我想我就能突破现在的瓶颈，顺利进入到下一个阶段了。但是恐怕得等到校招之后我才会去动手实现它，在此之前还是先尽量把我那个简单的网页版简历做得尽善尽美，然后搞懂vue和webpack。</p>
-<h4 id="把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。"><a href="#把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。" class="headerlink" title="把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。"></a>把自己思想中一些不好的东西丢掉，重新形成自己的思想内核雏形。</h4><p>这么说可能有点玄乎，我可以详细解释一下。</p>
-<blockquote>
-<p>大概在一个月前，我开始思考我作为一个独立个体应该如何去提高自己。</p>
-</blockquote>
-<p>这样说可能太过简单，提高自己所指也有些虚无缥缈。于是我当时开始想，<strong>除去外物后，人所拥有的一些东西是什么？</strong>我总结后发现可能是下面这些：</p>
-<ul>
-<li>外在：脸、身高、穿着、身材、品味……</li>
-<li>品质：明辨是非、诚实守信、负责……</li>
-<li>能力：听说看写，以及最重要的思想内核。</li>
-</ul>
-<p>所以我就准备从这三方面开始着手提高自己。</p>
-<h5 id="外在"><a href="#外在" class="headerlink" title="外在"></a>外在</h5><p>外在除了身高，其他其实都可以通过自己的行动去改变。虽然外在相对于另外两种可能一文不值，但是它还是有很多好处的。你的外在是别人对你第一印象的基础，而让他人有个好印象还是挺好的，所以提高外在似乎是一个不错的选择。另外一个健康的身体是一切的基础，没了它一切都是白搭。所以我决定开始<strong>定期锻炼</strong>、<strong>学习基本的穿衣搭配</strong>、<strong>尽力提高自己的审美品味</strong>。</p>
-<h5 id="品质"><a href="#品质" class="headerlink" title="品质"></a>品质</h5><p>品质这种东西看不见摸不着，但是却能够被感知。培养一些优秀的品质，也是提高自己的一种方式，但是哪些才是优秀的品质呢？爱国？孝顺？不不不，自从看了王小波的《思维的乐趣》，我认为明辨是非才是最重要的品质，同时也是最难培养的品质。当自己越来越能够明辨是非的时候，其实也就知道哪些品质是优秀的了~</p>
-<p>那明辨是非的定义是什么呢？简单来说就是能够分清一件事情的因果、好坏吧~那怎么培养呢？多用正确的方式思考！比如：<strong>把个人情感放一边，基于证据去判断一件事情，在证据不充分的时候不下定论，当发现证据错误的时候及时修正判断</strong> ；<strong>观察地更精确一点、估量事情更仔细认真一点、做决定更小心一点</strong>。</p>
-<h5 id="能力"><a href="#能力" class="headerlink" title="能力"></a>能力</h5><p>最后就是能力了，本来我以为能力应该是指自己现有的技能，但是我突然发现这样想太过于狭隘了，相比之下更重要的是<strong>理解事物</strong>、<strong>学习事物</strong>和<strong>输出有价值的东西</strong>的能力。综合概括就是听说看写。也就是人的输入和输出功能，</p>
-<p>当然最重要的还是大脑处理输入的能力，也就是最重要的思想内核。所以我先把输入和输出能力放在一边，开始想办法提高自己的思想内核。可是怎么才能提高自己的CPU呢？一个种可能是去不断处理输入，渐渐形成自己的思维方式，但是这样有点慢而且可能会把自己搞糊涂。于是我就想，只能先直接吸收优秀的人的思想了，就是说直接先假定那种思想是好的。这么做可能很快，但是风险极大！所以挑选优秀的人写的优秀的书成了至关重要的一步！</p>
-<p>其实有一种很有意思的现象，如果你看了一本好书，你可能就会在这本书中发现其他好书，然后一路发现好书。但是如果你看了一本坏书，那自然可能就是一路坏书了。这种现象类似于自动控制系统中的正反馈，好的越好、坏的越坏。</p>
-<p>那怎么找好书呢？《论语》、《大学》……这些中华古典名著算不算是好书呢？因为我没有通读过，所以我不知道，但是我想我是不会再去读它们了，除非哪一天我需要一些反面教材。我先来说说我看过的并且自认为是好书的书：《思维的乐趣》、《黑客与画家》、《Beyond feelings: a guide to critical thinking》、《鲁迅全集》，这些是能够直接产生作用的书，而且这些书里面也有一些优秀的人以及一些好书。还有一些书可能是潜移默化的，其中道理是需要自己去领悟的，通常是小说：《兄弟》、《活着》、《许三观卖血记》、《三体》、《红与黑》，这些是我看过小说中自认为比较好的。</p>
-<h4 id="发现和承认自己的不足，并有改进的欲望。"><a href="#发现和承认自己的不足，并有改进的欲望。" class="headerlink" title="发现和承认自己的不足，并有改进的欲望。"></a>发现和承认自己的不足，并有改进的欲望。</h4><p>这可能是最为重要的收获了，一直以来我都没有刻意地去发现发现自己的不足，也没有刻意地想着去提高。可是现在因为要开始面对<strong>自己将步入社会并完全独立</strong>这个事实，我也终于开始去思考未来的人生，开始思考以前完全没有想过的东西。</p>
-<p>昨天刚看完王小波的《思维的乐趣》，收获可以用巨大来形容吧。这个暑假干的最明智的事情可能就是看了这本书和重看了《黑客与画家》。遇到一本好书，真的是时看时新啊~说实话，真的很羡慕他们的智慧、能够透过现象看到本质的一些东西的能力、能够较好地控制自己的情绪的能力、能够早早就心智成熟，知道自己真正需要什么。</p>
-<p>我才21，未来的路还很长。</p>
-<p>我已21，人生的三分之一。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1764,7 +1752,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1781,7 +1769,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

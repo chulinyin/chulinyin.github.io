@@ -249,6 +249,169 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/14/初见JQuery（2）/" itemprop="url">
+                  初见JQuery(2)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-14T23:24:19+08:00" content="2016-05-14">
+              2016-05-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/14/初见JQuery（2）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/14/初见JQuery（2）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/14/初见JQuery（2）/" class="leancloud_visitors" data-flag-title="初见JQuery(2)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="初见JQuery-2"><a href="#初见JQuery-2" class="headerlink" title="初见JQuery(2)"></a>初见JQuery(2)</h1><hr>
+<p>今天继续在codecademy网站学习JQuery名主要学习了以下的内容：</p>
+<p>###1. 选中、创建、添加、移动、移除HTML元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">$p = $(&apos;p&apos;); //选中p元素</div><div class="line">$p = $(&apos;&lt;p&gt;..&lt;/p&gt;&apos;); //创建p元素</div><div class="line"></div><div class="line">// 在选定元素的所有子元素之后插入</div><div class="line">$(&quot;cssSelector&quot;).append(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&apos;&lt;p&gt;Stuff!&lt;/p&gt;&apos;).appendTo(&apos;cssSelector&apos;);</div><div class="line"></div><div class="line">// 在选定元素的所有子元素之前插入p元素</div><div class="line">$(&quot;cssSelector&quot;).prepend(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&apos;&lt;p&gt;Stuff!&lt;/p&gt;&apos;).preappendTo(&apos;cssSelector&apos;);</div><div class="line"></div><div class="line">//在选定元素之后插入p元素</div><div class="line">$(&quot;cssSelector&quot;).after(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;).insertAfter(&quot;cssSelector&quot;);</div><div class="line"></div><div class="line">//在选定元素之前插入p元素</div><div class="line">$(&quot;cssSelector&quot;).before(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;);</div><div class="line">$(&quot;&lt;p&gt;Stuff!&lt;/p&gt;&quot;).insertBefore(&quot;cssSelector&quot;);</div><div class="line"></div><div class="line">$(&quot;cssSelector&quot;).after($(&apos;p&apos;));//选定p元素，并将其移动到选定元素之后</div><div class="line"></div><div class="line">$(&apos;cssSelector&apos;).empty(); //移除选定元素的所有子元素</div><div class="line">$(&apos;cssSelector&apos;).remove(); //移除选定元素及其子元素</div></pre></td></tr></table></figure></p>
+<p>###2. 修改class属性、style属性和内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// 添加、移除、切换class属性</div><div class="line">$(&apos;cssSelector&apos;).addClass(&apos;className&apos;);</div><div class="line">$(&apos;cssSelector&apos;).removeClass(&apos;className&apos;);</div><div class="line">$(&apos;cssSelector&apos;).toggleClass(&apos;className&apos;); //切换类名，有→无，无→有</div><div class="line">$(&apos;cssSelector&apos;).hasClass(&apos;className&apos;);//返回ture or false</div><div class="line">// 修改css</div><div class="line">$(&apos;cssSelector&apos;).height(&apos;200px&apos;);</div><div class="line">$(&apos;cssSelector&apos;).width(&apos;200px&apos;); //设置宽高的函数</div><div class="line">//获取或改变css属性</div><div class="line">$(&apos;cssSelector&apos;).css(&apos;attributes&apos;);</div><div class="line">$(&apos;cssSelector&apos;).css(&apos;attributes&apos;,&apos;value&apos;); </div><div class="line">$(&apos;cssSelector&apos;).css(&#123;&apos;attributes&apos;,&apos;value&apos;&#125;); </div><div class="line"></div><div class="line"></div><div class="line">//修改内容（注意三者区别有点像js中的innerHTML,innerText,value）</div><div class="line">$(&apos;p&apos;).html(); //获取第一个p元素的html内容，返回字符串</div><div class="line">$(&apos;p&apos;).html(&apos;htmString&apos;); //修改第一个p元素的html内容,返回p节点JQ对象</div><div class="line"></div><div class="line">$(&apos;p&apos;).text(); //获取所有p元素及其后代子元素的文本内容，并连接成字符串返回</div><div class="line">$(&apos;p&apos;).text(&apos;&lt;b /&gt;some text&apos;); //修改所有p元素的内容，返回JQ对象</div><div class="line"></div><div class="line">$(&apos;input&apos;).val();//获取或修改第一个input表单元素的内容</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>.html(),.text(),.val()三个方法功能上的对比</strong><br>1、.html(),.text(),.val()三种方法都是用来读取选定元素的内容。<br>2、.html()是用来读取元素的HTML内容（包括其Html标签）<br>3、.text()用来读取元素的纯文本内容，包括其后代元素<br>4、.val()是用来读取表单元素的”value”值。<br>5、和.text()方法不能使用在表单元素上,而.val()只能使用在表单元素上；另外.html()方法使用在多个元素上时，只读取第一个元素；.val()方法和.html()相同，如果其应用在多个元素上时，只能读取第一个表单元素的”value”值，但是.text()和他们不一样，如果.text()应用在多个元素上时，将会读取所有选中元素的文本内容。<br><strong>javascript 中 innerHTML()、innerTEXT()、outerHTML()、outerTEXT() 的区别：</strong><br>1、innerHTML 设置或获取位于对象起始和结束标签内的 HTML<br>2、outerHTML 设置或获取对象及其内容的 HTML 形式<br>3、innerText 设置或获取位于对象起始和结束标签内的文本<br>4、outerText 设置(包括标签)或获取(不包括标签)对象的文本<br>引用网上文章<a href="http://m.studyofnet.com/news/437.html" target="_blank" rel="external">jquery中text(),val(),html()区别</a></p>
+<p>###3. 事件绑定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 一般的事件绑定</div><div class="line">$(&apos;cssSelector&apos;).click(function()&#123;&#125;);</div><div class="line">// 动态的事件绑定</div><div class="line">$(document).on(&apos;click&apos;,&apos;cssSelector&apos;,function()&#123;&#125;);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>###4. 一般模型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(document).ready(function()&#123;</div><div class="line">    $(&apos;thingToTouch&apos;).event(function()&#123;</div><div class="line">        $(&apos;thingToAffect&apos;).effect();</div><div class="line">    &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>###5. 一些常用事件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">$(&apos;&apos;).click/dblclick/hover/focus/keydown</div><div class="line">//鼠标hover的时候执行第一个函数，离开的是偶执行第二个函数</div><div class="line">$(&apos;&apos;).hover(</div><div class="line">    function()&#123;&#125;,</div><div class="line">    function()&#123;&#125;</div><div class="line">)</div><div class="line">//通过这个可以实现一个小游戏（贪食蛇）</div><div class="line">$(document).keydown(function(key) &#123;</div><div class="line">    switch(parseInt(key.which,10)) &#123;</div><div class="line">	// 按方向键←</div><div class="line">	case 37:</div><div class="line">		$(&apos;img&apos;).animate(&#123;left: &quot;-=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	// 按方向键↑</div><div class="line">	case 38:</div><div class="line">		$(&apos;img&apos;).animate(&#123;top: &quot;-=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	// 按方向键→</div><div class="line">	case 39:</div><div class="line">		$(&apos;img&apos;).animate(&#123;left: &quot;+=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	// 按方向键↓</div><div class="line">	case 40:</div><div class="line">		$(&apos;img&apos;).animate(&#123;top: &quot;+=10px&quot;&#125;, &apos;fast&apos;);</div><div class="line">		break;</div><div class="line">	&#125;</div><div class="line">&#125;); </div><div class="line">//.animate(&#123;object&#125; [,speed])接受一个类似于css的object，然后选择的元素的样式就会从原来的状态变为我们animate接受的状态。</div></pre></td></tr></table></figure></p>
+<p>###6. JQuery UI<br>首先你得去官网下载这个库，或者直接在link的地址中添加绝对地址<code>http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css</code>在script标签的地址中添加绝对地址<code>http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(&apos;cssSelector&apos;).effect(&apos;explode&apos;); //爆炸效果</div><div class="line">$(&apos;cssSelector&apos;).effect(&apos;bounce&apos;,&#123;times:2&#125;,500);  //500ms内弹跳2次</div><div class="line">$(&apos;cssSelector&apos;).effect(&apos;slide&apos;); //滑动出现</div><div class="line">$(&apos;cssSelector&apos;).draggable(); //使div或Img元素可拖动</div><div class="line">$(&apos;cssSelector&apos;).resizable(); //使div元素的宽高通过鼠标拖动改变</div><div class="line">$(&apos;ol&apos;).selectable();  //使ol或ul列表变得可选择</div><div class="line">$(&apos;ol&apos;).sortable(); //使列表变得可拖动排序</div></pre></td></tr></table></figure></p>
+<p>好看的列表折叠展开效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;menu&quot;&gt;</div><div class="line">    &lt;h3&gt;&lt;/h3&gt;</div><div class="line">    &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</div><div class="line">    </div><div class="line">    &lt;h3&gt;jQuery UI&lt;/h3&gt;</div><div class="line">    &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</div><div class="line">    </div><div class="line">    &lt;h3&gt;&lt;/h3&gt;</div><div class="line">    &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">        </div><div class="line">&lt;script&gt;</div><div class="line">    $(document).ready(function() &#123;</div><div class="line">      $(&quot;#menu&quot;).accordion(&#123;collapsible: true, active: false&#125;);</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>###逻辑<br>今天晚饭过后本来想看个搜索一个关于逻辑的TED演讲，然后一不小心搜到了台湾大学的公开课<a href="http://ocw.aca.ntu.edu.tw/ntu-ocw/index.php/ocw/cou/100S105/2" target="_blank" rel="external">官方网址</a>，老师幽默风趣的上课方式一下子就吸引到了我。（这课在网易公开课上也能搜到）</p>
+<blockquote>
+<p>逻辑就是研究说话的‘道理’的学科</p>
+</blockquote>
+<p><strong>用数学集合的概念去论证一些东西</strong></p>
+<blockquote>
+<ol>
+<li>所有人都会死，苏格拉底是人，所以苏格拉底会死。</li>
+<li>所有人都会死，苏格拉底会死，所以苏格拉底是人。</li>
+</ol>
+</blockquote>
+<p>显然命题1逻辑是正确的，而命题2逻辑是错误的。可以将以上两个论证抽象为：</p>
+<blockquote>
+<ol>
+<li>所有A都是B，P是A，所以P是B；</li>
+<li>所有A都是B，P是B，所以P是A；</li>
+</ol>
+</blockquote>
+<p><strong>比较论证最好不要有</strong><br>一般我们都讨厌拿别人的比较，然后要求自己像别人一样。比如：</p>
+<blockquote>
+<p>XX家孩子学习如何用功，成绩如何好，获了什么什么奖，毕业找到了什么什么工作。你也要用功一点，这样以后能够找到好工作。</p>
+</blockquote>
+<p>所以我们也最好不要用比较论证的方式去论证一些东西。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/13/初见JQuery（1）/" itemprop="url">
                   初见JQuery(1)
                 </a>
@@ -1299,7 +1462,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">97</span>
+              <span class="site-state-item-count">98</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1316,7 +1479,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
