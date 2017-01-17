@@ -249,8 +249,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/03/数据结构和算法学习笔记（2）/" itemprop="url">
-                  大话数据结构学习笔记（2）
+                <a class="post-title-link" href="/2017/01/17/数据结构与算法学习笔记(3)_线性表/" itemprop="url">
+                  大话数据结构学习笔记(3)_线性表
                 </a>
               
             
@@ -263,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-03T21:05:45+08:00" content="2017-01-03">
-              2017-01-03
+            <time itemprop="dateCreated" datetime="2017-01-17T15:55:45+08:00" content="2017-01-17">
+              2017-01-17
             </time>
           </span>
 
@@ -293,8 +293,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/01/03/数据结构和算法学习笔记（2）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/03/数据结构和算法学习笔记（2）/" itemprop="commentsCount"></span>
+                <a href="/2017/01/17/数据结构与算法学习笔记(3)_线性表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/17/数据结构与算法学习笔记(3)_线性表/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -304,7 +304,7 @@
 
           
           
-             <span id="/2017/01/03/数据结构和算法学习笔记（2）/" class="leancloud_visitors" data-flag-title="大话数据结构学习笔记（2）">
+             <span id="/2017/01/17/数据结构与算法学习笔记(3)_线性表/" class="leancloud_visitors" data-flag-title="大话数据结构学习笔记(3)_线性表">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -327,29 +327,21 @@
 
       
         
-          <h3 id="算法综述"><a href="#算法综述" class="headerlink" title="算法综述"></a>算法综述</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><strong>算法：</strong>是解决<strong>特定问题</strong>的<strong>求解步骤</strong>的描述，在<strong>计算机中</strong>表现为<strong>指令的有限序列</strong>，并且每条指令表示一个或多个操作。（泡妞的技巧和方式，对于给定的问题，是以可以有多种算法解决的）</p>
-<p><strong>指令：</strong>能被人或机器等计算装置执行。</p>
-<h4 id="算法特征"><a href="#算法特征" class="headerlink" title="算法特征"></a>算法特征</h4><ol>
-<li><strong>输入：</strong>&gt;=0</li>
-<li><strong>输出：</strong>&gt;=1</li>
-<li><strong>有穷性：</strong>指算法在执行<strong>有限的步骤</strong>之后，<strong>自动结束</strong>而不会出现无限循环，并且每个步骤在<strong>可接受的时间内</strong>完成。（一定要可接收啊～）</li>
-<li><strong>确定性：</strong>每个步骤都具有确定的含义，<strong>无二义性</strong>；在一定条件下只有一条执行路径，<strong>相同的输入</strong>只能有<strong>唯一的输出</strong>结果；每个步骤都应该被<strong>精确定义</strong>而无歧义。</li>
-<li><strong>可行性：</strong> <strong>每一步</strong>都必须是<strong>可行</strong>的，即每一步都能够通过执行<strong>有限次数完成</strong>。</li>
-</ol>
-<h4 id="算法设计要求"><a href="#算法设计要求" class="headerlink" title="算法设计要求"></a>算法设计要求</h4><ol>
-<li><strong>正确性：</strong>指算法至少应该具有五个基本特征<ul>
-<li>无语法错误</li>
-<li>对合法输入能产生满足要求的输出</li>
-<li>对非法输入能够产生满足规格的说明</li>
-<li>对故意刁难的测试输入都有满足要求的输出结果</li>
+          <h3 id="线性表（List）"><a href="#线性表（List）" class="headerlink" title="线性表（List）"></a>线性表（List）</h3><p><strong>线性表：</strong>零个或多个数据元素的<strong>有限</strong>序列。（点名册、星座列表）</p>
+<p>线性表的个数n(n&gt;=0)定义为线性表的长度，当n=0时，称为空表。</p>
+<p>有序，前驱元素，后继元素， 个数&gt;=0，<strong>数据类型相同</strong>。</p>
+<p>在较复杂的线性表中，一个数据元素可以由若干个数据项组成。</p>
+<h4 id="线性表的抽象数据类型"><a href="#线性表的抽象数据类型" class="headerlink" title="线性表的抽象数据类型"></a>线性表的抽象数据类型</h4><ul>
+<li>创建和初始化( createList(), initList() )</li>
+<li>判断是否为空表( listEmpty() )</li>
+<li>重置为空表( clearList() )</li>
+<li>根据位序得到数据元素( getElem() )</li>
+<li>查找是否存在( locateElem() )</li>
+<li>线性表长度( listLength() )</li>
+<li>插入和删除( listInsert(), listDelete() )</li>
 </ul>
-</li>
-<li><strong>可读性：</strong>便于阅读、理解和交流</li>
-<li><strong>健壮性：</strong>当输入不合法时，算法也能做相关处理，而不是产生异常、崩溃等结果。</li>
-<li><strong>时间效率高</strong>和<strong>存储量低</strong></li>
-</ol>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/03/数据结构和算法学习笔记（2）/#more" rel="contents">
+            <a class="btn" href="/2017/01/17/数据结构与算法学习笔记(3)_线性表/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -400,8 +392,159 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/02/数据结构和算法学习笔记（1）/" itemprop="url">
-                  大话数据结构学习笔记（1）
+                <a class="post-title-link" href="/2017/01/03/数据结构和算法学习笔记(2)_算法综述/" itemprop="url">
+                  大话数据结构学习笔记(2)_算法综述
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-03T21:05:45+08:00" content="2017-01-03">
+              2017-01-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/03/数据结构和算法学习笔记(2)_算法综述/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/03/数据结构和算法学习笔记(2)_算法综述/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/03/数据结构和算法学习笔记(2)_算法综述/" class="leancloud_visitors" data-flag-title="大话数据结构学习笔记(2)_算法综述">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="算法综述"><a href="#算法综述" class="headerlink" title="算法综述"></a>算法综述</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><strong>算法：</strong>是解决<strong>特定问题</strong>的<strong>求解步骤</strong>的描述，在<strong>计算机中</strong>表现为<strong>指令的有限序列</strong>，并且每条指令表示一个或多个操作。（泡妞的技巧和方式，对于给定的问题，是以可以有多种算法解决的）</p>
+<p><strong>指令：</strong>能被人或机器等计算装置执行。</p>
+<h4 id="算法特征"><a href="#算法特征" class="headerlink" title="算法特征"></a>算法特征</h4><ol>
+<li><strong>输入：</strong>&gt;=0</li>
+<li><strong>输出：</strong>&gt;=1</li>
+<li><strong>有穷性：</strong>指算法在执行<strong>有限的步骤</strong>之后，<strong>自动结束</strong>而不会出现无限循环，并且每个步骤在<strong>可接受的时间内</strong>完成。（一定要可接收啊～）</li>
+<li><strong>确定性：</strong>每个步骤都具有确定的含义，<strong>无二义性</strong>；在一定条件下只有一条执行路径，<strong>相同的输入</strong>只能有<strong>唯一的输出</strong>结果；每个步骤都应该被<strong>精确定义</strong>而无歧义。</li>
+<li><strong>可行性：</strong> <strong>每一步</strong>都必须是<strong>可行</strong>的，即每一步都能够通过执行<strong>有限次数完成</strong>。</li>
+</ol>
+<h4 id="算法设计要求"><a href="#算法设计要求" class="headerlink" title="算法设计要求"></a>算法设计要求</h4><ol>
+<li><strong>正确性：</strong>指算法至少应该具有五个基本特征<ul>
+<li>无语法错误</li>
+<li>对合法输入能产生满足要求的输出</li>
+<li>对非法输入能够产生满足规格的说明</li>
+<li>对故意刁难的测试输入都有满足要求的输出结果</li>
+</ul>
+</li>
+<li><strong>可读性：</strong>便于阅读、理解和交流</li>
+<li><strong>健壮性：</strong>当输入不合法时，算法也能做相关处理，而不是产生异常、崩溃等结果。</li>
+<li><strong>时间效率高</strong>和<strong>存储量低</strong></li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/03/数据结构和算法学习笔记(2)_算法综述/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/02/数据结构和算法学习笔记(1)_数据结构绪论/" itemprop="url">
+                  大话数据结构学习笔记(1)_数据结构绪论
                 </a>
               
             
@@ -444,8 +587,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/01/02/数据结构和算法学习笔记（1）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/02/数据结构和算法学习笔记（1）/" itemprop="commentsCount"></span>
+                <a href="/2017/01/02/数据结构和算法学习笔记(1)_数据结构绪论/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/02/数据结构和算法学习笔记(1)_数据结构绪论/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -455,7 +598,7 @@
 
           
           
-             <span id="/2017/01/02/数据结构和算法学习笔记（1）/" class="leancloud_visitors" data-flag-title="大话数据结构学习笔记（1）">
+             <span id="/2017/01/02/数据结构和算法学习笔记(1)_数据结构绪论/" class="leancloud_visitors" data-flag-title="大话数据结构学习笔记(1)_数据结构绪论">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1503,143 +1646,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/05/遇见 MacBook Pro/" itemprop="url">
-                  遇见 MackBook Pro
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-05T00:31:43+08:00" content="2016-11-05">
-              2016-11-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Mac/" itemprop="url" rel="index">
-                    <span itemprop="name">Mac</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/05/遇见 MacBook Pro/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/05/遇见 MacBook Pro/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/05/遇见 MacBook Pro/" class="leancloud_visitors" data-flag-title="遇见 MackBook Pro">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>前天和昨天，一直在熟悉我心仪已久的 MacBook Pro 😄 ，今晚总算顺利地从 Windows 转到 MacOS 了，😄 开心 ~</p>
-</blockquote>
-<p>很久很久以前，有位少年突然厌倦了自己正在使用的 Asus ，开始对她各种挑剔。最开始嫌弃的，是她那笨重又难看的外表，尤其是在看到 MBP 那轻盈又简约的身姿之后，这种感觉就愈发地明显。接着，他发现她的内在也不行了，动作越来越迟缓，和她一起合作的时候能够明显地感觉到她的力不从心。然而，反过来观察 MBP，他发现她是如此美妙、卓越。此时，他知道他已经爱上了 MBP ，爱到无法自拔。</p>
-<p>但是，追求 MBP 是有代价的，对于此时的他来说，这种代价无疑是他支付不起的。正是这种约束，让他保持了耐心，继续和 Asus 合作着。但是，有耐心，最后很可能就会失去耐心。因为，只有当你做着不喜欢的事情，你才会劝说自己保持耐心。</p>
-<p>慢慢地，他发现了 Asus 越来越多的缺点，比如：不支持蓝牙（尽管他已经准备好了蓝牙键盘和鼠标）、风扇声音大、充电器笨重、开机慢。然而，有趣的是，这些缺点，在 MBP 上全都消失不见了， MBP 那美丽的外表下，不仅有一个高雅的内在，她还支持蓝牙、即开即用、长达9小时的待机、静若处子的风扇，天呐，她怎么会如此的完美无暇？他甚至开始幻想和她一起生活的场景。</p>
-<p>终于有一天，他知道他已经有足够地理由去追求她了，他知道那些所谓的代价再也不能阻碍他了，而恰好上天或许是被他强烈的意愿所感动了，赐给了他一次“天时”，居然让代价一下减轻了许多，他知道他不能再犹豫了，“天时地利人和”已经聚齐，他知道他终于能够拥有梦寐以求的 MBP 了，他颤抖着手指，在手机京东上激动地按下了付款按钮。</p>
-<p>这天晚上他睡得异常安稳，他已经沉浸在即将到来的幸福海洋之中。</p>
-<p>第二天，他起床去迎接她，那个美丽却又强大的、剽悍却又安静的她。他把她抱到了寝室，很有仪式感地打开了她。从此，他俩开始了蜜月旅行……</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1685,7 +1691,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">98</span>
+              <span class="site-state-item-count">99</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1702,7 +1708,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
