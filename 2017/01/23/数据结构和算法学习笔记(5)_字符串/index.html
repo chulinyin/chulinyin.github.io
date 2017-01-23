@@ -1,0 +1,851 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="字符串 BF算法 KMP算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="字符串（String）原理是用数值模拟非数值，通过 ASXII 码表。
+定义：串是由零个或多个字符组成的有限序列，又名字符串。
+串的比较串的比较是通过组成串的字符之间的编码来进行的，而字符的编码指的是字符在对应字符集中的序号。
+ASII编码（7位2进制）-&amp;gt; ASII编码（8位2进制）-&amp;gt; Unicode编码（16位2进制，为了兼容前者，前256个与前者完全相同）
+两个串的相等判断：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大话数据结构学习笔记(5)_字符串">
+<meta property="og:url" content="http://chulinyin.com/2017/01/23/数据结构和算法学习笔记(5)_字符串/index.html">
+<meta property="og:site_name" content="褚林银的秘密基地">
+<meta property="og:description" content="字符串（String）原理是用数值模拟非数值，通过 ASXII 码表。
+定义：串是由零个或多个字符组成的有限序列，又名字符串。
+串的比较串的比较是通过组成串的字符之间的编码来进行的，而字符的编码指的是字符在对应字符集中的序号。
+ASII编码（7位2进制）-&amp;gt; ASII编码（8位2进制）-&amp;gt; Unicode编码（16位2进制，为了兼容前者，前256个与前者完全相同）
+两个串的相等判断：">
+<meta property="og:updated_time" content="2017-01-23T12:56:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大话数据结构学习笔记(5)_字符串">
+<meta name="twitter:description" content="字符串（String）原理是用数值模拟非数值，通过 ASXII 码表。
+定义：串是由零个或多个字符组成的有限序列，又名字符串。
+串的比较串的比较是通过组成串的字符之间的编码来进行的，而字符的编码指的是字符在对应字符集中的序号。
+ASII编码（7位2进制）-&amp;gt; ASII编码（8位2进制）-&amp;gt; Unicode编码（16位2进制，为了兼容前者，前256个与前者完全相同）
+两个串的相等判断：">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://chulinyin.com/2017/01/23/数据结构和算法学习笔记(5)_字符串/"/>
+
+
+  <title> 大话数据结构学习笔记(5)_字符串 | 褚林银的秘密基地 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">褚林银的秘密基地</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Write down my thinking</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                大话数据结构学习笔记(5)_字符串
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-23T20:55:45+08:00" content="2017-01-23">
+              2017-01-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/23/数据结构和算法学习笔记(5)_字符串/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/23/数据结构和算法学习笔记(5)_字符串/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/23/数据结构和算法学习笔记(5)_字符串/" class="leancloud_visitors" data-flag-title="大话数据结构学习笔记(5)_字符串">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="字符串（String）"><a href="#字符串（String）" class="headerlink" title="字符串（String）"></a>字符串（String）</h3><p>原理是用数值模拟非数值，通过 ASXII 码表。</p>
+<p>定义：串是由零个或多个字符组成的有限序列，又名字符串。</p>
+<h4 id="串的比较"><a href="#串的比较" class="headerlink" title="串的比较"></a>串的比较</h4><p>串的比较是通过组成串的字符之间的编码来进行的，而字符的编码指的是字符在对应字符集中的序号。</p>
+<p>ASII编码（7位2进制）-&gt; ASII编码（8位2进制）-&gt; Unicode编码（16位2进制，为了兼容前者，前256个与前者完全相同）</p>
+<p>两个串的相等判断：</p>
+<p>两个串的大小判断：查字典的过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">ADT 串(string)</div><div class="line">Data</div><div class="line">	串中元素仅由一个字符组成，相邻元素具有前驱和后继关系。</div><div class="line">Operation</div><div class="line">	strAssign(T, *chars)：生成一个值为字符串常量 chars 的串T</div><div class="line">	strCopy(T, S)</div><div class="line">	clearString(S)</div><div class="line">	stringEmpty(S)</div><div class="line">	strLength(S)</div><div class="line">	strCompare(S, T)</div><div class="line">	concat(T, S1, S2)</div><div class="line">	subString(Sub, S, pos, len)</div><div class="line">	index(S, T, pos)</div><div class="line">	replace(S, T, V)：用V替换主串S中出现的所有与T相等的不重叠子串</div><div class="line">	strInsert(S, pos, T)</div><div class="line">	strDelete(S, pos, len)</div><div class="line">    </div><div class="line">endADT</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="串的抽象数据类型"><a href="#串的抽象数据类型" class="headerlink" title="串的抽象数据类型"></a>串的抽象数据类型</h4><p>存储结构：</p>
+<ul>
+<li><p>顺序：用一组地址连续的存储单元存储串中的字符序列，按预定义的大小，为每个定义的字符串变量分配一个固定长度的存储区，一般用定长数组定义。</p>
+<p>由于串操作使得串的长度超过了数组长度 MaxSize，此时上溢报错或者对多余的字符串截尾都不好，最好串的存储空间可在程序执行过程中动态分配而得。如计算机中存在一个只有存储区“堆”，该堆可由 C语言的动态分配函数 malloc() 和 free() 管理。</p>
+</li>
+<li><p>链式：……一个节点可以存放一个或者多个字符</p>
+</li>
+</ul>
+<p>串的链式结构除了在连接串与串操作时有一定方便之外，总的来说不如顺序存储灵活，性能也不如顺序存储结构好。</p>
+<h4 id="BF-brute-force-算法"><a href="#BF-brute-force-算法" class="headerlink" title="BF(brute force) 算法"></a>BF(brute force) 算法</h4><p>属于朴素的模式匹配（子串的定位操作）算法。有两个字符串 S 和 T (S 为主串，T为子串) ，长度为 N 和 M 。首先 S[1] 和 T[1] 比较，若相等，则再比较 S[2] 和 T[2] ，一直到 T[M] 为止；若 S[1] 和 T[1] 不等，则 T 向右移动一个字符的位置，再依次进行比较。</p>
+<p>最坏情况下要进行 <code>M*(N-M+1)</code> 次比较，时间复杂度为 O(M*N)。（其中N为主串长度，M为要匹配的子串长度）</p>
+<p>效率比较低。（回溯）</p>
+<h4 id="KMP-克努特-莫里斯-普拉特-模式匹配算法"><a href="#KMP-克努特-莫里斯-普拉特-模式匹配算法" class="headerlink" title="KMP(克努特-莫里斯-普拉特) 模式匹配算法"></a>KMP(克努特-莫里斯-普拉特) 模式匹配算法</h4><p>核心就是避免不必要的回溯。</p>
+<p>什么是不必要的？问题由模式串（T）决定，不是由目标串（S）决定。</p>
+<p>如当 S = “abcdefgab”， T = “abcdex”，当判断x与f不相等时，按照BF算法，T的a接下来会依次与S的b、c、d、e比较。但其实是没必要的，因为T的前五位各自均不相等，且T的前五位均各自与S的前五位相等，即 <code>S[i]==T[j](0&lt;i=j&lt;5)</code>，且T[1]!==T[2]..!=T[5]，所以T[1]肯定不等于S[2]..S[5]，所以直接比较T[1]和S[6]即可。</p>
+<p>把T串各个位置的j值变化定义为一个数组next，那么next的长度就是T串的长度。于是我们可以得到下面的函数定义：</p>
+<ul>
+<li>next[1]=0, </li>
+<li>next[j]=Max{k|1&lt;k&lt;j，且’p1…k-1’=’pj-k+1..pj-1’}当此集合不空时 ,</li>
+<li>next[j]=1，其他情况</li>
+<li>前后缀一个字符相等，k值是2，两个字符k值是3，n个相等k值就是n+1</li>
+</ul>
+<p>给模式匹配串添加一个 k 数组（也就是该算法中非著名的 next 数组。），这是一个“智能”的数组，因为它指导着模式匹配串下一步改用第几号元素去进行匹配。</p>
+<p>前缀和后缀是相对于失配位置的。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">T</th>
+<th style="text-align:center">8</th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">下标</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">7</td>
+<td>8</td>
+</tr>
+<tr>
+<td style="text-align:center">next</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2</td>
+<td>2</td>
+</tr>
+<tr>
+<td style="text-align:center">nextval(next改进)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>NEXT 数组：当模式匹配串 T 失配的时候， NEXT 数组对应的元素指导应该用 T 串的哪个元素进行下一轮的匹配。  </p>
+<p>总结改进版KMP算法：在计算出next值的同时，如果a位字符与它next值指向的b位字符相等，则该a位的nextval就指向b位的nextval值，如果不等，则该a位的nextval值就是它自己a位的next的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// i 为后缀 1 2 。3 4 5 6 7 。 8 9</span></div><div class="line"><span class="comment">// j 为前缀 0 1 0 1 2 3 4 2 1 2 3</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_next</span>(<span class="params">String T, int *next</span>)</span>&#123;</div><div class="line">  int i,j;</div><div class="line">  i = <span class="number">1</span>;</div><div class="line">  j = <span class="number">0</span>;</div><div class="line">  next[<span class="number">1</span>] = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>( i &lt; T[<span class="number">0</span>] )&#123; 				<span class="comment">// T[0]为串T的长度</span></div><div class="line">    <span class="keyword">if</span>(j == <span class="number">0</span> || T[i] == T[j])&#123; 	<span class="comment">// T[i]表示后缀单个字符，T[j]表示前缀单个字符 </span></div><div class="line">      i++;</div><div class="line">      j++；</div><div class="line">    <span class="comment">//  if(T[i] != T[j])&#123;		</span></div><div class="line">        next[i] = j;</div><div class="line">    <span class="comment">//  &#125;else&#123;</span></div><div class="line">        <span class="comment">// 去掉注释可以更优，比如当 S = aaaabcde T =aaaaax</span></div><div class="line">    <span class="comment">//    next[i] =next[j];</span></div><div class="line">    <span class="comment">//   &#125;</span></div><div class="line">      </div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">      j = next[j]; 	<span class="comment">// 若字符不相同，这j值回溯</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">index_kmp</span>(<span class="params">S, T, pos</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> i = pos;</div><div class="line">  <span class="keyword">var</span> j = <span class="number">1</span>;</div><div class="line">  <span class="keyword">var</span> next = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">255</span>);</div><div class="line">  </div><div class="line">  get_next(T, next);</div><div class="line">  </div><div class="line">  <span class="keyword">while</span>( i&lt;= S[<span class="number">0</span>] &amp;&amp; j&lt;= T[<span class="number">0</span>] )&#123;</div><div class="line">    <span class="keyword">if</span>(j == <span class="number">0</span> || S[i] == T[i])&#123;</div><div class="line">      i++;</div><div class="line">      j++;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;				<span class="comment">// 指针后退重新开始匹配</span></div><div class="line">      j = next[j];		<span class="comment">// j退回到合适的位置，i值不变</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span>(j &gt; T[<span class="number">0</span>])&#123;</div><div class="line">    <span class="keyword">return</span> i-T[<span class="number">0</span>];</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>整个算法的时间复杂度为O(n+m)，相比于BF算法的O(m*(n-m+1))要好一些。另外，KMP算法仅当T与S之间存在许多“部分匹配”的情况下才体现出它的优势，否则两者差异不明显。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/字符串-BF算法-KMP算法/" rel="tag">#字符串 BF算法 KMP算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/18/数据结构与算法学习笔记(4)_栈和队列/" rel="next" title="大话数据结构学习笔记(4)_栈和队列">
+                <i class="fa fa-chevron-left"></i> 大话数据结构学习笔记(4)_栈和队列
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/23/数据结构和算法学习笔记(5)_字符串/"
+           data-title="大话数据结构学习笔记(5)_字符串" data-url="http://chulinyin.com/2017/01/23/数据结构和算法学习笔记(5)_字符串/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="chulinyin" />
+          <p class="site-author-name" itemprop="name">chulinyin</p>
+          <p class="site-description motion-element" itemprop="description">褚林银的秘密基地</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">101</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串（String）"><span class="nav-number">1.</span> <span class="nav-text">字符串（String）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#串的比较"><span class="nav-number">1.1.</span> <span class="nav-text">串的比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#串的抽象数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">串的抽象数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BF-brute-force-算法"><span class="nav-number">1.3.</span> <span class="nav-text">BF(brute force) 算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KMP-克努特-莫里斯-普拉特-模式匹配算法"><span class="nav-number">1.4.</span> <span class="nav-text">KMP(克努特-莫里斯-普拉特) 模式匹配算法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chulinyin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chulinyin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("dtz5YifF8WHLzMkG3byRjSM8-gzGzoHsz", "dKrJHG1PJWQKqRRc1YrOva9E");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -249,6 +249,152 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/28/初见HTTP（2）/" itemprop="url">
+                  初见HTTP（2）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-28T01:06:03+08:00" content="2016-05-28">
+              2016-05-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/28/初见HTTP（2）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/28/初见HTTP（2）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/28/初见HTTP（2）/" class="leancloud_visitors" data-flag-title="初见HTTP（2）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>又是在图书馆渡过了平淡又充实的一天,基本上一直在一边看kindle的《图解HTTP》，一边做一些笔记，以便以后查阅起来方便点。单是看进度条的话，现在已经看了60%了，也就是说再看个两三天就能把HTTP最基础的部分掌握了。等看完这个就计划了解下AngularJS或者Vue或者Bootstrap，再然后就打算开始自己写组件了。</p>
+</blockquote>
+<p><strong>下面是今天的一些总结笔记：</strong></p>
+<p>HTTP协议确实很简单易用，但是也正因为这个，导致了一些它在<strong>安全方面的缺陷</strong>。所以当我们对安全性要求比较高的时候就不再单纯地只使用这个协议了，一般我们使用<strong>HTTPS</strong>。这两个不光看起来比较像，其实HTTPS就是HHTP协议再加上SSL（安全套接层）协议。<br>那么HTTP到底哪里不好，HTTPS又是哪里好呢？</p>
+<h3 id="1-1-HTTP通信使用明文（不加密），内容可能会被窃听。"><a href="#1-1-HTTP通信使用明文（不加密），内容可能会被窃听。" class="headerlink" title="1.1 HTTP通信使用明文（不加密），内容可能会被窃听。"></a>1.1 HTTP通信使用明文（不加密），内容可能会被窃听。</h3><p>因为按照TCP/IP协议族的工作机制，通信内容在所有的通信线路上都有可能被有心人看到。（用抓包或者嗅探器工具）</p>
+<h3 id="1-2-HTTPS使用加密处理，防止内容被破解"><a href="#1-2-HTTPS使用加密处理，防止内容被破解" class="headerlink" title="1.2 HTTPS使用加密处理，防止内容被破解"></a>1.2 HTTPS使用加密处理，防止内容被破解</h3><p>虽然加密后的报文本身还是会被有心人看到，但是那时候他看到的是一串混乱的字符串，如果不破解的话，肯定看不懂（相当于战争时候用的电报，需要有一张解码表才能知道电报信号的真正意思，不然你得到的只是无意义的滴滴声罢了）</p>
+<h3 id="2-1-HTTP协议对于任何人都可以发起请求"><a href="#2-1-HTTP协议对于任何人都可以发起请求" class="headerlink" title="2.1 HTTP协议对于任何人都可以发起请求"></a>2.1 HTTP协议对于任何人都可以发起请求</h3><p>也就是说，服务器只要接收到请求报文，就会返回响应报文（当然是在发送端IP地址和端口号没有被服务器设定限制访问的情况下）可是这样就会造成下面的情况：</p>
+<ul>
+<li>可能是已伪装的服务器或客户端</li>
+<li>无法确定通信的对方是否有访问权限</li>
+<li>无法判定请求来自何方，出自谁手</li>
+<li>即使无意义的请求也照单全收（无法阻止海量请求下的DOS攻击）</li>
+</ul>
+<h3 id="2-2-HTTPS查明对方的证书"><a href="#2-2-HTTPS查明对方的证书" class="headerlink" title="2.2 HTTPS查明对方的证书"></a>2.2 HTTPS查明对方的证书</h3><p>因为SSL提供了证书的手段（证书由值得信任的第三方机构颁发，用以证明服务器和客户端是实际存在的），只要确认通信方持有证书即可。</p>
+<h3 id="3-1-HTTP协议接收到的内容可能有误"><a href="#3-1-HTTP协议接收到的内容可能有误" class="headerlink" title="3.1 HTTP协议接收到的内容可能有误"></a>3.1 HTTP协议接收到的内容可能有误</h3><p>用HTTP协议的话，即使请求或响应的内容遭到篡改，用户也无法知道。因为没有任何办法可以确认’发出的请求/响应’和’接收到的请求/响应’是前后相同的。<br>当然也可以用用MD5和SHA-1等散列值校验的算法以及用来确认文件的数字签名方法，但还是需要用户自己去检查验证下载的文件是否就是原来服务器上的文件。</p>
+<h3 id="3-2-HTTPS协议可以防止篡改"><a href="#3-2-HTTPS协议可以防止篡改" class="headerlink" title="3.2 HTTPS协议可以防止篡改"></a>3.2 HTTPS协议可以防止篡改</h3><p>使用HTTPS（SSL提供认证和加密处理及摘要功能），可确保完整性。</p>
+<p><strong>不过，如果HTTPS这么好，那还有HTTP什么事？HTTPS应该也有很多不如HTTP的地方吧？明天再继续看下去吧~</strong></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/27/初见HTTP（1）/" itemprop="url">
                   初见HTTP（1）
                 </a>
@@ -1523,146 +1669,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/18/深夜日记（4）/" itemprop="url">
-                  深夜日记（4）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-18T00:07:05+08:00" content="2016-05-18">
-              2016-05-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/18/深夜日记（4）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/18/深夜日记（4）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/18/深夜日记（4）/" class="leancloud_visitors" data-flag-title="深夜日记（4）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天早上开始就一直在准备明天下午面试所需要的一些东西了，首先准备的就是自我介绍，一想到如何介绍自己我就想到了我在<code>Beyond feelings a guide to critical thinking 9th</code>中看到的’Individuality’那一节，里面讲到（请原谅我如下粗略的翻译理解：）</p>
-<blockquote>
-<p>当你问一个你是谁的时候，那个人一般会先说自己的名字，如果你再问一遍你是谁，那个人可能就会说出自己的年龄、身高、体重等。然后再深入一点，那个人可能会说出自己的性格和爱好，对事物的一些看法，以及一些不为人知的秘密。也就是说描述一个人大概可以从他的生理特征、情商和智商三方面考虑。<br>（其实后面的内容‘How did you get the way you are? How to be a individuality?’才是重点内容，不过我只引用前面的这段作为我写自我介绍的依据）</p>
-</blockquote>
-<p>然后我天真的就开始写<br><strong>1. 自己的表面特征：</strong><br>我叫XXX，是XXX大学自动专业大三的学生，想要应聘前端实习生岗位。<br><strong>2. 自己的情商</strong><br>爱好看书、跑步、听歌、设计和网页前端。我觉得自己做事认真靠谱，能对自己的选择负责：为了制作社团比赛和班级评比的PPT连续几天熬夜；能够独立自主，同时也有团队合作和管理经验：在担任社团技术部部长期间，管理技术部，并通过团队合作，为比赛做了充足的准备。<br><strong>3. 自己的智商（能力）</strong><br>我还有很强的自学能力，自学了平面设计基础，能够熟练运用ps、ai、ppt等软件；从去年九月份开始自学网页前端，报名了网易云课堂前端微专业，在今4月份完成大作业获得了优秀结业证书，现在已经能够独立完成一些简单网页的开发。<br><strong>4. 结尾</strong><br>所以我认为我有能力满足这个岗位的需求，能为公司创造价值，也希望公司能给我这个机会，谢谢~</p>
-<p>当我开始沾沾自喜的时候，突然想到应该没那么简单吧？于是我就google了一下，然后看了一些“专业人士”的文章，发现我真的太想当然了。比较靠谱的自我介绍应该是：<strong>背景介绍-职位相关经历和能力-其他的一些能力和特点-我能为公司带来什么</strong>，于是我又开始重构。T——T<br><strong>1. 背景介绍：</strong><br>我叫XXX，是XXX大学自动专业大三的学生，想要应聘前端实习生岗位。<br><strong>2. 职位相关经历和能力</strong>（这部分我最后决定采用了一个故事化的形式）<br>去年九月，我在翻墙找学习网站的时候，意外的学习了一个做网页的基础课程，从此我就走上了前端的不归路。为了能够更加系统地学习前端知识，我在寒假前报名了网易云课堂前端微专业，并在今年4月份获得了优秀结业证书，现在已经能够完成一些简单网页的开发。<br><strong>3. 其他的一些能力和特点</strong><br>我还有很强的自学能力，自学了平面设计基础，能够熟练运用ps、ai、ppt等软件；我还有较强的责任心和团队精神，做事靠谱。在大二的时候，成为了创行社团技术部部长，管理技术部并为社团提供技术支持，像制作名片、招新海报和比赛PPT。<br><strong>4. 我能为公司带来什么</strong><br>所以我认为我有能力满足这个岗位的需求，能为公司创造价值，也希望公司能给我这个机会，谢谢~（实在不知道能为公司带来什么大的改变）</p>
-<p>光是为了准备这个自我介绍，就花了我两个小时的时间….好了不说了，我要熬下夜准备其他东西了，但愿明天一切顺利。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1703,7 +1714,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">100</span>
+              <span class="site-state-item-count">101</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1720,7 +1731,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">89</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
