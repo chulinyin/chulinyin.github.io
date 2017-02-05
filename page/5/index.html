@@ -249,6 +249,156 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/15/早起日记-工作中遇到的前端坑/" itemprop="url">
+                  早起日记-关于工作中遇到的前端坑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T07:22:39+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/工作/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/早起日记-工作中遇到的前端坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/早起日记-工作中遇到的前端坑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/15/早起日记-工作中遇到的前端坑/" class="leancloud_visitors" data-flag-title="早起日记-关于工作中遇到的前端坑">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>如果从6.21号入职开始算的话，我以实习生的身份进入公司已经有将近一个月的时间了。在这个5人前端组里，过得还是十分轻松愉快的。</p>
+<ul>
+<li>没有什么险恶的钩心斗角（当然也有可能是我还是个小不点），组里的人也都很好相处；</li>
+<li>正式员工也没有架子，有什么问题他们都会积极和你一起解决。</li>
+</ul>
+<p>当然有利也有弊，轻松愉快的另一面就是：我有时会很闲，闲得自己在看文档学习甚至会打瞌睡，以致于让我觉得领工资受之有愧。</p>
+<p>不过闲归闲，这礼拜阿冰师傅给了我两个简单的需要上线的活动页面让我独立完成，有问题找他。我当时有点兴奋，因为总算可以有点事情做了。虽然页面很简单，逻辑也很简单，但途中还是遇到了不少坑，也学到了不少东西，比如说：</p>
+<ol>
+<li>如果要适配各种屏幕的手机，一般只能做到宽度自适应。（因为如果同时做到高度自适应的后果可能就是页面比例变形）。而这个时候，如果你制作的是一个单页的话（也就是说设计稿页面的高度恰好是一个屏幕的高度），<ul>
+<li>在长宽比大的手机（like iphone 6plus）中，会在底下出现一块空白，</li>
+<li>在长宽比小的手机（like iphone 4）中，需要滑动才能看到剩余部分</li>
+</ul>
+</li>
+<li>如果在微信朋友圈打开分享链接，是无法直接唤起已有APP的。<ul>
+<li>在iOS系统下，会跳转到APP Store，然后再按打开按钮，才能唤起APP；</li>
+<li>而在Android系统下，就比较恶心了。微信会先跳转到腾讯应用宝下载页面，然后如果你这时候点【腾讯应用宝安全打开】，它会自动下载腾讯应用宝；如果你点【普通打开】，它会提示在普通打开下会存在安全隐患，然后给你两个选项【继续】和【安全打开】，按照人类的逻辑，这时候我不管点哪一个都应该唤起APP。然而结果是，你如果点【安全打开】，又会进入下载。必须点继续才能唤起APP。</li>
+</ul>
+</li>
+<li>还有一些历史遗留问题，我使用了公司规范里的一些函数，结果有几个函数内部的地址不正确，导致在IOS和Android下结果不一样。后来我们找了半小时，然后问主管（我们的老大）洋哥，然后洋哥再找客户端开发人员，才找到问题所在。</li>
+</ol>
+<p>对于问题1，目前只能通过给<code>body</code>设置一个背景色，让它和页面底部的颜色一致，使页面在大屏手机下不至于出现一块空白。而小屏手机页面无法完全展示，需要滑动才能看到其余部分的问题还是没法解决。【除非设计稿一开始的尺寸是按照小屏手机来设计的】。</p>
+<p>不知不觉已经7月半了，我得加速看算法和数据结构才行了！<br>Fighting!</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/10/深夜日记-关于买东西/" itemprop="url">
                   深夜日记--关于买东西
                 </a>
@@ -1779,139 +1929,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/29/深夜日记（27）/" itemprop="url">
-                  深夜日记（27）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-29T23:33:25+08:00" content="2016-06-29">
-              2016-06-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/29/深夜日记（27）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/29/深夜日记（27）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/29/深夜日记（27）/" class="leancloud_visitors" data-flag-title="深夜日记（27）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天在公司上午的时候睡意朦胧，下午的时候眼睛又开始痛，总之这个效率我自己都很不满意。不过总算是把静态页面写完了，JS逻辑部分因为用了JQ再加上像<code>flexible</code>、<code>swiper</code>、<code>lazyLoad</code>等组件，因此真正需要我写的只有大概100-200行而已，明天估计就能搞定了~</p>
-<p>下面还是说说反思吧~</p>
-<p>一开始我自以为写静态页面已经不成问题了，可是这么一个简单的手机单页，真正写起来的时候，突然发现我手太生了，写起来很慢很慢。1写HTML还没有养成自己的风格，写CSS的时候又没有总结出一套自己的布局理论，所以总之就是一片混乱~远远没有达到得心应手的地步。</p>
-<p>以上情况只能说明我写得太少太少了（也是，我算上这个总共也就写了两个完整的页面），其次总结得也太少了。任重道远呐~</p>
-<p>哦！对了，这次写静态页面的时候，淌过了不少坑，有不懂的地方可以请教别人的感觉真棒！另外即使写完了，还是一眼被阿冰师傅瞧出很多坑。哈哈哈！加油吧！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1957,7 +1974,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">102</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1974,7 +1991,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-count">92</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

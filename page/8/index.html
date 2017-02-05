@@ -249,6 +249,156 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/09/初见模块化编程（1）/" itemprop="url">
+                  初见模块化编程（1）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-09T00:49:09+08:00" content="2016-06-09">
+              2016-06-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/09/初见模块化编程（1）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/09/初见模块化编程（1）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/09/初见模块化编程（1）/" class="leancloud_visitors" data-flag-title="初见模块化编程（1）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天早上在复习网易云课堂前端微专业中的“产品架构”那一块内容，主要是想理清在一款产品开发中，<code>前端所扮演的角色</code>以及<code>前端的开发流程</code>。起因是最近突然接触到了MV*架构模式，接触到工程化开发，可是有点丈二和尚摸不着头脑。经过了几个小时的复习，大致搞清楚了视图层、模型层、控制层到底是什么意思，也了解了什么叫模板以及它的作用。</p>
+<blockquote>
+<p>我们在浏览器中输入URL（地址）后，浏览器会向服务器发送一份请求，然后控制层根据请求从数据层获取所需数据，再从视图层获取模板结构，然后将数据和模板整合成一个页面文件，发送给浏览器，这时候浏览器上就会显示部分页面。然后浏览器可能会发送异步请求（ajax）,再载入其余页面。</p>
+</blockquote>
+<p>因为了解的还不是很全面深入，只是有个总体的感觉，所以还是留待下次再写吧~</p>
+<p>下面先初步讲下模块化编程吧~<br>模块化编程在C++体现地异常明显，下面开始我的<strong>半吊子C++概述</strong>：</p>
+<p>1.在C++中每个类都会有一个.h文件里面声明了类的公有、私有成员和方法，里面不写具体的代码（相当于声明一个对象所有的接口）。比如说：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// Person.h</div><div class="line">class Person&#123;</div><div class="line">    public:</div><div class="line">        char *name;</div><div class="line">        Person(char *name);//构造函数，可用于初始化成员</div><div class="line">        void sayAge();</div><div class="line">    private:</div><div class="line">        int age;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.然后在这个对象下会有若干个.h文件，一般用于对一些方法进行具体的描述:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// Person.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">Person::Person(char *name,int age)&#123;</div><div class="line">    this-&gt;name = name;</div><div class="line">    this-&gt;age = age;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// say.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">void Person::sayAge()&#123;</div><div class="line">    return age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.最后会有一个主程序叫main.cpp文件，开始调用各个对象完成所需的业务逻辑。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// main.cpp</div><div class="line">#include &quot;Person.h&quot;</div><div class="line">void main()&#123;</div><div class="line">    Person person1(&apos;xiaoming&apos;,20);</div><div class="line">    cout&lt;&lt;&quot;age=&quot;&lt;&lt;person1.sayAge()&lt;&lt;endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>那这样做的好处是什么呢？</strong><br>在构建大型项目的时候，往往是多人协同开发，每个人负责开发不同的特性。这样写的好处就是：</p>
+<ul>
+<li>我不必了解你内部的具体代码实现，我只要看一眼你的.h文件就知道你负责的类该如何使用。</li>
+<li>进行主程序编写的时候，只要把需要用到的类包含进来，然后实例化对象之后就可以调用了。</li>
+<li>后期进行维护也会变得异常方便，如果想要增加新功能，只需要新增类或者类方法即可，如果需要修改功能，也能马上找到对应的类，然后去修改对应的方法即可。</li>
+</ul>
+<p><strong>以上就是所谓的模块化编程，在构建大型项目的时候超级有用！</strong></p>
+<p>好，那么接下来，问题来了：</p>
+<blockquote>
+<p>既然模块化编程这么好用，我为什么不能用在JS当中呢？这样可以构建网页应用，不是很爽吗？</p>
+</blockquote>
+<p>下次再说……<br>（又快1点了，主要是自己给自己挖了个坑，想用自己拿蹩脚的C++解释模块化编程，结果一开始写就发现自己已经全忘了，不得不上网查查资料，再翻翻书ค(TㅅT)）</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/08/深夜日记（13）/" itemprop="url">
                   深夜日记（13）
                 </a>
@@ -1571,145 +1721,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/深夜日记（11）/" itemprop="url">
-                  深夜日记（11）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T00:10:59+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/30/深夜日记（11）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/深夜日记（11）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/30/深夜日记（11）/" class="leancloud_visitors" data-flag-title="深夜日记（11）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="自控力"><a href="#自控力" class="headerlink" title="自控力"></a>自控力</h2><p>这两天效率出奇的低，一方面是被学校无聊的期末考以及一些恼人的杂事所纠缠不清，另一方面是关于暑假实习的焦虑，最后也是最主要的当然就是自己的自控力出现了问题。</p>
-<p>比如我会控制不住刷微信的频率（这还是在我已经卸载了微博客户端的情况下），我也会不时打一会部落冲突。这两个占据了我很多的空余时间，甚至当我在做重要事情的时候，也会突然不自觉地拿起手机。（比如就在几分钟前）</p>
-<p>还有让我看不起自己的地方是，我明明知道我在5分钟前刚刷过朋友圈，为什么刚拿起手机就又马上打开了微信呢？我明明知道别人在朋友圈发送了什么东西，很多都是与我无关的，我为什么还是要重复去做这种无意义的事呢？</p>
-<p><strong>所以自控力差真的是一种病</strong>，所以做可以忘我的事情真的很重要，不论是兴趣驱动、压力驱动亦或是责任感驱动。</p>
-<p><strong>我发现我现在控制自控力最好的办法就是把自己逼到绝路，让自己无路可选。</strong>比如:</p>
-<ul>
-<li>去年为了戒掉小说，我就干脆直接把阅读软件删了，然后不去想它，不去碰它，克制自己把它下载回来的冲动。结果</li>
-<li>去年为了戒掉CF和梦幻西游，我也是直接把游戏给卸载了。</li>
-<li>上个月为了抑制自己刷微博的频率，也是直接从手机里把它卸了。</li>
-</ul>
-<p>大禹治水是用疏导的方式，而不是用堵的方式。我相信这个在戒隐方面也是有用的，可是我做不到。明天是时候找找书，或者搜搜知乎，看看有没有什么科学的方法锻炼自己的自控力了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1755,7 +1766,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">102</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1772,7 +1783,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-count">92</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
