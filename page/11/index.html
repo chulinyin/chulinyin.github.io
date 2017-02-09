@@ -249,6 +249,156 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/12/深夜日记（3）/" itemprop="url">
+                  深夜日记（3）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-12T22:44:49+08:00" content="2016-04-12">
+              2016-04-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日记/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/12/深夜日记（3）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/12/深夜日记（3）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/12/深夜日记（3）/" class="leancloud_visitors" data-flag-title="深夜日记（3）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="关于作业"><a href="#关于作业" class="headerlink" title="关于作业"></a>关于作业</h3><p>大学里有一个怪异的现象，一部分人总是等着别人完成作业，完成老师布置的任务，然后坐享其成。我也会有这种行为，虽然我觉得这是极其诡异和不正常的。这是一种怎么样的心理呢？</p>
+<ul>
+<li>这事对我来说是浪费时间，可是我又不得不把它完成。</li>
+<li>反正最后复习的时候可以补回来的，先抄着也是一样的。</li>
+</ul>
+<h3 id="关于实习"><a href="#关于实习" class="headerlink" title="关于实习"></a>关于实习</h3><p>虽然从三月份就开始想着要找实习了，可是一直拖到现在我也还没有投出去过一份简历。原因无大概就是    </p>
+<ul>
+<li>实力不够，以至于严重信心不足</li>
+<li>起步确实太晚了，好多需要的东西都还没了解到</li>
+<li>自己确实不足够勤奋努力，天赋也不强</li>
+</ul>
+<h3 id="关于效率"><a href="#关于效率" class="headerlink" title="关于效率"></a>关于效率</h3><p>为什么自己做事效率有点低呢？感觉自己的专注程度和环境有很大关系，如果环境不好，我就很容易分心。重点还是自我控制力不够吧~</p>
+<h3 id="关于js的收获"><a href="#关于js的收获" class="headerlink" title="关于js的收获"></a>关于js的收获</h3><p>今天在做百度前端学院的一道题的时候，需要验证输入字符串</p>
+<ol>
+<li>城市名必须是中英文字符</li>
+<li>空气指数必须是正整数<br>第一反应就是想有没有对应的判断函数，在脑海里使劲寻觅了一番，发现没有之后，就开始想到用正则表达式的<code>.test()</code>方法：<code>reg.test(str);</code><blockquote>
+<p>当str字符中匹配到正则表达式reg时就返回true,否则就返回false.</p>
+</blockquote>
+</li>
+</ol>
+<p>然后就开始想用什么正则表达式，判断英文字符简单，以前有学到过<code>/.*[a-z A-Z]/</code>表示匹配字符串中出现的<strong>英文大小写字母的字符</strong>。<br>可是中文字符是什么鬼？于是就google了一下，原来使用<code>/[/u4e00-\u9fa5]/</code>就可以匹配字符串中出现的<strong>中文字符</strong>。<br>可是如果写成<code>/[a-z A-Z \u4e00-\u9fa5]/.test(str)</code>只能检测到字符串中是否含有符合要求的字符串，可是题目的要求是字符串中必须全是符合要求的，那怎么办呢？<br>这时候只要反转一下，我们判断字符串中是否含有不符合要求的字符不就OK了吗？于是要求1就顺利可以完成了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function isEnglishOrChineseChar(str)&#123;</div><div class="line">    var reg = /[^a-z A-Z \u4e00-\u9fa5]/;</div><div class="line">    if(reg.test(str))&#123;</div><div class="line">        return false;</div><div class="line">    &#125;else&#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而题目相对就简单多了，只需要使用<code>/\D/</code>就可以匹配字符串中出现的<strong>非数字字符</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function isInteger(str)&#123;</div><div class="line">    var reg = /\D/;</div><div class="line">    if(reg.test(str))&#123;</div><div class="line">        return false;</div><div class="line">    &#125;else&#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/10/关于《海边的卡夫卡》/" itemprop="url">
                   关于《海边的卡夫卡》
                 </a>
@@ -720,7 +870,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">104</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -737,7 +887,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

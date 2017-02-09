@@ -249,6 +249,146 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/31/初见HTTP（3）/" itemprop="url">
+                  初见HTTP（3）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-31T00:52:16+08:00" content="2016-05-31">
+              2016-05-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/31/初见HTTP（3）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/初见HTTP（3）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/31/初见HTTP（3）/" class="leancloud_visitors" data-flag-title="初见HTTP（3）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>今天又收到了笔试+面试的通知，约在了后天早上，也就是说明天我要把基础过一遍，然后争取自己写一个组件。(～ o ～)~zZ</p>
+<p>晚上的时候开始继续看《图解HTTP》，本来按照正常进度，一个晚上大概能从60%看到75%。可是到7点左右的时候，我就突然决定先不做笔记，直接把内容过一遍，这样做是有两个打算，一是为了应对后天的面试，二是等后天过后再反过头来看，继续做笔记加深印象。</p>
+</blockquote>
+<p><strong>下面是一些笔记：</strong></p>
+<h3 id="1-HTTPS-HTTP-加密-认证-完整性保护"><a href="#1-HTTPS-HTTP-加密-认证-完整性保护" class="headerlink" title="1. HTTPS = HTTP+加密+认证+完整性保护"></a>1. HTTPS = HTTP+加密+认证+完整性保护</h3><h4 id="1-1-加密"><a href="#1-1-加密" class="headerlink" title="1.1 加密"></a>1.1 加密</h4><p>用HTTP协议的时候，一般都是直接和传输层TCP进行通信，现在在它们中间增加了一个SSL协议（用于加密）。<br>SSL采用了“公开秘钥加密”的加密处理方式，那什么叫<strong>公开秘钥加密</strong>呢？</p>
+<ul>
+<li>共享秘钥加密：<br>传统的加密方式就是加密和解密都是用一个秘钥，而在以这种方式加密时，必须将秘钥也发送给对方（相当于有一把锁和一把钥匙，客户端发锁用钥匙锁起来之后，同时将锁和钥匙发送给服务器，服务器再用钥匙把锁打开），这里就出现了一个很大的安全隐患，因为在发送过程中，秘钥很容易被截获，那么所谓的加密也就不成立了。</li>
+<li>公开秘钥加密：<br>为了解决上述的问题，于是采用一对相互匹配但是非对称的秘钥：私有秘钥和公开秘钥。客户端接收到服务器发送的公开秘钥，然后用它对报文加密后发送给服务器，服务器在用公开秘钥对应的私有秘钥进行解密（相当于一把锁有两把钥匙，公开的那把钥匙大家都有，但是公开的钥匙只能锁住锁，却不能打开锁，想要打开锁必须使用对应的那把私有的钥匙。）于是即使公开秘钥和密文都被截获，也不能破解密文了。</li>
+</ul>
+<h4 id="1-2认证"><a href="#1-2认证" class="headerlink" title="1.2认证"></a>1.2认证</h4><p>其实即使使用公开秘钥加密的方式，还是会存在安全问题。试想在传送的过程中，公开秘钥被替换了呢？那不就又什么都知道了？（相当于在传送公开钥匙和锁的时候，坏人把公开的钥匙换成了自己的，于是当一方用这把伪造的公开钥匙加密文件并发送，坏人就可以截获，然后自己的私有秘钥进行破解。）<br>所以验证公开秘钥就变得异常重要，于是第三方认证机构出现了，他们为真正的服务器提供了公开秘钥的证书，当客户端接收到证书并查验后就可以知道是不是真的公开秘钥了。</p>
+<h4 id="1-3完整性保护"><a href="#1-3完整性保护" class="headerlink" title="1.3完整性保护"></a>1.3完整性保护</h4><p>使用HTTPS（SSL提供认证和加密处理及摘要功能），可确保完整性。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/30/深夜日记（11）/" itemprop="url">
                   深夜日记（11）
                 </a>
@@ -1532,153 +1672,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/21/深夜日记（7）/" itemprop="url">
-                  深夜日记（7）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-21T00:03:42+08:00" content="2016-05-21">
-              2016-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/21/深夜日记（7）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/21/深夜日记（7）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/21/深夜日记（7）/" class="leancloud_visitors" data-flag-title="深夜日记（7）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于昨晚1.30才睡，今天把6.30的闹钟摁掉后，一觉醒来已经是7.30了。然后赶紧起床，匆匆洗漱一番就去图书馆了。现在没有特殊情况，早上都会至少看半小时的《Beyond feelings,a guide to critical thinking》，这本书都已经出到第九版了。评价一本书的好坏有时候看看它最新的版次就知道了，一般一本书能够出到第四第五版就已经算得上是一本好书了，所以从这里也能看出这本书有多厉害了。</p>
-<p>今天没有看关于前端的东西，因为下周一要考试，只能先缓一缓。写点看书的笔记吧：</p>
-<h3 id="关于真理（Truth-is-discovered-not-created）"><a href="#关于真理（Truth-is-discovered-not-created）" class="headerlink" title="关于真理（Truth is discovered, not created）"></a>关于真理（Truth is discovered, not created）</h3><ol>
-<li>我们的观点和信念都不可避免地被其他人所影响，特别是在我们还是儿童的时候；</li>
-<li>观察和记忆都是不完美的（因为它们会被很多东西影响）；</li>
-<li>我们得到的信息可能是不精确，不完整的；</li>
-</ol>
-<p>所以我们确实创造了一些东西，但那不是真理。我们像接受真理一样接受的信念和观点都很容易出错。真理可以通过发现而被捕获。</p>
-<p><strong>对于真理，我们应该在脑海中有这样的框架：</strong></p>
-<blockquote>
-<p>我知道我有局限并且很容易犯错。当然我也永远不能找到我想要知道的问题的答案。但是我可以观察地更仔细点，衡量实物更全面彻底一点，下决心更小心点。如果我这样做了，我将会离真理更加近一点。（I know I have limitations and can easily be mistaken. And surely I will never find the answers I’d like to. But I can observe a little more accurately, weigh things a little more throughly, and make up my mind a little more carefully. If I do so, I will be a little closer to the truth.）</p>
-</blockquote>
-<h3 id="关于一些疑惑"><a href="#关于一些疑惑" class="headerlink" title="关于一些疑惑"></a>关于一些疑惑</h3><p>我们生活中难免需要找别人帮忙或者帮别人的忙，那么我们找人的依据是什么呢？也就是说，我现在有A这件事情需要比人帮助，我为什么选择Person1作为求助对象而不是Person2呢？我们选择的标准是什么呢？或许我们只是根据需要求助的事情，在脑海中依靠感觉搜索求助对象的。</p>
-<p>我在想，当我们需要求助的事情是一件体力劳动，只是因为自己暂时有事或者因为忘了，需要别人帮助的时候，会选择什么样的人来求助呢？</p>
-<ol>
-<li>选择自己最好的朋友？</li>
-<li>选择空闲并且不会拒绝的人？</li>
-<li>选择看起来好欺负的人？</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1724,7 +1717,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">104</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1741,7 +1734,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
