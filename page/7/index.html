@@ -249,6 +249,150 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/22/window-sessionStorage的妙用（2）/" itemprop="url">
+                  window.sessionStorage的妙用（2）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-22T23:32:01+08:00" content="2016-06-22">
+              2016-06-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/22/window-sessionStorage的妙用（2）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/22/window-sessionStorage的妙用（2）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/22/window-sessionStorage的妙用（2）/" class="leancloud_visitors" data-flag-title="window.sessionStorage的妙用（2）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近慢慢悟到：<strong>特性一定对应着相应的需求</strong>，如果你看到一个API或者对象有某些你不了解的特性，尝试去想下它对应的需求是什么，或者说它可以实现什么需求？</p>
+<blockquote>
+<p>昨天说到,将window.sessionStorage用于页面误刷新之后的表单内容恢复操作，然后还悄悄卖了个关子。今天就来探索它恢复(回退)页面后，数据依然保存着的特性的妙用！</p>
+</blockquote>
+<p>当我们顺着APP逻辑逐级向下走的时候，我们可能会需要返回上一级的菜单去重新选择另一个页面（分支）。那当我们返回上一级菜单或者页面的时候，我们可能想要让返回页面出现在我们上次浏览到的位置而不是再重头向下滑动屏幕。这样讲好像不是很生动，还是举个例子吧~比如：</p>
+<blockquote>
+<p>我们在上网购物的时候，一般会在一个商品简介列表页面中寻找中意的商品。向下滑动屏幕滑了半天，终于发现一个比较满意的，然后点击进去看详情发现“我靠！居然是个标题党！”，于是怒戳返回按钮……<br><strong>注意</strong>：这时候如果发现返回之后列表还是原来那个列表，可滚动条却是在顶部，也就是说我需要重新向下滑半天屏幕，重新浏览一遍我已经看过并且不感兴趣的商品简介，这时候是不是被恶心得想吐？<br><strong>So</strong>更人性化的方案应该是：返回之后滚动条已经自动滚到我刚才最后浏览到的位置，那么我可以愉快地继续往下找了！</p>
+</blockquote>
+<p>上面这个案例的人性化体现在：</p>
+<ol>
+<li>避免重复的无意义的劳动</li>
+<li>更符合人类直觉</li>
+<li>有效缓解用户的暴怒情绪</li>
+</ol>
+<p>说了这么多‘废话’。没错！<code>window.sessionStorage</code>对象就是我们需要的东西！我们只需在单击事件中存储滚动条的位置就可以了！也就是只要计算出单击的标签距离页面顶部的位置即可！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">window.onload = function()&#123;</div><div class="line">    var pos = window.sessionStorage.getItem(&apos;position&apos;);</div><div class="line">    if(pos)&#123;</div><div class="line">        document.body.scrollTop = pos;</div><div class="line">    &#125;else&#123;</div><div class="line">        document.body.scrollTop = 0;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    var parentEl = document.getElementById(&apos;items&apos;);</div><div class="line">    parentEl.addEventListener(&apos;click&apos;,function(event)&#123;</div><div class="line">        var target = event.target;</div><div class="line">        window.sessionStorage.setItem(&apos;position&apos;,target.scrollTop);</div><div class="line">        //other code...</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h3><p>今天下午开始正式给我一个已有的简单页面做了，难点是只有视觉稿，没有交互稿，另外视觉稿也挺粗糙的，不过用来练手是足够了。加油吧！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/22/window-sessionStorage的妙用（1）/" itemprop="url">
                   window.sessionStorage的妙用（1）
                 </a>
@@ -1488,152 +1632,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/13/早起日记（15）/" itemprop="url">
-                  早起日记（15）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-13T08:14:45+08:00" content="2016-06-13">
-              2016-06-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/13/早起日记（15）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/13/早起日记（15）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/13/早起日记（15）/" class="leancloud_visitors" data-flag-title="早起日记（15）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在前一个礼拜和以前社团同一个项目组的学长学姐们一起拍了照片，在前天我们又一起去吃了火锅以及沙冰，而这几天开始他们就要陆续离开这个学校了。</p>
-<p>按道理讲，这个时候应该是特别伤感的，因为这一次极有可能是我们之间的最后一次相聚了，甚至有可能是我们的最后一次联系（时间和空间真的会把和一些人的距离拉得无限远）。可是我自己却没有离别的情绪，</p>
-<ul>
-<li>有可能是我们之间的感情没有深到让我无法割舍，</li>
-<li>也有可能是我个人的性格导致了我是一个感情淡漠，不喜欢依赖别人，并且一般不会主动维系感情的人，</li>
-<li>还有可能是因为离开的不是我，如果明年轮到我的时候，不知道会怎么样。</li>
-</ul>
-<p>进入大学以来，在这个团体中，我算是最本质的一个我吧~因为我可以完全地把自己的优缺点都暴露出来，我会在其中始终保持活跃，而不是在大多数时候保持沉默。在这里我没有感受到学生会的压抑，也没有感受到宿舍的不适，更没有感受到相处的尴尬，在这里我们为了一些同样的目标共同前进，我们独立但又和谐。</p>
-<p>可以毫不夸张的说，加入创行，是我大学以来做的最明智的一次决定（虽然是在阴差阳错之下）。而成为创行的一员，是我大学以来最值得珍惜的一次经历。回顾我在创行的两年，</p>
-<ul>
-<li>我很幸运地在第一年选择加入了一个和谐努力的项目组，也很幸地在第二年带了一个项目组（学弟学妹们都很棒，反而是我自己的缺陷导致没有让这个5人团队达到最佳状态）。</li>
-<li>我很幸运地在第一年选择加入了逗比严谨的技术部，也很幸运地在第二年成为了部长，并自认为足够努力地带了一个技术部（当然还是有很多遗憾，也只能怪自己吧~）。</li>
-</ul>
-<p>在创行认识了很多能力优秀同时品性良好的人，可惜的是由于我个人性格的原因，没有主动去深交，去学习他们的优点，这也算是一大遗憾了。哦！最后还有一个不大不小的遗憾就是没有进入全国赛了（虽然也在意料之中）。</p>
-<p>最后，还是感谢创行，感谢里面文化，感谢里面的人，也祝愿学长学姐们能够顺利地开始人生的长跑，并且能够越跑越快~(<em>＾-＾</em>)</p>
-<blockquote>
-<p>闪念：搜索的时候是不是应该换个方式搜，比如说当你搜<code>肾虚会引起性功能障碍</code>的时候,同时也搜下<code>肾虚不会引起性功能障碍</code>，或者使用疑问句<code>肾虚会不会引起性功能障碍</code>。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1679,7 +1677,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">106</span>
+              <span class="site-state-item-count">107</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1696,7 +1694,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">95</span>
+                <span class="site-state-item-count">98</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
