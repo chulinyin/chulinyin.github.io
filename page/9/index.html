@@ -249,6 +249,151 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/04/JS跨域请求（3）/" itemprop="url">
+                  JS跨域请求（3）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-04T01:48:06+08:00" content="2016-06-04">
+              2016-06-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/04/JS跨域请求（3）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/04/JS跨域请求（3）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/04/JS跨域请求（3）/" class="leancloud_visitors" data-flag-title="JS跨域请求（3）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="日常闲扯"><a href="#日常闲扯" class="headerlink" title="日常闲扯"></a>日常闲扯</h2><p>今天上午看了一个NBA总决赛的第一场，勇士不出意外地赢了。个人觉得观赏性远远没有勇士和雷霆的比赛高，当然也有可能是今天两边主力发挥都不太好的原因。</p>
+<p>下午就去看我们量新学院的10周年晚会同时也是毕业生晚会，不对！不能称之为“晚会”，因为是在下午1：30开始的Σ( ° △ °|||)︴。这种事情我个人觉得还是相当浪费时间以及无聊的，但我还是去了是因为想去支持一下我的好朋友（主席团老二）同时也算是给自己放松一下，哈哈~</p>
+<p>晚上的时候，先把要交的实验报告写完，然后就开始逛了逛网易云课堂，发现了一个叫<code>网易云课堂前端开发交流会</code>的课程，里面有一些以前网易前端工程师的直播分享，然后看了郑海波老师的《自学前端的常见问题与方法指导》以及蔡剑飞老师的《我的网易十年前端路》，获益良多。我觉得对学习一个东西的方法论以及大概的路线先有一个了解之后再去学习就会少一点盲目多一点自信。</p>
+<p>下面进入……</p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>前面简单总结了下用JS实现跨域请求的原因，以及标准的CORS方法、非标准的图像Ping方法和非标准的JSONP方法。</p>
+<h4 id="2-3、Comet"><a href="#2-3、Comet" class="headerlink" title="2.3、Comet"></a>2.3、Comet</h4><p>是一种更加高级的Ajax技术，它是服务器向页面推送数据，而不是像Ajax那样从页面向服务器请求数据。<br>有两种实现Comet的方式：<code>长轮询</code>和<code>HTTP流</code><br>1、 长轮询<br>为什么叫“长轮询”？因为有一个“短轮询”啊~o(￣▽￣)d </p>
+<blockquote>
+<p>所谓<code>短轮询</code>就是指传统的请求：浏览器定时向服务器发送请求，每次服务器收到请求之后就马上回应。</p>
+</blockquote>
+<p>而…..</p>
+<blockquote>
+<p><code>长轮询</code>就是指浏览器是不定时向服务器发送请求的（此时请求时机取决于服务器），当服务器收到请求之后，它会检查资源是否有更新，如果没有，就会保持连接，直到等到资源更新的时候，再把响应发送给浏览器。而浏览器在收到响应的时候，会立即自动再发送一个请求。</p>
+</blockquote>
+<p><strong>以上需自行脑补画面</strong><br>2、 HTTP流<br>HTTP流就更加简单了，服务器在收到浏览器请求后就一直保持连接（直到页面关闭或者写代码主动关闭），然后定时向浏览器发送响应数据（不论是否更新）。</p>
+<p>而在js代码中利用XHR对象就可以实现HTTP流（所以IE下又跪了）。通过监听readystatechange事件并检测readyState的值是否为3（为什么是3呢？因为等于3的时候，xhr.responseText中就会包含接收到的数据啊~），然后比较此前收到的数据，从而截取获得最新的数据。</p>
+<p><strong>献上改自书中的代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createStreamingClient</span>(<span class="params">url,progress,finished</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHTTPRequest(),</div><div class="line">        received = <span class="number">0</span>;</div><div class="line">    xhr.open(<span class="string">'get'</span>,url,<span class="literal">true</span>);</div><div class="line">    xhr.readystatechange = fucntion()&#123;</div><div class="line">        <span class="keyword">var</span>  data = <span class="string">''</span>;</div><div class="line">        <span class="keyword">if</span>(xhr.readyState == <span class="number">3</span>)&#123;</div><div class="line">            data = xhr.responseText.substring(received);<span class="comment">//截取最新部分数据</span></div><div class="line">            received += data.length;<span class="comment">//累加取得最新数据的位置</span></div><div class="line">            progress(data);<span class="comment">//将最新数据传入回调函数中</span></div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>)&#123;</div><div class="line">            finished(xhr.responseText);<span class="comment">//将响应的全部内容传入回调</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    xhr.send(<span class="literal">null</span>);</div><div class="line">    <span class="keyword">return</span> xhr;<span class="comment">//为什么还要返回这个？</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> progress = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Received: '</span>+data);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> finish = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Done'</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> client = createStreamingClient(<span class="string">'XXX.php'</span>,progress,finish);</div></pre></td></tr></table></figure></p>
+<h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>已经快两点了……明天见。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/03/JS跨域请求（2）/" itemprop="url">
                   JS跨域请求（2）
                 </a>
@@ -1574,162 +1719,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/25/初见JQuery（5）/" itemprop="url">
-                  初见JQuery（5）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T00:09:46+08:00" content="2016-05-25">
-              2016-05-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JQuery/" itemprop="url" rel="index">
-                    <span itemprop="name">JQuery</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/25/初见JQuery（5）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/初见JQuery（5）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/25/初见JQuery（5）/" class="leancloud_visitors" data-flag-title="初见JQuery（5）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>今天在图书馆呆了一天，一直在看着优达的PDF学JQuery,也总算极为粗略地了解了JQ的强大之处。下面是一些笔记：</p>
-</blockquote>
-<h3 id="1-Ajax-amp-forms"><a href="#1-Ajax-amp-forms" class="headerlink" title="1. Ajax &amp; forms"></a>1. Ajax &amp; forms</h3><p>用JQ怎么提交表单呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(&apos;form&apos;).on(&apos;submit&apos;,function(event)&#123;</div><div class="line">    event.preventDefault();</div><div class="line">    $.ajax(&apos;acitonAdress&apos;,&#123;</div><div class="line">        type: &apos;POST&apos;,</div><div class="line">        data: &#123;&quot;dataName&quot;:$(&apos;form&apos;).find(&apos;nameValue&apos;).val()&#125;,</div><div class="line">        success: function(result)&#123;&#125;</div><div class="line">    &#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p>以上方法虽然可行，但是在data里查找并输入实在是太麻烦了，如果一个表单里有很多数据都需要提交到服务器，那不是要写到手抽筋？JQ开发人员当然也想到了这个问题，于是为<strong>表单的JQ对象</strong>提供了一个<strong>参数序列化的API</strong>：<code>.serialize()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$(&apos;form&apos;).on(&apos;submit&apos;,function(event)&#123;</div><div class="line">    event.preventDefault();</div><div class="line">    var form  = $(this);</div><div class="line">    $.ajax(form.attr(&apos;action&apos;),&#123;</div><div class="line">        type: &apos;POST&apos;,</div><div class="line">        data: form.serialize(),</div><div class="line">        success: function(result)&#123;</div><div class="line">            form.remove();</div><div class="line">            $(&apos;#vacation&apos;).hide().html(result).fadeIn();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<h3 id="2-Ajax-amp-Json"><a href="#2-Ajax-amp-Json" class="headerlink" title="2. Ajax &amp; Json"></a>2. Ajax &amp; Json</h3><p>注意前面的请求成功的回调函数中，默认服务器返回的是一个html结构，但是通常服务器返回的都是Json对象，那么这个时候我们改怎么办呢？同样的，JQ开发人员也想到了这个问题，于是有了<strong>dataType属性，规定如何解析返回的数据</strong>，同时有了<strong>contentType属性，规定服务器返回什么样的数据类型</strong>。而且由于返回的是一个Json对象，那么我们就需要自己构造节点，然后把对象中的数据传到节点中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$(&apos;form&apos;).on(&apos;submit&apos;,function(event)&#123;</div><div class="line">    event.preventDefault();</div><div class="line">    var form  = $(this);</div><div class="line">    $.ajax(form.attr(&apos;action&apos;),&#123;</div><div class="line">        type: &apos;POST&apos;,</div><div class="line">        data: form.serialize(),</div><div class="line">        dataType: &apos;json&apos;,</div><div class="line">        success: function(result)&#123;</div><div class="line">            form.remove();</div><div class="line">            var msg = $(&apos;&lt;p&gt;&lt;/p&gt;&apos;);</div><div class="line">            var html = &apos;Destination: &apos; + reult.location +</div><div class="line">                       &apos;. Price: &apos; +result.totalPrice +&apos;.&apos;</div><div class="line">            msg.append(html);</div><div class="line">            $(&apos;#vacation&apos;).hide().html(msg).fadeIn();</div><div class="line">        &#125;,</div><div class="line">        contentType:&apos;application/json&apos;</div><div class="line">    &#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>注意：以上代码均来自Udacity中JQ进阶课程中的PDF，但过渡语倒是我自己想的，哈哈。</p>
-</blockquote>
-<h3 id="3-构造函数化"><a href="#3-构造函数化" class="headerlink" title="3. 构造函数化"></a>3. 构造函数化</h3><p>那么上面这段代码就这样可以了吗？还有改进的余地吗？如果像应用到另外一个相似的表单上的时候，我们该怎么办呢？貌似只能复制一遍代码，然后把<code>$(&#39;form&#39;).on(...)</code>修改为<code>$(&#39;form&#39;).filter(&#39;#formID&#39;).on(..)</code>。所以如果你已经想到这段代码以后极有可能是要<strong>重复利用</strong>的，那就把它写成<strong>构造函数的形式</strong>吧~<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function VacationForm(ele)&#123;</div><div class="line">   this.ele = ele; </div><div class="line">   this.ele.on(&apos;submit&apos;,this.submit);</div><div class="line">   this.submit = function(event)&#123;</div><div class="line">        event.preventDefault();</div><div class="line">        $.ajax(this.ele.attr(&apos;action&apos;),&#123;</div><div class="line">            context: vacationForm,</div><div class="line">            type: &apos;POST&apos;,</div><div class="line">            data: this.ele.serialize(),</div><div class="line">            dataType: &apos;json&apos;,</div><div class="line">            success: function(result)&#123;...&#125;,</div><div class="line">            contentType: &apos;application/json&apos;</div><div class="line">        &#125;);</div><div class="line">   &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="4-一些有用的方法："><a href="#4-一些有用的方法：" class="headerlink" title="4. 一些有用的方法："></a>4. 一些有用的方法：</h3><h4 id="1-数组遍历-each"><a href="#1-数组遍历-each" class="headerlink" title="1. 数组遍历.each()"></a>1. 数组遍历<code>.each()</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$.each(arr,function(index,item)&#123;...&#125;)</div></pre></td></tr></table></figure>
-<p>相当于为数组执行了一个for循环操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for(var i=0,len=arr.length;i&lt;len;i++)&#123;...&#125;</div></pre></td></tr></table></figure></p>
-<p>可以用于当返回服务器返回由多个对象组成的一个数组时，处理该数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 返回对象</div><div class="line">[</div><div class="line">    &#123;</div><div class="line">        name: &apos;...&apos;,</div><div class="line">        age: &apos;...&apos;</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        name: &apos;...&apos;,</div><div class="line">        age: &apos;...&apos;</div><div class="line">    &#125;</div><div class="line">]</div><div class="line">// 回调处理函数</div><div class="line">success: function(result)&#123;</div><div class="line">    $.each(result,function(index,item)&#123;</div><div class="line">        var person = $(&apos;.fav&apos;+index);</div><div class="line">        person.find(&apos;p&apos;).html(item.name);</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="2-数组遍历并返回一个新数组-map"><a href="#2-数组遍历并返回一个新数组-map" class="headerlink" title="2. 数组遍历并返回一个新数组.map()"></a>2. 数组遍历并返回一个新数组<code>.map()</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var newArr = $.map(arr,function(item,index)&#123;return item+1&#125;)</div></pre></td></tr></table></figure>
-<p>可以用于当我们要根据服务器返回的对象，搭建对应的HTML结构时。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">success: function(result)&#123;</div><div class="line">    var persons = $.map(result,function(item,index)&#123;</div><div class="line">        var person = $(&apos;&lt;li&gt;&lt;/li&gt;&apos;);</div><div class="line">        person.append(&apos;&lt;h3&gt;&apos;+item.name+&apos;&lt;/h3&gt;&apos;);</div><div class="line">        person.append(&apos;&lt;p&gt;&apos;+item.age+&apos;&lt;/p&gt;&apos;);</div><div class="line">        return person; </div><div class="line">    &#125;);//最终返回了由多个节点对象组成的新数组</div><div class="line">    $(&apos;.persons&apos;).html(persons);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>由htmlString组成的数组，可以直接传入html()方法中</strong></p>
-<h4 id="3-事件命名空间"><a href="#3-事件命名空间" class="headerlink" title="3. 事件命名空间"></a>3. 事件命名空间</h4><p>有时候我们可能想要在事件发生以后就将事件移除掉，那我们需要怎么做呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;.button&apos;).on(&apos;click&apos;,showName);</div><div class="line">$(&apos;.button&apos;).on(&apos;click&apos;,showAge);</div><div class="line">$(&apos;.button&apos;).off(&apos;click&apos;);</div></pre></td></tr></table></figure></p>
-<p>这种做法会把绑定在按钮上的所有单击事件全都解绑，但是我们可能想要让showName不起作用，而想要继续让showAge起作用呢？这时候<strong>事件命名空间</strong>出现了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(&apos;.button&apos;).on(&apos;click.name&apos;,showName);</div><div class="line">$(&apos;.button&apos;).on(&apos;click.age&apos;,showAge);</div><div class="line">$(&apos;.button&apos;).off(&apos;click.name&apos;);</div></pre></td></tr></table></figure></p>
-<p>上面的这种写法就成功实现了我们的需求，如果我们写成<code>$(&#39;.button&#39;).off(&#39;.name&#39;);</code>，如此会将所有以<code>.name</code>结尾的事件给解绑（不一定是单击事件了）。<br>其实我们也可以通过程序直接触发事件，而不需要通过用户行为去触发。当然仍然可以使用事件命名空间</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(&apos;.button&apos;).on(&apos;click.name&apos;,showName);</div><div class="line">$(&apos;.button&apos;).on(&apos;click.age&apos;,showAge);</div><div class="line">$(&apos;.button&apos;).trigger(&apos;click.name&apos;);</div><div class="line">$(&apos;.button&apos;).trigger(&apos;click&apos;);</div></pre></td></tr></table></figure>
-<h3 id="5-Plugin"><a href="#5-Plugin" class="headerlink" title="5. Plugin"></a>5. Plugin</h3><p>如果你以为是从网上下载一些插件？那就错了，我们其实可以自己给JQ对象写API！！！（真特么酷）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$.fn.apiName = function()&#123;...&#125;//函数中的this自动转向绑定的节点</div><div class="line">$(&apos;selector&apos;).apiName();</div></pre></td></tr></table></figure></p>
-<p>也就是说我可以给任何JQ对象运用这个方法！！！<br>当然我们还可以给API传入一些参数（我的天，这是我JQ学到现在最让我震惊的一个功能）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$.fn.apiName = function(options)&#123;...&#125;//函数中的this自动转向绑定的节点</div><div class="line">$(&apos;selector&apos;).apiName(parameters);</div></pre></td></tr></table></figure></p>
-<h3 id="6-合并对象-extend"><a href="#6-合并对象-extend" class="headerlink" title="6. 合并对象 $.extend()"></a>6. 合并对象 <code>$.extend()</code></h3><p>可以将多个对象合并成一个对象(相同属性覆盖,不同属性叠加）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$.extend(target[, object1][, objectn])</div></pre></td></tr></table></figure>
-<p>可能乍眼一看没什么用，可是如果搭配API中的默认参数，用来初始化API简直不能更方便，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$.fn.apiName = function(options)&#123;</div><div class="line">    var settings = $.extend(&#123;defaultInitParameters  &#125;,options);   </div><div class="line">&#125;</div><div class="line">$(&apos;selector&apos;).apiName(parameters);</div></pre></td></tr></table></figure></p>
-<h3 id="7-Promises"><a href="#7-Promises" class="headerlink" title="7. Promises"></a>7. Promises</h3><p><code>$.ajax()</code>运行完后其实会返回一个promises的对象<br>如果我想要针对不同的人名，向服务器请求参数，服务器返回那个人的个人信息（姓名、年龄、电话），那我是不是当人名不同的时候，每次都要再写一遍差不多的Ajax请求？（Don’t repeat your code）JQ提出了较好的方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var PersonalInformation = &#123;</div><div class="line">    getAge : function(name)&#123;</div><div class="line">        var promise = $.ajax(&apos;url&apos;,&#123;</div><div class="line">            data:&#123;name:name&#125;</div><div class="line">        &#125;);</div><div class="line">        return promise;</div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line">$(&apos;button&apos;).on(&apos;click&apos;,function()&#123;</div><div class="line">    var name = $(&apos;input[type=&quot;text&quot;]&apos;).val();</div><div class="line">    var inforPromise = PersonalInformation.getAge(name);</div><div class="line">    inforPromise.done(function(result)&#123;</div><div class="line">        $(&apos;.infor&apos;).find(&apos;.age&apos;).text(result.age);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p><code>$.ajax(&#39;url&#39;,{data:{name:name}).done(function(result){});</code>相当于<code>$.ajax(&#39;url&#39;,{data:{name:name},success:function(result){})</code>?<br>但是上面这段代码还是存在问题，请注意在成功回调函数中，我们使用了<code>result.name</code>，这样的代码显然是不够健壮的。那要怎样改变done()中函数的result呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">var PersonalInformation = &#123;</div><div class="line">    getAge : function(name)&#123;</div><div class="line">        var promise = $.Deferred();//创建一个新的promise对象</div><div class="line">        $.ajax(&apos;url&apos;,&#123;</div><div class="line">            data:&#123;name:name&#125;，</div><div class="line">            success:function(result)&#123;</div><div class="line">                promise.resolve(result.age);//会触发done回调</div><div class="line">            &#125;,//立即执行done()方法，并向其中传递reult.name</div><div class="line">            error:function()&#123;</div><div class="line">                var error = &apos;invalid name&apos;;</div><div class="line">                promise.reject(error);//会触发fail回调</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        return promise;</div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line">$(&apos;button&apos;).on(&apos;click&apos;,function()&#123;</div><div class="line">    var name = $(&apos;input[type=&quot;text&quot;]&apos;).val();</div><div class="line">    var inforPromise = PersonalInformation.getAge(name);</div><div class="line">    inforPromise.done(function(result)&#123;</div><div class="line">        //这里的result变成了reolve中的传入的参数</div><div class="line">        $(&apos;.infor&apos;).find(&apos;.age&apos;).text(result);</div><div class="line">    &#125;).fail(function(error)&#123;</div><div class="line">        console.log(error);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h4 id="Ajax同时成功回调"><a href="#Ajax同时成功回调" class="headerlink" title="Ajax同时成功回调"></a>Ajax同时成功回调</h4><p>当多个ajax请求发生的时候，它们一定不会同时结束并回调，也就是说它们显示不会同步。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">PersonalInformation.getAge(name)</div><div class="line">    .done(fucntion(InforResult)&#123;</div><div class="line">        resultDiv.append(InforResult);           </div><div class="line">    &#125;);</div><div class="line">PersonalExperience.getUniversity(name)</div><div class="line">    .done(function(ExpResult)&#123;</div><div class="line">        resultDiv.append(ExpResult);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1775,7 +1764,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">107</span>
+              <span class="site-state-item-count">108</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1792,7 +1781,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-count">99</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

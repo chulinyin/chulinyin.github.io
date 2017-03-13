@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="褚林银的秘密基地">
 <meta property="og:description" content="实习的第一天早上6:30起床，接近7点的时候洗漱完，然后整理下去楼下吃早饭（一碗白粥+两个肉包），吃完7：20，走向校门口乘公交车。今天时间凑的刚好，我离车站还有50米的时候就看到车在停站了，于是奋力冲去，司机师傅也很好心的起步之后又停下来等我（有被感动到），上车急忙礼貌地说了句“谢师傅”~
 到公司之后，签了份协议，领了员工牌（卡片印着一只萌萌的猿猴&amp;lt;(￣︶￣)&amp;gt;），领了一台笔记本，介">
-<meta property="og:updated_time" content="2016-06-22T15:32:33.000Z">
+<meta property="og:updated_time" content="2017-03-08T12:44:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深夜日记（23）">
 <meta name="twitter:description" content="实习的第一天早上6:30起床，接近7点的时候洗漱完，然后整理下去楼下吃早饭（一碗白粥+两个肉包），吃完7：20，走向校门口乘公交车。今天时间凑的刚好，我离车站还有50米的时候就看到车在停站了，于是奋力冲去，司机师傅也很好心的起步之后又停下来等我（有被感动到），上车急忙礼貌地说了句“谢师傅”~
@@ -335,8 +335,8 @@
 <p>中午的时候，洋哥带我们去了鱼味馆请我们吃了顿好的，途中还聊了许多。回去之后我的任务就是就开始看一个淘宝团队建的一个用于适配各种移动设备库<a href="https://github.com/amfe/lib-flexible" target="_blank" rel="external">flexible</a>，其实原理还蛮简单的，就是：</p>
 <ol>
 <li>利用meta标签中信息或者检测移动设备型号确定<code>设备像素比dpr(device pixel ratio)</code>以及<code>缩放比scale</code>，</li>
-<li>根据设备的宽度确定<code>相对大小rem</code>(rem=width/10)，并为<code>htm</code>标签设置<code>font-size：rem px;</code>,</li>
-<li>监听窗口大小变化，如果300ms内大小没有变化，则重新获取设备宽度并为<code>htm</code>设置<code>font-size</code>属性。</li>
+<li>根据设备的宽度确定<code>相对大小rem</code>(rem=width/10)，并为<code>html</code>标签设置<code>font-size：rem px;</code>,</li>
+<li>监听窗口大小变化，如果300ms内大小没有变化，则重新获取设备宽度并为<code>html</code>设置<code>font-size</code>属性。</li>
 <li>然后在写css的时候只需要把px换算成em就好了，结果值 = 实际px值/rem，比如设备宽度是750px的，那么rem就是75px，如果一个盒子的宽度测得是75px,那么写css的时候写成1em即可。</li>
 </ol>
 <p>推荐读读<a href="http://web.jobbole.com/84285/" target="_blank" rel="external">这篇文章</a>。当然我觉得源码还有有些问题的，比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">if (!dpr &amp;&amp; !scale) &#123;</div><div class="line">    var isAndroid = win.navigator.appVersion.match(/android/gi);</div><div class="line">    var isIPhone = win.navigator.appVersion.match(/iphone/gi);</div><div class="line">    var devicePixelRatio = win.devicePixelRatio;</div><div class="line">    if (isIPhone) &#123;</div><div class="line">        // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案</div><div class="line">        if (devicePixelRatio &gt;= 3 &amp;&amp; (!dpr || dpr &gt;= 3)) &#123;                </div><div class="line">            dpr = 3;</div><div class="line">        &#125; else if (devicePixelRatio &gt;= 2 &amp;&amp; (!dpr || dpr &gt;= 2))&#123;</div><div class="line">            dpr = 2;</div><div class="line">        &#125; else &#123;</div><div class="line">            dpr = 1;</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        // 其他设备下，仍旧使用1倍的方案</div><div class="line">        dpr = 1;</div><div class="line">    &#125;</div><div class="line">    scale = 1 / dpr;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -454,7 +454,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">107</span>
+              <span class="site-state-item-count">108</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -471,7 +471,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-count">99</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
