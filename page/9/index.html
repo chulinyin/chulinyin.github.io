@@ -249,6 +249,139 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/05/JS跨域请求（4）/" itemprop="url">
+                  JS跨域请求（4）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-05T00:26:40+08:00" content="2016-06-05">
+              2016-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/05/JS跨域请求（4）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/05/JS跨域请求（4）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/05/JS跨域请求（4）/" class="leancloud_visitors" data-flag-title="JS跨域请求（4）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="日常闲扯"><a href="#日常闲扯" class="headerlink" title="日常闲扯"></a>日常闲扯</h2><p>晚上在图书馆借书，借到了《JavaScript DOM编程艺术》、《JavaScript设计模式》和《JavaScript DOM高级程序设计》，设计模式这本书是不小心看到的，然后又想到昨天网易云课堂上蔡剑飞老师说的关于计算机基础的设计模式，就顺手翻开来看下，内容还不错，罗列了一些面向对象的主要设计模式，并用JS实现了。明天打算再借一本关于数据结构的和一本关于算法的，等考完试就抓紧开始看了。<br>哦！对了，等明天开始我必须开始重构我那个糟糕的大作业了。计划用模块化编程的方式~</p>
+<p>下面进入……</p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><h4 id="2-3、SSE（服务器发送事件）"><a href="#2-3、SSE（服务器发送事件）" class="headerlink" title="2.3、SSE（服务器发送事件）"></a>2.3、SSE（服务器发送事件）</h4><p>SSE是根据只读Comet推出的API，可以用API创建到服务器的单向连接，而服务器通过这个连接可以发送任意数量的数据。SSE支持短轮询、长轮询和HTTP流，而且能够在断开连接的时候自动确定什么时候再次连接。（So easy!）不过还是有一些要求的：响应报文的MIME类型必须是<code>text/event-stream</code>，而且浏览器中的API能够解析格式输出。（什么？IE支持吗？当然不支持……）</p>
+<p><strong>下面献上书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(<span class="string">'myevents.php'</span>); <span class="comment">//实例化事件流</span></div><div class="line"><span class="keyword">var</span> state = source.readyState; </div><div class="line"><span class="comment">//state = 0:正在连接到服务器 1:打开了连接 2:关闭了连接</span></div><div class="line"></div><div class="line">source.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">//建立连接时触发</span></div><div class="line"></div><div class="line"><span class="comment">//从服务器接收到新事件时触发</span></div><div class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </div><div class="line">    <span class="keyword">var</span> data = event.data; <span class="comment">//服务器发回的数据</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">source.onerror = funciton()&#123;&#125;; <span class="comment">//无法建立连接时触发</span></div><div class="line"></div><div class="line">source.close(); <span class="comment">//强制关闭连接并不再重新连接</span></div></pre></td></tr></table></figure></p>
+<h4 id="2-4、Web-Sockets（服务器发送事件）"><a href="#2-4、Web-Sockets（服务器发送事件）" class="headerlink" title="2.4、Web Sockets（服务器发送事件）"></a>2.4、Web Sockets（服务器发送事件）</h4><p><strong>可以提供全双工、双向通信……</strong><br>下面的明日再说~</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/04/JS跨域请求（3）/" itemprop="url">
                   JS跨域请求（3）
                 </a>
@@ -1583,142 +1716,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/25/深夜日记（9）/" itemprop="url">
-                  深夜日记（9）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T23:38:43+08:00" content="2016-05-25">
-              2016-05-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/25/深夜日记（9）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/25/深夜日记（9）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/25/深夜日记（9）/" class="leancloud_visitors" data-flag-title="深夜日记（9）">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="一个发现"><a href="#一个发现" class="headerlink" title="一个发现"></a>一个发现</h3><blockquote>
-<p>A: 傻逼的可怜之处在于他永远不会意识到自己是一个傻逼<br>  B：那请问你是不是傻逼？<br>  A：当然不是喽！<br>  B：那按你的逻辑，你不就是一个傻逼？<br>  A：……</p>
-</blockquote>
-<p>这种逻辑错误在生活中真的太常见了，傻逼意识不到自己是傻逼，但是意识不到自己是傻逼的人，不一定就是傻逼啊！相当于数学里的充分必要条件的关系。A是B的充分条件，所以A能推出B，但B不一定能退出A。</p>
-<h3 id="一个想法："><a href="#一个想法：" class="headerlink" title="一个想法："></a>一个想法：</h3><blockquote>
-<p>不要自作多情地为别人做事，即使是朋友也要尽量避免，不要被莫名的虚荣和道德感舒服。同时也不要自作多情地想别人为你做事，他们更加没有这个义务。</p>
-</blockquote>
-<p>另外，今天整天在看图解HTTP，边看边记笔记，也已经看了快40%了。明天继续……</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1764,7 +1761,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">108</span>
+              <span class="site-state-item-count">109</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1781,7 +1778,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">99</span>
+                <span class="site-state-item-count">100</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
