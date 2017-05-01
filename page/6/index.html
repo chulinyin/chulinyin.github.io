@@ -249,6 +249,141 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/08/关于this/" itemprop="url">
+                  关于this
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-08T23:31:40+08:00" content="2016-07-08">
+              2016-07-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/08/关于this/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/08/关于this/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/07/08/关于this/" class="leancloud_visitors" data-flag-title="关于this">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="1-如果闭包函数在全局对象下，则闭包函数中this-window"><a href="#1-如果闭包函数在全局对象下，则闭包函数中this-window" class="headerlink" title="1. 如果闭包函数在全局对象下，则闭包函数中this = window"></a>1. 如果闭包函数在全局对象下，则闭包函数中<code>this = window</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var count = 1;</div><div class="line">(function()&#123;</div><div class="line">    console.log(this.count);  </div><div class="line">&#125;)()</div><div class="line">// &gt;&gt; 1</div></pre></td></tr></table></figure>
+<h4 id="2-在字面量对象的函数（方法）中this-obj"><a href="#2-在字面量对象的函数（方法）中this-obj" class="headerlink" title="2. 在字面量对象的函数（方法）中this = obj"></a>2. 在字面量对象的函数（方法）中<code>this = obj</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var count = 1;</div><div class="line">var obj = &#123;</div><div class="line">    count: 2,</div><div class="line">    say: function()&#123;</div><div class="line">        console.log(this.count);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// &gt;&gt; 2</div></pre></td></tr></table></figure>
+<h4 id="3-在字面量对象的函数（方法）中的闭包函数中this-window"><a href="#3-在字面量对象的函数（方法）中的闭包函数中this-window" class="headerlink" title="3. 在字面量对象的函数（方法）中的闭包函数中this = window"></a>3. 在字面量对象的函数（方法）中的闭包函数中<code>this = window</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var count = 1;</div><div class="line">var obj = &#123;</div><div class="line">    count: 2,</div><div class="line">    say: funtion()&#123;</div><div class="line">        (function()&#123;</div><div class="line">            console.log(this.count);</div><div class="line">        &#125;)()</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// &gt;&gt; 1</div></pre></td></tr></table></figure>
+<p><strong>而且不管这个对象上含有多少个对象，只要在一个对象中使用闭包函数,结论始终成立。</strong></p>
+<h4 id="4-在字面量对象的函数（方法）中的闭包函数中访问对象，只要新建一个that变量，然后使用that变量即可。"><a href="#4-在字面量对象的函数（方法）中的闭包函数中访问对象，只要新建一个that变量，然后使用that变量即可。" class="headerlink" title="4. 在字面量对象的函数（方法）中的闭包函数中访问对象，只要新建一个that变量，然后使用that变量即可。"></a>4. 在字面量对象的函数（方法）中的闭包函数中访问对象，只要新建一个that变量，然后使用that变量即可。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var count = 1;</div><div class="line">var obj = &#123;</div><div class="line">    count: 2,</div><div class="line">    say: funtion()&#123;</div><div class="line">        var that = this;</div><div class="line">        (function()&#123;</div><div class="line">            console.log(that.count);</div><div class="line">        &#125;)();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// &gt;&gt; 2</div></pre></td></tr></table></figure>
+<h4 id="5-在构造函数中也是一样，闭包函数中的this始终指向window对象。"><a href="#5-在构造函数中也是一样，闭包函数中的this始终指向window对象。" class="headerlink" title="5.在构造函数中也是一样，闭包函数中的this始终指向window对象。"></a>5.在构造函数中也是一样，闭包函数中的this始终指向window对象。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var count =1;</div><div class="line">function Obj()&#123;</div><div class="line">    this.count = 2;</div><div class="line">    this.say = function()&#123;</div><div class="line">        (function()&#123;</div><div class="line">            console.log(this.count);</div><div class="line">        &#125;)();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var obj1 = new Obj();</div><div class="line">obj1.say();</div><div class="line">// &gt;&gt; 1</div></pre></td></tr></table></figure>
+<p><strong>而改进方法也是一样的：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var count =1;</div><div class="line">function Obj()&#123;</div><div class="line">    this.count = 2;</div><div class="line">    this.say = function()&#123;</div><div class="line">        var that = this;</div><div class="line">        (function()&#123;</div><div class="line">            console.log(that.count);</div><div class="line">        &#125;)();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var obj1 = new Obj();</div><div class="line"></div><div class="line">obj1.say();</div><div class="line">// &gt;&gt; 2</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/07/window-location-VS-document-location/" itemprop="url">
                   window.location VS document.location
                 </a>
@@ -1785,147 +1920,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/25/关于《三人行》/" itemprop="url">
-                  关于《三人行》
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-25T23:42:51+08:00" content="2016-06-25">
-              2016-06-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/观影随感/" itemprop="url" rel="index">
-                    <span itemprop="name">观影随感</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/25/关于《三人行》/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/25/关于《三人行》/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/25/关于《三人行》/" class="leancloud_visitors" data-flag-title="关于《三人行》">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天晚上和朋友去看了一部电影《三人行》，其实本来应该是昨天晚上和他去看《惊天魔盗团2》的，但由于突然有事就不能去了，于是他就和一个妹子一起去看了。其实本来我对国内这种题材的电影已经不感兴趣了，不想去看的，但是朋友很喜欢钟汉良，于是就……</p>
-<p>提前5分钟进场，然后就坐那里看了5分钟的广告！那么low的广告简直无法忍受！不知道算不算是侵犯消费者的权益，因为我是付费看电影去的，不是看广告去的，而且国内的广告质量真的不敢恭维。</p>
-<p>好了，终于等到正片了！开场是赵薇扮演的医生正在给一个病人做开颅手术，画面还是有点血腥的。然后情节就开始一路让我看不懂了，先是赵薇被一个因她手术而截瘫的病人羞辱，然后突然古天乐扮演的警察和钟汉良扮演的劫匪出现了。钟汉良因为警察的走火脑袋里进了一颗子弹，而古天乐为了包庇自己的同事不惜做伪证，同时还想方设法抓住钟汉良的同伙。</p>
-<ul>
-<li>钟汉良的这个角色很有意思，台词很有哲学家的味道，引用了好多的哲学故事，也恰当地运用了哲学思想。</li>
-<li>赵薇的这个角色一开始是一个执拗的性格，还天真地本着医生的职责帮钟汉良给他同伙打了电话，在被古天乐扇了几个巴掌之后居然又完全颠倒想去害死钟汉良。</li>
-<li>古天乐的这个角色很有警察的风范，但他却选择包庇同事。他有一句台词让我印象深刻：<code>犯法是为了执法</code>。</li>
-</ul>
-<p>电影情节很混乱，我还是没有缓过来。本应该是电影高潮的枪战片段，也被弄得很让人看不懂，明明是惊险刺激的枪战配乐却是一首莫名其妙的歌，然后有很多慢镜头和特效。</p>
-<p>最后的结局更有意思，古天乐居然选择救了钟汉良，赵薇的那个截瘫病人选择滚下楼梯自杀之后居然莫名站了起来可以走路了（当然这里我极度怀疑是赵薇的幻觉，是她自我内心的一种救赎吧，就像《心理罪》里男主还以为女朋友还活着）。</p>
-<p>最后的最后是，古天乐向上司承认做伪证，赵薇抛开了心结开启音乐做起了手术，钟汉良变成植物人躺在病床上。</p>
-<p>总之我看得很迷糊……</p>
-<p><strong>以上纯属个人观后感受</strong></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1971,7 +1965,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">109</span>
+              <span class="site-state-item-count">110</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
