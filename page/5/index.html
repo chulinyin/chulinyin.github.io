@@ -237,6 +237,170 @@
   
   
 
+  <article class="post post-type-categories " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/14/渲染树构建、布局及绘制/" itemprop="url">
+                  渲染树构建、布局及绘制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-14T09:13:11+08:00" content="2016-08-14">
+              2016-08-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/14/渲染树构建、布局及绘制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/14/渲染树构建、布局及绘制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/14/渲染树构建、布局及绘制/" class="leancloud_visitors" data-flag-title="渲染树构建、布局及绘制">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>自认为运气比较好地过了线上笔试，过两天就要去面试了，于是开始找一些前端面试题作为准备。由于前端涉及的领域实在是太广，整理的过程挺艰辛的，不过也收获了很多以前没有了解到的知识点。我会选一些比较好的放到博客上。</p>
+</blockquote>
+<h4 id="网页生成过程："><a href="#网页生成过程：" class="headerlink" title="网页生成过程："></a>网页生成过程：</h4><ol>
+<li>HTML代码转化成DOM</li>
+<li>CSS代码转化成CSSOM（CSS Object Model）</li>
+<li>DOM 树与 CSSOM 树融合成渲染树（渲染树只包括渲染页面需要的节点）</li>
+<li>布局（layout），计算渲染树每个节点的几何信息（精确位置及尺寸）</li>
+<li>将布局绘制（paint）在屏幕上（把渲染树中的每个节点转换为屏幕上的实际像素）</li>
+</ol>
+<h4 id="渲染树的构建："><a href="#渲染树的构建：" class="headerlink" title="渲染树的构建："></a>渲染树的构建：</h4><ol>
+<li>从 DOM 树的根节点开始，遍历每个可见的节点。<ul>
+<li>某些节点完全不可见（例如 script 标签、meta 标签等），因为它们不会在渲染结果中反映，所以会被忽略。</li>
+<li>某些节点通过 CSS 隐藏，因此在渲染树中也会被忽略。比如有节点有一条显式规则设置了 <code>display:none</code> 属性，所以不会出现在渲染树中。</li>
+</ul>
+</li>
+<li>给每个可见节点找到相应匹配的 CSSOM 规则，并应用这些规则。</li>
+<li>最终输出渲染树，其中包括了内容以及屏幕所有可见内容的样式信息。</li>
+</ol>
+<h4 id="CSS重绘和重排"><a href="#CSS重绘和重排" class="headerlink" title="CSS重绘和重排"></a>CSS重绘和重排</h4><ul>
+<li><strong>重绘：</strong>是一个元素外观的改变所触发的浏览器行为，例如改变visibility、背景色等属性。浏览器会根据元素的新属性重新绘制元素，使元素呈现新的外观。重绘不会带来新的布局，重绘不一定会引起重排。</li>
+<li><strong>重排：</strong>渲染树重新计算。重排一定会带来重绘。一个元素的重排通常带来一系列的反应，甚至会触发整个文档的重绘和重排，性能代价是高昂的。，下面的情况会发生重排：<ul>
+<li>DOM元素的几何属性的变化（尺寸、位置等）</li>
+<li>DOM树的结构变化（节点的增减、移动）</li>
+<li>获取某些属性（offsetTop、offsetLeft、 offsetWidth、offsetHeight、scrollTop、scrollLeft、scrollWidth、scrollHeight、 clientTop、clientLeft、clientWidth）。</li>
+<li>调整浏览器窗口的大小等</li>
+</ul>
+</li>
+</ul>
+<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><p>所以根据以上特点，可以对代码进行性能优化。具体请点击下面的参考文章，写得很详细了。</p>
+<h4 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h4><ul>
+<li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=zh-cn" target="_blank" rel="external">渲染树构建、布局及绘制</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html" target="_blank" rel="external">网页性能管理详解</a></li>
+<li><a href="https://www.zybuluo.com/Sakura-W/note/168812" target="_blank" rel="external">渲染、重绘、重排技巧</a></li>
+<li><a href="http://www.yatessss.com/2016/04/29/%E9%87%8D%E7%BB%98reflow%E4%B8%8E%E9%87%8D%E6%8E%92repaint.html" target="_blank" rel="external">重绘reflow与重排repaint</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
@@ -1713,148 +1877,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/10/深夜日记-关于幸福感/" itemprop="url">
-                  深夜日记-关于幸福感
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-10T00:30:48+08:00" content="2016-07-10">
-              2016-07-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/10/深夜日记-关于幸福感/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/10/深夜日记-关于幸福感/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/07/10/深夜日记-关于幸福感/" class="leancloud_visitors" data-flag-title="深夜日记-关于幸福感">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="我这一生被强烈的幸福感击倒过四次"><a href="#我这一生被强烈的幸福感击倒过四次" class="headerlink" title="我这一生被强烈的幸福感击倒过四次"></a>我这一生被强烈的幸福感击倒过四次</h3><h4 id="第一次："><a href="#第一次：" class="headerlink" title="第一次："></a>第一次：</h4><p>12岁那年夏天的一个中午，我第一次钓起了一条鱼，虽然只有两个手指的大小，但强烈的幸福感几乎把我击晕，我把它像宝贝一样捧在手里然后连蹦带跳地带到我妈那。其实那时候我想向全世界宣告「我他妈会钓鱼了」！而且还是用花了一块五零花钱买的钓鱼线+随便捡来的竹条+一颗白米饭钓的！（其实那是我第一次的梦想，也是第一次为了梦想尝试并实现了自己的梦想）</p>
-<h4 id="第二次："><a href="#第二次：" class="headerlink" title="第二次："></a>第二次：</h4><p>好像是初二下半学期的期末考，第一次拿了第一名。强烈的虚荣心和满足感充满了我那没有胸肌的胸膛。当时我觉得「我他妈就是个天才」！这个念头直到开始上大学才渐渐消退……（这一次算不上实现梦想吧，只是满足了小而稚嫩的野心）</p>
-<h4 id="第三次："><a href="#第三次：" class="headerlink" title="第三次："></a>第三次：</h4><p>初三毕业的时候，从学校陪她一起走回家，等到了分开的岔路口，鼓起勇气亲了她一下（真的只是嘴唇碰了一下），然后那一天没有睡着觉。（这次既不算梦想也不算野心，但就是一种奇异的幸福感将我包围了）</p>
-<h4 id="第四次："><a href="#第四次：" class="headerlink" title="第四次："></a>第四次：</h4><p>不方便说……</p>
-<h4 id="第五次？"><a href="#第五次？" class="headerlink" title="第五次？"></a>第五次？</h4><p>大学到现在好像再也没有过了……虽然有几次满足，但是再也没有强烈到让我睡不着或者抑制不住兴奋的情绪。不知道是因为缺少了梦想还是因为某些东西实现得晚了几步以致于当时的我已经错过了正确的年纪。</p>
-<p>现在我的梦想就是自己做一个有意思的网页实现自己想要的一些功能。当然如果两个月内不能实现的话，我估计又不会感到强烈的幸福感了。</p>
-<blockquote>
-<p>在合适的年纪，通过努力做到了自己梦想着的或者意想不到的事，那一刻全身的细胞都会欢呼，强烈的幸福感几乎能让人飘起来。我真的好想再经历几次……</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1895,7 +1922,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">110</span>
+              <span class="site-state-item-count">111</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1912,7 +1939,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-count">99</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
