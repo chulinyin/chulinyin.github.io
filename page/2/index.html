@@ -249,6 +249,154 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/15/数据结构与算法学习笔记(9)_排序/" itemprop="url">
+                  大话数据结构学习笔记(9)_排序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-15T20:38:45+08:00" content="2017-02-15">
+              2017-02-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/15/数据结构与算法学习笔记(9)_排序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/15/数据结构与算法学习笔记(9)_排序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/15/数据结构与算法学习笔记(9)_排序/" class="leancloud_visitors" data-flag-title="大话数据结构学习笔记(9)_排序">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="概论"><a href="#概论" class="headerlink" title="概论"></a>概论</h4><p><strong>排序：</strong>将含有n个记录的序列{r1, r2, … rn.}，排列为一个按关键字{k1,k2,…kn}有序的序列的操作。（在排序问题中，通常将数据元素称为<strong>记录</strong>。排序的依据是关键字之间的大小关系。）</p>
+<h5 id="排序稳定性："><a href="#排序稳定性：" class="headerlink" title="排序稳定性："></a>排序稳定性：</h5><p>假设ki=kj（即大小相等），且在排序前的序列中ri领先于rj（即i&lt;j），如果排序后ri仍然领先于rj，则所用的排序是<strong>稳定</strong>的；反之，若可能使得排序后的序列中rj领先于ri，则所用的排序方法是<strong>不稳定</strong>的。（即大小相同的两个元素，排序前后的先后次序不变，则排序稳定。）</p>
+<h5 id="内排序与外排序"><a href="#内排序与外排序" class="headerlink" title="内排序与外排序"></a>内排序与外排序</h5><p><strong>内排序：</strong>在排序整个过程中，待排序的所有记录全被放置在内存中。</p>
+<p><strong>外排序：</strong>由于排序的记录个数太多，不能同时放置在内存，整个排序过程需要在内外存之间多次交换数据才能进行。</p>
+<p>内排序算法的性能：</p>
+<ol>
+<li><p>时间性能</p>
+<p>尽可能少的关键字比较次数和尽可能少的记录移动次数。</p>
+</li>
+<li><p>辅助空间</p>
+<p>除了存放待排序所占用的存储空间之外，执行算法所需的其他存储空间。</p>
+</li>
+<li><p>算法的复杂性</p>
+<p>指算法本身的复杂度，而不是指算法的时间复杂度。内排序可以分为：插入排序、交换排序、选择排序和归并排序。</p>
+</li>
+</ol>
+<h5 id="排序用到的结构与函数"><a href="#排序用到的结构与函数" class="headerlink" title="排序用到的结构与函数"></a>排序用到的结构与函数</h5><p>排序数组的第一位，即r[0]通常用作哨兵或临时变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">swap</span>(<span class="params">arr, i, j</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> t = arr[i];</div><div class="line">  arr[i] = arr[j];</div><div class="line">  arr[j] = t;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/15/数据结构与算法学习笔记(9)_排序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/09/数据结构与算法学习笔记(8)_查找/" itemprop="url">
                   大话数据结构学习笔记(8)_查找
                 </a>
@@ -1511,139 +1659,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/08/11月总结/" itemprop="url">
-                  11月总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-08T15:15:51+08:00" content="2016-12-08">
-              2016-12-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/个人提高/" itemprop="url" rel="index">
-                    <span itemprop="name">个人提高</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/08/11月总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/08/11月总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/08/11月总结/" class="leancloud_visitors" data-flag-title="11月总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>从这学期以来，我的进步速度放缓了许多，想了一下大概有以下几个原因，1）找工作的事情让自己分了心。并且由于一直没有找到满意的工作，内心产生了焦虑甚至自我怀疑。2）毕业设计的事情确实挺烦人的。3）前端真的浩瀚如烟，由于没有人带，学习的目标不够明确，所以导致东学一点，西学一点的情况。4）为了让自己心智尽快成熟，想要从书中去寻找答案，可是目前还不得要领。5）自己确实有点儿懈怠了，做事不够专注，生活不够自律。</p>
-<p>以上前四个点分别对应着我想要完成或者说有所收获的方面：工作、毕业设计、前端、思想。目前看来我一下子想要收获的东西有点太多了，以致于四个方面都没有做好。所以是时候做出一些改变了！找工作的事情我早已放下，决定等明年春招的时候再继续找。思想方面，只能先从一些小习惯开始，慢慢培养自己的思维能力。于是这个月就只剩两大目标了，不过这似乎还是会让我分心，既然如此，在这个月我就盯紧一个目标拼命往前冲，先把毕业设计搞定吧！（写点东西，确实能够帮助自己把思维理顺一点。^ - ^）</p>
-<p>哦，光顾着写反思了，接下来写一下自己在11月干了哪些事情以及有哪些收获吧～</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/08/11月总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1689,7 +1704,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-count">115</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1706,7 +1721,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-count">103</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
