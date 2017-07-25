@@ -249,6 +249,294 @@
             
               
                 
+                <a class="post-title-link" href="/2017/07/25/javaScript 快速全栈开发 读书笔记/" itemprop="url">
+                  《javaScript 快速全栈开发》笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-25T23:20:29+08:00" content="2017-07-25">
+              2017-07-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/25/javaScript 快速全栈开发 读书笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/25/javaScript 快速全栈开发 读书笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/07/25/javaScript 快速全栈开发 读书笔记/" class="leancloud_visitors" data-flag-title="《javaScript 快速全栈开发》笔记">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>看了一眼创建时间，看这本书已经是今年 1 月份时候的事情了，时间过得可真快啊，半年就这样过去了。如果最近不是开始填过去埋下的坑，我都快忘记自己看过这本书了。尴尬！</p>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><h4 id="web和移动应用："><a href="#web和移动应用：" class="headerlink" title="web和移动应用："></a>web和移动应用：</h4><ol>
+<li>用户在浏览器（客户端）里输入或点击一个链接</li>
+<li>浏览器向服务器发送HTTP请求</li>
+<li>服务器处理请求，如果查询字符串或者请求体里含有参数，服务器也会把这些参数信息考虑进去。</li>
+<li>服务器更新、获取或者转换数据库里的数据</li>
+<li>服务器以HTML、JSON、或者其他格式返回一个HTTP响应</li>
+<li>浏览器接收HTTP响应</li>
+<li>浏览器以HTML或者其他格式（如JPEG、XML或者JSON）把HTPP响应呈现给用户。</li>
+</ol>
+<p>移动应用用远胜应用取代了浏览器，带宽带来的数据传输限制、更小的屏幕、更高效地使用本地存储。</p>
+<p>原始string 和 Sting 对象的区别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var strP = &quot;primitive&quot; // 是字符串，基本类型，typeof strP == &apos;string&apos;</div><div class="line">var strO = new String(&quot;object&quot;) // 是对象，引用类型，typeof strO == &apos;object&apos;</div></pre></td></tr></table></figure>
+<p>每次读取一个基本类型值时，后台会创建一个对应的基本包装类型的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var strP = &quot;primitive&quot;;</div><div class="line">var str2 = strP.substring(2);</div><div class="line">// =&gt;</div><div class="line">var strP = new String(&quot;primitive&quot;);</div><div class="line">var str2 = strP.substring(2);</div><div class="line">strP = null;</div></pre></td></tr></table></figure>
+<p>使用 new 操作符创建的引用类型的实例，在执行流离开当前作用域之前都一直保存在内存中。而自动创建的基本包装类型对象，则只存在于一行代码的执行瞬间，然后立即被销毁。所以无法在运行时为基本类型值添加属性或方法。</p>
+<h4 id="敏捷开发"><a href="#敏捷开发" class="headerlink" title="敏捷开发"></a>敏捷开发</h4><ol>
+<li><p>Scrum 方法</p>
+<p>由一个个短周期组成，每个周期叫 sprint 。一个 sprint 持续1-2周。每天的会议会把新任务分配给团队成员。新任务不能添加到正在进行的 sprint 里，它们只能在子sprint 计划会议上添加。5-15分钟的会议中，每个团队成员要回答3个问题：自己昨天做了什么；今天准备做什么；是否需要从其他团队成员那里得到些什么。</p>
+<p>优势：在没法提前规划，或者需要收集用户反馈作为主要决策因素时，非常高效。</p>
+</li>
+<li><p>测试驱动开发（TDD）</p>
+<ol>
+<li>使用assertion（true or false）为新功能、新任务或者增强写下失败的自动测试用例；</li>
+<li>写出能够成功通过测试的代码</li>
+<li>如果需要，重构代码，添加功能，同时保证测试用例通过</li>
+<li>重复上面的步骤直到所有任务都完成</li>
+</ol>
+<p>优势：更少的错误和缺陷；更有效的代码；确保代码可以正常工作，并且不会影响已有功能。</p>
+</li>
+<li><p>持续部署（CD）和集成</p>
+<p>   是一系列技术的组合，可以快速把开发好的新功能、错误修复和增强功能呈现给用户。CD 包含自动测试和自动部署。</p>
+<p>   优势：减少反馈时间和手工劳动</p>
+</li>
+<li><p>结对编程</p>
+<pre><code>两个开发者在同一个环境里一起工作。其中一个为”驾驶员“，另一个为”观察员“。驾驶员负责写代码，观察员围观并提供建议。一段时间后两者互换角色。驾驶员的角色更多关注当下的任务，观察员需要有大局观，发现错误并改进算法。
+</code></pre><p>   优势：产出更简洁、高效的代码，同时降低引发错误和缺陷的几率。两人一起工作时彼此可以交流和传递知识。</p>
+</li>
+</ol>
+<h4 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h4><p>事件驱动异步I/O。可用于创建可伸缩且高性能 Web 服务器。</p>
+<h4 id="NoSQL和MongoDB"><a href="#NoSQL和MongoDB" class="headerlink" title="NoSQL和MongoDB"></a>NoSQL和MongoDB</h4><p>用于大数据的高性能非关系型数据库。</p>
+<p>优势：</p>
+<ul>
+<li>可伸缩性：由于其分布性特性，可以在多个服务器和数据中心放置冗余数据</li>
+<li>高性能：在存储和检索方面非常高效，部分原因是数据库中元素和集合之间关系上的弱处理；</li>
+<li>灵活性：键-值对存储非常适合原型开发，因为它使用户不需要关心表关系，不需要修复数据模型，不需要关注复杂的数据迁移。</li>
+</ul>
+<h4 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h4><ul>
+<li>基础设施即服务（IaaS），如 Rackspace、Amazon Web Services</li>
+<li>平台即服务（PaaS），如 Heroku、windows Azure</li>
+<li>后端即服务（Baas），如Parse.com、Firbase</li>
+<li>软件即服务（Saas），如 Google Apps、Saleforce.com</li>
+</ul>
+<p>云应用平台功能：</p>
+<ul>
+<li>可伸缩性，如在几分钟内产生新的实例；</li>
+<li>部署简单，向Heroic 部署，只需要 $ git push</li>
+<li>现收现付制，用户根据需要添加和删除内存及磁盘空间</li>
+<li>可扩展，方便安装和设置数据库、应用服务器、程序包等</li>
+<li>安全和技术支持</li>
+</ul>
+<p>PaaS 和 BaaS 非常适合构建原型，一般用来创建 MVP（minimal viable produce 最小化的可行产品），供那些尚处于创业初始阶段的团队使用。</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><h4 id="搭建本地环境"><a href="#搭建本地环境" class="headerlink" title="搭建本地环境"></a>搭建本地环境</h4><h5 id="开发目录"><a href="#开发目录" class="headerlink" title="开发目录"></a>开发目录</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cd ~/Documents</div><div class="line">$ mkdir Development</div><div class="line">$ cd Development</div><div class="line">$ mkdir rpjs</div></pre></td></tr></table></figure>
+<h5 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h5><h5 id="IDE和文本编辑器"><a href="#IDE和文本编辑器" class="headerlink" title="IDE和文本编辑器"></a>IDE和文本编辑器</h5><ul>
+<li>Sublime Text</li>
+<li>webstorm IDE</li>
+<li>Visual Studio Code</li>
+</ul>
+<h5 id="版本控制系统"><a href="#版本控制系统" class="headerlink" title="版本控制系统"></a>版本控制系统</h5><ul>
+<li>Git</li>
+<li><a href="git.wiki.kernel.org/index.php/GitSvnComparison">Git vs subversion(svn)</a></li>
+</ul>
+<h5 id="本地服务器"><a href="#本地服务器" class="headerlink" title="本地服务器"></a>本地服务器</h5><ul>
+<li>MAPMP</li>
+<li>MAMP Stack</li>
+<li>XAMP</li>
+</ul>
+<h5 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h5><ul>
+<li><strong>mongod安装：</strong></li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew update</div><div class="line">$ brew install mongodb</div></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo mkdir -p /<span class="keyword">data</span>/db</div><div class="line">$ sudo chown `id -u` /<span class="keyword">data</span>/db</div></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mongod</div></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mongo</div><div class="line">$ db.test.save(&#123;a:<span class="number">1</span>&#125;)</div><div class="line">$ db.test.find()</div></pre></td></tr></table></figure>
+<h5 id="其他组件"><a href="#其他组件" class="headerlink" title="其他组件"></a>其他组件</h5><ul>
+<li>Node.js</li>
+<li>JS库（使用CDN或下载到开发目录中）</li>
+</ul>
+<h4 id="搭建云端环境"><a href="#搭建云端环境" class="headerlink" title="搭建云端环境"></a>搭建云端环境</h4><p>SSH密钥：安全连接到服务器，而不需每次都输入账密</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 查看已有密钥</div><div class="line">$ cd ~/.ssh</div><div class="line">$ ls -lah</div></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 备份已有密钥</div><div class="line">$ mkdir key_backup</div><div class="line">$ cp id_rsa* key_backup</div><div class="line">$ rm id_rsa*</div></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 生成新密钥</div><div class="line">$ ssh-keygen -t rsa -C <span class="string">"chulinyin0317@gmail.com"</span></div></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 复制密钥文件中的内容，</div><div class="line">// 或用默认编辑器打开文件</div><div class="line">$ pbcopy &lt; ~/.ssh/id_rsa.pub</div><div class="line">$ open id_rsa.pub</div></pre></td></tr></table></figure>
+<h4 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h4><p>登陆GitHub，账户设置，选择 SSH key，添加新的 SSH 密钥。添加一个名字，然后复制粘贴。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 检查是否可以通过 SSH 连接到 Github</div><div class="line">$ ssh -T git@github.com</div><div class="line">The authenticity of host....</div><div class="line">Are you sure you want to <span class="keyword">continue</span> connecting (yes/no)? yes</div><div class="line">....</div><div class="line">Hi, XXX! You have successfully ....</div></pre></td></tr></table></figure>
+<h4 id="Windows-Azure"><a href="#Windows-Azure" class="headerlink" title="Windows Azure"></a>Windows Azure</h4><ol>
+<li><p><a href="https://azure.microsoft.com/zh-cn/" target="_blank" rel="external">注册</a></p>
+</li>
+<li><p>启用 Git 部署，并且创建用户名和密码，然后上传 SSH 公钥到 Azure</p>
+</li>
+<li><p>安装 Node.js SDK，</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install azure</div></pre></td></tr></table></figure>
+</li>
+<li><p>登陆</p>
+</li>
+<li><p>点new -&gt; web site -&gt; quick create  -&gt; 输入使用网址 -&gt; 点OK</p>
+</li>
+<li><p>到新创建的网站控制面板，选择 “set up Git publishing”，点击“确定” 。然后输入用户名和密码。此后所有你创建的网站都不需要设定凭据。</p>
+</li>
+<li><p>填入一个 Git URL </p>
+</li>
+<li><p>高级用户选项：可以创建一个虚拟机，并在上面安装 MongoDB的<a href="https://goo.gl/FISkpS" target="_blank" rel="external">教程</a></p>
+</li>
+</ol>
+<p><a href="https://www.heroku.com/" target="_blank" rel="external">Heroku</a>是多语言敏捷应用部署的平台。</p>
+<p><a href="https://c9.io/" target="_blank" rel="external">Cloud9</a>是一个在浏览器里运行的IDE，绑定 Github 账户后，它可以用于浏览、编辑你的仓库，并部署到 windows Azure 或者其他服务。无需安装，所有东西都在浏览器里工作，和 Google Docs 很类似。</p>
+<h3 id="前端原型构建"><a href="#前端原型构建" class="headerlink" title="前端原型构建"></a>前端原型构建</h3><p>jason</p>
+<p>ajax</p>
+<p>jQuery</p>
+<p>Bootstrap</p>
+<p>less/sass</p>
+<p>parse.com</p>
+<p>用于替换数据库和服务器的服务，方便于移动程序开发。在使用 REST API 和 JavaScript SDK 的情况下，Parse.com 适用于任何 Web 和桌面应用数据存储（及其他功能），因此成为理想的用来快速构建原型的工具</p>
+<p>前端框架：backbone……</p>
+<h4 id="推送到-Github"><a href="#推送到-Github" class="headerlink" title="推送到 Github"></a>推送到 Github</h4><ol>
+<li><p>登陆 GitHub，创建新仓库，复制 SSH 地址（ git@github.com:chulinyin/rep.git ）</p>
+</li>
+<li><p>在本地项目目录根部初始化一个 Git 仓库</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+</li>
+<li><p>把所有文件添加到仓库，并开始追踪它们</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add .</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建第一条提交</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">'inital commit'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加 Github 远程地址</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin git@github.com:chulinyin/rep.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>把本地 Git仓库推送到 GitHub 上的远程位置</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
+</li>
+<li><p>提交单独的文件变化</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git commit filename -m <span class="string">'some message'</span></div><div class="line">$ git push</div></pre></td></tr></table></figure>
+</li>
+<li><p>从Git 仓库里删除文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
+<h4 id="部署到某个平台："><a href="#部署到某个平台：" class="headerlink" title="部署到某个平台："></a>部署到某个平台：</h4><p>Windows Azure、Heroku……</p>
+<h3 id="后端原型构建"><a href="#后端原型构建" class="headerlink" title="后端原型构建"></a>后端原型构建</h3><p>Node.js</p>
+<p>mongoDB</p>
+<ul>
+<li>mongoDB shell</li>
+<li>mongoDB nom</li>
+<li>mongoose</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="keyword">var</span> mongodb = <span class="built_in">require</span>(<span class="string">'mongodb'</span>);</div><div class="line"><span class="keyword">var</span> Db = mongodb.Db;</div><div class="line"><span class="keyword">var</span> Connection = mongodb.Connection;</div><div class="line"><span class="keyword">var</span> Server = mongodb.Server;</div><div class="line"></div><div class="line">dbConnUrl = process.env.MONGOHQ_URL ||</div><div class="line">  			<span class="string">'mongodb://127.0.0.1:27017'</span>;</div><div class="line"><span class="keyword">var</span> host = url.parse(dbConnUrl).hostname;</div><div class="line"><span class="keyword">var</span> port = <span class="keyword">new</span> Nubmer(url.parse(dbConnUrl).port);</div><div class="line"></div><div class="line"><span class="keyword">var</span> db = <span class="keyword">new</span> Db(<span class="string">'test'</span>,<span class="keyword">new</span> Server(host, port, &#123;&#125;));</div><div class="line"></div><div class="line">db.open(<span class="function"><span class="keyword">function</span>(<span class="params">e, c</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(db._state);</div><div class="line">  db.close();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="整合前后端"><a href="#整合前后端" class="headerlink" title="整合前后端"></a>整合前后端</h3><h4 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// jsonp</span></div><div class="line"><span class="keyword">var</span> request = $.ajax(&#123;</div><div class="line">  <span class="attr">url</span>: url,</div><div class="line">  <span class="attr">dataType</span>: <span class="string">"jsonp"</span>,</div><div class="line">  <span class="attr">jsonCallback</span>: <span class="string">"fetchData"</span>,</div><div class="line">  <span class="attr">type</span>: <span class="string">"GET"</span></div><div class="line">&#125;)</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchData</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">  <span class="comment">// 处理 data</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// CORS</span></div><div class="line"><span class="comment">// 在Node.js服务器应用返回前添加 OPRTIONS 方法和特殊的响应头部信息</span></div><div class="line">...</div><div class="line">response.writeHead(<span class="number">200</span>, &#123;</div><div class="line">  <span class="string">'Access-Control-Allow-Origin'</span>: origin</div><div class="line">  <span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>,</div><div class="line">  <span class="string">'Content-Length'</span>: body.length</div><div class="line">&#125;);</div><div class="line">...</div><div class="line"><span class="comment">//或者：</span></div><div class="line">res.writeHead(<span class="number">200</span>, &#123;</div><div class="line">  <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'your-domain-name'</span>,</div><div class="line">  ...</div><div class="line">&#125;)</div><div class="line">  </div><div class="line"><span class="comment">// OPTIONS请求处理</span></div><div class="line">...</div><div class="line">var origin = request.headers.origin || <span class="string">"*"</span>;</div><div class="line"><span class="keyword">if</span>(request.method == <span class="string">'OPTIONS'</span>)&#123;</div><div class="line">  response.writeHead(<span class="number">204</span>, <span class="string">'No Content'</span>, &#123;</div><div class="line">    <span class="string">'Access-Control-Allow-Origin'</span>: origin,</div><div class="line">  	<span class="string">'Access-Control-Allow-Methods'</span>:</div><div class="line">  		<span class="string">"GET, POST, PUT, DELETE, OPTIONS"</span>,</div><div class="line">  	<span class="string">'Access-Control-Allow-Headers'</span>: <span class="string">"content-type, accept"</span>,</div><div class="line">  	<span class="string">'Access-Control-Max-Age'</span>: <span class="number">10</span>, <span class="comment">//秒</span></div><div class="line">  	<span class="string">'Content-Length'</span>: <span class="number">0</span></div><div class="line">  &#125;);</div><div class="line">  response.end();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/07/25/李笑来读书经验分享/" itemprop="url">
                   李笑来老师在「一块听听」上的读书经验分享
                 </a>
@@ -1702,161 +1990,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/18/锋利的jQuery/" itemprop="url">
-                  《锋利的jQuery》笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-18T20:44:29+08:00" content="2017-02-18">
-              2017-02-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/JQuery/" itemprop="url" rel="index">
-                    <span itemprop="name">JQuery</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/02/18/锋利的jQuery/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/18/锋利的jQuery/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/02/18/锋利的jQuery/" class="leancloud_visitors" data-flag-title="《锋利的jQuery》笔记">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h3><p>$(document).ready(function(){})   vs window.onload</p>
-<ul>
-<li><p>执行时机</p>
-<p>前者在DOM完全就绪时就可以被调用，后者还需等元素所有关联文件加载完成</p>
-</li>
-<li><p>编写个数</p>
-<p>前者事件能够保存对多个函数的引用</p>
-</li>
-<li><p>简写 </p>
-<p>前者可简写为 $().ready(function(){})  $(function(){})  </p>
-</li>
-</ul>
-<p>与DOM对象的转化</p>
-<ul>
-<li>$jq[index] $jq.get(index) </li>
-<li>$(dom)</li>
-</ul>
-<p>$cr.is(:checked) 与 cr.checked</p>
-<p>解决冲突：</p>
-<ul>
-<li>jQuery.noConflict() 后使用jQuery</li>
-<li>jQuery.noConflict() 后使用jQuery(function($){$(‘p’…)})</li>
-<li>jQuery.noConflict() 后使用(function($){$(‘p’…)})(jQuery)</li>
-<li>$j = jQuery.noConflict() 后使用$j</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/18/锋利的jQuery/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1902,7 +2035,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">115</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1919,7 +2052,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

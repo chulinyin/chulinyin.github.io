@@ -249,6 +249,183 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/02/JS跨域请求（1）/" itemprop="url">
+                  JS跨域请求（1）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-02T00:20:04+08:00" content="2016-06-02">
+              2016-06-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/02/JS跨域请求（1）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/02/JS跨域请求（1）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/02/JS跨域请求（1）/" class="leancloud_visitors" data-flag-title="JS跨域请求（1）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>今天一大早就去面试了，在公交车上颠簸近一个半小时，然后下车走了10多分钟的路后，终于在9.30的时候到了面试的公司“淘粉吧”，公司内部装修的还是蛮有格调的，氛围挺轻松写意的。<br>在会议室做了一份笔试题，然后面试了20分钟左右，就马上又赶去公交车站了（因为要赶在12.30前回学校拍照，错过了就会很麻烦）。<br>在车上的时候，又接到了HR的电话，让我马上过去复试，因为刚刚面试我的主管没有找到HR,也就是说他刚刚是在没有看到我简历的情况下，面试了我二十分钟。所以我不得不明天再去一趟。<br>不过也是福祸相依吧，如果那个主管是在拿到我的简历的情况下面试我的，时间估计得持续一小时，那样的话我就来不及赶回学校了，就不得不补拍照的坑了。</p>
+</blockquote>
+<p>今天下午就去图书馆了，加上晚上的时间基本都在重新看一遍《JS高级程序设计》里的：</p>
+<ul>
+<li>ajax请求和跨域请求</li>
+<li>高级函数的应用（作用域安全的构造函数、惰性载入函数(使初始化判断只进行一次)</li>
+<li>函数绑定及柯里化[fnc.bind()]）</li>
+<li>自定义事件</li>
+<li>模块模式的编程。</li>
+</ul>
+<p>然后开始分析网易云课堂上老师讲<strong>组件</strong>的时候给的两个demo，瞬间有了许多领悟。后面我准备再了解下怎么把各个模块组合起来，还有什么模板解析技术，我就要开始重构当初那个大作业的js代码了。现在回过头去看当初写的代码，确实太嫩了。</p>
+<p>下面就如标题所述，开始讲一下跨域请求吧~</p>
+<h3 id="为什么要跨域"><a href="#为什么要跨域" class="headerlink" title="为什么要跨域"></a>为什么要跨域</h3><p>因为通过XHR实现Ajax通信有一个主要限制————跨域安全策略。默认情况下，XHR对象只能访问与包含它的页面位于同一个域中的资源。可是有时候我们需要使用跨域资源。那就只能依靠一些跨域技术了。</p>
+<h3 id="1、CORS跨域资源共享"><a href="#1、CORS跨域资源共享" class="headerlink" title="1、CORS跨域资源共享"></a>1、CORS跨域资源共享</h3><p>这是W3C指定制定的一个标准，使用自定义的HTTP头部让浏览器和服务器沟通，在发送请求的时候，需要给请求报文添加一个额外的Origin首部字段，值为页面的源信息（协议+域名+端口），如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Origin: http://www.chulinyin.com</div></pre></td></tr></table></figure></p>
+<p>然后服务器就根据这个首部字段决定是否响应，如果响应的话，响应报文中的Access-Control-Allow-Origin的首部字段中就会包含相同的源信息，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Origin: http://www.chulinyin.com</div></pre></td></tr></table></figure></p>
+<p>如果响应报文没有这个首部字段或者值不匹配，浏览器就会驳回请求。</p>
+<blockquote>
+<p>注意，请求和响应报文中都不会包含Cookie信息。</p>
+</blockquote>
+<h4 id="1-1、IE中CORS的实现"><a href="#1-1、IE中CORS的实现" class="headerlink" title="1.1、IE中CORS的实现"></a>1.1、IE中CORS的实现</h4><p>IE8中使用了与XHR相似的XDR对象，它有一些不同之处：</p>
+<ul>
+<li>cookie不随请求发送，也不随响应返回</li>
+<li>只能设置请求首部字段中的Content-Type字段</li>
+<li>不能访问响应报文的首部信息</li>
+<li>只支持GET和POST请求</li>
+<li>所有的XDR请求都是异步执行的</li>
+<li>接收到响应后只能访问响应文本，没有办法确定响应的状态码</li>
+<li>用load事件和error事件监测响应成功或失败</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xdr = XDomainRequest();</div><div class="line">xdr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(xdr.responseText);</div><div class="line">&#125;</div><div class="line">xdr.error = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    conlose.log(<span class="string">'An error occurred.'</span>)</div><div class="line">&#125;</div><div class="line">xdr.open(<span class="string">"get"</span>,<span class="string">"http://www.somewhere-else.com/page"</span>);</div><div class="line">xdr.send(<span class="literal">null</span>);</div><div class="line"><span class="comment">//POST方法：</span></div><div class="line">xdr.open(<span class="string">'post'</span>,<span class="string">'http://www.somewhere-else.com/page'</span>);</div><div class="line">xdr.contentType = <span class="string">'application/x-www-form-urlencoded'</span>;</div><div class="line">xdr.send(<span class="string">'name1=value1&amp;name2=value2'</span>);</div></pre></td></tr></table></figure>
+<h4 id="1-2、其他浏览器中CORS的实现"><a href="#1-2、其他浏览器中CORS的实现" class="headerlink" title="1.2、其他浏览器中CORS的实现"></a>1.2、其他浏览器中CORS的实现</h4><p>直接使用原生的XHR对象即可，不过也有一些限制：</p>
+<ul>
+<li>不能使用setRequestHeader()设置自定义的头部</li>
+<li>不能发送和接收Cookie</li>
+<li>调用getAllResponseHeaders()方法会返回空字符串<br>因为可能会和同域请求难以区分，所以如果是同域的请求最好使用相对的URL，跨域请求使用绝对URL。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xhr = XMLHTTPRequest();</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(xhr.readySate == <span class="number">4</span>)&#123;</div><div class="line">        <span class="keyword">if</span>(xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>||xhr.status==<span class="number">304</span>)&#123;</div><div class="line">            callback(xhr.responseText);</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'success'</span>);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'Request was unsuccessful:'</span> + xhr.status);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">xhr.open(<span class="string">"get"</span>,<span class="string">'http://www.somewhere-else.com/page'</span>,ture);</div><div class="line">xhr.send(<span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<h4 id="1-3、CORS的跨浏览器实现"><a href="#1-3、CORS的跨浏览器实现" class="headerlink" title="1.3、CORS的跨浏览器实现"></a>1.3、CORS的跨浏览器实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 简单的（非 preflightted 和不带凭据的）跨浏览器的跨域请求方案</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCORSRequest</span>(<span class="params">method,url</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHTTPRequest();</div><div class="line">    <span class="keyword">if</span>(<span class="string">'withCredentials'</span> <span class="keyword">in</span> xhr)&#123;</div><div class="line">        xhr.open(method,url,ture);</div><div class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> XDomianRequest != <span class="string">"undefined"</span> )&#123;</div><div class="line">        xhr = <span class="keyword">new</span> XDomainRequest();</div><div class="line">        xhr.open(method,url);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        xhr = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> xhr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> request = createCORSRequest(<span class="string">'get'</span>,<span class="string">'http://www.somewhere-else.com/page'</span>);</div><div class="line"><span class="keyword">if</span>(request)&#123;</div><div class="line">    request.onload = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">        callback(xhr.reponseText);</div><div class="line">    &#125;;</div><div class="line">    request.send();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>XMLHttpRequest 和 XDomainRequest 对象共同的属性、方法、事件：</p>
+<ul>
+<li>responseText</li>
+<li>open()</li>
+<li>send()</li>
+<li>abort()</li>
+<li>onload，用于代替 onreadystatechange 检测成功</li>
+<li>onerror，用于代替 onreadystatechange 检测错误</li>
+</ul>
+<h3 id="2、其他跨域技术"><a href="#2、其他跨域技术" class="headerlink" title="2、其他跨域技术"></a>2、其他跨域技术</h3><p>明天再写……</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/01/初见HTTP（4）/" itemprop="url">
                   初见HTTP（4）
                 </a>
@@ -1531,149 +1708,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/23/关于《岛上书店》/" itemprop="url">
-                  关于《岛上书店》
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-23T00:57:55+08:00" content="2016-05-23">
-              2016-05-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/读书随感/" itemprop="url" rel="index">
-                    <span itemprop="name">读书随感</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/23/关于《岛上书店》/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/23/关于《岛上书店》/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/23/关于《岛上书店》/" class="leancloud_visitors" data-flag-title="关于《岛上书店》">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><blockquote>
-<p>一礼拜前花0.1RMB试用了kindle的包月服务，哈哈，才1毛钱当然舍得试一下的。试过发现有好多书是不包括在包月服务里面的，这点比较难以接受，然后只能在包月服务的书库里找本自己感兴趣的读，于是就选了《岛上书店》这本书，因为最近好像挺火的。</p>
-</blockquote>
-<h3 id="经过"><a href="#经过" class="headerlink" title="经过"></a>经过</h3><p>读这本书算是断断续续，并没有连续花几天时间看完，因为小说开篇并不是很有趣，甚至让我有点摸不着头脑。今天一口气从高潮部分看到了结束，大概占了全书的30%左右。这本小说的故事现在在我的脑海里是这样的：</p>
-<blockquote>
-<p>主人公爱好读书，他在妻子的故乡————爱丽丝岛，开了一家书店，并且为此放弃了攻读博士学位（因为她妻子认为，一个地方如果没有书店，那就不能称之为一个地方）。可是不幸的是，她妻子在开车送一本书的作者回家的时候，出车祸身亡了。从此主人公就过上了几乎麻木的生活，他的生活里几乎除了看书、照看书店、想念妻子就几乎没有其他了。<br>    主人公对书的品味很高，并且酷爱短篇小说；因为不知名的原因，他会不时地失去意识，但他还是常常把自己灌醉。<br>    有一个晚上，他想把自己灌醉，同时打开了一本有很高收藏价值的书《木贴儿》在看，可是醒来之后发现这本书不见了（价值几十万美元），他变得手足无措以及愤怒，因为他本来是打算卖掉这本书，然后结束自己的开店生涯，可是计划破灭了……<br>    他在医生的建议下开始跑步，每次跑步的时候他都不锁门，因为他觉得自己已经没有什么值钱的东西了。可是有一天跑步回来发现店里非但没有少任何东西，反而多了一个2岁多的可爱的小女孩正在看书（是 她的妈妈把她留在了书店中）。他第一反应当然是把她交到警察局，然后送到别的寄养家庭，可是经过一番相处后，他发现自己喜欢上了做父亲的感觉，并且和小女孩玛雅相处得很融洽。于是最后他选择将她留在了自己的身边，想将她培养成一个作家。<br>    在接触到小女孩之后，他突然对整个世界又有了激情。在一次玛雅生病的时候，他不得不读了一本曾经自己不想的书，他发现他错了，于是打电话给以前来店里给他推荐这本书的推销员，表示对自己无礼的歉意。一番交流相处后，他发现自己爱上了这位推销员。经历过一些曲折，他们也终于相爱并且结婚。<br>    可是好景不长，他失去知觉的次数越来越频繁，去医院检查后发现得了罕见的脑癌。他衡量过后本来不打算接受治疗了，可是《木贴儿》的失而复得以及妻子和女儿的支持让他接受了初期的治疗。（当然，关于《木贴儿》的故事是小说的另一条线）<br>    可是治疗最终并没有起到什么效果，他也逐渐丧失了语言表达能力，他想用自己最后的时间来教导女儿一些东西，可是表达能力的丧失，使得他只能每天写一小段话给女儿。（这也是文章每一节开头一段话的由来）<br>    不久之后，他死了。岛上也将面临没有书店情况，可是最后他的前妻的妹妹和她的丈夫（一名警察）选择继承了这家书店。（当然这又是一个小故事）</p>
-</blockquote>
-<h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><p>让我感触最深的是主人公对待世界的态度的转变吧，从对美好生活的向往，到突然地跌落谷底失去信念，再意外地找到了亲情和爱情，并从中收获幸福，突然地患上绝症，并且逐渐丧失语言表达能力，不能再看自己喜爱的书，但是这时候他的心境已经迥然不同，他选择将自己的余光献给女儿。<br>突然想起了几句《爱拼才会赢》里歌词:</p>
-<blockquote>
-<ul>
-<li>一时失志不免怨叹，一时落魄不免胆寒。</li>
-<li>那通失去希望每日醉茫茫，无魂有体亲像稻草人。</li>
-<li>人生可比是海上的波浪，有时起有时落。</li>
-</ul>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1719,7 +1753,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">115</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1736,7 +1770,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

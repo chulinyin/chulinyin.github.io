@@ -249,6 +249,161 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/18/锋利的jQuery/" itemprop="url">
+                  《锋利的jQuery》笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-18T20:44:29+08:00" content="2017-02-18">
+              2017-02-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/18/锋利的jQuery/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/18/锋利的jQuery/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/18/锋利的jQuery/" class="leancloud_visitors" data-flag-title="《锋利的jQuery》笔记">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h3><p>$(document).ready(function(){})   vs window.onload</p>
+<ul>
+<li><p>执行时机</p>
+<p>前者在DOM完全就绪时就可以被调用，后者还需等元素所有关联文件加载完成</p>
+</li>
+<li><p>编写个数</p>
+<p>前者事件能够保存对多个函数的引用</p>
+</li>
+<li><p>简写 </p>
+<p>前者可简写为 $().ready(function(){})  $(function(){})  </p>
+</li>
+</ul>
+<p>与DOM对象的转化</p>
+<ul>
+<li>$jq[index] $jq.get(index) </li>
+<li>$(dom)</li>
+</ul>
+<p>$cr.is(:checked) 与 cr.checked</p>
+<p>解决冲突：</p>
+<ul>
+<li>jQuery.noConflict() 后使用jQuery</li>
+<li>jQuery.noConflict() 后使用jQuery(function($){$(‘p’…)})</li>
+<li>jQuery.noConflict() 后使用(function($){$(‘p’…)})(jQuery)</li>
+<li>$j = jQuery.noConflict() 后使用$j</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/18/锋利的jQuery/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/15/数据结构与算法学习笔记(9)_排序/" itemprop="url">
                   大话数据结构学习笔记(9)_排序
                 </a>
@@ -1525,140 +1680,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/09/Arduino 和 Processing 的学习/" itemprop="url">
-                  Arduino 与 Processing 的串口通信
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-09T23:10:51+08:00" content="2016-12-09">
-              2016-12-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/毕业设计/" itemprop="url" rel="index">
-                    <span itemprop="name">毕业设计</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/09/Arduino 和 Processing 的学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/09/Arduino 和 Processing 的学习/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/09/Arduino 和 Processing 的学习/" class="leancloud_visitors" data-flag-title="Arduino 与 Processing 的串口通信">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>终于真正地开始准备毕业设计的东西了，虽然最终到底要实现什么样的功能还没有具体定下来，但是有些肯定用得到的东西还是可以先准备起来了～</p>
-<p>导师上个月粗略给我规划的毕业设计方案是在原有六足机器人（以前我们一组人一起完成的一个项目）的基础上加传感器，从而实现六足机器人姿态的实时检测。当时导师给出的步骤是：先是对传感器的选型（要有理有据），然后整合到现有的六足机器上，再搭建实验平台（如斜坡、凹凸地）进行测试，最后对测试所得进行分析。</p>
-<p>我以为应该不会很难，结果第一步就把我卡得死死的。前阵子一直在想如何通过理论计算推导出传感器的选型依据，结果看了一些硕士、博士论文之后，彻底懵逼 :( ，如丈二和尚摸不着头脑。（话说，丈二和尚是谁啊？算了，管他呢……）然后今天就和另外一人商量着去找下导师，看看导师能否提供一些帮助。结果老师发短信让我们下周一再去……</p>
-<p>于是，我只能静下心想一想有什么是到时候肯定需要完成的，我可以先提前准备起来。皇天不负有心人，我突然想到，既然是实时姿态检测，那最终上位机肯定需要得到六足机器人的欧拉角，也就是重心与地面参考系三个轴的夹角（看了一些论文之后，还是有些收获的 ^-^），而我想最好还能根据这些数据在上位机上实时渲染出 3D 图像，也就是能够让六足机器人的姿态可视化。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/09/Arduino 和 Processing 的学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1704,7 +1725,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">115</span>
+              <span class="site-state-item-count">116</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1721,7 +1742,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
