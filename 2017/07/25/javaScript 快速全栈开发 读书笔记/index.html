@@ -102,7 +102,7 @@
 服务器处理请求，如果查询字符串或者请求体里含有参数，服务器也会把这些参数信息考虑进去。
 服务器更新、获取或者转换数据库里的数据
 服务">
-<meta property="og:updated_time" content="2017-07-25T15:29:47.000Z">
+<meta property="og:updated_time" content="2017-10-10T13:19:14.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《javaScript 快速全栈开发》笔记">
 <meta name="twitter:description" content="看了一眼创建时间，看这本书已经是今年 1 月份时候的事情了，时间过得可真快啊，半年就这样过去了。如果最近不是开始填过去埋下的坑，我都快忘记自己看过这本书了。尴尬！
@@ -356,6 +356,7 @@
 <p>每次读取一个基本类型值时，后台会创建一个对应的基本包装类型的对象。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> strP = <span class="string">"primitive"</span>;</div><div class="line"><span class="keyword">var</span> str2 = strP.substring(<span class="number">2</span>);</div><div class="line"><span class="comment">// =&gt;</span></div><div class="line"><span class="keyword">var</span> strP = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"primitive"</span>);</div><div class="line"><span class="keyword">var</span> str2 = strP.substring(<span class="number">2</span>);</div><div class="line">strP = <span class="literal">null</span>;</div></pre></td></tr></table></figure>
 <p>使用 new 操作符创建的引用类型的实例，在执行流离开当前作用域之前都一直保存在内存中。而自动创建的基本包装类型对象，则只存在于一行代码的执行瞬间，然后立即被销毁。所以无法在运行时为基本类型值添加属性或方法。</p>
+<a id="more"></a>
 <h4 id="敏捷开发"><a href="#敏捷开发" class="headerlink" title="敏捷开发"></a>敏捷开发</h4><ol>
 <li><p>Scrum 方法</p>
 <p>由一个个短周期组成，每个周期叫 sprint 。一个 sprint 持续1-2周。每天的会议会把新任务分配给团队成员。新任务不能添加到正在进行的 sprint 里，它们只能在子sprint 计划会议上添加。5-15分钟的会议中，每个团队成员要回答3个问题：自己昨天做了什么；今天准备做什么；是否需要从其他团队成员那里得到些什么。</p>
