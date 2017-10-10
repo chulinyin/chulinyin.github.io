@@ -249,8 +249,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/10/10/使用 vue-router 做权限控制/" itemprop="url">
-                  未命名
+                <a class="post-title-link" href="/2017/10/10/VueRouter/" itemprop="url">
+                  VueRouter 简明介绍
                 </a>
               
             
@@ -263,19 +263,38 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-10T17:19:46+08:00" content="2017-10-10">
+            <time itemprop="dateCreated" datetime="2017-10-10T22:30:36+08:00" content="2017-10-10">
               2017-10-10
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/10/10/使用 vue-router 做权限控制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/10/使用 vue-router 做权限控制/" itemprop="commentsCount"></span>
+                <a href="/2017/10/10/VueRouter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/10/VueRouter/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,7 +304,7 @@
 
           
           
-             <span id="/2017/10/10/使用 vue-router 做权限控制/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2017/10/10/VueRouter/" class="leancloud_visitors" data-flag-title="VueRouter 简明介绍">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -308,11 +327,16 @@
 
       
         
-          
-            <p>使用 vue-router 做权限控制</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 权限控制</span></div><div class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'is beforeEach'</span>);</div><div class="line">  <span class="keyword">const</span> menu = store.state.base.app.menu;</div><div class="line">  <span class="keyword">if</span>(menu.length == <span class="number">0</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'no menu'</span>)</div><div class="line">    store.dispatch(<span class="string">'base/initApp'</span>).then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</div><div class="line">      <span class="keyword">if</span>(hasPermission(data.menu, to.path)) &#123;</div><div class="line">        next();</div><div class="line">      &#125;<span class="keyword">else</span> &#123;</div><div class="line">        next(<span class="string">'/'</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;<span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'menu exist'</span>)</div><div class="line">    <span class="keyword">if</span>(hasPermission(menu, to.path)) &#123;</div><div class="line">      next();</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">      next(<span class="string">'/'</span>);</div><div class="line">    &#125;    </div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasPermission</span>(<span class="params">menu, targetPath</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> menu.some(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span>(item.children &amp;&amp; item.children.length &gt; <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">return</span> hasPermission(item.children, targetPath);</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">if</span>(targetPath == item.url) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// ⚠️ 注意前方有坑：根组件实例化的代码必须放在 router.beforeEach() 之后，否则第一次进入页面/页面重刷新的时候不会触发 beforeEach。</span></div><div class="line"><span class="comment">// 详情：https://github.com/vuejs/vue-router/issues/748</span></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">  store,</div><div class="line">  <span class="attr">router</span>: router,</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(entry),</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-
-          
+          <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><code>&lt;router-link&gt;&lt;/router-link&gt;</code> 是一个组件，模块化使用时需要注册（ <code>Vue.use(VueRouter)</code> ），最后渲染为 <code>&lt;a&gt;&lt;/a&gt;</code> 链接。</p>
+<p>最终， 在 <code>&lt;router-view&gt;&lt;router-view&gt;</code> 里渲染路由地址对应的组件。</p>
+<h4 id="路由的注册"><a href="#路由的注册" class="headerlink" title="路由的注册"></a>路由的注册</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = &#123; <span class="attr">template</span>: <span class="string">'&lt;div&gt;foo&lt;/div&gt;'</span> &#125;</div><div class="line"></div><div class="line"><span class="comment">// 相同地址匹配多个路由时，越早定义，优先级越高</span></div><div class="line"><span class="keyword">const</span> routes = [</div><div class="line">    &#123; <span class="attr">path</span>: <span class="string">'/foo'</span>, <span class="attr">name</span>:<span class="string">'foo'</span>, <span class="attr">component</span>: Foo &#125;</div><div class="line">    <span class="comment">// other routes</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</div><div class="line">    routes, <span class="comment">// short of routes: routes</span></div><div class="line">    <span class="comment">// other config</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  	<span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    router,</div><div class="line">  	<span class="comment">// other config</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h4 id="动态路由：-route-params-route-query-route-hash"><a href="#动态路由：-route-params-route-query-route-hash" class="headerlink" title="动态路由：$route.params, $route.query, $route.hash"></a>动态路由：<code>$route.params</code>, <code>$route.query</code>, <code>$route.hash</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> User = &#123; <span class="attr">template</span>: <span class="string">'&lt;div&gt;User name: &#123;&#123; $route.params.id &#125;&#125;, the postID: &#123;&#123; $route.params.post_id &#125;&#125;&lt;/div&gt;'</span> &#125;</div><div class="line"><span class="keyword">const</span> DynamicRoute = &#123; <span class="attr">path</span>: <span class="string">'xxx/:id/:post_id'</span>, <span class="attr">component</span>: User &#125;</div></pre></td></tr></table></figure>
+<h4 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> user = &#123;</div><div class="line">    <span class="attr">tempalte</span>: <span class="string">`</div><div class="line">	  &lt;div&gt;</div><div class="line">		&lt;h2&gt; User name: &#123;&#123; $route.params.id &#125;&#125;&lt;/h2&gt;</div><div class="line">		&lt;router-view&gt;&lt;router-view&gt;</div><div class="line">	  &lt;/div&gt;</div><div class="line">	`</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> routes = [</div><div class="line">    &#123;</div><div class="line">        <span class="attr">path</span>: <span class="string">'/user/:id'</span>, <span class="attr">component</span>: User,</div><div class="line">      	<span class="attr">children</span>: [</div><div class="line">            &#123; <span class="attr">path</span>:  <span class="string">'posts'</span>, UserPosts &#125;,</div><div class="line">          	<span class="comment">// ...</span></div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/10/10/VueRouter/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1650,7 +1674,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1659,7 +1683,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-count">105</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
