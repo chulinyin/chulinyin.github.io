@@ -249,6 +249,167 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/03/JS跨域请求（2）/" itemprop="url">
+                  JS跨域请求（2）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-03T01:05:29+08:00" content="2016-06-03">
+              2016-06-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/03/JS跨域请求（2）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/JS跨域请求（2）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/03/JS跨域请求（2）/" class="leancloud_visitors" data-flag-title="JS跨域请求（2）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="日常闲扯"><a href="#日常闲扯" class="headerlink" title="日常闲扯"></a>日常闲扯</h2><p>今天下午又去面试了，这次是HR面，没有问技术方面的问题（她也不懂啊( ^_^ )），主要问了一些简历上的内容以及其他的问题，印象比较深的是下面这几个：</p>
+<ul>
+<li>我看你成绩还不错，为什么不考研呢？</li>
+<li>你学的是自动化专业，为什么想要做前端呢？</li>
+<li>你既然认可网易云课堂的课程，那你为什么不去面试网易？</li>
+<li>所以你认为是你自己能力还不够，所以不去面试网易吗？</li>
+<li>你目前为止投过几份简历，面试了哪几家?</li>
+<li>你认为互联网公司的团队应该是什么样的？</li>
+<li>你希望你的主管是什么样的？</li>
+</ul>
+<p>然后就回学校等通知了……</p>
+<p>今天晚上就在研究怎样在JS中实现模块化编程，先直接粗暴地google了一下，看了几篇博文，然后顺藤摸瓜，找到了廖雪峰介绍模块化的博文，然后突然想起翻看了下网易云课堂的笔记本（当初边看视频，边手写记笔记( ╯▽╰)），在产品前端那课程里有讲到模块化编程，于是就直接开始复习了。</p>
+<p>视频里主要讲了原生的模块编程（使用namesapce函数）以及常见的模块系统（commonJS、AMD、ES6、systemJS）。所以我现在已经知道模块化编程到底是什么形式了，计划抽空看一下AMD和systemJS就直接上手了。</p>
+<p>还有就是今天逛讨论区的时候（突然好后悔当初没有去关注讨论区），知道了模板到底是干嘛用的（用来生成不变的结构，然后可以嵌入动态的数据），也知道了前端架构师的职责。当然产品前端里一些什么同步/异步数据规范、页面入口规范什么的还是不知道是什么鬼。</p>
+<p>最后觉得网易云课堂的这个微专业课程真的很好，良心课程，把网易内部自己总结出来的东西都分享出来了，可以让我们少走很多弯路，而且每次看都有不一样的领悟。</p>
+<p><strong>（好长的前戏o(╯□╰)o）以上是今天的经历，下面进入……</strong></p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>昨天写了看《JS高程》关于跨域那一部分的笔记——<a href="http://chulinyin.com/2016/06/02/JS%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/">JS跨域请求（1）</a>，主要是规范的跨域技术CORS，下面继续写下其他的跨域技术：</p>
+<h3 id="2、其他跨域技术"><a href="#2、其他跨域技术" class="headerlink" title="2、其他跨域技术"></a>2、其他跨域技术</h3><p>在CORS出现以前，前端工程师们是怎么实现跨域请求的呢？</p>
+<h4 id="2-1、图像Ping"><a href="#2-1、图像Ping" class="headerlink" title="2.1、图像Ping"></a>2.1、图像Ping</h4><p>这是一种与服务器端进行简单、单向的跨域通信方式。</p>
+<ul>
+<li>优点：请求的数据是通过查询字符串的形式发送的，而响应可以是任何内容。不过通常是图片或204响应，最常用于跟踪用户点击页面或动态广告曝光次数。</li>
+<li>缺点：只能发送GET请求，同时也无法访问响应文本。</li>
+</ul>
+<p><strong>献上书中代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var img = new Image();</div><div class="line">img.onload = functiion()&#123;</div><div class="line">    console.log(&apos;successful&apos;);</div><div class="line">&#125;</div><div class="line">img.onerror = function()&#123;</div><div class="line">    console.log(&apos;unsuccessful&apos;);</div><div class="line">&#125;</div><div class="line">img.src = &apos;http://www.example.com/test?name=Nicholas&apos;;</div></pre></td></tr></table></figure></p>
+<h4 id="2-1、JSONP-JSON-with-padding"><a href="#2-1、JSONP-JSON-with-padding" class="headerlink" title="2.1、JSONP (JSON with padding)"></a>2.1、JSONP (JSON with padding)</h4><p>图像Ping利用了<code>&lt;img&gt;</code>元素，而JSONP则利用了动态<code>&lt;script&gt;元素</code>，使用的时候也是令<code>src=&#39;跨域的URL&#39;</code>，这就令JSONP成为了有效的JS代码，在请求完成后，就会立即执行。<br>JSONP由两部分组成：<code>回调函数</code>+<code>JSON数据</code>，一般回调函数是通过请求中的查询字符串实现的。</p>
+<ul>
+<li>优点：能直接访问响应文本，支持浏览器与服务器的双向通信。</li>
+<li>缺点：是从其他域中加载代码并执行，如果其他域不安全就不能用了。另外，确定JSONP请求失败，只能通过 HTML5 新增的 onerror 事件处理程序（目前没有得到浏览器支持），或者计时器定时检测是否受到响应（耗费性能）。</li>
+</ul>
+<p><strong>献上改自书中代码：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hadleReponse</span>(<span class="params">response</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'successful'</span>);</div><div class="line">    <span class="comment">// do something with response</span></div><div class="line">    <span class="comment">//var responseObj = JSON.parse(response);</span></div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.type = <span class="string">'text/javascript'</span>;</div><div class="line">script.src = <span class="string">'http://example.com/json/?callback=handleResponse'</span>;</div><div class="line"><span class="built_in">document</span>.body.appendChild(script);</div><div class="line"></div><div class="line"><span class="comment">// 在远程服务器上会有如下代码 handleResponse(&#123;"name":"vaule"&#125;)</span></div><div class="line"><span class="comment">// 也可以参考这几篇文章 </span></div><div class="line"><span class="comment">// http://www.cnblogs.com/kaixinbocai/p/4109223.html</span></div><div class="line"><span class="comment">// https://zh.wikipedia.org/wiki/JSONP</span></div><div class="line"><span class="comment">// https://www.wuchengkai.com/principle/</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 动态加载 js 代码</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadScript</span>(<span class="params">url, callback</span>)</span>&#123;</div><div class="line">  </div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>)</div><div class="line">    script.type = <span class="string">"text/javascript"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (script.readyState)&#123;  <span class="comment">//IE</span></div><div class="line">        script.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">if</span> (script.readyState == <span class="string">"loaded"</span> ||</div><div class="line">                    script.readyState == <span class="string">"complete"</span>)&#123;</div><div class="line">                script.onreadystatechange = <span class="literal">null</span>;</div><div class="line">                callback();</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">//Others</span></div><div class="line">        script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            callback();</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">  	script.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'ERROR: '</span> + err);</div><div class="line">  	&#125;</div><div class="line"></div><div class="line">    script.src = url;</div><div class="line">    <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 参考自：https://www.nczonline.net/blog/2009/06/23/loading-javascript-without-blocking/</span></div></pre></td></tr></table></figure>
+<h4 id="2-3、Comet"><a href="#2-3、Comet" class="headerlink" title="2.3、Comet"></a>2.3、Comet</h4><p>是一种更加高级的Ajax技术，它是服务器向页面推送数据，而不是像Ajax那样从页面向服务器请求数据。<br>有两种实现Comet的方式：<code>长轮询</code>和<code>HTTP流</code></p>
+<p>……明天继续，实在太晚了(￣o￣) . z Z</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/02/JS跨域请求（1）/" itemprop="url">
                   JS跨域请求（1）
                 </a>
@@ -1569,145 +1730,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/24/关于《死亡诗社》/" itemprop="url">
-                  关于《死亡诗社》
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-24T00:32:15+08:00" content="2016-05-24">
-              2016-05-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/观影随感/" itemprop="url" rel="index">
-                    <span itemprop="name">观影随感</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/24/关于《死亡诗社》/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/24/关于《死亡诗社》/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/24/关于《死亡诗社》/" class="leancloud_visitors" data-flag-title="关于《死亡诗社》">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天晚上本来打算去图书馆看JQ学前端的，因为已经好几天没有在这方面有进步了，甚至开始因为遗忘而退步了。可是突然之间又有了看一部电影的欲望，这是一部我在好几天前就列入必看名单的电影————《死亡诗社》，于是就圈当是刚考完一门试的奖励，从6点多开始看，9点左右结束。</p>
-<p>关于里面的一些金句以及一些提到的诗歌，我已经全都忘了，除了<code>O captain, my captain !</code>这贯穿始终的一句。（我发现我看书和看电影基本上都无法记住其中的一些好的句子，可能是经历太少，感触不深以致于自己不能记住，也有可能是我压根就没有尝试去记）</p>
-<p>电影里大致讲一个与众不同的诗歌教师来到了一所古老死板的高中教学，他的教学方式是如此的与众不同，以致于很多学生受到了他的鼓舞，开始去追求自己的内心。一些人也因此成立了“死亡诗社”。</p>
-<p>其中有一个优秀生，他喜欢表演，可是父母逼迫他专心学习，甚至为他规划好了未来几年的生活（考上哈佛，就读医学专业，毕业后当医生），可是有一次他违抗了父亲的命令，出演了男主角，而且表演得非常出色。表演过后，他父亲把他叫回家，然后告诉他让他转学校，不许他再表演。他沉默地答应了。</p>
-<p>晚上，他走进了书房，拿出了抢……父亲半夜惊醒，在书房发现他的时候，哭着扑了上去。</p>
-<p>最后，父母要求学校彻查此事，学校开始追究责任，怪罪到了这个与众不同的老师身上，并强迫死亡诗社的成员把责任推到老师身上。老师也不得不离职，最后他回到教室拿东西的时候，学生逐个站立到桌子上，并喊出”O captain, my captain.”老师感动地表示了感谢，转身走出教室，电影也到此终结。</p>
-<blockquote>
-<p>每个人都有着自己的坚持，有些人迫于无奈而不得不屈服于现实，有些人不甘心，尝试挣脱，寻找自己，但当他们发现自己面前是条不可跨越的鸿沟时，一部分人选择以死亡来换取自己的自由，一部分人选择了放弃。</p>
-</blockquote>
-<p><strong>把自己的梦想或者说意愿寄托到别人（子女）身上，想以此弥补自己的遗憾，却不询问那个人的意见，最后甚至还会用逼迫的办法，这已经让人无法接受了。令人恶心的是他们通常甚至还美其名曰：都是为了别人着想，都是为了别人好。或许他们也想以此催眠自己，坚定自己的信念，逃避现实吧。可是，能求你别为我着想吗？求你别为我好吗？求你放过我好吗？</strong></p>
-<p>我甚至认为，那对父母还是想不通儿子自杀的根本原因是什么，他们会认为是那个老师把自己曾经的乖孩子引入了歧途……这种人的可悲和可怕之处在于他们自己被自己洗脑了，永远认为他们是为了自己的子女好，认为他们是对的。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1753,7 +1775,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">116</span>
+              <span class="site-state-item-count">117</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

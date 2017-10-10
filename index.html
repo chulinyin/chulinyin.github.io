@@ -249,6 +249,117 @@
             
               
                 
+                <a class="post-title-link" href="/2017/10/10/使用 vue-router 做权限控制/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-10T17:19:46+08:00" content="2017-10-10">
+              2017-10-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/10/使用 vue-router 做权限控制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/10/使用 vue-router 做权限控制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/10/10/使用 vue-router 做权限控制/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>使用 vue-router 做权限控制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 权限控制</span></div><div class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'is beforeEach'</span>);</div><div class="line">  <span class="keyword">const</span> menu = store.state.base.app.menu;</div><div class="line">  <span class="keyword">if</span>(menu.length == <span class="number">0</span>) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'no menu'</span>)</div><div class="line">    store.dispatch(<span class="string">'base/initApp'</span>).then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</div><div class="line">      <span class="keyword">if</span>(hasPermission(data.menu, to.path)) &#123;</div><div class="line">        next();</div><div class="line">      &#125;<span class="keyword">else</span> &#123;</div><div class="line">        next(<span class="string">'/'</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;<span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'menu exist'</span>)</div><div class="line">    <span class="keyword">if</span>(hasPermission(menu, to.path)) &#123;</div><div class="line">      next();</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">      next(<span class="string">'/'</span>);</div><div class="line">    &#125;    </div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasPermission</span>(<span class="params">menu, targetPath</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> menu.some(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span>(item.children &amp;&amp; item.children.length &gt; <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">return</span> hasPermission(item.children, targetPath);</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">if</span>(targetPath == item.url) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// ⚠️ 注意前方有坑：根组件实例化的代码必须放在 router.beforeEach() 之后，否则第一次进入页面/页面重刷新的时候不会触发 beforeEach。</span></div><div class="line"><span class="comment">// 详情：https://github.com/vuejs/vue-router/issues/748</span></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">  store,</div><div class="line">  <span class="attr">router</span>: router,</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(entry),</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/07/25/javaScript 快速全栈开发 读书笔记/" itemprop="url">
                   《javaScript 快速全栈开发》笔记
                 </a>
@@ -1486,141 +1597,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/05/关于《霸王别姬》/" itemprop="url">
-                  关于《霸王别姬》
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-05T23:30:51+08:00" content="2017-03-05">
-              2017-03-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/观影随感/" itemprop="url" rel="index">
-                    <span itemprop="name">观影随感</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/05/关于《霸王别姬》/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/05/关于《霸王别姬》/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2017/03/05/关于《霸王别姬》/" class="leancloud_visitors" data-flag-title="关于《霸王别姬》">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>是的，我又要开始更新我的博客了，这段时间丢下的东西会慢慢开始拿起来。起初丢下是因为认为自己有更重要的事情需要去完成，没有多余的时间来更新博客。然而事实是我高看自己了，其实自己并没有想象中那么忙碌，而且那些所谓更重要的事情，到现在也没有得到自己想要的结果。因此决定还是脚踏实地，慢慢完善提高自己吧~</p>
-</blockquote>
-<p>前几天看了由陈凯歌执导，张国荣、张丰毅、巩俐主演的电影 ——《霸王别姬》，其中的好几个场景都引人深思。我说几个让我印象深刻的吧~</p>
-<p>一、小豆子总是把戏文“我本是女娇娥，又不是男儿郎”记成“我本是男儿郎，又不是女娇娥”，并因此挨了不少打。我想这不是因为小豆子记性不好导致的，而是他自己内心深处的抗拒。按照一般人的思维，那不就是一句台词嘛，又不能当真，何必因此受苦呢？但显然小豆子并不是这样想的，他知道自己会入戏。正如后面段小楼（小石头）对他的评价——“不疯魔不成活”。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/05/关于《霸王别姬》/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1666,7 +1642,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">116</span>
+              <span class="site-state-item-count">117</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
